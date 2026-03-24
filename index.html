@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en" class="">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NOB Rotana - Developer Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .glassmorphism {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .dark .glassmorphism {
+            background: rgba(17, 24, 39, 0.1); /* gray-900 with alpha */
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+        }
+        .video-container iframe,
+        .video-container video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-200 transition-colors duration-500 overflow-x-hidden">
+
+    <!-- Weather Effects Canvas & Audio -->
+    <canvas id="weather-canvas" class="fixed top-0 left-0 w-full h-full -z-10"></canvas>
+    <audio id="rain-audio" loop src="https://www.soundjay.com/nature/rain-07.mp3" preload="auto"></audio>
+    <audio id="snow-audio" loop src="https://www.soundjay.com/nature/wind-howl-01.mp3" preload="auto"></audio>
+
+    <!-- Floating UI Toggles -->
+    <div class="fixed top-5 right-5 z-50 flex items-center space-x-3">
+        <button id="weather-toggle" class="p-2 rounded-full glassmorphism text-white hover:bg-white/20 transition-all">
+            <!-- Icon will be set by JS -->
+            <svg id="weather-icon-off" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+        </button>
+        <button id="theme-toggle" class="p-2 rounded-full glassmorphism text-white hover:bg-white/20 transition-all">
+             <svg id="theme-icon-light" class="h-6 w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" /></svg>
+             <svg id="theme-icon-dark" class="h-6 w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" /></svg>
+        </button>
+    </div>
+
+    <div id="main-content" class="relative z-10">
+
+        <!-- HEADER/NAV -->
+        <header class="p-4 sm:p-6 sticky top-0 z-40 glassmorphism">
+            <nav class="container mx-auto flex justify-between items-center">
+                <a href="#" class="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white">NOB Rotana</a>
+                <div class="hidden md:flex items-center space-x-6 text-sm font-medium">
+                    <a href="#projects" class="hover:text-sky-500 dark:hover:text-sky-400 transition-colors">Projects</a>
+                    <a href="#certificates" class="hover:text-sky-500 dark:hover:text-sky-400 transition-colors">Certificates</a>
+                    <a href="#contact" class="hover:text-sky-500 dark:hover:text-sky-400 transition-colors">Contact</a>
+                </div>
+            </nav>
+        </header>
+
+
+        <main class="container mx-auto p-4 sm:p-6">
+
+            <!-- HERO SECTION -->
+            <section id="hero" class="min-h-[80vh] flex items-center py-20">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
+                    <div class="md:col-span-2 space-y-5">
+                        <span class="font-semibold text-sky-500 dark:text-sky-400">Full Stack Developer</span>
+                        <h1 class="text-4xl sm:text-6xl font-extrabold text-gray-900 dark:text-white leading-tight">
+                            Crafting Digital Experiences with Code and Coffee.
+                        </h1>
+                        <p class="text-base sm:text-lg text-gray-600 dark:text-gray-400 max-w-2xl">
+                            A passionate developer with a knack for building beautiful, functional, and scalable web applications. I turn complex problems into elegant solutions, with a strong focus on user experience and clean code. Ready to bring your ideas to life.
+                        </p>
+                         <a href="#contact" class="inline-block bg-sky-500 text-white font-bold py-3 px-6 rounded-lg hover:bg-sky-600 transition-transform hover:scale-105">
+                            Get In Touch
+                        </a>
+                    </div>
+                    <div class="relative h-full flex items-center justify-center">
+                        <div class="w-60 h-60 sm:w-80 sm:h-80 relative">
+                             <!-- Placeholder for Main Profile Photo -->
+                            <img src="https://placehold.co/400x400/22d3ee/FFFFFF?text=Main+Photo" alt="NOB Rotana" class="w-full h-full object-cover rounded-full shadow-2xl border-4 border-white dark:border-gray-800">
+                             <!-- Placeholder for Secondary/Action Photo -->
+                            <img src="https://placehold.co/150x150/0f172a/FFFFFF?text=Action" alt="Action shot" class="absolute -bottom-5 -right-5 w-24 h-24 sm:w-32 sm:h-32 object-cover rounded-full shadow-lg border-4 border-white dark:border-gray-800 transform group-hover:rotate-12 transition-transform">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PROJECTS SECTION -->
+            <section id="projects" class="py-20">
+                <h2 class="text-3xl sm:text-4xl font-bold text-center mb-12">My Projects</h2>
+                <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Projects will be dynamically inserted here by JavaScript -->
+                </div>
+            </section>
+
+            <!-- CERTIFICATES SECTION -->
+            <section id="certificates" class="py-20">
+                 <h2 class="text-3xl sm:text-4xl font-bold text-center mb-12">Certificates & Achievements</h2>
+                <div id="certificates-list" class="space-y-8 max-w-4xl mx-auto">
+                    <!-- Certificates will be dynamically inserted here by JavaScript -->
+                </div>
+            </section>
+
+        </main>
+
+        <!-- FOOTER / CONTACT -->
+        <footer id="contact" class="bg-gray-200 dark:bg-gray-800/50 py-10 mt-20">
+            <div class="container mx-auto text-center">
+                <h3 class="text-2xl font-bold mb-4">Connect with Me</h3>
+                <div class="flex justify-center items-center space-x-6">
+                    <a href="#" target="_blank" class="text-gray-600 dark:text-gray-400 hover:text-sky-500 dark:hover:text-sky-400 transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.91 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                    </a>
+                    <a href="#" target="_blank" class="text-gray-600 dark:text-gray-400 hover:text-sky-500 dark:hover:text-sky-400 transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                    </a>
+                    <a href="#" target="_blank" class="text-gray-600 dark:text-gray-400 hover:text-sky-500 dark:hover:text-sky-400 transition-colors">
+                         <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 24 24" fill="currentColor"><path d="M22.675 0h-21.35c-.732 0-1.325.593-1.325 1.325v21.351c0 .731.593 1.324 1.325 1.324h11.495v-9.294h-3.128v-3.622h3.128v-2.671c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.142v3.24h-1.918c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12v9.293h6.116c.73 0 1.323-.593 1.323-1.325v-21.35c0-.732-.593-1.325-1.325-1.325z"/></svg>
+                    </a>
+                </div>
+                 <p class="mt-8 text-sm text-gray-500 dark:text-gray-400">&copy; ${new Date().getFullYear()} NOB Rotana. All Rights Reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // --- STATE & DATA (FIREBASE PREPARATION) ---
+        // This is where you'll fetch data from Firebase Firestore.
+        // For now, we use local placeholder data.
+        
+        // --- PROJECTS DATA ---
+        // Replace this with a fetch call to your Firestore 'projects' collection
+        const projectsData = [
+            {
+                title: "E-commerce Platform",
+                description: "A full-featured e-commerce website with a custom CMS, built with React and Node.js. Integrated with Stripe for payments.",
+                media: {
+                    type: 'image', // 'image' or 'video'
+                    src: 'https://placehold.co/600x400/3498db/ffffff?text=Project+Image'
+                },
+                tags: ["React", "Node.js", "Stripe", "MongoDB"],
+                liveUrl: "#",
+                repoUrl: "#"
+            },
+            {
+                title: "Project Showcase Video",
+                description: "A video demo of a real-time chat application. Built using WebSockets and Express.",
+                media: {
+                    type: 'video', // 'image' or 'video'
+                    src: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4'
+                },
+                tags: ["WebSockets", "JavaScript", "HTML5 Video"],
+                liveUrl: "#",
+                repoUrl: "#"
+            },
+            {
+                title: "Portfolio Website V1",
+                description: "My previous personal portfolio website, designed to be minimalist and fast. Built with vanilla HTML, CSS, and JS.",
+                media: {
+                    type: 'image',
+                    src: 'https://placehold.co/600x400/9b59b6/ffffff?text=Project+3'
+                },
+                tags: ["HTML", "CSS", "JavaScript"],
+                liveUrl: "#",
+                repoUrl: "#"
+            },
+        ];
+
+        // --- CERTIFICATES DATA ---
+        // Replace this with a fetch call to your Firestore 'certificates' collection
+        const certificatesData = [
+            {
+                title: "Google Cloud Certified - Associate Cloud Engineer",
+                issuer: "Google Cloud",
+                date: "Jan 2023",
+                url: "#",
+                imageUrl: "https://placehold.co/100x100/4285F4/ffffff?text=GCP"
+            },
+            {
+                title: "Firebase for Web Developers",
+                issuer: "Udemy",
+                date: "Nov 2022",
+                url: "#",
+                imageUrl: "https://placehold.co/100x100/e74c3c/ffffff?text=Firebase"
+            },
+            {
+                title: "React - The Complete Guide (incl Hooks, React Router, Redux)",
+                issuer: "Academind by Maximilian Schwarzmüller",
+                date: "May 2022",
+                url: "#",
+                imageUrl: "https://placehold.co/100x100/2980b9/ffffff?text=React"
+            }
+        ];
+
+
+        // --- DYNAMIC CONTENT RENDERING ---
+
+        // Function to render projects
+        function renderProjects() {
+            const projectsGrid = document.getElementById('projects-grid');
+            if (!projectsGrid) return;
+            projectsGrid.innerHTML = projectsData.map(project => `
+                <div class="glassmorphism rounded-xl overflow-hidden shadow-lg group transform hover:-translate-y-2 transition-all duration-300">
+                    <div class="media-container">
+                        ${project.media.type === 'image' ?
+                            `<img src="${project.media.src}" alt="${project.title}" class="w-full h-48 object-cover">` :
+                            `<div class="video-container bg-black"><video controls muted loop preload="metadata" src="${project.media.src}#t=0.1" class="w-full h-full object-contain"></video></div>`
+                        }
+                    </div>
+                    <div class="p-5">
+                        <h3 class="text-xl font-bold mb-2 text-gray-900 dark:text-white">${project.title}</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm mb-4">${project.description}</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            ${project.tags.map(tag => `<span class="text-xs font-semibold bg-sky-100 text-sky-800 dark:bg-sky-900/50 dark:text-sky-300 px-2 py-1 rounded-full">${tag}</span>`).join('')}
+                        </div>
+                        <div class="mt-4 flex items-center space-x-4">
+                            <a href="${project.liveUrl}" target="_blank" class="text-sm font-semibold text-sky-500 dark:text-sky-400 hover:underline">View Live</a>
+                            <a href="${project.repoUrl}" target="_blank" class="text-sm font-semibold text-gray-500 dark:text-gray-400 hover:underline">Source Code</a>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Function to render certificates
+        function renderCertificates() {
+            const certificatesList = document.getElementById('certificates-list');
+            if (!certificatesList) return;
+            certificatesList.innerHTML = certificatesData.map(cert => `
+                <div class="glassmorphism rounded-xl shadow-md p-4 flex items-center space-x-4 hover:shadow-xl transition-shadow duration-300">
+                    <img src="${cert.imageUrl}" alt="${cert.issuer}" class="w-16 h-16 sm:w-20 sm:h-20 rounded-lg object-cover">
+                    <div class="flex-1">
+                        <h4 class="font-bold text-md sm:text-lg text-gray-900 dark:text-white">${cert.title}</h4>
+                        <p class="text-sm text-gray-600 dark:text-gray-400">${cert.issuer} - ${cert.date}</p>
+                        <a href="${cert.url}" target="_blank" class="text-sm text-sky-500 dark:text-sky-400 hover:underline mt-1 inline-block">View Credential</a>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        renderProjects();
+        renderCertificates();
+
+
+        // --- THEME (DARK/LIGHT MODE) TOGGLE ---
+        const themeToggle = document.getElementById('theme-toggle');
+        const lightIcon = document.getElementById('theme-icon-light');
+        const darkIcon = document.getElementById('theme-icon-dark');
+
+        // Check for saved theme preference or use OS preference
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+            lightIcon.classList.remove('hidden');
+            darkIcon.classList.add('hidden');
+        } else {
+            document.documentElement.classList.remove('dark');
+            lightIcon.classList.add('hidden');
+            darkIcon.classList.remove('hidden');
+        }
+
+        themeToggle.addEventListener('click', () => {
+            // toggle theme
+            document.documentElement.classList.toggle('dark');
+
+            // update icon and save preference
+            if (document.documentElement.classList.contains('dark')) {
+                localStorage.setItem('color-theme', 'dark');
+                lightIcon.classList.remove('hidden');
+                darkIcon.classList.add('hidden');
+            } else {
+                localStorage.setItem('color-theme', 'light');
+                lightIcon.classList.add('hidden');
+                darkIcon.classList.remove('hidden');
+            }
+        });
+
+
+        // --- WEATHER EFFECTS ---
+        const weatherToggle = document.getElementById('weather-toggle');
+        const weatherCanvas = document.getElementById('weather-canvas');
+        const rainAudio = document.getElementById('rain-audio');
+        const snowAudio = document.getElementById('snow-audio');
+        const ctx = weatherCanvas.getContext('2d');
+        
+        let weatherState = 0; // 0: Off, 1: Rain, 2: Snow
+        let animationFrameId;
+        let particles = [];
+
+        weatherCanvas.width = window.innerWidth;
+        weatherCanvas.height = window.innerHeight;
+
+        const rainIcon = `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" /></svg>`;
+        const snowIcon = `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" /></svg>`;
+        const offIcon = `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>`;
+
+        function updateWeatherIcon() {
+            if (weatherState === 0) weatherToggle.innerHTML = offIcon;
+            if (weatherState === 1) weatherToggle.innerHTML = rainIcon;
+            if (weatherState === 2) weatherToggle.innerHTML = snowIcon;
+        }
+
+        updateWeatherIcon();
+
+        function createParticle(type) {
+            const x = Math.random() * weatherCanvas.width;
+            if (type === 'rain') {
+                return { x: x, y: -20, length: Math.random() * 20 + 10, speed: Math.random() * 5 + 4 };
+            }
+            if (type === 'snow') {
+                return {
+                    x: x, y: -20, radius: Math.random() * 3 + 2,
+                    speedY: Math.random() * 1 + 0.5,
+                    speedX: Math.random() * 2 - 1,
+                    opacity: Math.random() * 0.5 + 0.5
+                };
+            }
+        }
+
+        function draw() {
+            ctx.clearRect(0, 0, weatherCanvas.width, weatherCanvas.height);
+            for (let i = 0; i < particles.length; i++) {
+                const p = particles[i];
+                if (weatherState === 1) { // Rain
+                    ctx.beginPath();
+                    ctx.moveTo(p.x, p.y);
+                    ctx.lineTo(p.x, p.y + p.length);
+                    ctx.strokeStyle = 'rgba(173, 216, 230, 0.5)';
+                    ctx.lineWidth = 1;
+                    ctx.stroke();
+                    p.y += p.speed;
+                    if (p.y > weatherCanvas.height) {
+                        particles[i] = createParticle('rain');
+                    }
+                } else if (weatherState === 2) { // Snow
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(255, 255, 255, ${p.opacity})`;
+                    ctx.fill();
+                    p.y += p.speedY;
+                    p.x += p.speedX;
+                    if (p.y > weatherCanvas.height || p.x > weatherCanvas.width || p.x < 0) {
+                        particles[i] = createParticle('snow');
+                    }
+                }
+            }
+            animationFrameId = requestAnimationFrame(draw);
+        }
+
+        function stopEffects() {
+            cancelAnimationFrame(animationFrameId);
+            ctx.clearRect(0, 0, weatherCanvas.width, weatherCanvas.height);
+            particles = [];
+            rainAudio.pause();
+            snowAudio.pause();
+            rainAudio.currentTime = 0;
+            snowAudio.currentTime = 0;
+        }
+
+        function startRain() {
+            stopEffects();
+            particles = Array(100).fill(null).map(() => createParticle('rain'));
+            rainAudio.play().catch(e => console.error("Audio autoplay failed:", e));
+            draw();
+        }
+
+        function startSnow() {
+            stopEffects();
+            particles = Array(200).fill(null).map(() => createParticle('snow'));
+            snowAudio.play().catch(e => console.error("Audio autoplay failed:", e));
+            draw();
+        }
+
+        weatherToggle.addEventListener('click', () => {
+            weatherState = (weatherState + 1) % 3;
+            updateWeatherIcon();
+            switch (weatherState) {
+                case 0: stopEffects(); break;
+                case 1: startRain(); break;
+                case 2: startSnow(); break;
+            }
+        });
+
+        window.addEventListener('resize', () => {
+            weatherCanvas.width = window.innerWidth;
+            weatherCanvas.height = window.innerHeight;
+        });
+    });
+    </script>
+
+</body>
+</html>
