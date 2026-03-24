@@ -1,0 +1,38 @@
+# Dependencies
+node_modules/
+
+# Environment & secrets (Firebase, API keys)
+.env
+.env.*
+!.env.example
+
+# Logs & debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Editor / IDE (keep local; remove these lines if you want to commit workspace settings)
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Build outputs (if you add a bundler later)
+dist/
+build/
+.out/
+.cache/
+
+# Optional tooling
+.turbo/
+.vercel/
+.netlify/
+
+# Misc
+*.local

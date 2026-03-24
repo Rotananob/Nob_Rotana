@@ -1,410 +1,2170 @@
 <!DOCTYPE html>
-<html lang="en" class="">
+<html lang="en" data-theme="dark">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NOB Rotana - Developer Portfolio</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-        }
-        .glassmorphism {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-        .dark .glassmorphism {
-            background: rgba(17, 24, 39, 0.1); /* gray-900 with alpha */
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        .video-container {
-            position: relative;
-            width: 100%;
-            padding-bottom: 56.25%; /* 16:9 aspect ratio */
-        }
-        .video-container iframe,
-        .video-container video {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
-        html {
-            scroll-behavior: smooth;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dev Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <style>
+    /* =============================
+       CSS VARIABLES & THEMES
+       ============================= */
+    :root {
+      --transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    [data-theme="dark"] {
+      --bg-primary: #080c14;
+      --bg-secondary: #0d1420;
+      --bg-card: rgba(255,255,255,0.04);
+      --bg-card-hover: rgba(255,255,255,0.07);
+      --border: rgba(255,255,255,0.08);
+      --border-hover: rgba(99,179,237,0.4);
+      --text-primary: #f0f4ff;
+      --text-secondary: #8899b4;
+      --text-muted: #4a5568;
+      --accent: #63b3ed;
+      --accent-warm: #f6ad55;
+      --accent-purple: #b794f4;
+      --accent-green: #68d391;
+      --glow: rgba(99,179,237,0.15);
+      --glow-strong: rgba(99,179,237,0.3);
+      --glass: rgba(13,20,32,0.7);
+      --glass-border: rgba(255,255,255,0.06);
+      --nav-bg: rgba(8,12,20,0.85);
+      --shadow: 0 8px 32px rgba(0,0,0,0.4);
+      --shadow-card: 0 4px 24px rgba(0,0,0,0.3);
+    }
+
+    [data-theme="light"] {
+      --bg-primary: #f4f7fb;
+      --bg-secondary: #e8eef7;
+      --bg-card: rgba(255,255,255,0.7);
+      --bg-card-hover: rgba(255,255,255,0.95);
+      --border: rgba(0,0,0,0.08);
+      --border-hover: rgba(37,99,235,0.4);
+      --text-primary: #0f172a;
+      --text-secondary: #475569;
+      --text-muted: #94a3b8;
+      --accent: #2563eb;
+      --accent-warm: #d97706;
+      --accent-purple: #7c3aed;
+      --accent-green: #059669;
+      --glow: rgba(37,99,235,0.08);
+      --glow-strong: rgba(37,99,235,0.2);
+      --glass: rgba(244,247,251,0.8);
+      --glass-border: rgba(0,0,0,0.06);
+      --nav-bg: rgba(244,247,251,0.9);
+      --shadow: 0 8px 32px rgba(0,0,0,0.1);
+      --shadow-card: 0 4px 24px rgba(0,0,0,0.08);
+    }
+
+    /* =============================
+       RESET & BASE
+       ============================= */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      min-height: 100vh;
+      overflow-x: hidden;
+      transition: background var(--transition), color var(--transition);
+    }
+
+    h1, h2, h3, h4 { font-family: 'Syne', sans-serif; }
+    code, .mono { font-family: 'JetBrains Mono', monospace; }
+
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; display: block; }
+
+    /* =============================
+       CANVAS & WEATHER
+       ============================= */
+    #weather-canvas {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0;
+      transition: opacity 0.8s ease;
+    }
+    #weather-canvas.active { opacity: 1; }
+
+    /* =============================
+       SCROLLBAR
+       ============================= */
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: var(--bg-primary); }
+    ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 4px; }
+
+    /* =============================
+       NAVIGATION
+       ============================= */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: var(--nav-bg);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: background var(--transition);
+    }
+
+    .nav-logo {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1.3rem;
+      letter-spacing: -0.02em;
+    }
+
+    .nav-logo span { color: var(--accent); }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      transition: color 0.2s;
+      letter-spacing: 0.02em;
+    }
+
+    .nav-links a:hover { color: var(--text-primary); }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .btn-icon {
+      width: 38px; height: 38px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+      color: var(--text-secondary);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.95rem;
+      transition: all 0.2s;
+      backdrop-filter: blur(10px);
+    }
+
+    .btn-icon:hover {
+      border-color: var(--border-hover);
+      color: var(--accent);
+      background: var(--glow);
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 4px;
+      cursor: pointer;
+      padding: 6px;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 22px; height: 2px;
+      background: var(--text-primary);
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+
+    /* =============================
+       MOBILE MENU
+       ============================= */
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 64px; left: 0; right: 0;
+      background: var(--nav-bg);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      z-index: 99;
+      padding: 1.5rem 2rem;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      transition: color 0.2s;
+    }
+    .mobile-menu a:hover { color: var(--accent); }
+
+    /* =============================
+       HERO
+       ============================= */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 100px 2rem 60px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(100px);
+      pointer-events: none;
+    }
+
+    .orb-1 {
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(99,179,237,0.12) 0%, transparent 70%);
+      top: -100px; right: -100px;
+    }
+
+    .orb-2 {
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(183,148,244,0.08) 0%, transparent 70%);
+      bottom: 0; left: -50px;
+    }
+
+    [data-theme="light"] .orb-1 {
+      background: radial-gradient(circle, rgba(37,99,235,0.08) 0%, transparent 70%);
+    }
+    [data-theme="light"] .orb-2 {
+      background: radial-gradient(circle, rgba(124,58,237,0.06) 0%, transparent 70%);
+    }
+
+    .hero-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 6px 16px;
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+      backdrop-filter: blur(10px);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .hero-badge .dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--accent-green);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.8); }
+    }
+
+    .hero-name {
+      font-size: clamp(2.8rem, 6vw, 5rem);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.5rem;
+    }
+
+    .hero-name .line-accent {
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent-purple) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-role {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1rem;
+      color: var(--accent-warm);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .hero-role::before { content: '//'; color: var(--text-muted); }
+
+    .hero-bio {
+      font-size: 1.05rem;
+      line-height: 1.75;
+      color: var(--text-secondary);
+      max-width: 520px;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 12px 28px;
+      background: var(--accent);
+      color: #fff;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      border: none;
+      transition: all 0.25s;
+      letter-spacing: 0.01em;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px var(--glow-strong);
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 12px 28px;
+      background: var(--bg-card);
+      color: var(--text-primary);
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      border: 1px solid var(--border);
+      transition: all 0.25s;
+      backdrop-filter: blur(10px);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--border-hover);
+      background: var(--bg-card-hover);
+      transform: translateY(-2px);
+    }
+
+    /* Hero Photos */
+    .hero-photos {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .photo-main-wrap {
+      width: 320px; height: 380px;
+      border-radius: 24px;
+      overflow: hidden;
+      border: 2px solid var(--border);
+      box-shadow: var(--shadow), 0 0 0 8px var(--glow);
+      position: relative;
+      z-index: 2;
+      background: var(--bg-secondary);
+    }
+
+    .photo-main-wrap img, .photo-main-wrap .photo-placeholder {
+      width: 100%; height: 100%;
+      object-fit: cover;
+    }
+
+    .photo-placeholder {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      text-align: center;
+      background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-card) 100%);
+    }
+
+    .photo-placeholder i { font-size: 2.5rem; color: var(--text-muted); }
+
+    .photo-secondary-wrap {
+      position: absolute;
+      bottom: -24px;
+      right: -32px;
+      width: 130px; height: 130px;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 2px solid var(--border-hover);
+      box-shadow: var(--shadow-card);
+      z-index: 3;
+      background: var(--bg-secondary);
+      animation: float 4s ease-in-out infinite;
+    }
+
+    .photo-secondary-wrap img, .photo-secondary-wrap .photo-placeholder {
+      width: 100%; height: 100%;
+      object-fit: cover;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .photo-bg-shape {
+      position: absolute;
+      top: -20px; left: -20px;
+      width: 360px; height: 420px;
+      border-radius: 30px;
+      border: 1px dashed var(--border);
+      z-index: 1;
+    }
+
+    .photo-stat-card {
+      position: absolute;
+      top: 20px; left: -40px;
+      background: var(--glass);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--glass-border);
+      border-radius: 14px;
+      padding: 12px 18px;
+      z-index: 4;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: var(--shadow-card);
+      animation: float 4s ease-in-out infinite 1s;
+    }
+
+    .stat-card-icon {
+      width: 36px; height: 36px;
+      border-radius: 10px;
+      background: var(--glow);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+      font-size: 1rem;
+    }
+
+    .stat-card-text strong {
+      display: block;
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--text-primary);
+    }
+
+    .stat-card-text span {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 2rem;
+      margin-top: 2.5rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .hero-stat-item strong {
+      display: block;
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1.6rem;
+      color: var(--text-primary);
+    }
+
+    .hero-stat-item span {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    /* =============================
+       SECTION COMMONS
+       ============================= */
+    section {
+      padding: 100px 2rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .section-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-header {
+      margin-bottom: 3.5rem;
+    }
+
+    .section-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .section-tag::before, .section-tag::after {
+      content: '';
+      height: 1px;
+      background: var(--accent);
+      flex: 0 0 30px;
+    }
+
+    .section-tag::before { display: none; }
+
+    .section-title {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+    }
+
+    .section-title .highlight {
+      color: var(--accent);
+    }
+
+    .section-desc {
+      margin-top: 1rem;
+      color: var(--text-secondary);
+      font-size: 1rem;
+      line-height: 1.7;
+      max-width: 600px;
+    }
+
+    /* =============================
+       SKILLS TICKER
+       ============================= */
+    #skills-ticker {
+      padding: 24px 0;
+      background: var(--bg-secondary);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      overflow: hidden;
+      position: relative;
+      z-index: 1;
+    }
+
+    .ticker-track {
+      display: flex;
+      gap: 2.5rem;
+      animation: ticker 30s linear infinite;
+      width: max-content;
+    }
+
+    .ticker-item {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      white-space: nowrap;
+      padding: 0 1rem;
+    }
+
+    .ticker-item i { color: var(--accent); font-size: 1rem; }
+
+    @keyframes ticker {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    /* =============================
+       PROJECTS
+       ============================= */
+    #projects { background: var(--bg-secondary); }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .project-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      overflow: hidden;
+      transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+      backdrop-filter: blur(10px);
+      cursor: pointer;
+    }
+
+    .project-card:hover {
+      border-color: var(--border-hover);
+      transform: translateY(-4px);
+      box-shadow: var(--shadow), 0 0 0 1px var(--glow-strong);
+    }
+
+    .project-media {
+      width: 100%;
+      aspect-ratio: 16/9;
+      position: relative;
+      overflow: hidden;
+      background: var(--bg-secondary);
+    }
+
+    .project-media img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .project-card:hover .project-media img {
+      transform: scale(1.04);
+    }
+
+    .project-media video,
+    .project-media iframe {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      border: none;
+    }
+
+    .project-media .media-placeholder {
+      width: 100%; height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-card) 100%);
+    }
+
+    .media-placeholder i { font-size: 2rem; }
+
+    .project-media-badge {
+      position: absolute;
+      top: 12px; right: 12px;
+      background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(8px);
+      border-radius: 8px;
+      padding: 4px 10px;
+      font-size: 0.7rem;
+      font-family: 'JetBrains Mono', monospace;
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .project-body {
+      padding: 1.5rem;
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .tag {
+      font-size: 0.7rem;
+      font-family: 'JetBrains Mono', monospace;
+      padding: 3px 10px;
+      border-radius: 6px;
+      background: var(--glow);
+      border: 1px solid rgba(99,179,237,0.15);
+      color: var(--accent);
+      letter-spacing: 0.02em;
+    }
+
+    [data-theme="light"] .tag {
+      background: rgba(37,99,235,0.06);
+      border-color: rgba(37,99,235,0.15);
+    }
+
+    .project-title {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 1.15rem;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.01em;
+    }
+
+    .project-desc {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      line-height: 1.65;
+      margin-bottom: 1.25rem;
+    }
+
+    .project-links {
+      display: flex;
+      gap: 0.75rem;
+    }
+
+    .project-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--accent);
+      padding: 6px 14px;
+      border-radius: 8px;
+      border: 1px solid rgba(99,179,237,0.2);
+      background: rgba(99,179,237,0.06);
+      transition: all 0.2s;
+    }
+
+    [data-theme="light"] .project-link {
+      border-color: rgba(37,99,235,0.2);
+      background: rgba(37,99,235,0.06);
+    }
+
+    .project-link:hover {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+
+    /* =============================
+       CERTIFICATES
+       ============================= */
+    .certs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .cert-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 1.75rem;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cert-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent) 0%, var(--accent-purple) 100%);
+    }
+
+    .cert-card:hover {
+      border-color: var(--border-hover);
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-card);
+    }
+
+    .cert-icon-wrap {
+      width: 52px; height: 52px;
+      border-radius: 14px;
+      background: var(--glow);
+      border: 1px solid rgba(99,179,237,0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      color: var(--accent);
+    }
+
+    [data-theme="light"] .cert-icon-wrap {
+      background: rgba(37,99,235,0.06);
+      border-color: rgba(37,99,235,0.15);
+    }
+
+    .cert-card-title {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      line-height: 1.3;
+    }
+
+    .cert-issuer {
+      font-size: 0.8rem;
+      color: var(--accent-warm);
+      font-weight: 500;
+    }
+
+    .cert-date {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      font-family: 'JetBrains Mono', monospace;
+      margin-top: auto;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .cert-preview-img {
+      width: 100%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      margin-top: 0.25rem;
+    }
+
+    .cert-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.78rem;
+      color: var(--accent);
+      font-weight: 500;
+      margin-top: 0.25rem;
+      transition: gap 0.2s;
+    }
+
+    .cert-link:hover { gap: 0.75rem; }
+
+    /* =============================
+       ABOUT / SKILLS
+       ============================= */
+    #about { background: var(--bg-primary); }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .skills-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .skill-item {}
+
+    .skill-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      font-weight: 500;
+      margin-bottom: 0.4rem;
+      color: var(--text-secondary);
+    }
+
+    .skill-bar {
+      height: 5px;
+      background: var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .skill-bar-fill {
+      height: 100%;
+      border-radius: 10px;
+      background: linear-gradient(90deg, var(--accent) 0%, var(--accent-purple) 100%);
+      transition: width 1.5s cubic-bezier(0.4,0,0.2,1);
+      width: 0;
+    }
+
+    .skill-bar-fill.animated { /* set by JS */ }
+
+    .tech-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-top: 1.5rem;
+    }
+
+    .tech-pill {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      padding: 6px 14px;
+      border-radius: 8px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      transition: all 0.2s;
+    }
+
+    .tech-pill:hover {
+      border-color: var(--border-hover);
+      color: var(--accent);
+      background: var(--glow);
+    }
+
+    /* =============================
+       CONTACT
+       ============================= */
+    #contact { background: var(--bg-secondary); }
+
+    .contact-wrapper {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .form-label {
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .form-input, .form-textarea {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 12px 16px;
+      color: var(--text-primary);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      outline: none;
+      transition: all 0.2s;
+      resize: none;
+      width: 100%;
+    }
+
+    .form-input:focus, .form-textarea:focus {
+      border-color: var(--border-hover);
+      box-shadow: 0 0 0 3px var(--glow);
+    }
+
+    .form-textarea { min-height: 130px; }
+
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .contact-info-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+
+    .contact-info-icon {
+      width: 44px; height: 44px;
+      border-radius: 12px;
+      background: var(--glow);
+      border: 1px solid rgba(99,179,237,0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+
+    [data-theme="light"] .contact-info-icon {
+      background: rgba(37,99,235,0.06);
+    }
+
+    .contact-info-text strong {
+      display: block;
+      font-weight: 600;
+      font-size: 0.9rem;
+      margin-bottom: 0.2rem;
+    }
+
+    .contact-info-text span {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+    }
+
+    /* =============================
+       FOOTER
+       ============================= */
+    footer {
+      background: var(--bg-primary);
+      border-top: 1px solid var(--border);
+      padding: 3rem 2rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
+
+    .footer-logo {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1.25rem;
+    }
+
+    .footer-logo span { color: var(--accent); }
+
+    .footer-copy {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 0.25rem;
+    }
+
+    .social-links {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .social-link {
+      width: 42px; height: 42px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-secondary);
+      font-size: 1rem;
+      transition: all 0.2s;
+      backdrop-filter: blur(10px);
+    }
+
+    .social-link:hover {
+      border-color: var(--border-hover);
+      color: var(--accent);
+      background: var(--glow);
+      transform: translateY(-2px);
+    }
+
+    /* =============================
+       WEATHER TOGGLE BUTTON
+       ============================= */
+    #weather-btn {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 200;
+      width: 54px; height: 54px;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      background: var(--glass);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      color: var(--text-primary);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      transition: all 0.3s;
+      box-shadow: var(--shadow-card);
+    }
+
+    #weather-btn:hover {
+      border-color: var(--border-hover);
+      transform: scale(1.08);
+      box-shadow: 0 8px 24px var(--glow-strong);
+    }
+
+    #weather-btn .weather-label {
+      position: absolute;
+      right: 66px;
+      background: var(--glass);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 6px 14px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s;
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--text-secondary);
+    }
+
+    #weather-btn:hover .weather-label { opacity: 1; }
+
+    .weather-indicator {
+      position: fixed;
+      bottom: calc(2rem + 64px);
+      right: 2rem;
+      z-index: 200;
+      background: var(--glass);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 8px 14px;
+      font-size: 0.72rem;
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--accent);
+      display: none;
+    }
+
+    .weather-indicator.visible { display: block; }
+
+    /* =============================
+       SCROLL REVEAL
+       ============================= */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* =============================
+       LOADING / FIRESTORE STATES
+       ============================= */
+    .loading-skeleton {
+      background: linear-gradient(90deg, var(--bg-card) 25%, var(--bg-card-hover) 50%, var(--bg-card) 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.5s infinite;
+      border-radius: 12px;
+    }
+
+    @keyframes shimmer {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+
+    .empty-state {
+      grid-column: 1/-1;
+      text-align: center;
+      padding: 3rem;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    /* =============================
+       RESPONSIVE
+       ============================= */
+    @media (max-width: 900px) {
+      .hero-inner { grid-template-columns: 1fr; text-align: center; }
+      .hero-cta { justify-content: center; }
+      .hero-bio { margin-left: auto; margin-right: auto; }
+      .hero-badge { justify-content: center; }
+      .hero-role { justify-content: center; }
+      .hero-stats { justify-content: center; }
+      .hero-photos {
+        order: -1;
+        height: 300px;
+      }
+      .photo-main-wrap { width: 220px; height: 270px; }
+      .photo-stat-card { display: none; }
+      .about-grid { grid-template-columns: 1fr; }
+      .contact-wrapper { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .projects-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 600px) {
+      section { padding: 70px 1.25rem; }
+      .certs-grid { grid-template-columns: 1fr; }
+      .footer-inner { flex-direction: column; align-items: center; text-align: center; }
+    }
+  </style>
 </head>
-<body class="bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-200 transition-colors duration-500 overflow-x-hidden">
 
-    <!-- Weather Effects Canvas & Audio -->
-    <canvas id="weather-canvas" class="fixed top-0 left-0 w-full h-full -z-10"></canvas>
-    <audio id="rain-audio" loop src="https://www.soundjay.com/nature/rain-07.mp3" preload="auto"></audio>
-    <audio id="snow-audio" loop src="https://www.soundjay.com/nature/wind-howl-01.mp3" preload="auto"></audio>
+<body>
+  <!-- =====================
+       WEATHER CANVAS
+       ===================== -->
+  <canvas id="weather-canvas"></canvas>
 
-    <!-- Floating UI Toggles -->
-    <div class="fixed top-5 right-5 z-50 flex items-center space-x-3">
-        <button id="weather-toggle" class="p-2 rounded-full glassmorphism text-white hover:bg-white/20 transition-all">
-            <!-- Icon will be set by JS -->
-            <svg id="weather-icon-off" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-        </button>
-        <button id="theme-toggle" class="p-2 rounded-full glassmorphism text-white hover:bg-white/20 transition-all">
-             <svg id="theme-icon-light" class="h-6 w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" /></svg>
-             <svg id="theme-icon-dark" class="h-6 w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" /></svg>
-        </button>
+  <!-- =====================
+       NAVIGATION
+       ===================== -->
+  <nav>
+    <div class="nav-logo">Dev<span>.</span></div>
+    <ul class="nav-links">
+      <li><a href="#hero">Home</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#certificates">Certificates</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button class="btn-icon" id="theme-toggle" title="Toggle theme">
+        <i class="fa-solid fa-moon" id="theme-icon"></i>
+      </button>
+      <a href="#contact" class="btn-primary" style="padding:8px 20px;font-size:0.82rem;">
+        Hire Me <i class="fa-solid fa-arrow-right"></i>
+      </a>
+      <div class="hamburger" id="hamburger">
+        <span></span><span></span><span></span>
+      </div>
     </div>
+  </nav>
 
-    <div id="main-content" class="relative z-10">
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="#hero" onclick="closeMobileMenu()">Home</a>
+    <a href="#projects" onclick="closeMobileMenu()">Projects</a>
+    <a href="#certificates" onclick="closeMobileMenu()">Certificates</a>
+    <a href="#about" onclick="closeMobileMenu()">About</a>
+    <a href="#contact" onclick="closeMobileMenu()">Contact</a>
+  </div>
 
-        <!-- HEADER/NAV -->
-        <header class="p-4 sm:p-6 sticky top-0 z-40 glassmorphism">
-            <nav class="container mx-auto flex justify-between items-center">
-                <a href="#" class="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white">NOB Rotana</a>
-                <div class="hidden md:flex items-center space-x-6 text-sm font-medium">
-                    <a href="#projects" class="hover:text-sky-500 dark:hover:text-sky-400 transition-colors">Projects</a>
-                    <a href="#certificates" class="hover:text-sky-500 dark:hover:text-sky-400 transition-colors">Certificates</a>
-                    <a href="#contact" class="hover:text-sky-500 dark:hover:text-sky-400 transition-colors">Contact</a>
-                </div>
-            </nav>
-        </header>
+  <!-- =====================
+       HERO SECTION
+       ===================== -->
+  <section id="hero">
+    <div class="hero-bg-orb orb-1"></div>
+    <div class="hero-bg-orb orb-2"></div>
+    <div class="hero-inner">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span class="dot"></span>
+          Available for work
+        </div>
 
+        <h1 class="hero-name">
+          Your Name<br />
+          <span class="line-accent">Developer</span>
+        </h1>
 
-        <main class="container mx-auto p-4 sm:p-6">
+        <div class="hero-role">Full-Stack & Firebase Developer</div>
 
-            <!-- HERO SECTION -->
-            <section id="hero" class="min-h-[80vh] flex items-center py-20">
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
-                    <div class="md:col-span-2 space-y-5">
-                        <span class="font-semibold text-sky-500 dark:text-sky-400">Full Stack Developer</span>
-                        <h1 class="text-4xl sm:text-6xl font-extrabold text-gray-900 dark:text-white leading-tight">
-                            Crafting Digital Experiences with Code and Coffee.
-                        </h1>
-                        <p class="text-base sm:text-lg text-gray-600 dark:text-gray-400 max-w-2xl">
-                            A passionate developer with a knack for building beautiful, functional, and scalable web applications. I turn complex problems into elegant solutions, with a strong focus on user experience and clean code. Ready to bring your ideas to life.
-                        </p>
-                         <a href="#contact" class="inline-block bg-sky-500 text-white font-bold py-3 px-6 rounded-lg hover:bg-sky-600 transition-transform hover:scale-105">
-                            Get In Touch
-                        </a>
-                    </div>
-                    <div class="relative h-full flex items-center justify-center">
-                        <div class="w-60 h-60 sm:w-80 sm:h-80 relative">
-                             <!-- Placeholder for Main Profile Photo -->
-                            <img src="https://placehold.co/400x400/22d3ee/FFFFFF?text=Main+Photo" alt="NOB Rotana" class="w-full h-full object-cover rounded-full shadow-2xl border-4 border-white dark:border-gray-800">
-                             <!-- Placeholder for Secondary/Action Photo -->
-                            <img src="https://placehold.co/150x150/0f172a/FFFFFF?text=Action" alt="Action shot" class="absolute -bottom-5 -right-5 w-24 h-24 sm:w-32 sm:h-32 object-cover rounded-full shadow-lg border-4 border-white dark:border-gray-800 transform group-hover:rotate-12 transition-transform">
-                        </div>
-                    </div>
-                </div>
-            </section>
+        <p class="hero-bio">
+          <!-- 🔥 FIREBASE: Replace this static bio with dynamic data fetched from Firestore
+               Collection: "profile" / Document: "bio" / Field: "description"  -->
+          I craft immersive web experiences with clean code and pixel-perfect design.
+          Passionate about Firebase, real-time apps, and pushing the web forward —
+          one commit at a time.
+        </p>
 
-            <!-- PROJECTS SECTION -->
-            <section id="projects" class="py-20">
-                <h2 class="text-3xl sm:text-4xl font-bold text-center mb-12">My Projects</h2>
-                <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <!-- Projects will be dynamically inserted here by JavaScript -->
-                </div>
-            </section>
+        <div class="hero-cta">
+          <a href="#projects" class="btn-primary">
+            <i class="fa-solid fa-grid-2"></i> View Projects
+          </a>
+          <a href="#contact" class="btn-secondary">
+            <i class="fa-solid fa-envelope"></i> Get In Touch
+          </a>
+        </div>
 
-            <!-- CERTIFICATES SECTION -->
-            <section id="certificates" class="py-20">
-                 <h2 class="text-3xl sm:text-4xl font-bold text-center mb-12">Certificates & Achievements</h2>
-                <div id="certificates-list" class="space-y-8 max-w-4xl mx-auto">
-                    <!-- Certificates will be dynamically inserted here by JavaScript -->
-                </div>
-            </section>
+        <div class="hero-stats">
+          <!-- 🔥 FIREBASE: Fetch these numbers from Firestore "profile/stats" document -->
+          <div class="hero-stat-item">
+            <strong>20+</strong>
+            <span>Projects Done</span>
+          </div>
+          <div class="hero-stat-item">
+            <strong>3+</strong>
+            <span>Years Experience</span>
+          </div>
+          <div class="hero-stat-item">
+            <strong>15+</strong>
+            <span>Certificates</span>
+          </div>
+        </div>
+      </div>
 
-        </main>
+      <!-- Hero Photos -->
+      <div class="hero-photos">
+        <div class="photo-bg-shape"></div>
 
-        <!-- FOOTER / CONTACT -->
-        <footer id="contact" class="bg-gray-200 dark:bg-gray-800/50 py-10 mt-20">
-            <div class="container mx-auto text-center">
-                <h3 class="text-2xl font-bold mb-4">Connect with Me</h3>
-                <div class="flex justify-center items-center space-x-6">
-                    <a href="#" target="_blank" class="text-gray-600 dark:text-gray-400 hover:text-sky-500 dark:hover:text-sky-400 transition-colors">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.91 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-                    </a>
-                    <a href="#" target="_blank" class="text-gray-600 dark:text-gray-400 hover:text-sky-500 dark:hover:text-sky-400 transition-colors">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-                    </a>
-                    <a href="#" target="_blank" class="text-gray-600 dark:text-gray-400 hover:text-sky-500 dark:hover:text-sky-400 transition-colors">
-                         <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 24 24" fill="currentColor"><path d="M22.675 0h-21.35c-.732 0-1.325.593-1.325 1.325v21.351c0 .731.593 1.324 1.325 1.324h11.495v-9.294h-3.128v-3.622h3.128v-2.671c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.142v3.24h-1.918c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12v9.293h6.116c.73 0 1.323-.593 1.323-1.325v-21.35c0-.732-.593-1.325-1.325-1.325z"/></svg>
-                    </a>
-                </div>
-                 <p class="mt-8 text-sm text-gray-500 dark:text-gray-400">&copy; ${new Date().getFullYear()} NOB Rotana. All Rights Reserved.</p>
+        <!-- Floating stat card -->
+        <div class="photo-stat-card">
+          <div class="stat-card-icon"><i class="fa-brands fa-firebase"></i></div>
+          <div class="stat-card-text">
+            <strong>Firebase Pro</strong>
+            <span>Cloud & Realtime DB</span>
+          </div>
+        </div>
+
+        <!-- 📸 PHOTO 1: Replace src with your main profile photo URL -->
+        <div class="photo-main-wrap">
+          <div class="photo-placeholder">
+            <i class="fa-regular fa-image"></i>
+            <span>Your Profile Photo<br /><small>Replace with &lt;img src="your-photo.jpg"&gt;</small></span>
+          </div>
+          <!-- UNCOMMENT AND REPLACE:
+          <img src="YOUR_MAIN_PHOTO_URL" alt="Profile Photo" />
+          -->
+        </div>
+
+        <!-- 📸 PHOTO 2: Replace src with your secondary/action photo URL -->
+        <div class="photo-secondary-wrap">
+          <div class="photo-placeholder" style="font-size:0.65rem;">
+            <i class="fa-regular fa-image" style="font-size:1.2rem;"></i>
+            <span style="line-height:1.3;">Photo 2<br/>Replace</span>
+          </div>
+          <!-- UNCOMMENT AND REPLACE:
+          <img src="YOUR_SECONDARY_PHOTO_URL" alt="Secondary Photo" />
+          -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =====================
+       SKILLS TICKER
+       ===================== -->
+  <div id="skills-ticker">
+    <div class="ticker-track" id="ticker-track">
+      <!-- Duplicated for seamless loop -->
+    </div>
+  </div>
+
+  <!-- =====================
+       PROJECTS SECTION
+       ===================== -->
+  <section id="projects">
+    <div class="section-inner">
+      <div class="section-header reveal">
+        <div class="section-tag">Portfolio</div>
+        <h2 class="section-title">Featured <span class="highlight">Projects</span></h2>
+        <p class="section-desc">
+          <!-- 🔥 FIREBASE: Fetch description from Firestore "sections/projects" document -->
+          A showcase of things I've built — from real-time Firebase apps to full-stack platforms and creative experiments.
+        </p>
+      </div>
+
+      <!-- 🔥 FIREBASE: This grid is populated by loadProjectsFromFirestore() below.
+           Fallback static cards shown until Firebase is connected. -->
+      <div class="projects-grid" id="projects-grid">
+        <!-- Static placeholder cards — replace with dynamic rendering from Firestore -->
+
+        <div class="project-card reveal">
+          <div class="project-media">
+            <!-- IMAGE type: use <img src="..."> -->
+            <div class="media-placeholder">
+              <i class="fa-regular fa-image"></i>
+              <span>Project Screenshot / Demo</span>
             </div>
-        </footer>
+            <!-- UNCOMMENT for image:  <img src="project1-screenshot.png" alt="Project 1" />  -->
+            <!-- UNCOMMENT for video:
+            <video autoplay muted loop playsinline>
+              <source src="project1-demo.mp4" type="video/mp4">
+            </video>
+            -->
+            <!-- UNCOMMENT for YouTube:
+            <iframe src="https://www.youtube.com/embed/VIDEO_ID?autoplay=1&mute=1&loop=1" allowfullscreen></iframe>
+            -->
+            <div class="project-media-badge">Image</div>
+          </div>
+          <div class="project-body">
+            <div class="project-tags">
+              <span class="tag">React</span>
+              <span class="tag">Firebase</span>
+              <span class="tag">Tailwind</span>
+            </div>
+            <h3 class="project-title">Project Title One</h3>
+            <p class="project-desc">A brief description of this project — what it does, the problem it solves, and the tech stack used. Make it compelling.</p>
+            <div class="project-links">
+              <a href="#" class="project-link"><i class="fa-brands fa-github"></i> Code</a>
+              <a href="#" class="project-link"><i class="fa-solid fa-arrow-up-right-from-square"></i> Live</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card reveal">
+          <div class="project-media">
+            <div class="media-placeholder">
+              <i class="fa-solid fa-film"></i>
+              <span>Video Demo</span>
+            </div>
+            <div class="project-media-badge">Video</div>
+          </div>
+          <div class="project-body">
+            <div class="project-tags">
+              <span class="tag">Node.js</span>
+              <span class="tag">Firestore</span>
+              <span class="tag">APIs</span>
+            </div>
+            <h3 class="project-title">Project Title Two</h3>
+            <p class="project-desc">Another project description. This slot supports a video demo using HTML5 &lt;video&gt; or an embedded YouTube iframe.</p>
+            <div class="project-links">
+              <a href="#" class="project-link"><i class="fa-brands fa-github"></i> Code</a>
+              <a href="#" class="project-link"><i class="fa-solid fa-arrow-up-right-from-square"></i> Live</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card reveal">
+          <div class="project-media">
+            <div class="media-placeholder">
+              <i class="fa-brands fa-youtube"></i>
+              <span>Embedded iframe / YouTube</span>
+            </div>
+            <div class="project-media-badge">Iframe</div>
+          </div>
+          <div class="project-body">
+            <div class="project-tags">
+              <span class="tag">Flutter</span>
+              <span class="tag">Firebase Auth</span>
+            </div>
+            <h3 class="project-title">Project Title Three</h3>
+            <p class="project-desc">This card demonstrates iframe support — embed a YouTube link, Loom, or Figma prototype directly inside the card.</p>
+            <div class="project-links">
+              <a href="#" class="project-link"><i class="fa-brands fa-github"></i> Code</a>
+              <a href="#" class="project-link"><i class="fa-solid fa-arrow-up-right-from-square"></i> Live</a>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+  </section>
 
+  <!-- =====================
+       CERTIFICATES SECTION
+       ===================== -->
+  <section id="certificates" style="background: var(--bg-primary);">
+    <div class="section-inner">
+      <div class="section-header reveal">
+        <div class="section-tag">Achievements</div>
+        <h2 class="section-title">Certificates &amp; <span class="highlight">Awards</span></h2>
+        <p class="section-desc">
+          <!-- 🔥 FIREBASE: Fetch description from Firestore "sections/certificates" document -->
+          Credentials and recognition from courses, competitions, and industry platforms that shaped my skills.
+        </p>
+      </div>
 
-    <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        // --- STATE & DATA (FIREBASE PREPARATION) ---
-        // This is where you'll fetch data from Firebase Firestore.
-        // For now, we use local placeholder data.
-        
-        // --- PROJECTS DATA ---
-        // Replace this with a fetch call to your Firestore 'projects' collection
-        const projectsData = [
-            {
-                title: "E-commerce Platform",
-                description: "A full-featured e-commerce website with a custom CMS, built with React and Node.js. Integrated with Stripe for payments.",
-                media: {
-                    type: 'image', // 'image' or 'video'
-                    src: 'https://placehold.co/600x400/3498db/ffffff?text=Project+Image'
-                },
-                tags: ["React", "Node.js", "Stripe", "MongoDB"],
-                liveUrl: "#",
-                repoUrl: "#"
-            },
-            {
-                title: "Project Showcase Video",
-                description: "A video demo of a real-time chat application. Built using WebSockets and Express.",
-                media: {
-                    type: 'video', // 'image' or 'video'
-                    src: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4'
-                },
-                tags: ["WebSockets", "JavaScript", "HTML5 Video"],
-                liveUrl: "#",
-                repoUrl: "#"
-            },
-            {
-                title: "Portfolio Website V1",
-                description: "My previous personal portfolio website, designed to be minimalist and fast. Built with vanilla HTML, CSS, and JS.",
-                media: {
-                    type: 'image',
-                    src: 'https://placehold.co/600x400/9b59b6/ffffff?text=Project+3'
-                },
-                tags: ["HTML", "CSS", "JavaScript"],
-                liveUrl: "#",
-                repoUrl: "#"
-            },
-        ];
+      <!-- 🔥 FIREBASE: This grid is populated by loadCertificatesFromFirestore() below. -->
+      <div class="certs-grid" id="certs-grid">
 
-        // --- CERTIFICATES DATA ---
-        // Replace this with a fetch call to your Firestore 'certificates' collection
-        const certificatesData = [
-            {
-                title: "Google Cloud Certified - Associate Cloud Engineer",
-                issuer: "Google Cloud",
-                date: "Jan 2023",
-                url: "#",
-                imageUrl: "https://placehold.co/100x100/4285F4/ffffff?text=GCP"
-            },
-            {
-                title: "Firebase for Web Developers",
-                issuer: "Udemy",
-                date: "Nov 2022",
-                url: "#",
-                imageUrl: "https://placehold.co/100x100/e74c3c/ffffff?text=Firebase"
-            },
-            {
-                title: "React - The Complete Guide (incl Hooks, React Router, Redux)",
-                issuer: "Academind by Maximilian Schwarzmüller",
-                date: "May 2022",
-                url: "#",
-                imageUrl: "https://placehold.co/100x100/2980b9/ffffff?text=React"
-            }
-        ];
+        <div class="cert-card reveal">
+          <div class="cert-icon-wrap"><i class="fa-brands fa-google"></i></div>
+          <div>
+            <div class="cert-issuer">Google Cloud</div>
+            <div class="cert-card-title">Google Cloud Associate Developer</div>
+          </div>
+          <!-- UNCOMMENT to show certificate image:
+          <img src="certificate1.jpg" alt="Certificate" class="cert-preview-img" />
+          -->
+          <div class="cert-date"><i class="fa-regular fa-calendar"></i> Jan 2024</div>
+          <a href="#" class="cert-link">View Credential <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
 
+        <div class="cert-card reveal">
+          <div class="cert-icon-wrap"><i class="fa-brands fa-firebase"></i></div>
+          <div>
+            <div class="cert-issuer">Firebase / Google</div>
+            <div class="cert-card-title">Firebase Advanced Development</div>
+          </div>
+          <div class="cert-date"><i class="fa-regular fa-calendar"></i> Mar 2024</div>
+          <a href="#" class="cert-link">View Credential <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
 
-        // --- DYNAMIC CONTENT RENDERING ---
+        <div class="cert-card reveal">
+          <div class="cert-icon-wrap"><i class="fa-brands fa-react"></i></div>
+          <div>
+            <div class="cert-issuer">Meta</div>
+            <div class="cert-card-title">Meta Front-End Developer Professional</div>
+          </div>
+          <div class="cert-date"><i class="fa-regular fa-calendar"></i> Jun 2024</div>
+          <a href="#" class="cert-link">View Credential <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
 
-        // Function to render projects
-        function renderProjects() {
-            const projectsGrid = document.getElementById('projects-grid');
-            if (!projectsGrid) return;
-            projectsGrid.innerHTML = projectsData.map(project => `
-                <div class="glassmorphism rounded-xl overflow-hidden shadow-lg group transform hover:-translate-y-2 transition-all duration-300">
-                    <div class="media-container">
-                        ${project.media.type === 'image' ?
-                            `<img src="${project.media.src}" alt="${project.title}" class="w-full h-48 object-cover">` :
-                            `<div class="video-container bg-black"><video controls muted loop preload="metadata" src="${project.media.src}#t=0.1" class="w-full h-full object-contain"></video></div>`
-                        }
-                    </div>
-                    <div class="p-5">
-                        <h3 class="text-xl font-bold mb-2 text-gray-900 dark:text-white">${project.title}</h3>
-                        <p class="text-gray-600 dark:text-gray-400 text-sm mb-4">${project.description}</p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            ${project.tags.map(tag => `<span class="text-xs font-semibold bg-sky-100 text-sky-800 dark:bg-sky-900/50 dark:text-sky-300 px-2 py-1 rounded-full">${tag}</span>`).join('')}
-                        </div>
-                        <div class="mt-4 flex items-center space-x-4">
-                            <a href="${project.liveUrl}" target="_blank" class="text-sm font-semibold text-sky-500 dark:text-sky-400 hover:underline">View Live</a>
-                            <a href="${project.repoUrl}" target="_blank" class="text-sm font-semibold text-gray-500 dark:text-gray-400 hover:underline">Source Code</a>
-                        </div>
-                    </div>
+        <div class="cert-card reveal">
+          <div class="cert-icon-wrap"><i class="fa-solid fa-award"></i></div>
+          <div>
+            <div class="cert-issuer">Coursera</div>
+            <div class="cert-card-title">Full-Stack Web Development Specialization</div>
+          </div>
+          <div class="cert-date"><i class="fa-regular fa-calendar"></i> Sep 2023</div>
+          <a href="#" class="cert-link">View Credential <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+
+        <div class="cert-card reveal">
+          <div class="cert-icon-wrap"><i class="fa-brands fa-aws"></i></div>
+          <div>
+            <div class="cert-issuer">Amazon Web Services</div>
+            <div class="cert-card-title">AWS Certified Cloud Practitioner</div>
+          </div>
+          <div class="cert-date"><i class="fa-regular fa-calendar"></i> Dec 2023</div>
+          <a href="#" class="cert-link">View Credential <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+
+        <div class="cert-card reveal">
+          <div class="cert-icon-wrap"><i class="fa-solid fa-trophy"></i></div>
+          <div>
+            <div class="cert-issuer">Hackathon 2024</div>
+            <div class="cert-card-title">1st Place — National Hackathon Winner</div>
+          </div>
+          <div class="cert-date"><i class="fa-regular fa-calendar"></i> Aug 2024</div>
+          <a href="#" class="cert-link">View Details <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- =====================
+       ABOUT / SKILLS
+       ===================== -->
+  <section id="about">
+    <div class="section-inner">
+      <div class="section-header reveal">
+        <div class="section-tag">About Me</div>
+        <h2 class="section-title">Skills &amp; <span class="highlight">Expertise</span></h2>
+      </div>
+      <div class="about-grid">
+        <div class="reveal">
+          <!-- 🔥 FIREBASE: Fetch bio/about text from Firestore "profile/about" document -->
+          <p style="color:var(--text-secondary);line-height:1.8;margin-bottom:1.5rem;font-size:1rem;">
+            I'm a passionate developer with a love for building fast, scalable, and beautiful web applications.
+            My core stack revolves around <strong style="color:var(--text-primary)">React, Firebase, and Node.js</strong>,
+            and I'm constantly exploring new tools to sharpen my craft.
+          </p>
+          <p style="color:var(--text-secondary);line-height:1.8;margin-bottom:2rem;font-size:1rem;">
+            When I'm not coding, you'll find me contributing to open source, mentoring juniors, or brewing the perfect cup of coffee before a deep work session.
+          </p>
+          <div class="tech-pills">
+            <!-- 🔥 FIREBASE: Fetch tech stack from Firestore "profile/techStack" array field -->
+            <span class="tech-pill">React</span>
+            <span class="tech-pill">Firebase</span>
+            <span class="tech-pill">Node.js</span>
+            <span class="tech-pill">TypeScript</span>
+            <span class="tech-pill">Flutter</span>
+            <span class="tech-pill">Tailwind CSS</span>
+            <span class="tech-pill">Firestore</span>
+            <span class="tech-pill">Cloud Functions</span>
+            <span class="tech-pill">REST APIs</span>
+            <span class="tech-pill">Git / GitHub</span>
+            <span class="tech-pill">Docker</span>
+            <span class="tech-pill">Figma</span>
+          </div>
+        </div>
+
+        <div class="skills-list reveal">
+          <!-- 🔥 FIREBASE: Fetch skill levels from Firestore "profile/skills" array field -->
+          <div class="skill-item">
+            <div class="skill-label"><span>Frontend (React / Tailwind)</span><span>92%</span></div>
+            <div class="skill-bar"><div class="skill-bar-fill" data-width="92"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-label"><span>Firebase &amp; Firestore</span><span>90%</span></div>
+            <div class="skill-bar"><div class="skill-bar-fill" data-width="90"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-label"><span>Backend (Node.js / APIs)</span><span>80%</span></div>
+            <div class="skill-bar"><div class="skill-bar-fill" data-width="80"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-label"><span>Mobile (Flutter)</span><span>75%</span></div>
+            <div class="skill-bar"><div class="skill-bar-fill" data-width="75"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-label"><span>UI/UX Design</span><span>70%</span></div>
+            <div class="skill-bar"><div class="skill-bar-fill" data-width="70"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-label"><span>DevOps / Cloud</span><span>65%</span></div>
+            <div class="skill-bar"><div class="skill-bar-fill" data-width="65"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =====================
+       CONTACT SECTION
+       ===================== -->
+  <section id="contact">
+    <div class="section-inner">
+      <div class="section-header reveal">
+        <div class="section-tag">Contact</div>
+        <h2 class="section-title">Let's <span class="highlight">Connect</span></h2>
+        <p class="section-desc">Have a project in mind? I'd love to hear about it. Drop me a message and let's make something great together.</p>
+      </div>
+      <div class="contact-wrapper">
+        <form class="contact-form reveal" id="contact-form">
+          <!-- 🔥 FIREBASE: Handle form submission with Firestore or Firebase Functions
+               See submitContactForm() function below -->
+          <div class="form-group">
+            <label class="form-label">Name</label>
+            <input type="text" class="form-input" placeholder="Your full name" id="form-name" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Email</label>
+            <input type="email" class="form-input" placeholder="your@email.com" id="form-email" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Message</label>
+            <textarea class="form-textarea" placeholder="Tell me about your project or idea..." id="form-message" required></textarea>
+          </div>
+          <button type="submit" class="btn-primary" style="align-self:flex-start;">
+            <i class="fa-solid fa-paper-plane"></i> Send Message
+          </button>
+          <div id="form-feedback" style="font-size:0.85rem;color:var(--accent-green);display:none;"></div>
+        </form>
+
+        <div class="contact-info reveal">
+          <!-- 🔥 FIREBASE: Fetch contact details from Firestore "profile/contact" document -->
+          <div class="contact-info-item">
+            <div class="contact-info-icon"><i class="fa-solid fa-envelope"></i></div>
+            <div class="contact-info-text">
+              <strong>Email</strong>
+              <span>your.email@gmail.com</span>
+            </div>
+          </div>
+          <div class="contact-info-item">
+            <div class="contact-info-icon"><i class="fa-solid fa-location-dot"></i></div>
+            <div class="contact-info-text">
+              <strong>Location</strong>
+              <span>Your City, Your Country</span>
+            </div>
+          </div>
+          <div class="contact-info-item">
+            <div class="contact-info-icon"><i class="fa-solid fa-clock"></i></div>
+            <div class="contact-info-text">
+              <strong>Response Time</strong>
+              <span>Within 24 hours</span>
+            </div>
+          </div>
+
+          <!-- Social links inside contact -->
+          <div style="margin-top:1rem;">
+            <div style="font-size:0.78rem;color:var(--text-muted);font-family:'JetBrains Mono',monospace;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:0.75rem;">Find me on</div>
+            <div class="social-links">
+              <!-- 🔥 FIREBASE: Fetch social URLs from Firestore "profile/socials" document -->
+              <a href="#" class="social-link" title="GitHub"><i class="fa-brands fa-github"></i></a>
+              <a href="#" class="social-link" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+              <a href="#" class="social-link" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+              <a href="#" class="social-link" title="Twitter / X"><i class="fa-brands fa-x-twitter"></i></a>
+              <a href="#" class="social-link" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+              <a href="#" class="social-link" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =====================
+       FOOTER
+       ===================== -->
+  <footer>
+    <div class="footer-inner">
+      <div>
+        <div class="footer-logo">Dev<span>.</span></div>
+        <div class="footer-copy">© 2025 Your Name. All rights reserved.</div>
+      </div>
+      <div class="social-links">
+        <!-- 🔥 FIREBASE: Fetch social URLs from Firestore "profile/socials" document -->
+        <a href="#" class="social-link" title="GitHub"><i class="fa-brands fa-github"></i></a>
+        <a href="#" class="social-link" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+        <a href="#" class="social-link" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+        <a href="#" class="social-link" title="Twitter / X"><i class="fa-brands fa-x-twitter"></i></a>
+        <a href="#" class="social-link" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- =====================
+       WEATHER TOGGLE BUTTON
+       ===================== -->
+  <div class="weather-indicator" id="weather-indicator"></div>
+  <button id="weather-btn" title="Toggle Weather Ambience">
+    <span class="weather-label" id="weather-label">Zen Mode</span>
+    <i class="fa-solid fa-cloud-sun" id="weather-icon"></i>
+  </button>
+
+  <!-- =====================
+       AUDIO (hidden, user-triggered only)
+       ===================== -->
+  <!--
+    🔊 AUDIO SOURCES: Replace with actual audio file URLs.
+    These audio elements are muted/paused by default and ONLY play when user clicks the weather button.
+    Free audio sources: https://freesound.org (rain: #399095, snow/wind: #425370)
+  -->
+  <audio id="rain-audio" loop>
+    <!-- Replace with your own rain audio URL -->
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg" />
+    <!-- Fallback: <source src="rain.ogg" type="audio/ogg" /> -->
+  </audio>
+
+  <audio id="snow-audio" loop>
+    <!-- Replace with your own snow/wind audio URL -->
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" type="audio/mpeg" />
+  </audio>
+
+  <!-- =====================
+       JAVASCRIPT
+       ===================== -->
+  <script>
+    /* ========================================================
+       🔥 FIREBASE INTEGRATION ZONE
+       ========================================================
+       TO CONNECT FIREBASE:
+       1. Go to https://console.firebase.google.com
+       2. Create / open your project
+       3. Go to Project Settings > Your apps > Add web app
+       4. Copy the firebaseConfig object below and paste yours
+
+       Then install SDK (if using bundler):
+         npm install firebase
+       Or add the CDN scripts above this <script> block:
+         <script type="module">
+           import { initializeApp } from "https://www.gstatic.com/firebasejs/10.x.x/firebase-app.js";
+           import { getFirestore, collection, getDocs } from "...firebase-firestore.js";
+       ======================================================== */
+
+    // ── STEP 1: Paste your Firebase config here ────────────
+    const firebaseConfig = {
+      apiKey:            "YOUR_API_KEY",
+      authDomain:        "YOUR_PROJECT.firebaseapp.com",
+      projectId:         "YOUR_PROJECT_ID",
+      storageBucket:     "YOUR_PROJECT.appspot.com",
+      messagingSenderId: "YOUR_SENDER_ID",
+      appId:             "YOUR_APP_ID"
+    };
+
+    // ── STEP 2: Uncomment after adding Firebase SDK ─────────
+    // const app = initializeApp(firebaseConfig);
+    // const db  = getFirestore(app);
+
+    // ── STEP 3: Replace static cards with this function ─────
+    async function loadProjectsFromFirestore() {
+      /*
+        const grid = document.getElementById('projects-grid');
+        grid.innerHTML = '<div class="loading-skeleton" style="height:300px;grid-column:1/-1;"></div>';
+
+        try {
+          const snapshot = await getDocs(collection(db, 'projects'));
+          if (snapshot.empty) {
+            grid.innerHTML = '<p class="empty-state">No projects yet.</p>';
+            return;
+          }
+          grid.innerHTML = '';
+          snapshot.forEach(doc => {
+            const p = doc.data();
+            // p.title, p.description, p.tags (array), p.imageUrl, p.videoUrl, p.iframeUrl,
+            // p.githubUrl, p.liveUrl, p.mediaType ('image'|'video'|'iframe')
+            const mediaHtml = p.mediaType === 'video'
+              ? `<video autoplay muted loop playsinline><source src="${p.videoUrl}" type="video/mp4"></video>`
+              : p.mediaType === 'iframe'
+              ? `<iframe src="${p.iframeUrl}" allowfullscreen></iframe>`
+              : `<img src="${p.imageUrl}" alt="${p.title}" />`;
+
+            grid.innerHTML += `
+              <div class="project-card reveal">
+                <div class="project-media">${mediaHtml}<div class="project-media-badge">${p.mediaType}</div></div>
+                <div class="project-body">
+                  <div class="project-tags">${(p.tags||[]).map(t=>`<span class="tag">${t}</span>`).join('')}</div>
+                  <h3 class="project-title">${p.title}</h3>
+                  <p class="project-desc">${p.description}</p>
+                  <div class="project-links">
+                    ${p.githubUrl ? `<a href="${p.githubUrl}" class="project-link" target="_blank"><i class="fa-brands fa-github"></i> Code</a>` : ''}
+                    ${p.liveUrl   ? `<a href="${p.liveUrl}"   class="project-link" target="_blank"><i class="fa-solid fa-arrow-up-right-from-square"></i> Live</a>` : ''}
+                  </div>
                 </div>
-            `).join('');
+              </div>`;
+          });
+          observeReveal(); // re-trigger scroll reveal for new cards
+        } catch(e) {
+          console.error('Firestore projects error:', e);
         }
+      */
+    }
 
-        // Function to render certificates
-        function renderCertificates() {
-            const certificatesList = document.getElementById('certificates-list');
-            if (!certificatesList) return;
-            certificatesList.innerHTML = certificatesData.map(cert => `
-                <div class="glassmorphism rounded-xl shadow-md p-4 flex items-center space-x-4 hover:shadow-xl transition-shadow duration-300">
-                    <img src="${cert.imageUrl}" alt="${cert.issuer}" class="w-16 h-16 sm:w-20 sm:h-20 rounded-lg object-cover">
-                    <div class="flex-1">
-                        <h4 class="font-bold text-md sm:text-lg text-gray-900 dark:text-white">${cert.title}</h4>
-                        <p class="text-sm text-gray-600 dark:text-gray-400">${cert.issuer} - ${cert.date}</p>
-                        <a href="${cert.url}" target="_blank" class="text-sm text-sky-500 dark:text-sky-400 hover:underline mt-1 inline-block">View Credential</a>
-                    </div>
+    // ── STEP 4: Replace static certs with this function ─────
+    async function loadCertificatesFromFirestore() {
+      /*
+        const grid = document.getElementById('certs-grid');
+        grid.innerHTML = '<div class="loading-skeleton" style="height:200px;grid-column:1/-1;"></div>';
+
+        try {
+          const snapshot = await getDocs(collection(db, 'certificates'));
+          if (snapshot.empty) { grid.innerHTML = '<p class="empty-state">No certificates yet.</p>'; return; }
+          grid.innerHTML = '';
+          snapshot.forEach(doc => {
+            const c = doc.data();
+            // c.title, c.issuer, c.date, c.icon (FA class), c.credentialUrl, c.previewImageUrl
+            grid.innerHTML += `
+              <div class="cert-card reveal">
+                <div class="cert-icon-wrap"><i class="${c.icon || 'fa-solid fa-award'}"></i></div>
+                <div>
+                  <div class="cert-issuer">${c.issuer}</div>
+                  <div class="cert-card-title">${c.title}</div>
                 </div>
-            `).join('');
+                ${c.previewImageUrl ? `<img src="${c.previewImageUrl}" class="cert-preview-img" alt="${c.title}" />` : ''}
+                <div class="cert-date"><i class="fa-regular fa-calendar"></i> ${c.date}</div>
+                <a href="${c.credentialUrl || '#'}" class="cert-link" target="_blank">View Credential <i class="fa-solid fa-arrow-right"></i></a>
+              </div>`;
+          });
+          observeReveal();
+        } catch(e) {
+          console.error('Firestore certificates error:', e);
         }
+      */
+    }
 
-        renderProjects();
-        renderCertificates();
-
-
-        // --- THEME (DARK/LIGHT MODE) TOGGLE ---
-        const themeToggle = document.getElementById('theme-toggle');
-        const lightIcon = document.getElementById('theme-icon-light');
-        const darkIcon = document.getElementById('theme-icon-dark');
-
-        // Check for saved theme preference or use OS preference
-        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            document.documentElement.classList.add('dark');
-            lightIcon.classList.remove('hidden');
-            darkIcon.classList.add('hidden');
-        } else {
-            document.documentElement.classList.remove('dark');
-            lightIcon.classList.add('hidden');
-            darkIcon.classList.remove('hidden');
+    // ── STEP 5: Contact form → Firestore ────────────────────
+    async function submitContactForm(name, email, message) {
+      /*
+        try {
+          await addDoc(collection(db, 'messages'), {
+            name, email, message,
+            createdAt: serverTimestamp()
+          });
+          return { success: true };
+        } catch(e) {
+          return { success: false, error: e.message };
         }
+      */
+      // Static fallback (remove when Firebase is connected):
+      return { success: true };
+    }
 
-        themeToggle.addEventListener('click', () => {
-            // toggle theme
-            document.documentElement.classList.toggle('dark');
+    // ── Call loaders on page load ────────────────────────────
+    // loadProjectsFromFirestore();
+    // loadCertificatesFromFirestore();
 
-            // update icon and save preference
-            if (document.documentElement.classList.contains('dark')) {
-                localStorage.setItem('color-theme', 'dark');
-                lightIcon.classList.remove('hidden');
-                darkIcon.classList.add('hidden');
-            } else {
-                localStorage.setItem('color-theme', 'light');
-                lightIcon.classList.add('hidden');
-                darkIcon.classList.remove('hidden');
-            }
-        });
+    /* ========================================================
+       THEME TOGGLE
+       ======================================================== */
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeIcon   = document.getElementById('theme-icon');
+    let isDark = true;
 
+    // Load saved preference
+    const savedTheme = localStorage.getItem('portfolio-theme');
+    if (savedTheme) {
+      isDark = savedTheme === 'dark';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+      themeIcon.className = isDark ? 'fa-solid fa-moon' : 'fa-solid fa-sun';
+    }
 
-        // --- WEATHER EFFECTS ---
-        const weatherToggle = document.getElementById('weather-toggle');
-        const weatherCanvas = document.getElementById('weather-canvas');
-        const rainAudio = document.getElementById('rain-audio');
-        const snowAudio = document.getElementById('snow-audio');
-        const ctx = weatherCanvas.getContext('2d');
-        
-        let weatherState = 0; // 0: Off, 1: Rain, 2: Snow
-        let animationFrameId;
-        let particles = [];
-
-        weatherCanvas.width = window.innerWidth;
-        weatherCanvas.height = window.innerHeight;
-
-        const rainIcon = `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" /></svg>`;
-        const snowIcon = `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" /></svg>`;
-        const offIcon = `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>`;
-
-        function updateWeatherIcon() {
-            if (weatherState === 0) weatherToggle.innerHTML = offIcon;
-            if (weatherState === 1) weatherToggle.innerHTML = rainIcon;
-            if (weatherState === 2) weatherToggle.innerHTML = snowIcon;
-        }
-
-        updateWeatherIcon();
-
-        function createParticle(type) {
-            const x = Math.random() * weatherCanvas.width;
-            if (type === 'rain') {
-                return { x: x, y: -20, length: Math.random() * 20 + 10, speed: Math.random() * 5 + 4 };
-            }
-            if (type === 'snow') {
-                return {
-                    x: x, y: -20, radius: Math.random() * 3 + 2,
-                    speedY: Math.random() * 1 + 0.5,
-                    speedX: Math.random() * 2 - 1,
-                    opacity: Math.random() * 0.5 + 0.5
-                };
-            }
-        }
-
-        function draw() {
-            ctx.clearRect(0, 0, weatherCanvas.width, weatherCanvas.height);
-            for (let i = 0; i < particles.length; i++) {
-                const p = particles[i];
-                if (weatherState === 1) { // Rain
-                    ctx.beginPath();
-                    ctx.moveTo(p.x, p.y);
-                    ctx.lineTo(p.x, p.y + p.length);
-                    ctx.strokeStyle = 'rgba(173, 216, 230, 0.5)';
-                    ctx.lineWidth = 1;
-                    ctx.stroke();
-                    p.y += p.speed;
-                    if (p.y > weatherCanvas.height) {
-                        particles[i] = createParticle('rain');
-                    }
-                } else if (weatherState === 2) { // Snow
-                    ctx.beginPath();
-                    ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-                    ctx.fillStyle = `rgba(255, 255, 255, ${p.opacity})`;
-                    ctx.fill();
-                    p.y += p.speedY;
-                    p.x += p.speedX;
-                    if (p.y > weatherCanvas.height || p.x > weatherCanvas.width || p.x < 0) {
-                        particles[i] = createParticle('snow');
-                    }
-                }
-            }
-            animationFrameId = requestAnimationFrame(draw);
-        }
-
-        function stopEffects() {
-            cancelAnimationFrame(animationFrameId);
-            ctx.clearRect(0, 0, weatherCanvas.width, weatherCanvas.height);
-            particles = [];
-            rainAudio.pause();
-            snowAudio.pause();
-            rainAudio.currentTime = 0;
-            snowAudio.currentTime = 0;
-        }
-
-        function startRain() {
-            stopEffects();
-            particles = Array(100).fill(null).map(() => createParticle('rain'));
-            rainAudio.play().catch(e => console.error("Audio autoplay failed:", e));
-            draw();
-        }
-
-        function startSnow() {
-            stopEffects();
-            particles = Array(200).fill(null).map(() => createParticle('snow'));
-            snowAudio.play().catch(e => console.error("Audio autoplay failed:", e));
-            draw();
-        }
-
-        weatherToggle.addEventListener('click', () => {
-            weatherState = (weatherState + 1) % 3;
-            updateWeatherIcon();
-            switch (weatherState) {
-                case 0: stopEffects(); break;
-                case 1: startRain(); break;
-                case 2: startSnow(); break;
-            }
-        });
-
-        window.addEventListener('resize', () => {
-            weatherCanvas.width = window.innerWidth;
-            weatherCanvas.height = window.innerHeight;
-        });
+    themeToggle.addEventListener('click', () => {
+      isDark = !isDark;
+      const theme = isDark ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', theme);
+      themeIcon.className = isDark ? 'fa-solid fa-moon' : 'fa-solid fa-sun';
+      localStorage.setItem('portfolio-theme', theme);
     });
-    </script>
 
+    /* ========================================================
+       MOBILE MENU
+       ======================================================== */
+    const hamburger  = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    hamburger.addEventListener('click', () => {
+      mobileMenu.classList.toggle('open');
+    });
+
+    function closeMobileMenu() {
+      mobileMenu.classList.remove('open');
+    }
+
+    /* ========================================================
+       SKILLS TICKER
+       ======================================================== */
+    const skills = [
+      { icon: 'fa-brands fa-react',      label: 'React' },
+      { icon: 'fa-brands fa-js',         label: 'JavaScript' },
+      { icon: 'fa-brands fa-node-js',    label: 'Node.js' },
+      { icon: 'fa-brands fa-firebase',   label: 'Firebase' },
+      { icon: 'fa-brands fa-css3-alt',   label: 'Tailwind CSS' },
+      { icon: 'fa-brands fa-python',     label: 'Python' },
+      { icon: 'fa-solid fa-database',    label: 'Firestore' },
+      { icon: 'fa-brands fa-git-alt',    label: 'Git' },
+      { icon: 'fa-brands fa-docker',     label: 'Docker' },
+      { icon: 'fa-brands fa-figma',      label: 'Figma' },
+      { icon: 'fa-brands fa-aws',        label: 'AWS' },
+      { icon: 'fa-solid fa-mobile-alt',  label: 'Flutter' },
+    ];
+
+    const tickerTrack = document.getElementById('ticker-track');
+    const doubled = [...skills, ...skills]; // duplicate for seamless loop
+    tickerTrack.innerHTML = doubled.map(s =>
+      `<div class="ticker-item"><i class="${s.icon}"></i>${s.label}</div>`
+    ).join('');
+
+    /* ========================================================
+       WEATHER EFFECT (Canvas + Audio)
+       RULE: Does NOT auto-play. Only activates on user click.
+       States: 0=Off, 1=Rain, 2=Snow
+       ======================================================== */
+    const weatherBtn       = document.getElementById('weather-btn');
+    const weatherIcon      = document.getElementById('weather-icon');
+    const weatherLabel     = document.getElementById('weather-label');
+    const weatherIndicator = document.getElementById('weather-indicator');
+    const weatherCanvas    = document.getElementById('weather-canvas');
+    const rainAudio        = document.getElementById('rain-audio');
+    const snowAudio        = document.getElementById('snow-audio');
+    const ctx              = weatherCanvas.getContext('2d');
+
+    let weatherState = 0; // 0=Off, 1=Rain, 2=Snow
+    let particles    = [];
+    let animFrame    = null;
+    let canvasReady  = false;
+
+    function resizeCanvas() {
+      weatherCanvas.width  = window.innerWidth;
+      weatherCanvas.height = window.innerHeight;
+    }
+
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    /* ── Particle factory ── */
+    function createRainDrop() {
+      return {
+        x:     Math.random() * weatherCanvas.width,
+        y:     Math.random() * -weatherCanvas.height,
+        speed: 8 + Math.random() * 8,
+        len:   12 + Math.random() * 20,
+        thick: 0.5 + Math.random() * 1,
+        alpha: 0.4 + Math.random() * 0.5,
+        wind:  2 + Math.random() * 2
+      };
+    }
+
+    function createSnowFlake() {
+      return {
+        x:     Math.random() * weatherCanvas.width,
+        y:     Math.random() * -weatherCanvas.height,
+        r:     1 + Math.random() * 4,
+        speed: 1 + Math.random() * 2,
+        drift: (Math.random() - 0.5) * 0.8,
+        alpha: 0.5 + Math.random() * 0.5,
+        wobble: Math.random() * Math.PI * 2
+      };
+    }
+
+    function initParticles() {
+      particles = [];
+      const count = weatherState === 1 ? 220 : 120;
+      for (let i = 0; i < count; i++) {
+        if (weatherState === 1) {
+          const d = createRainDrop();
+          d.y = Math.random() * weatherCanvas.height; // start spread
+          particles.push(d);
+        } else {
+          const s = createSnowFlake();
+          s.y = Math.random() * weatherCanvas.height;
+          particles.push(s);
+        }
+      }
+    }
+
+    function drawRain() {
+      ctx.clearRect(0, 0, weatherCanvas.width, weatherCanvas.height);
+      particles.forEach((d, i) => {
+        ctx.save();
+        ctx.globalAlpha = d.alpha;
+        ctx.strokeStyle = isDark ? 'rgba(150,210,255,0.8)' : 'rgba(70,130,200,0.6)';
+        ctx.lineWidth = d.thick;
+        ctx.beginPath();
+        ctx.moveTo(d.x, d.y);
+        ctx.lineTo(d.x + d.wind, d.y + d.len);
+        ctx.stroke();
+        ctx.restore();
+
+        d.x += d.wind;
+        d.y += d.speed;
+
+        if (d.y > weatherCanvas.height || d.x > weatherCanvas.width) {
+          particles[i] = createRainDrop();
+        }
+      });
+    }
+
+    function drawSnow() {
+      ctx.clearRect(0, 0, weatherCanvas.width, weatherCanvas.height);
+      particles.forEach((s, i) => {
+        s.wobble += 0.02;
+        ctx.save();
+        ctx.globalAlpha = s.alpha;
+        ctx.fillStyle = isDark ? 'rgba(220,240,255,0.9)' : 'rgba(180,210,240,0.8)';
+        ctx.beginPath();
+        ctx.arc(s.x + Math.sin(s.wobble) * 1.5, s.y, s.r, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+
+        s.x += s.drift;
+        s.y += s.speed;
+
+        if (s.y > weatherCanvas.height + 10) {
+          particles[i] = createSnowFlake();
+        }
+      });
+    }
+
+    function animateWeather() {
+      if (weatherState === 0) return;
+      weatherState === 1 ? drawRain() : drawSnow();
+      animFrame = requestAnimationFrame(animateWeather);
+    }
+
+    function stopWeather() {
+      cancelAnimationFrame(animFrame);
+      ctx.clearRect(0, 0, weatherCanvas.width, weatherCanvas.height);
+      weatherCanvas.classList.remove('active');
+      rainAudio.pause(); rainAudio.currentTime = 0;
+      snowAudio.pause(); snowAudio.currentTime = 0;
+      weatherIndicator.classList.remove('visible');
+    }
+
+    function startWeather() {
+      resizeCanvas();
+      initParticles();
+      weatherCanvas.classList.add('active');
+      animateWeather();
+
+      if (weatherState === 1) {
+        snowAudio.pause();
+        rainAudio.volume = 0.35;
+        rainAudio.play().catch(() => {}); // graceful fail if browser blocks
+        weatherIndicator.textContent = '🌧 Rain Mode';
+        weatherIcon.className = 'fa-solid fa-cloud-rain';
+        weatherLabel.textContent = 'Next: Snow';
+      } else {
+        rainAudio.pause();
+        snowAudio.volume = 0.2;
+        snowAudio.play().catch(() => {});
+        weatherIndicator.textContent = '❄️ Snow Mode';
+        weatherIcon.className = 'fa-solid fa-snowflake';
+        weatherLabel.textContent = 'Next: Off';
+      }
+      weatherIndicator.classList.add('visible');
+    }
+
+    /* ── Weather button click (Off → Rain → Snow → Off) ── */
+    weatherBtn.addEventListener('click', () => {
+      weatherState = (weatherState + 1) % 3;
+      if (weatherState === 0) {
+        stopWeather();
+        weatherIcon.className = 'fa-solid fa-cloud-sun';
+        weatherLabel.textContent = 'Zen Mode';
+      } else {
+        stopWeather();
+        startWeather();
+      }
+    });
+
+    /* ========================================================
+       SCROLL REVEAL
+       ======================================================== */
+    function observeReveal() {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            // Animate skill bars when they appear
+            entry.target.querySelectorAll('.skill-bar-fill').forEach(bar => {
+              bar.style.width = bar.getAttribute('data-width') + '%';
+            });
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+      document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    }
+
+    observeReveal();
+
+    /* ========================================================
+       CONTACT FORM (static handler — replace with Firebase)
+       ======================================================== */
+    document.getElementById('contact-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const name    = document.getElementById('form-name').value;
+      const email   = document.getElementById('form-email').value;
+      const message = document.getElementById('form-message').value;
+      const btn     = e.target.querySelector('button[type=submit]');
+      const fb      = document.getElementById('form-feedback');
+
+      btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Sending...';
+      btn.disabled = true;
+
+      // 🔥 FIREBASE: Replace with your Firestore submit function
+      const result = await submitContactForm(name, email, message);
+
+      if (result.success) {
+        fb.style.display = 'block';
+        fb.textContent = '✓ Message sent! I\'ll get back to you within 24 hours.';
+        e.target.reset();
+      } else {
+        fb.style.color = 'var(--accent-warm)';
+        fb.style.display = 'block';
+        fb.textContent = '✗ Something went wrong. Please try again.';
+      }
+
+      btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Send Message';
+      btn.disabled = false;
+    });
+
+    /* ========================================================
+       SMOOTH NAV HIGHLIGHT (active section)
+       ======================================================== */
+    const sections   = document.querySelectorAll('section[id]');
+    const navAnchors = document.querySelectorAll('.nav-links a');
+
+    const navObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          navAnchors.forEach(a => {
+            a.style.color = '';
+            if (a.getAttribute('href') === '#' + entry.target.id) {
+              a.style.color = 'var(--accent)';
+            }
+          });
+        }
+      });
+    }, { threshold: 0.4 });
+
+    sections.forEach(s => navObserver.observe(s));
+  </script>
 </body>
 </html>

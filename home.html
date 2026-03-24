@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NOB Rotana | Premium Developer Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <style>
+        :root { color-scheme: light; }
+        html.dark { color-scheme: dark; }
+        html { scroll-behavior: smooth; }
+        body { font-family: "Inter", sans-serif; overflow-x: hidden; }
+        .glass {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border: 1px solid rgba(255, 255, 255, 0.35);
+        }
+        .dark .glass {
+            background: rgba(15, 23, 42, 0.45);
+            border: 1px solid rgba(148, 163, 184, 0.18);
+        }
+        .noise-overlay {
+            pointer-events: none;
+            position: fixed;
+            inset: 0;
+            opacity: 0.035;
+            z-index: 1;
+            background-image: radial-gradient(circle at 25% 25%, #fff 0, transparent 45%), radial-gradient(circle at 75% 75%, #fff 0, transparent 45%);
+            background-size: 4px 4px, 3px 3px;
+        }
+        .media-ratio {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%;
+            overflow: hidden;
+            border-radius: 0.75rem;
+        }
+        .media-ratio > img, .media-ratio > video, .media-ratio > iframe {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border: 0;
+        }
+    </style>
+</head>
+<body class="bg-slate-100 text-slate-800 transition-colors duration-500 dark:bg-slate-950 dark:text-slate-100">
+    <div class="noise-overlay"></div>
+    <div class="fixed inset-0 -z-20 bg-gradient-to-br from-cyan-100 via-white to-indigo-100 dark:from-slate-950 dark:via-slate-900 dark:to-indigo-950"></div>
+    <canvas id="weather-canvas" class="pointer-events-none fixed inset-0 -z-10 hidden"></canvas>
+    <audio id="rain-audio" src="https://cdn.pixabay.com/audio/2022/03/10/audio_c8f49f3f89.mp3" preload="none" loop></audio>
+    <audio id="snow-audio" src="https://cdn.pixabay.com/audio/2021/12/20/audio_4ef77f760f.mp3" preload="none" loop></audio>
+
+    <div class="fixed right-4 top-4 z-50 flex flex-col gap-3 sm:right-6 sm:top-6">
+        <button id="theme-toggle" class="glass inline-flex items-center justify-center rounded-full p-3 text-slate-700 shadow-lg transition hover:scale-105 dark:text-slate-100" aria-label="Toggle light and dark mode"></button>
+        <button id="weather-toggle" class="glass inline-flex items-center gap-2 rounded-full px-4 py-3 text-sm font-semibold text-slate-700 shadow-lg transition hover:scale-105 dark:text-slate-100" aria-label="Toggle Zen weather mode">
+            <span id="weather-icon"></span>
+            <span id="weather-label">Zen: Off</span>
+        </button>
+    </div>
+
+    <header class="sticky top-0 z-40 border-b border-white/35 bg-white/45 backdrop-blur-xl dark:border-slate-700/40 dark:bg-slate-900/45">
+        <nav class="mx-auto flex w-full max-w-6xl items-center justify-between px-4 py-4 sm:px-6">
+            <a href="#hero" class="text-lg font-extrabold tracking-tight sm:text-xl">NOB Rotana</a>
+            <div class="flex items-center gap-4 text-sm font-semibold sm:gap-6">
+                <a href="#projects" class="transition hover:text-cyan-500">Projects</a>
+                <a href="#certificates" class="transition hover:text-cyan-500">Certificates</a>
+                <a href="#contact" class="transition hover:text-cyan-500">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="relative z-10 mx-auto w-full max-w-6xl px-4 sm:px-6">
+        <section id="hero" class="grid min-h-[88vh] items-center gap-10 py-14 md:grid-cols-2 md:py-20">
+            <div>
+                <p class="mb-3 inline-flex rounded-full border border-cyan-300/50 bg-cyan-100/70 px-4 py-1 text-sm font-semibold text-cyan-700 dark:border-cyan-800/60 dark:bg-cyan-900/40 dark:text-cyan-300">Developer Portfolio</p>
+                <h1 class="text-4xl font-black leading-tight sm:text-5xl lg:text-6xl">
+                    Hi, I'm
+                    <span class="bg-gradient-to-r from-cyan-500 to-violet-500 bg-clip-text text-transparent">NOB Rotana</span>
+                    <br />Creative Developer
+                </h1>
+                <p class="mt-6 max-w-xl text-base leading-relaxed text-slate-600 dark:text-slate-300 sm:text-lg">
+                    I build sleek, fast, and meaningful web experiences with a strong focus on user impact, visual excellence, and clean engineering.
+                    I love turning ideas into polished digital products.
+                </p>
+                <div class="mt-8 flex flex-wrap gap-3">
+                    <a href="#projects" class="rounded-full bg-slate-900 px-6 py-3 text-sm font-bold text-white transition hover:translate-y-[-1px] hover:bg-slate-800 dark:bg-cyan-500 dark:text-slate-950 dark:hover:bg-cyan-400">View Projects</a>
+                    <a href="#contact" class="rounded-full border border-slate-300 bg-white/70 px-6 py-3 text-sm font-bold text-slate-900 transition hover:translate-y-[-1px] hover:border-slate-500 dark:border-slate-600 dark:bg-slate-900/70 dark:text-slate-100">Hire Me</a>
+                </div>
+            </div>
+
+            <div class="relative mx-auto w-full max-w-md">
+                <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=900&q=80" alt="Main personal photo placeholder" class="glass h-[400px] w-full rounded-3xl object-cover p-2 shadow-2xl" />
+                <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=700&q=80" alt="Secondary personal photo placeholder" class="glass absolute -bottom-8 -left-8 h-40 w-32 rounded-2xl object-cover p-1.5 shadow-xl sm:h-44 sm:w-36" />
+            </div>
+        </section>
+
+        <section id="projects" class="py-16 sm:py-20">
+            <div class="mb-10 flex items-end justify-between gap-4">
+                <div>
+                    <h2 class="text-3xl font-black sm:text-4xl">Featured Projects</h2>
+                    <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">Project cards support image, video, and iframe demos.</p>
+                </div>
+            </div>
+            <div id="projects-grid" class="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3"></div>
+        </section>
+
+        <section id="certificates" class="py-16 sm:py-20">
+            <h2 class="text-3xl font-black sm:text-4xl">Certificates & Achievements</h2>
+            <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">A quick look at learning milestones and verifiable credentials.</p>
+            <div id="certificates-list" class="mt-8 grid grid-cols-1 gap-5 md:grid-cols-2"></div>
+        </section>
+    </main>
+
+    <footer id="contact" class="relative z-10 mt-8 border-t border-white/25 bg-white/45 py-10 backdrop-blur-xl dark:border-slate-700/45 dark:bg-slate-900/45">
+        <div class="mx-auto flex w-full max-w-6xl flex-col gap-8 px-4 sm:px-6 md:flex-row md:items-center md:justify-between">
+            <div>
+                <h3 class="text-2xl font-extrabold">Let's Connect</h3>
+                <p class="mt-1 text-sm text-slate-600 dark:text-slate-400">Open for freelance, startup, and full-time opportunities.</p>
+            </div>
+            <div class="flex items-center gap-3">
+                <a href="https://github.com/yourusername" target="_blank" rel="noreferrer" class="glass rounded-full p-3 transition hover:scale-105" aria-label="GitHub"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 .5A11.5 11.5 0 0 0 .5 12a11.5 11.5 0 0 0 7.86 10.92c.58.1.79-.25.79-.57V20.3c-3.2.7-3.88-1.39-3.88-1.39-.52-1.33-1.27-1.69-1.27-1.69-1.03-.7.08-.69.08-.69 1.14.08 1.74 1.16 1.74 1.16 1.01 1.72 2.64 1.23 3.28.94.1-.73.39-1.23.72-1.51-2.55-.29-5.23-1.27-5.23-5.67 0-1.25.45-2.27 1.17-3.07-.12-.29-.51-1.46.11-3.04 0 0 .96-.31 3.15 1.17a10.86 10.86 0 0 1 5.73 0c2.18-1.48 3.14-1.17 3.14-1.17.62 1.58.23 2.75.11 3.04.73.8 1.16 1.82 1.16 3.07 0 4.41-2.68 5.37-5.25 5.66.41.35.78 1.04.78 2.1v3.12c0 .32.21.67.8.56A11.5 11.5 0 0 0 23.5 12 11.5 11.5 0 0 0 12 .5Z"></path></svg></a>
+                <a href="https://linkedin.com/in/yourusername" target="_blank" rel="noreferrer" class="glass rounded-full p-3 transition hover:scale-105" aria-label="LinkedIn"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><path d="M4.98 3.5a2.48 2.48 0 1 0 0 4.96 2.48 2.48 0 0 0 0-4.96ZM3 9h3.96v12H3V9Zm7.24 0H14v1.71h.05c.52-.98 1.8-2.01 3.71-2.01 3.97 0 4.7 2.45 4.7 5.64V21h-3.96v-5.77c0-1.38-.03-3.16-2-3.16-2.01 0-2.32 1.5-2.32 3.06V21H10.2V9h.04Z"></path></svg></a>
+                <a href="https://facebook.com/yourusername" target="_blank" rel="noreferrer" class="glass rounded-full p-3 transition hover:scale-105" aria-label="Facebook"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><path d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.5-3.88 3.8-3.88 1.1 0 2.25.2 2.25.2v2.46h-1.27c-1.25 0-1.64.77-1.64 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0 0 22 12Z"></path></svg></a>
+            </div>
+        </div>
+        <p id="copyright" class="mx-auto mt-8 w-full max-w-6xl px-4 text-sm text-slate-500 dark:text-slate-400 sm:px-6"></p>
+    </footer>
+
+    <script>
+        tailwind.config = { darkMode: "class" };
+        document.addEventListener("DOMContentLoaded", () => {
+            const appState = {
+                projects: [
+                    { id: "p1", title: "SaaS Dashboard UX", description: "A premium analytics dashboard with role-based panels, real-time widgets, and conversion-focused UI.", media: { type: "image", src: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80" }, tags: ["Tailwind", "Firebase", "UX"], liveUrl: "https://example.com/live-1", repoUrl: "https://github.com/yourusername/project-1" },
+                    { id: "p2", title: "Realtime Collaboration Tool", description: "Team collaboration app demo with live cursors, comments, and smart activity timeline.", media: { type: "video", src: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4" }, tags: ["Realtime DB", "Web App", "Video Demo"], liveUrl: "https://example.com/live-2", repoUrl: "https://github.com/yourusername/project-2" },
+                    { id: "p3", title: "Product Landing (Embedded)", description: "A launch-ready product page with compelling hero motion and clean conversion sections.", media: { type: "iframe", src: "https://www.youtube.com/embed/dQw4w9WgXcQ" }, tags: ["Landing Page", "Marketing", "Embed"], liveUrl: "https://example.com/live-3", repoUrl: "https://github.com/yourusername/project-3" }
+                ],
+                certificates: [
+                    { id: "c1", title: "Firebase Web Integration Mastery", issuer: "Google / Firebase", date: "2025", imageUrl: "https://placehold.co/240x160/06b6d4/ffffff?text=Firebase+Cert", credentialUrl: "https://example.com/certificate-1" },
+                    { id: "c2", title: "Advanced Frontend Architecture", issuer: "Meta Frontend Program", date: "2024", imageUrl: "https://placehold.co/240x160/6366f1/ffffff?text=Frontend+Cert", credentialUrl: "https://example.com/certificate-2" },
+                    { id: "c3", title: "UI/UX Product Design Professional", issuer: "Google UX Design", date: "2024", imageUrl: "https://placehold.co/240x160/14b8a6/ffffff?text=UI+UX+Cert", credentialUrl: "https://example.com/certificate-3" },
+                    { id: "c4", title: "JavaScript Performance Engineering", issuer: "Frontend Masters", date: "2023", imageUrl: "https://placehold.co/240x160/0f172a/ffffff?text=JS+Perf", credentialUrl: "https://example.com/certificate-4" }
+                ],
+                weatherMode: 0
+            };
+            // Firebase prep: add your init and Firestore fetch here, then assign to appState.projects / appState.certificates and rerender.
+
+            const projectsGrid = document.getElementById("projects-grid");
+            const certificatesList = document.getElementById("certificates-list");
+            const yearText = document.getElementById("copyright");
+            const esc = (v) => String(v).replace(/[&<>"']/g, (c) => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[c]));
+
+            function projectMediaMarkup(media, title) {
+                if (media.type === "video") return `<div class="media-ratio bg-slate-950"><video controls preload="metadata" src="${media.src}" aria-label="${esc(title)} demo video"></video></div>`;
+                if (media.type === "iframe") return `<div class="media-ratio bg-slate-950"><iframe src="${media.src}" loading="lazy" allowfullscreen title="${esc(title)} embedded demo"></iframe></div>`;
+                return `<div class="media-ratio"><img src="${media.src}" alt="${esc(title)} preview image" loading="lazy" /></div>`;
+            }
+            function renderProjects() {
+                projectsGrid.innerHTML = appState.projects.map((p) => `
+                    <article class="glass rounded-2xl p-4 shadow-xl transition duration-300 hover:-translate-y-1">
+                        ${projectMediaMarkup(p.media, p.title)}
+                        <div class="pt-4">
+                            <h3 class="text-xl font-extrabold">${esc(p.title)}</h3>
+                            <p class="mt-2 text-sm leading-relaxed text-slate-600 dark:text-slate-300">${esc(p.description)}</p>
+                            <div class="mt-4 flex flex-wrap gap-2">${p.tags.map((t) => `<span class="rounded-full border border-cyan-300/45 bg-cyan-100/70 px-2.5 py-1 text-xs font-semibold text-cyan-700 dark:border-cyan-800/55 dark:bg-cyan-900/40 dark:text-cyan-300">${esc(t)}</span>`).join("")}</div>
+                            <div class="mt-5 flex items-center gap-4">
+                                <a class="text-sm font-bold text-cyan-600 transition hover:text-cyan-500 dark:text-cyan-300" href="${p.liveUrl}" target="_blank" rel="noreferrer">Live Demo</a>
+                                <a class="text-sm font-bold text-slate-600 transition hover:text-slate-900 dark:text-slate-300 dark:hover:text-white" href="${p.repoUrl}" target="_blank" rel="noreferrer">Source Code</a>
+                            </div>
+                        </div>
+                    </article>
+                `).join("");
+            }
+            function renderCertificates() {
+                certificatesList.innerHTML = appState.certificates.map((c) => `
+                    <article class="glass flex gap-4 rounded-2xl p-4 shadow-lg transition hover:-translate-y-0.5">
+                        <img src="${c.imageUrl}" alt="${esc(c.issuer)} certificate preview" loading="lazy" class="h-20 w-28 rounded-xl object-cover sm:h-24 sm:w-32" />
+                        <div>
+                            <h3 class="font-extrabold">${esc(c.title)}</h3>
+                            <p class="mt-1 text-sm text-slate-600 dark:text-slate-400">${esc(c.issuer)} • ${esc(c.date)}</p>
+                            <a href="${c.credentialUrl}" target="_blank" rel="noreferrer" class="mt-2 inline-block text-sm font-bold text-cyan-600 hover:text-cyan-500 dark:text-cyan-300">View Credential</a>
+                        </div>
+                    </article>
+                `).join("");
+            }
+            renderProjects(); renderCertificates();
+            yearText.textContent = `© ${new Date().getFullYear()} NOB Rotana. All rights reserved.`;
+
+            const themeToggle = document.getElementById("theme-toggle");
+            const moon = '<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z"/></svg>';
+            const sun = '<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M12 3v1m0 16v1m8.66-9h-1M4.34 12h-1m13.37 6.37-.7-.7M8.67 8.67l-.7-.7m9.07 0-.7.7M8.67 15.33l-.7.7M12 8a4 4 0 1 1 0 8 4 4 0 0 1 0-8Z"/></svg>';
+            function applyTheme(theme) {
+                const dark = theme === "dark";
+                document.documentElement.classList.toggle("dark", dark);
+                localStorage.setItem("portfolio-theme", dark ? "dark" : "light");
+                themeToggle.innerHTML = dark ? sun : moon;
+            }
+            const preferred = localStorage.getItem("portfolio-theme") || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+            applyTheme(preferred);
+            themeToggle.addEventListener("click", () => applyTheme(document.documentElement.classList.contains("dark") ? "light" : "dark"));
+
+            const weatherCanvas = document.getElementById("weather-canvas");
+            const weatherToggle = document.getElementById("weather-toggle");
+            const weatherIcon = document.getElementById("weather-icon");
+            const weatherLabel = document.getElementById("weather-label");
+            const rainAudio = document.getElementById("rain-audio");
+            const snowAudio = document.getElementById("snow-audio");
+            const ctx = weatherCanvas.getContext("2d");
+            let particles = [], animationRef = null;
+            const icons = {
+                0:'<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v18m9-9H3"/></svg>',
+                1:'<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 13 8 21m0-8-3 3m11-3-3 3m6-3-3 3M7 11a5 5 0 0 1 10 0"/></svg>',
+                2:'<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m12 3 1.5 2.6L16 4.5l-.8 2.9L18 8l-2.8.6L16 11.5l-2.5-1.1L12 13l-1.5-2.6L8 11.5l.8-2.9L6 8l2.8-.6L8 4.5l2.5 1.1L12 3ZM6 16h12M8 20h8"/></svg>'
+            };
+            const labels = ["Zen: Off", "Zen: Rain", "Zen: Snow"];
+            function resizeCanvas(){ weatherCanvas.width = window.innerWidth; weatherCanvas.height = window.innerHeight; }
+            function stopAudio(){ rainAudio.pause(); snowAudio.pause(); rainAudio.currentTime = 0; snowAudio.currentTime = 0; }
+            function stopWeather(){
+                if(animationRef){ cancelAnimationFrame(animationRef); animationRef = null; }
+                particles = []; ctx.clearRect(0,0,weatherCanvas.width,weatherCanvas.height); weatherCanvas.classList.add("hidden"); stopAudio();
+            }
+            function createRain(){ return {x:Math.random()*weatherCanvas.width, y:Math.random()*weatherCanvas.height-weatherCanvas.height, l:12+Math.random()*16, s:6+Math.random()*5}; }
+            function createSnow(){ return {x:Math.random()*weatherCanvas.width, y:Math.random()*weatherCanvas.height-weatherCanvas.height, r:1+Math.random()*2.8, sy:0.6+Math.random()*1.8, d:(Math.random()-0.5)*1.2}; }
+            function animate(){
+                ctx.clearRect(0,0,weatherCanvas.width,weatherCanvas.height);
+                if(appState.weatherMode===1){
+                    ctx.strokeStyle="rgba(125,211,252,0.5)"; ctx.lineWidth=1.1;
+                    for(const p of particles){ ctx.beginPath(); ctx.moveTo(p.x,p.y); ctx.lineTo(p.x-1.2,p.y+p.l); ctx.stroke(); p.y+=p.s; if(p.y>weatherCanvas.height+15) Object.assign(p,createRain(),{y:-20});}
+                } else if(appState.weatherMode===2){
+                    for(const p of particles){ ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fillStyle="rgba(255,255,255,0.85)"; ctx.fill(); p.y+=p.sy; p.x+=p.d+Math.sin(p.y*0.01)*0.3; if(p.y>weatherCanvas.height+10||p.x<-10||p.x>weatherCanvas.width+10) Object.assign(p,createSnow(),{y:-10});}
+                }
+                animationRef = requestAnimationFrame(animate);
+            }
+            function updateWeatherBtn(){ weatherIcon.innerHTML = icons[appState.weatherMode]; weatherLabel.textContent = labels[appState.weatherMode]; }
+            async function applyWeatherMode(){
+                stopWeather(); updateWeatherBtn(); if(appState.weatherMode===0) return;
+                weatherCanvas.classList.remove("hidden"); resizeCanvas();
+                if(appState.weatherMode===1){ particles = Array.from({length:160}, createRain); try{ await rainAudio.play(); }catch(e){ console.warn(e);} }
+                if(appState.weatherMode===2){ particles = Array.from({length:220}, createSnow); try{ await snowAudio.play(); }catch(e){ console.warn(e);} }
+                animate();
+            }
+            weatherToggle.addEventListener("click", () => { appState.weatherMode = (appState.weatherMode + 1) % 3; applyWeatherMode(); });
+            window.addEventListener("resize", resizeCanvas);
+            updateWeatherBtn();
+        });
+    </script>
+</body>
+</html>
