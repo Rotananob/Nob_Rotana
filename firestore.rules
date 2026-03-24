@@ -1,0 +1,30 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Contact form — anyone can create a message; no public reads
+    match /messages/{msgId} {
+      allow create: if request.resource.data.keys().hasAll(['name', 'email', 'message'])
+        && request.resource.data.name is string
+        && request.resource.data.email is string
+        && request.resource.data.message is string
+        && request.resource.data.name.size() > 0
+        && request.resource.data.name.size() <= 200
+        && request.resource.data.email.size() <= 320
+        && request.resource.data.message.size() > 0
+        && request.resource.data.message.size() <= 8000;
+      allow read, update, delete: if false;
+    }
+
+    // Portfolio content — public read; writes only from Console / Admin SDK
+    match /projects/{id} {
+      allow read: if true;
+      allow write: if false;
+    }
+
+    match /certificates/{id} {
+      allow read: if true;
+      allow write: if false;
+    }
+  }
+}

@@ -2,11 +2,11 @@
 <html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Dev Portfolio</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+Khmer:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
   <style>
     /* =============================
@@ -77,7 +77,27 @@
       transition: background var(--transition), color var(--transition);
     }
 
+    html[lang="km"] body {
+      font-family: 'Noto Sans Khmer', 'DM Sans', sans-serif;
+      line-height: 1.85;
+      word-break: break-word;
+    }
+
     h1, h2, h3, h4 { font-family: 'Syne', sans-serif; }
+
+    html[lang="km"] h1,
+    html[lang="km"] h2,
+    html[lang="km"] h3,
+    html[lang="km"] h4,
+    html[lang="km"] .nav-logo,
+    html[lang="km"] .hero-name,
+    html[lang="km"] .section-title,
+    html[lang="km"] .project-title,
+    html[lang="km"] .cert-card-title,
+    html[lang="km"] .stat-card-text strong,
+    html[lang="km"] .hero-stat-item strong {
+      font-family: 'Noto Sans Khmer', 'Syne', sans-serif;
+    }
     code, .mono { font-family: 'JetBrains Mono', monospace; }
 
     a { text-decoration: none; color: inherit; }
@@ -615,7 +635,7 @@
 
     .projects-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr));
       gap: 1.5rem;
     }
 
@@ -764,7 +784,7 @@
        ============================= */
     .certs-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
       gap: 1.5rem;
     }
 
@@ -1191,6 +1211,47 @@
     }
 
     /* =============================
+       LANGUAGE TOGGLE
+       ============================= */
+    .lang-toggle {
+      display: inline-flex;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      overflow: hidden;
+      background: var(--bg-card);
+    }
+
+    .lang-toggle button {
+      border: none;
+      background: transparent;
+      color: var(--text-secondary);
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 8px 11px;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+      font-family: inherit;
+    }
+
+    .lang-toggle button:hover {
+      color: var(--text-primary);
+    }
+
+    .lang-toggle button.active {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .lang-toggle button.km {
+      font-family: 'Noto Sans Khmer', sans-serif;
+      font-size: 0.8rem;
+    }
+
+    .nav-actions .hire-compact i {
+      margin: 0;
+    }
+
+    /* =============================
        RESPONSIVE
        ============================= */
     @media (max-width: 900px) {
@@ -1218,6 +1279,54 @@
       .certs-grid { grid-template-columns: 1fr; }
       .footer-inner { flex-direction: column; align-items: center; text-align: center; }
     }
+
+    @media (max-width: 480px) {
+      nav {
+        padding: 0.5rem 0.75rem;
+        height: auto;
+        min-height: 56px;
+        flex-wrap: wrap;
+        row-gap: 0.5rem;
+      }
+      .nav-logo { font-size: 1.1rem; }
+      .nav-actions {
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        gap: 0.45rem;
+      }
+      .lang-toggle button { padding: 7px 9px; font-size: 0.68rem; }
+      .nav-actions .btn-primary.hire-compact {
+        padding: 8px 12px;
+        font-size: 0.75rem;
+      }
+      .nav-actions .hire-compact .hire-text { display: none; }
+      #weather-btn {
+        width: 48px;
+        height: 48px;
+        bottom: 1.25rem;
+        right: max(1rem, env(safe-area-inset-right));
+        font-size: 1.15rem;
+      }
+      .weather-indicator {
+        right: max(1rem, env(safe-area-inset-right));
+        bottom: calc(1.25rem + 58px);
+        max-width: calc(100vw - 2rem);
+      }
+      #hero { padding: 88px 1rem 48px; }
+      .photo-secondary-wrap {
+        width: 104px;
+        height: 104px;
+        right: -8px;
+        bottom: -16px;
+      }
+      .photo-stat-card { left: -16px; padding: 10px 14px; }
+      .hero-stats { flex-wrap: wrap; justify-content: center; gap: 1.25rem; }
+    }
+
+    @media (max-width: 360px) {
+      .hero-name { font-size: clamp(1.85rem, 10vw, 2.6rem); }
+      .section-title { font-size: clamp(1.65rem, 8vw, 2.25rem); }
+    }
   </style>
 </head>
 
@@ -1233,18 +1342,22 @@
   <nav>
     <div class="nav-logo">Dev<span>.</span></div>
     <ul class="nav-links">
-      <li><a href="#hero">Home</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#certificates">Certificates</a></li>
-      <li><a href="#about">About</a></li>
-      <li><a href="#contact">Contact</a></li>
+      <li><a href="#hero" data-i18n="nav.home">Home</a></li>
+      <li><a href="#projects" data-i18n="nav.projects">Projects</a></li>
+      <li><a href="#certificates" data-i18n="nav.certificates">Certificates</a></li>
+      <li><a href="#about" data-i18n="nav.about">About</a></li>
+      <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
     </ul>
     <div class="nav-actions">
-      <button class="btn-icon" id="theme-toggle" title="Toggle theme">
+      <div class="lang-toggle" role="group" aria-label="Language">
+        <button type="button" class="lang-btn active" data-set-lang="en" aria-pressed="true">EN</button>
+        <button type="button" class="lang-btn km" data-set-lang="km" aria-pressed="false">ខ្មែរ</button>
+      </div>
+      <button class="btn-icon" id="theme-toggle" data-i18n-title="nav.themeToggle" title="Toggle theme">
         <i class="fa-solid fa-moon" id="theme-icon"></i>
       </button>
-      <a href="#contact" class="btn-primary" style="padding:8px 20px;font-size:0.82rem;">
-        Hire Me <i class="fa-solid fa-arrow-right"></i>
+      <a href="#contact" class="btn-primary hire-compact" style="padding:8px 20px;font-size:0.82rem;">
+        <span class="hire-text" data-i18n="nav.hire">Hire Me</span> <i class="fa-solid fa-arrow-right"></i>
       </a>
       <div class="hamburger" id="hamburger">
         <span></span><span></span><span></span>
@@ -1254,11 +1367,11 @@
 
   <!-- Mobile Menu -->
   <div class="mobile-menu" id="mobile-menu">
-    <a href="#hero" onclick="closeMobileMenu()">Home</a>
-    <a href="#projects" onclick="closeMobileMenu()">Projects</a>
-    <a href="#certificates" onclick="closeMobileMenu()">Certificates</a>
-    <a href="#about" onclick="closeMobileMenu()">About</a>
-    <a href="#contact" onclick="closeMobileMenu()">Contact</a>
+    <a href="#hero" onclick="closeMobileMenu()" data-i18n="nav.home">Home</a>
+    <a href="#projects" onclick="closeMobileMenu()" data-i18n="nav.projects">Projects</a>
+    <a href="#certificates" onclick="closeMobileMenu()" data-i18n="nav.certificates">Certificates</a>
+    <a href="#about" onclick="closeMobileMenu()" data-i18n="nav.about">About</a>
+    <a href="#contact" onclick="closeMobileMenu()" data-i18n="nav.contact">Contact</a>
   </div>
 
   <!-- =====================
@@ -1271,19 +1384,17 @@
       <div class="hero-content">
         <div class="hero-badge">
           <span class="dot"></span>
-          Available for work
+          <span data-i18n="hero.badge">Available for work</span>
         </div>
 
         <h1 class="hero-name">
-          Your Name<br />
-          <span class="line-accent">Developer</span>
+          <span data-i18n="hero.nameLine1">Your Name</span><br />
+          <span class="line-accent" data-i18n="hero.nameAccent">Developer</span>
         </h1>
 
-        <div class="hero-role">Full-Stack & Firebase Developer</div>
+        <div class="hero-role" data-i18n="hero.role">Full-Stack & Firebase Developer</div>
 
-        <p class="hero-bio">
-          <!-- 🔥 FIREBASE: Replace this static bio with dynamic data fetched from Firestore
-               Collection: "profile" / Document: "bio" / Field: "description"  -->
+        <p class="hero-bio" data-i18n="hero.bio">
           I craft immersive web experiences with clean code and pixel-perfect design.
           Passionate about Firebase, real-time apps, and pushing the web forward —
           one commit at a time.
@@ -1291,10 +1402,10 @@
 
         <div class="hero-cta">
           <a href="#projects" class="btn-primary">
-            <i class="fa-solid fa-grid-2"></i> View Projects
+            <i class="fa-solid fa-grid-2"></i> <span data-i18n="hero.viewProjects">View Projects</span>
           </a>
           <a href="#contact" class="btn-secondary">
-            <i class="fa-solid fa-envelope"></i> Get In Touch
+            <i class="fa-solid fa-envelope"></i> <span data-i18n="hero.getInTouch">Get In Touch</span>
           </a>
         </div>
 
@@ -1302,15 +1413,15 @@
           <!-- 🔥 FIREBASE: Fetch these numbers from Firestore "profile/stats" document -->
           <div class="hero-stat-item">
             <strong>20+</strong>
-            <span>Projects Done</span>
+            <span data-i18n="hero.statProjects">Projects Done</span>
           </div>
           <div class="hero-stat-item">
             <strong>3+</strong>
-            <span>Years Experience</span>
+            <span data-i18n="hero.statYears">Years Experience</span>
           </div>
           <div class="hero-stat-item">
             <strong>15+</strong>
-            <span>Certificates</span>
+            <span data-i18n="hero.statCerts">Certificates</span>
           </div>
         </div>
       </div>
@@ -1323,8 +1434,8 @@
         <div class="photo-stat-card">
           <div class="stat-card-icon"><i class="fa-brands fa-firebase"></i></div>
           <div class="stat-card-text">
-            <strong>Firebase Pro</strong>
-            <span>Cloud & Realtime DB</span>
+            <strong data-i18n="hero.statCardTitle">Firebase Pro</strong>
+            <span data-i18n="hero.statCardSub">Cloud & Realtime DB</span>
           </div>
         </div>
 
@@ -1332,7 +1443,7 @@
         <div class="photo-main-wrap">
           <div class="photo-placeholder">
             <i class="fa-regular fa-image"></i>
-            <span>Your Profile Photo<br /><small>Replace with &lt;img src="your-photo.jpg"&gt;</small></span>
+            <span data-i18n-html="hero.photoMainHint">Your Profile Photo<br /><small>Replace with &lt;img src="your-photo.jpg"&gt;</small></span>
           </div>
           <!-- UNCOMMENT AND REPLACE:
           <img src="YOUR_MAIN_PHOTO_URL" alt="Profile Photo" />
@@ -1343,8 +1454,8 @@
         <div class="photo-secondary-wrap">
           <div class="photo-placeholder" style="font-size:0.65rem;">
             <i class="fa-regular fa-image" style="font-size:1.2rem;"></i>
-            <span style="line-height:1.3;">Photo 2<br/>Replace</span>
-          </div>
+            <span style="line-height:1.3;" data-i18n-html="hero.photo2Hint">Photo 2<br/>Replace</span>
+        </div>
           <!-- UNCOMMENT AND REPLACE:
           <img src="YOUR_SECONDARY_PHOTO_URL" alt="Secondary Photo" />
           -->
@@ -1368,10 +1479,9 @@
   <section id="projects">
     <div class="section-inner">
       <div class="section-header reveal">
-        <div class="section-tag">Portfolio</div>
-        <h2 class="section-title">Featured <span class="highlight">Projects</span></h2>
-        <p class="section-desc">
-          <!-- 🔥 FIREBASE: Fetch description from Firestore "sections/projects" document -->
+        <div class="section-tag" data-i18n="projects.sectionTag">Portfolio</div>
+        <h2 class="section-title"><span data-i18n="projects.titleBefore">Featured</span> <span class="highlight" data-i18n="projects.titleHighlight">Projects</span></h2>
+        <p class="section-desc" data-i18n="projects.desc">
           A showcase of things I've built — from real-time Firebase apps to full-stack platforms and creative experiments.
         </p>
       </div>
@@ -1386,7 +1496,7 @@
             <!-- IMAGE type: use <img src="..."> -->
             <div class="media-placeholder">
               <i class="fa-regular fa-image"></i>
-              <span>Project Screenshot / Demo</span>
+              <span data-i18n="proj1.placeholder">Project Screenshot / Demo</span>
             </div>
             <!-- UNCOMMENT for image:  <img src="project1-screenshot.png" alt="Project 1" />  -->
             <!-- UNCOMMENT for video:
@@ -1397,7 +1507,7 @@
             <!-- UNCOMMENT for YouTube:
             <iframe src="https://www.youtube.com/embed/VIDEO_ID?autoplay=1&mute=1&loop=1" allowfullscreen></iframe>
             -->
-            <div class="project-media-badge">Image</div>
+            <div class="project-media-badge" data-i18n="common.badgeImage">Image</div>
           </div>
           <div class="project-body">
             <div class="project-tags">
@@ -1405,11 +1515,11 @@
               <span class="tag">Firebase</span>
               <span class="tag">Tailwind</span>
             </div>
-            <h3 class="project-title">Project Title One</h3>
-            <p class="project-desc">A brief description of this project — what it does, the problem it solves, and the tech stack used. Make it compelling.</p>
+            <h3 class="project-title" data-i18n="proj1.title">Project Title One</h3>
+            <p class="project-desc" data-i18n="proj1.desc">A brief description of this project — what it does, the problem it solves, and the tech stack used. Make it compelling.</p>
             <div class="project-links">
-              <a href="#" class="project-link"><i class="fa-brands fa-github"></i> Code</a>
-              <a href="#" class="project-link"><i class="fa-solid fa-arrow-up-right-from-square"></i> Live</a>
+              <a href="#" class="project-link"><i class="fa-brands fa-github"></i> <span data-i18n="common.code">Code</span></a>
+              <a href="#" class="project-link"><i class="fa-solid fa-arrow-up-right-from-square"></i> <span data-i18n="common.live">Live</span></a>
             </div>
           </div>
         </div>
@@ -1418,9 +1528,9 @@
           <div class="project-media">
             <div class="media-placeholder">
               <i class="fa-solid fa-film"></i>
-              <span>Video Demo</span>
+              <span data-i18n="proj2.placeholder">Video Demo</span>
             </div>
-            <div class="project-media-badge">Video</div>
+            <div class="project-media-badge" data-i18n="common.badgeVideo">Video</div>
           </div>
           <div class="project-body">
             <div class="project-tags">
@@ -1428,11 +1538,11 @@
               <span class="tag">Firestore</span>
               <span class="tag">APIs</span>
             </div>
-            <h3 class="project-title">Project Title Two</h3>
-            <p class="project-desc">Another project description. This slot supports a video demo using HTML5 &lt;video&gt; or an embedded YouTube iframe.</p>
+            <h3 class="project-title" data-i18n="proj2.title">Project Title Two</h3>
+            <p class="project-desc" data-i18n="proj2.desc">Another project description. This slot supports a video demo using HTML5 &lt;video&gt; or an embedded YouTube iframe.</p>
             <div class="project-links">
-              <a href="#" class="project-link"><i class="fa-brands fa-github"></i> Code</a>
-              <a href="#" class="project-link"><i class="fa-solid fa-arrow-up-right-from-square"></i> Live</a>
+              <a href="#" class="project-link"><i class="fa-brands fa-github"></i> <span data-i18n="common.code">Code</span></a>
+              <a href="#" class="project-link"><i class="fa-solid fa-arrow-up-right-from-square"></i> <span data-i18n="common.live">Live</span></a>
             </div>
           </div>
         </div>
@@ -1441,20 +1551,20 @@
           <div class="project-media">
             <div class="media-placeholder">
               <i class="fa-brands fa-youtube"></i>
-              <span>Embedded iframe / YouTube</span>
+              <span data-i18n="proj3.placeholder">Embedded iframe / YouTube</span>
             </div>
-            <div class="project-media-badge">Iframe</div>
+            <div class="project-media-badge" data-i18n="common.badgeIframe">Iframe</div>
           </div>
           <div class="project-body">
             <div class="project-tags">
               <span class="tag">Flutter</span>
               <span class="tag">Firebase Auth</span>
             </div>
-            <h3 class="project-title">Project Title Three</h3>
-            <p class="project-desc">This card demonstrates iframe support — embed a YouTube link, Loom, or Figma prototype directly inside the card.</p>
+            <h3 class="project-title" data-i18n="proj3.title">Project Title Three</h3>
+            <p class="project-desc" data-i18n="proj3.desc">This card demonstrates iframe support — embed a YouTube link, Loom, or Figma prototype directly inside the card.</p>
             <div class="project-links">
-              <a href="#" class="project-link"><i class="fa-brands fa-github"></i> Code</a>
-              <a href="#" class="project-link"><i class="fa-solid fa-arrow-up-right-from-square"></i> Live</a>
+              <a href="#" class="project-link"><i class="fa-brands fa-github"></i> <span data-i18n="common.code">Code</span></a>
+              <a href="#" class="project-link"><i class="fa-solid fa-arrow-up-right-from-square"></i> <span data-i18n="common.live">Live</span></a>
             </div>
           </div>
         </div>
@@ -1468,10 +1578,9 @@
   <section id="certificates" style="background: var(--bg-primary);">
     <div class="section-inner">
       <div class="section-header reveal">
-        <div class="section-tag">Achievements</div>
-        <h2 class="section-title">Certificates &amp; <span class="highlight">Awards</span></h2>
-        <p class="section-desc">
-          <!-- 🔥 FIREBASE: Fetch description from Firestore "sections/certificates" document -->
+        <div class="section-tag" data-i18n="certs.sectionTag">Achievements</div>
+        <h2 class="section-title"><span data-i18n="certs.titleBefore">Certificates &amp;</span> <span class="highlight" data-i18n="certs.titleHighlight">Awards</span></h2>
+        <p class="section-desc" data-i18n="certs.desc">
           Credentials and recognition from courses, competitions, and industry platforms that shaped my skills.
         </p>
       </div>
@@ -1482,64 +1591,64 @@
         <div class="cert-card reveal">
           <div class="cert-icon-wrap"><i class="fa-brands fa-google"></i></div>
           <div>
-            <div class="cert-issuer">Google Cloud</div>
-            <div class="cert-card-title">Google Cloud Associate Developer</div>
+            <div class="cert-issuer" data-i18n="cert1.issuer">Google Cloud</div>
+            <div class="cert-card-title" data-i18n="cert1.title">Google Cloud Associate Developer</div>
           </div>
           <!-- UNCOMMENT to show certificate image:
           <img src="certificate1.jpg" alt="Certificate" class="cert-preview-img" />
           -->
           <div class="cert-date"><i class="fa-regular fa-calendar"></i> Jan 2024</div>
-          <a href="#" class="cert-link">View Credential <i class="fa-solid fa-arrow-right"></i></a>
+          <a href="#" class="cert-link"><span data-i18n="cert.view">View Credential</span> <i class="fa-solid fa-arrow-right"></i></a>
         </div>
 
         <div class="cert-card reveal">
           <div class="cert-icon-wrap"><i class="fa-brands fa-firebase"></i></div>
           <div>
-            <div class="cert-issuer">Firebase / Google</div>
-            <div class="cert-card-title">Firebase Advanced Development</div>
+            <div class="cert-issuer" data-i18n="cert2.issuer">Firebase / Google</div>
+            <div class="cert-card-title" data-i18n="cert2.title">Firebase Advanced Development</div>
           </div>
           <div class="cert-date"><i class="fa-regular fa-calendar"></i> Mar 2024</div>
-          <a href="#" class="cert-link">View Credential <i class="fa-solid fa-arrow-right"></i></a>
+          <a href="#" class="cert-link"><span data-i18n="cert.view">View Credential</span> <i class="fa-solid fa-arrow-right"></i></a>
         </div>
 
         <div class="cert-card reveal">
           <div class="cert-icon-wrap"><i class="fa-brands fa-react"></i></div>
           <div>
-            <div class="cert-issuer">Meta</div>
-            <div class="cert-card-title">Meta Front-End Developer Professional</div>
+            <div class="cert-issuer" data-i18n="cert3.issuer">Meta</div>
+            <div class="cert-card-title" data-i18n="cert3.title">Meta Front-End Developer Professional</div>
           </div>
           <div class="cert-date"><i class="fa-regular fa-calendar"></i> Jun 2024</div>
-          <a href="#" class="cert-link">View Credential <i class="fa-solid fa-arrow-right"></i></a>
+          <a href="#" class="cert-link"><span data-i18n="cert.view">View Credential</span> <i class="fa-solid fa-arrow-right"></i></a>
         </div>
 
         <div class="cert-card reveal">
           <div class="cert-icon-wrap"><i class="fa-solid fa-award"></i></div>
           <div>
-            <div class="cert-issuer">Coursera</div>
-            <div class="cert-card-title">Full-Stack Web Development Specialization</div>
+            <div class="cert-issuer" data-i18n="cert4.issuer">Coursera</div>
+            <div class="cert-card-title" data-i18n="cert4.title">Full-Stack Web Development Specialization</div>
           </div>
           <div class="cert-date"><i class="fa-regular fa-calendar"></i> Sep 2023</div>
-          <a href="#" class="cert-link">View Credential <i class="fa-solid fa-arrow-right"></i></a>
+          <a href="#" class="cert-link"><span data-i18n="cert.view">View Credential</span> <i class="fa-solid fa-arrow-right"></i></a>
         </div>
 
         <div class="cert-card reveal">
           <div class="cert-icon-wrap"><i class="fa-brands fa-aws"></i></div>
           <div>
-            <div class="cert-issuer">Amazon Web Services</div>
-            <div class="cert-card-title">AWS Certified Cloud Practitioner</div>
+            <div class="cert-issuer" data-i18n="cert5.issuer">Amazon Web Services</div>
+            <div class="cert-card-title" data-i18n="cert5.title">AWS Certified Cloud Practitioner</div>
           </div>
           <div class="cert-date"><i class="fa-regular fa-calendar"></i> Dec 2023</div>
-          <a href="#" class="cert-link">View Credential <i class="fa-solid fa-arrow-right"></i></a>
+          <a href="#" class="cert-link"><span data-i18n="cert.view">View Credential</span> <i class="fa-solid fa-arrow-right"></i></a>
         </div>
 
         <div class="cert-card reveal">
           <div class="cert-icon-wrap"><i class="fa-solid fa-trophy"></i></div>
           <div>
-            <div class="cert-issuer">Hackathon 2024</div>
-            <div class="cert-card-title">1st Place — National Hackathon Winner</div>
+            <div class="cert-issuer" data-i18n="cert6.issuer">Hackathon 2024</div>
+            <div class="cert-card-title" data-i18n="cert6.title">1st Place — National Hackathon Winner</div>
           </div>
           <div class="cert-date"><i class="fa-regular fa-calendar"></i> Aug 2024</div>
-          <a href="#" class="cert-link">View Details <i class="fa-solid fa-arrow-right"></i></a>
+          <a href="#" class="cert-link"><span data-i18n="cert.details">View Details</span> <i class="fa-solid fa-arrow-right"></i></a>
         </div>
 
       </div>
@@ -1552,18 +1661,18 @@
   <section id="about">
     <div class="section-inner">
       <div class="section-header reveal">
-        <div class="section-tag">About Me</div>
-        <h2 class="section-title">Skills &amp; <span class="highlight">Expertise</span></h2>
+        <div class="section-tag" data-i18n="about.sectionTag">About Me</div>
+        <h2 class="section-title"><span data-i18n="about.titleBefore">Skills &amp;</span> <span class="highlight" data-i18n="about.titleHighlight">Expertise</span></h2>
       </div>
       <div class="about-grid">
         <div class="reveal">
           <!-- 🔥 FIREBASE: Fetch bio/about text from Firestore "profile/about" document -->
-          <p style="color:var(--text-secondary);line-height:1.8;margin-bottom:1.5rem;font-size:1rem;">
+          <p style="color:var(--text-secondary);line-height:1.8;margin-bottom:1.5rem;font-size:1rem;" data-i18n-html="about.p1">
             I'm a passionate developer with a love for building fast, scalable, and beautiful web applications.
             My core stack revolves around <strong style="color:var(--text-primary)">React, Firebase, and Node.js</strong>,
             and I'm constantly exploring new tools to sharpen my craft.
           </p>
-          <p style="color:var(--text-secondary);line-height:1.8;margin-bottom:2rem;font-size:1rem;">
+          <p style="color:var(--text-secondary);line-height:1.8;margin-bottom:2rem;font-size:1rem;" data-i18n="about.p2">
             When I'm not coding, you'll find me contributing to open source, mentoring juniors, or brewing the perfect cup of coffee before a deep work session.
           </p>
           <div class="tech-pills">
@@ -1586,27 +1695,27 @@
         <div class="skills-list reveal">
           <!-- 🔥 FIREBASE: Fetch skill levels from Firestore "profile/skills" array field -->
           <div class="skill-item">
-            <div class="skill-label"><span>Frontend (React / Tailwind)</span><span>92%</span></div>
+            <div class="skill-label"><span data-i18n="skill.frontend">Frontend (React / Tailwind)</span><span>92%</span></div>
             <div class="skill-bar"><div class="skill-bar-fill" data-width="92"></div></div>
           </div>
           <div class="skill-item">
-            <div class="skill-label"><span>Firebase &amp; Firestore</span><span>90%</span></div>
+            <div class="skill-label"><span data-i18n="skill.firebase">Firebase &amp; Firestore</span><span>90%</span></div>
             <div class="skill-bar"><div class="skill-bar-fill" data-width="90"></div></div>
           </div>
           <div class="skill-item">
-            <div class="skill-label"><span>Backend (Node.js / APIs)</span><span>80%</span></div>
+            <div class="skill-label"><span data-i18n="skill.backend">Backend (Node.js / APIs)</span><span>80%</span></div>
             <div class="skill-bar"><div class="skill-bar-fill" data-width="80"></div></div>
           </div>
           <div class="skill-item">
-            <div class="skill-label"><span>Mobile (Flutter)</span><span>75%</span></div>
+            <div class="skill-label"><span data-i18n="skill.mobile">Mobile (Flutter)</span><span>75%</span></div>
             <div class="skill-bar"><div class="skill-bar-fill" data-width="75"></div></div>
           </div>
           <div class="skill-item">
-            <div class="skill-label"><span>UI/UX Design</span><span>70%</span></div>
+            <div class="skill-label"><span data-i18n="skill.uiux">UI/UX Design</span><span>70%</span></div>
             <div class="skill-bar"><div class="skill-bar-fill" data-width="70"></div></div>
           </div>
           <div class="skill-item">
-            <div class="skill-label"><span>DevOps / Cloud</span><span>65%</span></div>
+            <div class="skill-label"><span data-i18n="skill.devops">DevOps / Cloud</span><span>65%</span></div>
             <div class="skill-bar"><div class="skill-bar-fill" data-width="65"></div></div>
           </div>
         </div>
@@ -1620,28 +1729,28 @@
   <section id="contact">
     <div class="section-inner">
       <div class="section-header reveal">
-        <div class="section-tag">Contact</div>
-        <h2 class="section-title">Let's <span class="highlight">Connect</span></h2>
-        <p class="section-desc">Have a project in mind? I'd love to hear about it. Drop me a message and let's make something great together.</p>
+        <div class="section-tag" data-i18n="contact.sectionTag">Contact</div>
+        <h2 class="section-title"><span data-i18n="contact.titleBefore">Let's</span> <span class="highlight" data-i18n="contact.titleHighlight">Connect</span></h2>
+        <p class="section-desc" data-i18n="contact.desc">Have a project in mind? I'd love to hear about it. Drop me a message and let's make something great together.</p>
       </div>
       <div class="contact-wrapper">
         <form class="contact-form reveal" id="contact-form">
           <!-- 🔥 FIREBASE: Handle form submission with Firestore or Firebase Functions
                See submitContactForm() function below -->
           <div class="form-group">
-            <label class="form-label">Name</label>
-            <input type="text" class="form-input" placeholder="Your full name" id="form-name" required />
+            <label class="form-label" data-i18n="form.name">Name</label>
+            <input type="text" class="form-input" data-i18n-placeholder="form.namePh" placeholder="Your full name" id="form-name" required />
           </div>
           <div class="form-group">
-            <label class="form-label">Email</label>
-            <input type="email" class="form-input" placeholder="your@email.com" id="form-email" required />
+            <label class="form-label" data-i18n="form.email">Email</label>
+            <input type="email" class="form-input" data-i18n-placeholder="form.emailPh" placeholder="your@email.com" id="form-email" required />
           </div>
           <div class="form-group">
-            <label class="form-label">Message</label>
-            <textarea class="form-textarea" placeholder="Tell me about your project or idea..." id="form-message" required></textarea>
+            <label class="form-label" data-i18n="form.message">Message</label>
+            <textarea class="form-textarea" data-i18n-placeholder="form.msgPh" placeholder="Tell me about your project or idea..." id="form-message" required></textarea>
           </div>
-          <button type="submit" class="btn-primary" style="align-self:flex-start;">
-            <i class="fa-solid fa-paper-plane"></i> Send Message
+          <button type="submit" class="btn-primary" id="form-submit-btn" style="align-self:flex-start;">
+            <i class="fa-solid fa-paper-plane"></i> <span data-i18n="form.send">Send Message</span>
           </button>
           <div id="form-feedback" style="font-size:0.85rem;color:var(--accent-green);display:none;"></div>
         </form>
@@ -1651,28 +1760,28 @@
           <div class="contact-info-item">
             <div class="contact-info-icon"><i class="fa-solid fa-envelope"></i></div>
             <div class="contact-info-text">
-              <strong>Email</strong>
+              <strong data-i18n="contact.labelEmail">Email</strong>
               <span>your.email@gmail.com</span>
             </div>
           </div>
           <div class="contact-info-item">
             <div class="contact-info-icon"><i class="fa-solid fa-location-dot"></i></div>
             <div class="contact-info-text">
-              <strong>Location</strong>
-              <span>Your City, Your Country</span>
+              <strong data-i18n="contact.labelLoc">Location</strong>
+              <span data-i18n="contact.valLoc">Your City, Your Country</span>
             </div>
           </div>
           <div class="contact-info-item">
             <div class="contact-info-icon"><i class="fa-solid fa-clock"></i></div>
             <div class="contact-info-text">
-              <strong>Response Time</strong>
-              <span>Within 24 hours</span>
+              <strong data-i18n="contact.labelResp">Response Time</strong>
+              <span data-i18n="contact.valResp">Within 24 hours</span>
             </div>
           </div>
 
           <!-- Social links inside contact -->
           <div style="margin-top:1rem;">
-            <div style="font-size:0.78rem;color:var(--text-muted);font-family:'JetBrains Mono',monospace;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:0.75rem;">Find me on</div>
+            <div style="font-size:0.78rem;color:var(--text-muted);font-family:'JetBrains Mono',monospace;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:0.75rem;" data-i18n="contact.findMe">Find me on</div>
             <div class="social-links">
               <!-- 🔥 FIREBASE: Fetch social URLs from Firestore "profile/socials" document -->
               <a href="#" class="social-link" title="GitHub"><i class="fa-brands fa-github"></i></a>
@@ -1695,7 +1804,7 @@
     <div class="footer-inner">
       <div>
         <div class="footer-logo">Dev<span>.</span></div>
-        <div class="footer-copy">© 2025 Your Name. All rights reserved.</div>
+        <div class="footer-copy" data-i18n="footer.copy">© 2025 Your Name. All rights reserved.</div>
       </div>
       <div class="social-links">
         <!-- 🔥 FIREBASE: Fetch social URLs from Firestore "profile/socials" document -->
@@ -1712,7 +1821,7 @@
        WEATHER TOGGLE BUTTON
        ===================== -->
   <div class="weather-indicator" id="weather-indicator"></div>
-  <button id="weather-btn" title="Toggle Weather Ambience">
+  <button id="weather-btn" data-i18n-title="weather.btnTitle" title="Toggle weather ambience">
     <span class="weather-label" id="weather-label">Zen Mode</span>
     <i class="fa-solid fa-cloud-sun" id="weather-icon"></i>
   </button>
@@ -1736,10 +1845,261 @@
     <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" type="audio/mpeg" />
   </audio>
 
+  <!-- Firebase (compat — works with a single inline script block) -->
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
+
   <!-- =====================
        JAVASCRIPT
        ===================== -->
   <script>
+    /* ========== i18n: English (default) & Khmer ========== */
+    const LANG_KEY = 'portfolio-lang';
+    let weatherState = 0;
+
+    const I18N = { en: {}, km: {} };
+
+    Object.assign(I18N.en, {
+      'page.title': 'Dev Portfolio',
+      'nav.home': 'Home',
+      'nav.projects': 'Projects',
+      'nav.certificates': 'Certificates',
+      'nav.about': 'About',
+      'nav.contact': 'Contact',
+      'nav.hire': 'Hire Me',
+      'nav.themeToggle': 'Toggle light / dark theme',
+      'hero.badge': 'Available for work',
+      'hero.nameLine1': 'Your Name',
+      'hero.nameAccent': 'Developer',
+      'hero.role': 'Full-Stack & Firebase Developer',
+      'hero.bio': 'I craft immersive web experiences with clean code and pixel-perfect design. Passionate about Firebase, real-time apps, and pushing the web forward — one commit at a time.',
+      'hero.viewProjects': 'View Projects',
+      'hero.getInTouch': 'Get In Touch',
+      'hero.statProjects': 'Projects Done',
+      'hero.statYears': 'Years Experience',
+      'hero.statCerts': 'Certificates',
+      'hero.statCardTitle': 'Firebase Pro',
+      'hero.statCardSub': 'Cloud & Realtime DB',
+      'hero.photoMainHint': 'Your Profile Photo<br /><small>Replace with &lt;img src="your-photo.jpg"&gt;</small>',
+      'hero.photo2Hint': 'Photo 2<br />Replace',
+      'projects.sectionTag': 'Portfolio',
+      'projects.titleBefore': 'Featured',
+      'projects.titleHighlight': 'Projects',
+      'projects.desc': 'A showcase of things I\'ve built — from real-time Firebase apps to full-stack platforms and creative experiments.',
+      'proj1.placeholder': 'Project Screenshot / Demo',
+      'proj1.title': 'Project Title One',
+      'proj1.desc': 'A brief description of this project — what it does, the problem it solves, and the tech stack used. Make it compelling.',
+      'proj2.placeholder': 'Video Demo',
+      'proj2.title': 'Project Title Two',
+      'proj2.desc': 'Another project description. This slot supports a video demo using HTML5 <video> or an embedded YouTube iframe.',
+      'proj3.placeholder': 'Embedded iframe / YouTube',
+      'proj3.title': 'Project Title Three',
+      'proj3.desc': 'This card demonstrates iframe support — embed a YouTube link, Loom, or Figma prototype directly inside the card.',
+      'common.badgeImage': 'Image',
+      'common.badgeVideo': 'Video',
+      'common.badgeIframe': 'Iframe',
+      'common.code': 'Code',
+      'common.live': 'Live',
+      'certs.sectionTag': 'Achievements',
+      'certs.titleBefore': 'Certificates &',
+      'certs.titleHighlight': 'Awards',
+      'certs.desc': 'Credentials and recognition from courses, competitions, and industry platforms that shaped my skills.',
+      'cert.view': 'View Credential',
+      'cert.details': 'View Details',
+      'cert1.issuer': 'Google Cloud',
+      'cert1.title': 'Google Cloud Associate Developer',
+      'cert2.issuer': 'Firebase / Google',
+      'cert2.title': 'Firebase Advanced Development',
+      'cert3.issuer': 'Meta',
+      'cert3.title': 'Meta Front-End Developer Professional',
+      'cert4.issuer': 'Coursera',
+      'cert4.title': 'Full-Stack Web Development Specialization',
+      'cert5.issuer': 'Amazon Web Services',
+      'cert5.title': 'AWS Certified Cloud Practitioner',
+      'cert6.issuer': 'Hackathon 2024',
+      'cert6.title': '1st Place — National Hackathon Winner',
+      'about.sectionTag': 'About Me',
+      'about.titleBefore': 'Skills &',
+      'about.titleHighlight': 'Expertise',
+      'about.p1': 'I\'m a passionate developer with a love for building fast, scalable, and beautiful web applications. My core stack revolves around <strong style="color:var(--text-primary)">React, Firebase, and Node.js</strong>, and I\'m constantly exploring new tools to sharpen my craft.',
+      'about.p2': 'When I\'m not coding, you\'ll find me contributing to open source, mentoring juniors, or brewing the perfect cup of coffee before a deep work session.',
+      'skill.frontend': 'Frontend (React / Tailwind)',
+      'skill.firebase': 'Firebase & Firestore',
+      'skill.backend': 'Backend (Node.js / APIs)',
+      'skill.mobile': 'Mobile (Flutter)',
+      'skill.uiux': 'UI/UX Design',
+      'skill.devops': 'DevOps / Cloud',
+      'contact.sectionTag': 'Contact',
+      'contact.titleBefore': 'Let\'s',
+      'contact.titleHighlight': 'Connect',
+      'contact.desc': 'Have a project in mind? I\'d love to hear about it. Drop me a message and let\'s make something great together.',
+      'form.name': 'Name',
+      'form.email': 'Email',
+      'form.message': 'Message',
+      'form.namePh': 'Your full name',
+      'form.emailPh': 'your@email.com',
+      'form.msgPh': 'Tell me about your project or idea...',
+      'form.send': 'Send Message',
+      'form.sending': 'Sending...',
+      'form.success': '✓ Message sent! I\'ll get back to you within 24 hours.',
+      'form.error': '✗ Something went wrong. Please try again.',
+      'contact.labelEmail': 'Email',
+      'contact.labelLoc': 'Location',
+      'contact.labelResp': 'Response Time',
+      'contact.valLoc': 'Your City, Your Country',
+      'contact.valResp': 'Within 24 hours',
+      'contact.findMe': 'Find me on',
+      'footer.copy': '© 2025 Your Name. All rights reserved.',
+      'weather.btnTitle': 'Toggle weather ambience (rain / snow)',
+      'weather.zen': 'Zen Mode',
+      'weather.nextSnow': 'Next: Snow',
+      'weather.nextOff': 'Next: Off',
+      'weather.rainMode': '🌧 Rain Mode',
+      'weather.snowMode': '❄️ Snow Mode'
+    });
+
+    Object.assign(I18N.km, {
+             'page.title': 'Portfolio អ្នកអភិវឌ្ឍន៍',
+             'nav.home': 'ទំព័រដើម',
+             'nav.projects': 'គម្រោង',
+             'nav.certificates': 'វិញ្ញាបនបត្រ',
+             'nav.about': 'អំពីខ្ញុំ',
+             'nav.contact': 'ទំនាក់ទំនង',
+             'nav.hire': 'ជួលខ្ញុំ',
+             'nav.themeToggle': 'បិទ/បើករចនាបថភ្លឺ ឬងងឹត',
+             'hero.badge': 'ទទួលការងារ',
+             'hero.nameLine1': 'ឈ្មោះរបស់អ្នក',
+             'hero.nameAccent': 'អ្នកអភិវឌ្ឍន៍',
+             'hero.role': 'អ្នកអភិវឌ្ឍន៍ Full-Stack និង Firebase',
+             'hero.bio': 'ខ្ញុំបង្កើតបទពិសោធវិបដែលរស់រវើកជាមួយកូដស្អាត និងការកាន់តួនាទីភីក់សែល។ ចូលចិត្ត Firebase កម្មវិធីពេលវេលាពិត និងការផ្លាស់ប្តូរវិបតែមជាលំដាប់។',
+             'hero.viewProjects': 'មើលគម្រោង',
+             'hero.getInTouch': 'ទាក់ទងមក',
+             'hero.statProjects': 'គម្រោងបានធ្វើ',
+             'hero.statYears': 'បទពិសោធឆ្នាំ',
+             'hero.statCerts': 'វិញ្ញាបនបត្រ',
+             'hero.statCardTitle': 'Firebase Pro',
+             'hero.statCardSub': 'Cloud និង Realtime DB',
+             'hero.photoMainHint': 'រូបអាវតារ<br /><small>ជំនួសដោយ &lt;img src="your-photo.jpg"&gt;</small>',
+             'hero.photo2Hint': 'រូបទី ២<br />ជំនួស',
+             'projects.sectionTag': 'Portfolio',
+             'projects.titleBefore': 'គម្រោង',
+             'projects.titleHighlight': 'ពិសេស',
+             'projects.desc': 'ការបង្ហាញអ្វីដែលខ្ញុំបានបង្កើត — ពីកម្មវិធី Firebase រហូតដល់វេទិកាពេញលេញ និងការសាកល្បងច្នៃប្រឌិត។',
+             'proj1.placeholder': 'រូបថត/ស្រាប់ពីគម្រោង',
+             'proj1.title': 'ចំណងជើងគម្រោង ១',
+             'proj1.desc': 'ការពិពណ៌នាខ្លីអំពីគម្រោងនេះ — ឧបសគ្គ បច្ចេកទេស និងតម្លៃដែលផ្តល់។',
+             'proj2.placeholder': 'វីដេអូសាកល្បង',
+             'proj2.title': 'ចំណងជើងគម្រោង ២',
+             'proj2.desc': 'គម្រោងនេះគាំទ្រវីដេអូ HTML5 ឬ embedding YouTube។',
+             'proj3.placeholder': 'iframe / YouTube',
+             'proj3.title': 'ចំណងជើងគម្រោង ៣',
+             'proj3.desc': 'ប័ណ្ណនេះគាំទ្រការបង្កប់ YouTube Loom ឬ Figma ផ្ទាល់ក្នុងកាត។',
+             'common.badgeImage': 'រូបភាព',
+             'common.badgeVideo': 'វីដេអូ',
+             'common.badgeIframe': 'Iframe',
+             'common.code': 'កូដ',
+      'common.live': 'Live',
+      'certs.sectionTag': 'សមិទ្ធផល',
+      'certs.titleBefore': 'វិញ្ញាបនបត្រ និង',
+      'certs.titleHighlight': 'កិត្តិយស',
+      'certs.desc': 'ការទទួលស្គាល់ពីវគ្គសិក្សា ការប្រកួតប្រជែង និងវេទិកាឧស្សាហ៍។',
+      'cert.view': 'មើលវិញ្ញាបនបត្រ',
+      'cert.details': 'មើលព័ត៌មានលម្អិត',
+      'cert1.issuer': 'Google Cloud',
+      'cert1.title': 'Google Cloud Associate Developer',
+      'cert2.issuer': 'Firebase / Google',
+      'cert2.title': 'Firebase Advanced Development',
+      'cert3.issuer': 'Meta',
+      'cert3.title': 'Meta Front-End Developer Professional',
+      'cert4.issuer': 'Coursera',
+      'cert4.title': 'វគ្គសិក្សា Full-Stack Web Development',
+      'cert5.issuer': 'Amazon Web Services',
+      'cert5.title': 'AWS Certified Cloud Practitioner',
+      'cert6.issuer': 'Hackathon ២០២៤',
+      'cert6.title': 'ជើងឯកថ្នាក់ជាតិ — Hackathon',
+      'about.sectionTag': 'អំពីខ្ញុំ',
+      'about.titleBefore': 'ជំនាញ និង',
+      'about.titleHighlight': 'ជំនាញជ្រាយជ្រះ',
+      'about.p1': 'ខ្ញុំជាអ្នកអភិវឌ្ឍន៍ដែលចូលចិត្តបង្កើតគេហទំព័រលឿន មានស្ថេរភាព និងស្រស់ស្អាត។ បច្ចុប្បន្នខ្ញុំန្រើ <strong style="color:var(--text-primary)">React, Firebase និង Node.js</strong> ជាស្នូល ហើយតែងតែស្វែងរកឧបករណ៍ថ្មីដើម្បីអភិវឌ្ឍខ្លួន។',
+      'about.p2': 'នៅពេលមិនសរសេរកូដ ខ្ញុំចូលចិត្តចូលរួមប្រភពបើកចំហ ណែនាំអ្នកចាប់ផ្តើម ឬផឹកកាហ្វេមុនការងារជ្រៅ។',
+      'skill.frontend': 'Frontend (React / Tailwind)',
+      'skill.firebase': 'Firebase និង Firestore',
+      'skill.backend': 'Backend (Node.js / APIs)',
+      'skill.mobile': 'Mobile (Flutter)',
+      'skill.uiux': 'រចនា UI/UX',
+      'skill.devops': 'DevOps / Cloud',
+      'contact.sectionTag': 'ទំនាក់ទំនង',
+      'contact.titleBefore': 'មក',
+      'contact.titleHighlight': 'ភ្ជាប់ទំនាក់ទំនង',
+      'contact.desc': 'មានគម្រោងគូរគំនិត? ខ្ញុំចង់ឮពីវា។ ផ្ញើសារ ហើយរួមគ្នាបង្កើតអ្វីដែលអស្ចារ្យ។',
+      'form.name': 'ឈ្មោះ',
+      'form.email': 'អ៊ីមែល',
+      'form.message': 'សារ',
+      'form.namePh': 'ឈ្មោះពេញរបស់អ្នក',
+      'form.emailPh': 'your@email.com',
+      'form.msgPh': 'ប្រាប់ខ្ញុំអំពីគម្រោងរបស់អ្នក...',
+      'form.send': 'ផ្ញើសារ',
+      'form.sending': 'កំពុងផ្ញើ...',
+      'form.success': '✓ ផ្ញើរួចរាល់! ខ្ញុំនឹងឆ្លើយតបក្នុងរយៈពេល ២៤ ម៉ោង។',
+      'form.error': '✗ មានបញ្ហា។ សូមព្យាយាមម្តងទៀត។',
+      'contact.labelEmail': 'អ៊ីមែល',
+      'contact.labelLoc': 'ទីកន្លែង',
+      'contact.labelResp': 'រយៈពេលឆ្លើយតប',
+      'contact.valLoc': 'ទីក្រុង ប្រទេសរបស់អ្នក',
+      'contact.valResp': 'ក្នុងរយៈពេល ២៤ ម៉ោង',
+      'contact.findMe': 'រកខ្ញុំនៅ',
+      'footer.copy': '© ២០២៥ ឈ្មោះរបស់អ្នក។ រក្សាសិទ្ធិគ្រប់យ៉ាង។',
+      'weather.btnTitle': 'ប្តូរបរិយាកាស (ភ្លៀង / ព្រិល)',
+      'weather.zen': 'Zen',
+      'weather.nextSnow': 'បន្ទាប់៖ ព្រិល',
+      'weather.nextOff': 'បន្ទាប់៖ បិទ',
+      'weather.rainMode': '🌧 របៀបភ្លៀង',
+      'weather.snowMode': '❄️ របៀបព្រិល'
+    });
+
+    function getLang() {
+      return localStorage.getItem(LANG_KEY) === 'km' ? 'km' : 'en';
+    }
+
+    function t(key) {
+      const L = getLang();
+      return (I18N[L] && I18N[L][key]) || I18N.en[key] || key;
+    }
+
+    function applyI18n() {
+      document.documentElement.lang = getLang() === 'km' ? 'km' : 'en';
+      document.querySelectorAll('[data-i18n]').forEach((el) => {
+        const k = el.getAttribute('data-i18n');
+        if (k && t(k)) el.textContent = t(k);
+      });
+      document.querySelectorAll('[data-i18n-html]').forEach((el) => {
+        const k = el.getAttribute('data-i18n-html');
+        if (k && t(k)) el.innerHTML = t(k);
+      });
+      document.querySelectorAll('[data-i18n-placeholder]').forEach((el) => {
+        const k = el.getAttribute('data-i18n-placeholder');
+        if (k && t(k)) el.setAttribute('placeholder', t(k));
+      });
+      document.querySelectorAll('[data-i18n-title]').forEach((el) => {
+        const k = el.getAttribute('data-i18n-title');
+        if (k && t(k)) el.setAttribute('title', t(k));
+      });
+      document.querySelectorAll('.lang-btn').forEach((btn) => {
+        const on = btn.getAttribute('data-set-lang') === getLang();
+        btn.classList.toggle('active', on);
+        btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+      });
+      document.title = t('page.title');
+      if (typeof applyWeatherUiLabels === 'function') applyWeatherUiLabels();
+    }
+
+    document.querySelectorAll('.lang-btn').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        localStorage.setItem(LANG_KEY, btn.getAttribute('data-set-lang'));
+        applyI18n();
+      });
+    });
+
     /* ========================================================
        🔥 FIREBASE INTEGRATION ZONE
        ========================================================
@@ -1757,116 +2117,162 @@
            import { getFirestore, collection, getDocs } from "...firebase-firestore.js";
        ======================================================== */
 
-    // ── STEP 1: Paste your Firebase config here ────────────
+    // ── Firebase init (config របស់អ្នក — រក្សាក្នុង Console តែត្រូវកំណត់ Firestore rules) ──
     const firebaseConfig = {
-      apiKey:            "YOUR_API_KEY",
-      authDomain:        "YOUR_PROJECT.firebaseapp.com",
-      projectId:         "YOUR_PROJECT_ID",
-      storageBucket:     "YOUR_PROJECT.appspot.com",
-      messagingSenderId: "YOUR_SENDER_ID",
-      appId:             "YOUR_APP_ID"
+      apiKey: 'AIzaSyDhGv1POoU1Pq1XhZHNQu6qZF0_dCKZi-g',
+      authDomain: 'nobrotana.firebaseapp.com',
+      projectId: 'nobrotana',
+      storageBucket: 'nobrotana.firebasestorage.app',
+      messagingSenderId: '692013232245',
+      appId: '1:692013232245:web:400e0286983edcbb06083c',
+      measurementId: 'G-YNKFRQ7RP6'
     };
 
-    // ── STEP 2: Uncomment after adding Firebase SDK ─────────
-    // const app = initializeApp(firebaseConfig);
-    // const db  = getFirestore(app);
+    let db = null;
+    if (typeof firebase !== 'undefined') {
+      try {
+        firebase.initializeApp(firebaseConfig);
+        db = firebase.firestore();
+      } catch (e) {
+        console.error('Firebase init error:', e);
+      }
+    }
 
-    // ── STEP 3: Replace static cards with this function ─────
-    async function loadProjectsFromFirestore() {
-      /*
-        const grid = document.getElementById('projects-grid');
-        grid.innerHTML = '<div class="loading-skeleton" style="height:300px;grid-column:1/-1;"></div>';
+    function escapeHtml(str) {
+      if (str == null) return '';
+      const d = document.createElement('div');
+      d.textContent = String(str);
+      return d.innerHTML;
+    }
 
-        try {
-          const snapshot = await getDocs(collection(db, 'projects'));
-          if (snapshot.empty) {
-            grid.innerHTML = '<p class="empty-state">No projects yet.</p>';
-            return;
+    function escapeAttr(str) {
+      return String(str ?? '')
+        .replace(/&/g, '&amp;')
+        .replace(/"/g, '&quot;')
+        .replace(/</g, '&lt;');
+    }
+
+    function observeRevealNodes(nodes) {
+      if (!nodes || !nodes.length) return;
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            entry.target.querySelectorAll('.skill-bar-fill').forEach((bar) => {
+              bar.style.width = bar.getAttribute('data-width') + '%';
+            });
+            observer.unobserve(entry.target);
           }
-          grid.innerHTML = '';
-          snapshot.forEach(doc => {
-            const p = doc.data();
-            // p.title, p.description, p.tags (array), p.imageUrl, p.videoUrl, p.iframeUrl,
-            // p.githubUrl, p.liveUrl, p.mediaType ('image'|'video'|'iframe')
-            const mediaHtml = p.mediaType === 'video'
-              ? `<video autoplay muted loop playsinline><source src="${p.videoUrl}" type="video/mp4"></video>`
-              : p.mediaType === 'iframe'
-              ? `<iframe src="${p.iframeUrl}" allowfullscreen></iframe>`
-              : `<img src="${p.imageUrl}" alt="${p.title}" />`;
-
-            grid.innerHTML += `
-              <div class="project-card reveal">
-                <div class="project-media">${mediaHtml}<div class="project-media-badge">${p.mediaType}</div></div>
-                <div class="project-body">
-                  <div class="project-tags">${(p.tags||[]).map(t=>`<span class="tag">${t}</span>`).join('')}</div>
-                  <h3 class="project-title">${p.title}</h3>
-                  <p class="project-desc">${p.description}</p>
-                  <div class="project-links">
-                    ${p.githubUrl ? `<a href="${p.githubUrl}" class="project-link" target="_blank"><i class="fa-brands fa-github"></i> Code</a>` : ''}
-                    ${p.liveUrl   ? `<a href="${p.liveUrl}"   class="project-link" target="_blank"><i class="fa-solid fa-arrow-up-right-from-square"></i> Live</a>` : ''}
-                  </div>
-                </div>
-              </div>`;
-          });
-          observeReveal(); // re-trigger scroll reveal for new cards
-        } catch(e) {
-          console.error('Firestore projects error:', e);
-        }
-      */
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+      nodes.forEach((el) => observer.observe(el));
     }
 
-    // ── STEP 4: Replace static certs with this function ─────
+    async function loadProjectsFromFirestore() {
+      const grid = document.getElementById('projects-grid');
+      if (!grid || !db) return;
+      try {
+        const snapshot = await db.collection('projects').get();
+        if (snapshot.empty) return;
+
+        const parts = [];
+        snapshot.forEach((docSnap) => {
+          const p = docSnap.data();
+          const title = escapeHtml(p.title || '');
+          const desc = escapeHtml(p.description || '');
+          const mt = String(p.mediaType || 'image').toLowerCase();
+          let mediaInner = '';
+          if (mt === 'video' && p.videoUrl) {
+            mediaInner = '<video controls muted loop playsinline preload="metadata"><source src="' + escapeAttr(p.videoUrl) + '" type="video/mp4"></video>';
+          } else if (mt === 'iframe' && p.iframeUrl) {
+            mediaInner = '<iframe src="' + escapeAttr(p.iframeUrl) + '" allowfullscreen loading="lazy"></iframe>';
+          } else if (p.imageUrl) {
+            mediaInner = '<img src="' + escapeAttr(p.imageUrl) + '" alt="' + title + '" />';
+          } else {
+            mediaInner = '<div class="media-placeholder"><i class="fa-regular fa-image"></i><span>Project</span></div>';
+          }
+          const badge = escapeHtml(mt === 'iframe' ? 'iframe' : mt);
+          const tags = (p.tags || []).map((tag) => '<span class="tag">' + escapeHtml(tag) + '</span>').join('');
+          const codeLink = p.githubUrl
+            ? '<a href="' + escapeAttr(p.githubUrl) + '" class="project-link" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> Code</a>'
+            : '';
+          const liveLink = p.liveUrl
+            ? '<a href="' + escapeAttr(p.liveUrl) + '" class="project-link" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-arrow-up-right-from-square"></i> Live</a>'
+            : '';
+          parts.push(
+            '<div class="project-card reveal"><div class="project-media">' +
+              mediaInner +
+              '<div class="project-media-badge">' + badge + '</div></div><div class="project-body"><div class="project-tags">' +
+              tags +
+              '</div><h3 class="project-title">' +
+              title +
+              '</h3><p class="project-desc">' +
+              desc +
+              '</p><div class="project-links">' +
+              codeLink +
+              liveLink +
+              '</div></div></div>'
+          );
+        });
+        grid.innerHTML = parts.join('');
+        observeRevealNodes(grid.querySelectorAll('.reveal'));
+      } catch (e) {
+        console.warn('Firestore projects (keeping static content):', e);
+      }
+    }
+
     async function loadCertificatesFromFirestore() {
-      /*
-        const grid = document.getElementById('certs-grid');
-        grid.innerHTML = '<div class="loading-skeleton" style="height:200px;grid-column:1/-1;"></div>';
+      const grid = document.getElementById('certs-grid');
+      if (!grid || !db) return;
+      try {
+        const snapshot = await db.collection('certificates').get();
+        if (snapshot.empty) return;
 
-        try {
-          const snapshot = await getDocs(collection(db, 'certificates'));
-          if (snapshot.empty) { grid.innerHTML = '<p class="empty-state">No certificates yet.</p>'; return; }
-          grid.innerHTML = '';
-          snapshot.forEach(doc => {
-            const c = doc.data();
-            // c.title, c.issuer, c.date, c.icon (FA class), c.credentialUrl, c.previewImageUrl
-            grid.innerHTML += `
-              <div class="cert-card reveal">
-                <div class="cert-icon-wrap"><i class="${c.icon || 'fa-solid fa-award'}"></i></div>
-                <div>
-                  <div class="cert-issuer">${c.issuer}</div>
-                  <div class="cert-card-title">${c.title}</div>
-                </div>
-                ${c.previewImageUrl ? `<img src="${c.previewImageUrl}" class="cert-preview-img" alt="${c.title}" />` : ''}
-                <div class="cert-date"><i class="fa-regular fa-calendar"></i> ${c.date}</div>
-                <a href="${c.credentialUrl || '#'}" class="cert-link" target="_blank">View Credential <i class="fa-solid fa-arrow-right"></i></a>
-              </div>`;
-          });
-          observeReveal();
-        } catch(e) {
-          console.error('Firestore certificates error:', e);
-        }
-      */
+        const parts = [];
+        snapshot.forEach((docSnap) => {
+          const c = docSnap.data();
+          const issuer = escapeHtml(c.issuer || '');
+          const title = escapeHtml(c.title || '');
+          const dateStr = escapeHtml(c.date || '');
+          const iconClass = escapeAttr(c.icon || 'fa-solid fa-award');
+          const preview = c.previewImageUrl
+            ? '<img src="' + escapeAttr(c.previewImageUrl) + '" alt="' + title + '" class="cert-preview-img" />'
+            : '';
+          const link = c.credentialUrl ? escapeAttr(c.credentialUrl) : '#';
+          parts.push(
+            '<div class="cert-card reveal">' +
+              '<div class="cert-icon-wrap"><i class="' + iconClass + '"></i></div>' +
+              '<div><div class="cert-issuer">' + issuer + '</div><div class="cert-card-title">' + title + '</div></div>' +
+              preview +
+              '<div class="cert-date"><i class="fa-regular fa-calendar"></i> ' + dateStr + '</div>' +
+              '<a href="' + link + '" class="cert-link" target="_blank" rel="noopener noreferrer">View Credential <i class="fa-solid fa-arrow-right"></i></a>' +
+              '</div>'
+          );
+        });
+        grid.innerHTML = parts.join('');
+        observeRevealNodes(grid.querySelectorAll('.reveal'));
+      } catch (e) {
+        console.warn('Firestore certificates (keeping static content):', e);
+      }
     }
 
-    // ── STEP 5: Contact form → Firestore ────────────────────
     async function submitContactForm(name, email, message) {
-      /*
-        try {
-          await addDoc(collection(db, 'messages'), {
-            name, email, message,
-            createdAt: serverTimestamp()
-          });
-          return { success: true };
-        } catch(e) {
-          return { success: false, error: e.message };
-        }
-      */
-      // Static fallback (remove when Firebase is connected):
-      return { success: true };
+      if (!db) {
+        return { success: false, error: 'Firebase not ready' };
+      }
+      try {
+        await db.collection('messages').add({
+          name: String(name).trim(),
+          email: String(email).trim(),
+          message: String(message).trim(),
+          createdAt: firebase.firestore.FieldValue.serverTimestamp()
+        });
+        return { success: true };
+      } catch (e) {
+        console.error('Firestore messages:', e);
+        return { success: false, error: e.message || String(e) };
+      }
     }
-
-    // ── Call loaders on page load ────────────────────────────
-    // loadProjectsFromFirestore();
-    // loadCertificatesFromFirestore();
 
     /* ========================================================
        THEME TOGGLE
@@ -1943,7 +2349,6 @@
     const snowAudio        = document.getElementById('snow-audio');
     const ctx              = weatherCanvas.getContext('2d');
 
-    let weatherState = 0; // 0=Off, 1=Rain, 2=Snow
     let particles    = [];
     let animFrame    = null;
     let canvasReady  = false;
@@ -2055,6 +2460,27 @@
       weatherIndicator.classList.remove('visible');
     }
 
+    function applyWeatherUiLabels() {
+      const btn = document.getElementById('weather-btn');
+      if (btn) btn.setAttribute('title', t('weather.btnTitle'));
+      if (!weatherLabel || !weatherIcon) return;
+      if (weatherState === 0) {
+        weatherLabel.textContent = t('weather.zen');
+        weatherIcon.className = 'fa-solid fa-cloud-sun';
+        weatherIndicator.classList.remove('visible');
+      } else if (weatherState === 1) {
+        weatherLabel.textContent = t('weather.nextSnow');
+        weatherIcon.className = 'fa-solid fa-cloud-rain';
+        weatherIndicator.textContent = t('weather.rainMode');
+        weatherIndicator.classList.add('visible');
+      } else {
+        weatherLabel.textContent = t('weather.nextOff');
+        weatherIcon.className = 'fa-solid fa-snowflake';
+        weatherIndicator.textContent = t('weather.snowMode');
+        weatherIndicator.classList.add('visible');
+      }
+    }
+
     function startWeather() {
       resizeCanvas();
       initParticles();
@@ -2064,19 +2490,13 @@
       if (weatherState === 1) {
         snowAudio.pause();
         rainAudio.volume = 0.35;
-        rainAudio.play().catch(() => {}); // graceful fail if browser blocks
-        weatherIndicator.textContent = '🌧 Rain Mode';
-        weatherIcon.className = 'fa-solid fa-cloud-rain';
-        weatherLabel.textContent = 'Next: Snow';
+        rainAudio.play().catch(() => {});
       } else {
         rainAudio.pause();
         snowAudio.volume = 0.2;
         snowAudio.play().catch(() => {});
-        weatherIndicator.textContent = '❄️ Snow Mode';
-        weatherIcon.className = 'fa-solid fa-snowflake';
-        weatherLabel.textContent = 'Next: Off';
       }
-      weatherIndicator.classList.add('visible');
+      applyWeatherUiLabels();
     }
 
     /* ── Weather button click (Off → Rain → Snow → Off) ── */
@@ -2084,8 +2504,7 @@
       weatherState = (weatherState + 1) % 3;
       if (weatherState === 0) {
         stopWeather();
-        weatherIcon.className = 'fa-solid fa-cloud-sun';
-        weatherLabel.textContent = 'Zen Mode';
+        applyWeatherUiLabels();
       } else {
         stopWeather();
         startWeather();
@@ -2113,9 +2532,11 @@
     }
 
     observeReveal();
+    loadProjectsFromFirestore();
+    loadCertificatesFromFirestore();
 
     /* ========================================================
-       CONTACT FORM (static handler — replace with Firebase)
+       CONTACT FORM → Firestore
        ======================================================== */
     document.getElementById('contact-form').addEventListener('submit', async (e) => {
       e.preventDefault();
@@ -2125,23 +2546,24 @@
       const btn     = e.target.querySelector('button[type=submit]');
       const fb      = document.getElementById('form-feedback');
 
-      btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Sending...';
+      btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> ' + t('form.sending');
       btn.disabled = true;
 
       // 🔥 FIREBASE: Replace with your Firestore submit function
       const result = await submitContactForm(name, email, message);
 
       if (result.success) {
+        fb.style.color = '';
         fb.style.display = 'block';
-        fb.textContent = '✓ Message sent! I\'ll get back to you within 24 hours.';
+        fb.textContent = t('form.success');
         e.target.reset();
       } else {
         fb.style.color = 'var(--accent-warm)';
         fb.style.display = 'block';
-        fb.textContent = '✗ Something went wrong. Please try again.';
+        fb.textContent = t('form.error');
       }
 
-      btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Send Message';
+      btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> <span data-i18n="form.send">' + t('form.send') + '</span>';
       btn.disabled = false;
     });
 
@@ -2165,6 +2587,9 @@
     }, { threshold: 0.4 });
 
     sections.forEach(s => navObserver.observe(s));
+
+    /* Initial language: English by default; Khmer if saved in localStorage */
+    applyI18n();
   </script>
 </body>
 </html>
