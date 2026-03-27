@@ -1,1333 +1,18 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="dark">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Dev Portfolio</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+Khmer:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=JetBrains+Mono:wght@400;500&family=Dangrek&display=swap"
+    rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
-  <style>
-    /* =============================
-       CSS VARIABLES & THEMES
-       ============================= */
-    :root {
-      --transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    }
+  <link rel="stylesheet " href="style.css">
 
-    [data-theme="dark"] {
-      --bg-primary: #080c14;
-      --bg-secondary: #0d1420;
-      --bg-card: rgba(255,255,255,0.04);
-      --bg-card-hover: rgba(255,255,255,0.07);
-      --border: rgba(255,255,255,0.08);
-      --border-hover: rgba(99,179,237,0.4);
-      --text-primary: #f0f4ff;
-      --text-secondary: #8899b4;
-      --text-muted: #4a5568;
-      --accent: #63b3ed;
-      --accent-warm: #f6ad55;
-      --accent-purple: #b794f4;
-      --accent-green: #68d391;
-      --glow: rgba(99,179,237,0.15);
-      --glow-strong: rgba(99,179,237,0.3);
-      --glass: rgba(13,20,32,0.7);
-      --glass-border: rgba(255,255,255,0.06);
-      --nav-bg: rgba(8,12,20,0.85);
-      --shadow: 0 8px 32px rgba(0,0,0,0.4);
-      --shadow-card: 0 4px 24px rgba(0,0,0,0.3);
-    }
-
-    [data-theme="light"] {
-      --bg-primary: #f4f7fb;
-      --bg-secondary: #e8eef7;
-      --bg-card: rgba(255,255,255,0.7);
-      --bg-card-hover: rgba(255,255,255,0.95);
-      --border: rgba(0,0,0,0.08);
-      --border-hover: rgba(37,99,235,0.4);
-      --text-primary: #0f172a;
-      --text-secondary: #475569;
-      --text-muted: #94a3b8;
-      --accent: #2563eb;
-      --accent-warm: #d97706;
-      --accent-purple: #7c3aed;
-      --accent-green: #059669;
-      --glow: rgba(37,99,235,0.08);
-      --glow-strong: rgba(37,99,235,0.2);
-      --glass: rgba(244,247,251,0.8);
-      --glass-border: rgba(0,0,0,0.06);
-      --nav-bg: rgba(244,247,251,0.9);
-      --shadow: 0 8px 32px rgba(0,0,0,0.1);
-      --shadow-card: 0 4px 24px rgba(0,0,0,0.08);
-    }
-
-    /* =============================
-       RESET & BASE
-       ============================= */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-
-    body {
-      font-family: 'DM Sans', sans-serif;
-      background: var(--bg-primary);
-      color: var(--text-primary);
-      min-height: 100vh;
-      overflow-x: hidden;
-      transition: background var(--transition), color var(--transition);
-    }
-
-    html[lang="km"] body {
-      font-family: 'Noto Sans Khmer', 'DM Sans', sans-serif;
-      line-height: 1.85;
-      word-break: break-word;
-    }
-
-    h1, h2, h3, h4 { font-family: 'Syne', sans-serif; }
-
-    html[lang="km"] h1,
-    html[lang="km"] h2,
-    html[lang="km"] h3,
-    html[lang="km"] h4,
-    html[lang="km"] .nav-logo,
-    html[lang="km"] .hero-name,
-    html[lang="km"] .section-title,
-    html[lang="km"] .project-title,
-    html[lang="km"] .cert-card-title,
-    html[lang="km"] .stat-card-text strong,
-    html[lang="km"] .hero-stat-item strong {
-      font-family: 'Noto Sans Khmer', 'Syne', sans-serif;
-    }
-    code, .mono { font-family: 'JetBrains Mono', monospace; }
-
-    a { text-decoration: none; color: inherit; }
-    img { max-width: 100%; display: block; }
-
-    /* =============================
-       CANVAS & WEATHER
-       ============================= */
-    #weather-canvas {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      pointer-events: none;
-      z-index: 0;
-      opacity: 0;
-      transition: opacity 0.8s ease;
-    }
-    #weather-canvas.active { opacity: 1; }
-
-    /* =============================
-       SCROLLBAR
-       ============================= */
-    ::-webkit-scrollbar { width: 5px; }
-    ::-webkit-scrollbar-track { background: var(--bg-primary); }
-    ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 4px; }
-
-    /* =============================
-       NAVIGATION
-       ============================= */
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      background: var(--nav-bg);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border-bottom: 1px solid var(--border);
-      padding: 0 2rem;
-      height: 64px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      transition: background var(--transition);
-    }
-
-    .nav-logo {
-      font-family: 'Syne', sans-serif;
-      font-weight: 800;
-      font-size: 1.3rem;
-      letter-spacing: -0.02em;
-    }
-
-    .nav-logo span { color: var(--accent); }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 2rem;
-      list-style: none;
-    }
-
-    .nav-links a {
-      font-size: 0.875rem;
-      font-weight: 500;
-      color: var(--text-secondary);
-      transition: color 0.2s;
-      letter-spacing: 0.02em;
-    }
-
-    .nav-links a:hover { color: var(--text-primary); }
-
-    .nav-actions {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-    }
-
-    .btn-icon {
-      width: 38px; height: 38px;
-      border-radius: 10px;
-      border: 1px solid var(--border);
-      background: var(--bg-card);
-      color: var(--text-secondary);
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.95rem;
-      transition: all 0.2s;
-      backdrop-filter: blur(10px);
-    }
-
-    .btn-icon:hover {
-      border-color: var(--border-hover);
-      color: var(--accent);
-      background: var(--glow);
-    }
-
-    .hamburger {
-      display: none;
-      flex-direction: column;
-      gap: 4px;
-      cursor: pointer;
-      padding: 6px;
-    }
-
-    .hamburger span {
-      display: block;
-      width: 22px; height: 2px;
-      background: var(--text-primary);
-      border-radius: 2px;
-      transition: all 0.3s;
-    }
-
-    /* =============================
-       MOBILE MENU
-       ============================= */
-    .mobile-menu {
-      display: none;
-      position: fixed;
-      top: 64px; left: 0; right: 0;
-      background: var(--nav-bg);
-      backdrop-filter: blur(20px);
-      border-bottom: 1px solid var(--border);
-      z-index: 99;
-      padding: 1.5rem 2rem;
-      flex-direction: column;
-      gap: 1.25rem;
-    }
-
-    .mobile-menu.open { display: flex; }
-    .mobile-menu a {
-      font-size: 1rem;
-      font-weight: 500;
-      color: var(--text-secondary);
-      transition: color 0.2s;
-    }
-    .mobile-menu a:hover { color: var(--accent); }
-
-    /* =============================
-       HERO
-       ============================= */
-    #hero {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      padding: 100px 2rem 60px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero-bg-orb {
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(100px);
-      pointer-events: none;
-    }
-
-    .orb-1 {
-      width: 600px; height: 600px;
-      background: radial-gradient(circle, rgba(99,179,237,0.12) 0%, transparent 70%);
-      top: -100px; right: -100px;
-    }
-
-    .orb-2 {
-      width: 400px; height: 400px;
-      background: radial-gradient(circle, rgba(183,148,244,0.08) 0%, transparent 70%);
-      bottom: 0; left: -50px;
-    }
-
-    [data-theme="light"] .orb-1 {
-      background: radial-gradient(circle, rgba(37,99,235,0.08) 0%, transparent 70%);
-    }
-    [data-theme="light"] .orb-2 {
-      background: radial-gradient(circle, rgba(124,58,237,0.06) 0%, transparent 70%);
-    }
-
-    .hero-inner {
-      max-width: 1200px;
-      margin: 0 auto;
-      width: 100%;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
-      align-items: center;
-      position: relative;
-      z-index: 1;
-    }
-
-    .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 100px;
-      padding: 6px 16px;
-      font-size: 0.78rem;
-      font-weight: 500;
-      color: var(--accent);
-      margin-bottom: 1.5rem;
-      backdrop-filter: blur(10px);
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-    }
-
-    .hero-badge .dot {
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      background: var(--accent-green);
-      animation: pulse 2s infinite;
-    }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.5; transform: scale(0.8); }
-    }
-
-    .hero-name {
-      font-size: clamp(2.8rem, 6vw, 5rem);
-      font-weight: 800;
-      line-height: 1.05;
-      letter-spacing: -0.03em;
-      margin-bottom: 0.5rem;
-    }
-
-    .hero-name .line-accent {
-      background: linear-gradient(135deg, var(--accent) 0%, var(--accent-purple) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .hero-role {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 1rem;
-      color: var(--accent-warm);
-      margin-bottom: 1.5rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .hero-role::before { content: '//'; color: var(--text-muted); }
-
-    .hero-bio {
-      font-size: 1.05rem;
-      line-height: 1.75;
-      color: var(--text-secondary);
-      max-width: 520px;
-      margin-bottom: 2.5rem;
-    }
-
-    .hero-cta {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-
-    .btn-primary {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 12px 28px;
-      background: var(--accent);
-      color: #fff;
-      border-radius: 12px;
-      font-weight: 600;
-      font-size: 0.9rem;
-      cursor: pointer;
-      border: none;
-      transition: all 0.25s;
-      letter-spacing: 0.01em;
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px var(--glow-strong);
-    }
-
-    .btn-secondary {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 12px 28px;
-      background: var(--bg-card);
-      color: var(--text-primary);
-      border-radius: 12px;
-      font-weight: 600;
-      font-size: 0.9rem;
-      cursor: pointer;
-      border: 1px solid var(--border);
-      transition: all 0.25s;
-      backdrop-filter: blur(10px);
-    }
-
-    .btn-secondary:hover {
-      border-color: var(--border-hover);
-      background: var(--bg-card-hover);
-      transform: translateY(-2px);
-    }
-
-    /* Hero Photos */
-    .hero-photos {
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .photo-main-wrap {
-      width: 320px; height: 380px;
-      border-radius: 24px;
-      overflow: hidden;
-      border: 2px solid var(--border);
-      box-shadow: var(--shadow), 0 0 0 8px var(--glow);
-      position: relative;
-      z-index: 2;
-      background: var(--bg-secondary);
-    }
-
-    .photo-main-wrap img, .photo-main-wrap .photo-placeholder {
-      width: 100%; height: 100%;
-      object-fit: cover;
-    }
-
-    .photo-placeholder {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 0.75rem;
-      color: var(--text-muted);
-      font-size: 0.8rem;
-      text-align: center;
-      background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-card) 100%);
-    }
-
-    .photo-placeholder i { font-size: 2.5rem; color: var(--text-muted); }
-
-    .photo-secondary-wrap {
-      position: absolute;
-      bottom: -24px;
-      right: -32px;
-      width: 130px; height: 130px;
-      border-radius: 20px;
-      overflow: hidden;
-      border: 2px solid var(--border-hover);
-      box-shadow: var(--shadow-card);
-      z-index: 3;
-      background: var(--bg-secondary);
-      animation: float 4s ease-in-out infinite;
-    }
-
-    .photo-secondary-wrap img, .photo-secondary-wrap .photo-placeholder {
-      width: 100%; height: 100%;
-      object-fit: cover;
-    }
-
-    @keyframes float {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-10px); }
-    }
-
-    .photo-bg-shape {
-      position: absolute;
-      top: -20px; left: -20px;
-      width: 360px; height: 420px;
-      border-radius: 30px;
-      border: 1px dashed var(--border);
-      z-index: 1;
-    }
-
-    .photo-stat-card {
-      position: absolute;
-      top: 20px; left: -40px;
-      background: var(--glass);
-      backdrop-filter: blur(16px);
-      border: 1px solid var(--glass-border);
-      border-radius: 14px;
-      padding: 12px 18px;
-      z-index: 4;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      box-shadow: var(--shadow-card);
-      animation: float 4s ease-in-out infinite 1s;
-    }
-
-    .stat-card-icon {
-      width: 36px; height: 36px;
-      border-radius: 10px;
-      background: var(--glow);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--accent);
-      font-size: 1rem;
-    }
-
-    .stat-card-text strong {
-      display: block;
-      font-family: 'Syne', sans-serif;
-      font-weight: 700;
-      font-size: 1rem;
-      color: var(--text-primary);
-    }
-
-    .stat-card-text span {
-      font-size: 0.72rem;
-      color: var(--text-muted);
-    }
-
-    .hero-stats {
-      display: flex;
-      gap: 2rem;
-      margin-top: 2.5rem;
-      padding-top: 2rem;
-      border-top: 1px solid var(--border);
-    }
-
-    .hero-stat-item strong {
-      display: block;
-      font-family: 'Syne', sans-serif;
-      font-weight: 800;
-      font-size: 1.6rem;
-      color: var(--text-primary);
-    }
-
-    .hero-stat-item span {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-    }
-
-    /* =============================
-       SECTION COMMONS
-       ============================= */
-    section {
-      padding: 100px 2rem;
-      position: relative;
-      z-index: 1;
-    }
-
-    .section-inner {
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .section-header {
-      margin-bottom: 3.5rem;
-    }
-
-    .section-tag {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.78rem;
-      color: var(--accent);
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      margin-bottom: 0.75rem;
-    }
-
-    .section-tag::before, .section-tag::after {
-      content: '';
-      height: 1px;
-      background: var(--accent);
-      flex: 0 0 30px;
-    }
-
-    .section-tag::before { display: none; }
-
-    .section-title {
-      font-size: clamp(2rem, 4vw, 3rem);
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      line-height: 1.1;
-    }
-
-    .section-title .highlight {
-      color: var(--accent);
-    }
-
-    .section-desc {
-      margin-top: 1rem;
-      color: var(--text-secondary);
-      font-size: 1rem;
-      line-height: 1.7;
-      max-width: 600px;
-    }
-
-    /* =============================
-       SKILLS TICKER
-       ============================= */
-    #skills-ticker {
-      padding: 24px 0;
-      background: var(--bg-secondary);
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-      overflow: hidden;
-      position: relative;
-      z-index: 1;
-    }
-
-    .ticker-track {
-      display: flex;
-      gap: 2.5rem;
-      animation: ticker 30s linear infinite;
-      width: max-content;
-    }
-
-    .ticker-item {
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      white-space: nowrap;
-      padding: 0 1rem;
-    }
-
-    .ticker-item i { color: var(--accent); font-size: 1rem; }
-
-    @keyframes ticker {
-      from { transform: translateX(0); }
-      to { transform: translateX(-50%); }
-    }
-
-    /* =============================
-       PROJECTS
-       ============================= */
-    #projects { background: var(--bg-secondary); }
-
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr));
-      gap: 1.5rem;
-    }
-
-    .project-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      overflow: hidden;
-      transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
-      backdrop-filter: blur(10px);
-      cursor: pointer;
-    }
-
-    .project-card:hover {
-      border-color: var(--border-hover);
-      transform: translateY(-4px);
-      box-shadow: var(--shadow), 0 0 0 1px var(--glow-strong);
-    }
-
-    .project-media {
-      width: 100%;
-      aspect-ratio: 16/9;
-      position: relative;
-      overflow: hidden;
-      background: var(--bg-secondary);
-    }
-
-    .project-media img {
-      width: 100%; height: 100%;
-      object-fit: cover;
-      transition: transform 0.5s ease;
-    }
-
-    .project-card:hover .project-media img {
-      transform: scale(1.04);
-    }
-
-    .project-media video,
-    .project-media iframe {
-      width: 100%; height: 100%;
-      object-fit: cover;
-      border: none;
-    }
-
-    .project-media .media-placeholder {
-      width: 100%; height: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
-      color: var(--text-muted);
-      font-size: 0.8rem;
-      background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-card) 100%);
-    }
-
-    .media-placeholder i { font-size: 2rem; }
-
-    .project-media-badge {
-      position: absolute;
-      top: 12px; right: 12px;
-      background: rgba(0,0,0,0.6);
-      backdrop-filter: blur(8px);
-      border-radius: 8px;
-      padding: 4px 10px;
-      font-size: 0.7rem;
-      font-family: 'JetBrains Mono', monospace;
-      color: #fff;
-      border: 1px solid rgba(255,255,255,0.1);
-    }
-
-    .project-body {
-      padding: 1.5rem;
-    }
-
-    .project-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.4rem;
-      margin-bottom: 0.75rem;
-    }
-
-    .tag {
-      font-size: 0.7rem;
-      font-family: 'JetBrains Mono', monospace;
-      padding: 3px 10px;
-      border-radius: 6px;
-      background: var(--glow);
-      border: 1px solid rgba(99,179,237,0.15);
-      color: var(--accent);
-      letter-spacing: 0.02em;
-    }
-
-    [data-theme="light"] .tag {
-      background: rgba(37,99,235,0.06);
-      border-color: rgba(37,99,235,0.15);
-    }
-
-    .project-title {
-      font-family: 'Syne', sans-serif;
-      font-weight: 700;
-      font-size: 1.15rem;
-      margin-bottom: 0.5rem;
-      letter-spacing: -0.01em;
-    }
-
-    .project-desc {
-      font-size: 0.875rem;
-      color: var(--text-secondary);
-      line-height: 1.65;
-      margin-bottom: 1.25rem;
-    }
-
-    .project-links {
-      display: flex;
-      gap: 0.75rem;
-    }
-
-    .project-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      font-size: 0.8rem;
-      font-weight: 500;
-      color: var(--accent);
-      padding: 6px 14px;
-      border-radius: 8px;
-      border: 1px solid rgba(99,179,237,0.2);
-      background: rgba(99,179,237,0.06);
-      transition: all 0.2s;
-    }
-
-    [data-theme="light"] .project-link {
-      border-color: rgba(37,99,235,0.2);
-      background: rgba(37,99,235,0.06);
-    }
-
-    .project-link:hover {
-      background: var(--accent);
-      color: #fff;
-      border-color: var(--accent);
-    }
-
-    /* =============================
-       CERTIFICATES
-       ============================= */
-    .certs-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
-      gap: 1.5rem;
-    }
-
-    .cert-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 1.75rem;
-      transition: all 0.3s ease;
-      backdrop-filter: blur(10px);
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .cert-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, var(--accent) 0%, var(--accent-purple) 100%);
-    }
-
-    .cert-card:hover {
-      border-color: var(--border-hover);
-      transform: translateY(-3px);
-      box-shadow: var(--shadow-card);
-    }
-
-    .cert-icon-wrap {
-      width: 52px; height: 52px;
-      border-radius: 14px;
-      background: var(--glow);
-      border: 1px solid rgba(99,179,237,0.15);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.5rem;
-      color: var(--accent);
-    }
-
-    [data-theme="light"] .cert-icon-wrap {
-      background: rgba(37,99,235,0.06);
-      border-color: rgba(37,99,235,0.15);
-    }
-
-    .cert-card-title {
-      font-family: 'Syne', sans-serif;
-      font-weight: 700;
-      font-size: 1rem;
-      line-height: 1.3;
-    }
-
-    .cert-issuer {
-      font-size: 0.8rem;
-      color: var(--accent-warm);
-      font-weight: 500;
-    }
-
-    .cert-date {
-      font-size: 0.75rem;
-      color: var(--text-muted);
-      font-family: 'JetBrains Mono', monospace;
-      margin-top: auto;
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-    }
-
-    .cert-preview-img {
-      width: 100%;
-      aspect-ratio: 4/3;
-      object-fit: cover;
-      border-radius: 10px;
-      border: 1px solid var(--border);
-      margin-top: 0.25rem;
-    }
-
-    .cert-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      font-size: 0.78rem;
-      color: var(--accent);
-      font-weight: 500;
-      margin-top: 0.25rem;
-      transition: gap 0.2s;
-    }
-
-    .cert-link:hover { gap: 0.75rem; }
-
-    /* =============================
-       ABOUT / SKILLS
-       ============================= */
-    #about { background: var(--bg-primary); }
-
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
-      align-items: start;
-    }
-
-    .skills-list {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
-
-    .skill-item {}
-
-    .skill-label {
-      display: flex;
-      justify-content: space-between;
-      font-size: 0.85rem;
-      font-weight: 500;
-      margin-bottom: 0.4rem;
-      color: var(--text-secondary);
-    }
-
-    .skill-bar {
-      height: 5px;
-      background: var(--border);
-      border-radius: 10px;
-      overflow: hidden;
-    }
-
-    .skill-bar-fill {
-      height: 100%;
-      border-radius: 10px;
-      background: linear-gradient(90deg, var(--accent) 0%, var(--accent-purple) 100%);
-      transition: width 1.5s cubic-bezier(0.4,0,0.2,1);
-      width: 0;
-    }
-
-    .skill-bar-fill.animated { /* set by JS */ }
-
-    .tech-pills {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.6rem;
-      margin-top: 1.5rem;
-    }
-
-    .tech-pill {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.78rem;
-      padding: 6px 14px;
-      border-radius: 8px;
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      color: var(--text-secondary);
-      transition: all 0.2s;
-    }
-
-    .tech-pill:hover {
-      border-color: var(--border-hover);
-      color: var(--accent);
-      background: var(--glow);
-    }
-
-    /* =============================
-       CONTACT
-       ============================= */
-    #contact { background: var(--bg-secondary); }
-
-    .contact-wrapper {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
-      align-items: start;
-    }
-
-    .contact-form {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
-
-    .form-group {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-    }
-
-    .form-label {
-      font-size: 0.8rem;
-      font-weight: 500;
-      color: var(--text-muted);
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      font-family: 'JetBrains Mono', monospace;
-    }
-
-    .form-input, .form-textarea {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 12px 16px;
-      color: var(--text-primary);
-      font-family: 'DM Sans', sans-serif;
-      font-size: 0.9rem;
-      outline: none;
-      transition: all 0.2s;
-      resize: none;
-      width: 100%;
-    }
-
-    .form-input:focus, .form-textarea:focus {
-      border-color: var(--border-hover);
-      box-shadow: 0 0 0 3px var(--glow);
-    }
-
-    .form-textarea { min-height: 130px; }
-
-    .contact-info {
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
-    }
-
-    .contact-info-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 1rem;
-    }
-
-    .contact-info-icon {
-      width: 44px; height: 44px;
-      border-radius: 12px;
-      background: var(--glow);
-      border: 1px solid rgba(99,179,237,0.15);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--accent);
-      font-size: 1rem;
-      flex-shrink: 0;
-    }
-
-    [data-theme="light"] .contact-info-icon {
-      background: rgba(37,99,235,0.06);
-    }
-
-    .contact-info-text strong {
-      display: block;
-      font-weight: 600;
-      font-size: 0.9rem;
-      margin-bottom: 0.2rem;
-    }
-
-    .contact-info-text span {
-      font-size: 0.85rem;
-      color: var(--text-secondary);
-    }
-
-    /* =============================
-       FOOTER
-       ============================= */
-    footer {
-      background: var(--bg-primary);
-      border-top: 1px solid var(--border);
-      padding: 3rem 2rem;
-      position: relative;
-      z-index: 1;
-    }
-
-    .footer-inner {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 2rem;
-    }
-
-    .footer-logo {
-      font-family: 'Syne', sans-serif;
-      font-weight: 800;
-      font-size: 1.25rem;
-    }
-
-    .footer-logo span { color: var(--accent); }
-
-    .footer-copy {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      margin-top: 0.25rem;
-    }
-
-    .social-links {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-    }
-
-    .social-link {
-      width: 42px; height: 42px;
-      border-radius: 12px;
-      border: 1px solid var(--border);
-      background: var(--bg-card);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--text-secondary);
-      font-size: 1rem;
-      transition: all 0.2s;
-      backdrop-filter: blur(10px);
-    }
-
-    .social-link:hover {
-      border-color: var(--border-hover);
-      color: var(--accent);
-      background: var(--glow);
-      transform: translateY(-2px);
-    }
-
-    /* =============================
-       WEATHER TOGGLE BUTTON
-       ============================= */
-    #weather-btn {
-      position: fixed;
-      bottom: 2rem;
-      right: 2rem;
-      z-index: 200;
-      width: 54px; height: 54px;
-      border-radius: 16px;
-      border: 1px solid var(--border);
-      background: var(--glass);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      color: var(--text-primary);
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.4rem;
-      transition: all 0.3s;
-      box-shadow: var(--shadow-card);
-    }
-
-    #weather-btn:hover {
-      border-color: var(--border-hover);
-      transform: scale(1.08);
-      box-shadow: 0 8px 24px var(--glow-strong);
-    }
-
-    #weather-btn .weather-label {
-      position: absolute;
-      right: 66px;
-      background: var(--glass);
-      backdrop-filter: blur(20px);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 6px 14px;
-      font-size: 0.75rem;
-      font-weight: 500;
-      white-space: nowrap;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.2s;
-      font-family: 'JetBrains Mono', monospace;
-      color: var(--text-secondary);
-    }
-
-    #weather-btn:hover .weather-label { opacity: 1; }
-
-    .weather-indicator {
-      position: fixed;
-      bottom: calc(2rem + 64px);
-      right: 2rem;
-      z-index: 200;
-      background: var(--glass);
-      backdrop-filter: blur(16px);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 8px 14px;
-      font-size: 0.72rem;
-      font-family: 'JetBrains Mono', monospace;
-      color: var(--accent);
-      display: none;
-    }
-
-    .weather-indicator.visible { display: block; }
-
-    /* =============================
-       SCROLL REVEAL
-       ============================= */
-    .reveal {
-      opacity: 0;
-      transform: translateY(24px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
-    }
-
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* =============================
-       LOADING / FIRESTORE STATES
-       ============================= */
-    .loading-skeleton {
-      background: linear-gradient(90deg, var(--bg-card) 25%, var(--bg-card-hover) 50%, var(--bg-card) 75%);
-      background-size: 200% 100%;
-      animation: shimmer 1.5s infinite;
-      border-radius: 12px;
-    }
-
-    @keyframes shimmer {
-      0% { background-position: 200% 0; }
-      100% { background-position: -200% 0; }
-    }
-
-    .empty-state {
-      grid-column: 1/-1;
-      text-align: center;
-      padding: 3rem;
-      color: var(--text-muted);
-      font-size: 0.9rem;
-    }
-
-    /* =============================
-       LANGUAGE TOGGLE
-       ============================= */
-    .lang-toggle {
-      display: inline-flex;
-      border-radius: 10px;
-      border: 1px solid var(--border);
-      overflow: hidden;
-      background: var(--bg-card);
-    }
-
-    .lang-toggle button {
-      border: none;
-      background: transparent;
-      color: var(--text-secondary);
-      font-size: 0.72rem;
-      font-weight: 700;
-      padding: 8px 11px;
-      cursor: pointer;
-      transition: background 0.2s, color 0.2s;
-      font-family: inherit;
-    }
-
-    .lang-toggle button:hover {
-      color: var(--text-primary);
-    }
-
-    .lang-toggle button.active {
-      background: var(--accent);
-      color: #fff;
-    }
-
-    .lang-toggle button.km {
-      font-family: 'Noto Sans Khmer', sans-serif;
-      font-size: 0.8rem;
-    }
-
-    .nav-actions .hire-compact i {
-      margin: 0;
-    }
-
-    /* =============================
-       RESPONSIVE
-       ============================= */
-    @media (max-width: 900px) {
-      .hero-inner { grid-template-columns: 1fr; text-align: center; }
-      .hero-cta { justify-content: center; }
-      .hero-bio { margin-left: auto; margin-right: auto; }
-      .hero-badge { justify-content: center; }
-      .hero-role { justify-content: center; }
-      .hero-stats { justify-content: center; }
-      .hero-photos {
-        order: -1;
-        height: 300px;
-      }
-      .photo-main-wrap { width: 220px; height: 270px; }
-      .photo-stat-card { display: none; }
-      .about-grid { grid-template-columns: 1fr; }
-      .contact-wrapper { grid-template-columns: 1fr; }
-      .nav-links { display: none; }
-      .hamburger { display: flex; }
-      .projects-grid { grid-template-columns: 1fr; }
-    }
-
-    @media (max-width: 600px) {
-      section { padding: 70px 1.25rem; }
-      .certs-grid { grid-template-columns: 1fr; }
-      .footer-inner { flex-direction: column; align-items: center; text-align: center; }
-    }
-
-    @media (max-width: 480px) {
-      nav {
-        padding: 0.5rem 0.75rem;
-        height: auto;
-        min-height: 56px;
-        flex-wrap: wrap;
-        row-gap: 0.5rem;
-      }
-      .nav-logo { font-size: 1.1rem; }
-      .nav-actions {
-        flex-wrap: wrap;
-        justify-content: flex-end;
-        gap: 0.45rem;
-      }
-      .lang-toggle button { padding: 7px 9px; font-size: 0.68rem; }
-      .nav-actions .btn-primary.hire-compact {
-        padding: 8px 12px;
-        font-size: 0.75rem;
-      }
-      .nav-actions .hire-compact .hire-text { display: none; }
-      #weather-btn {
-        width: 48px;
-        height: 48px;
-        bottom: 1.25rem;
-        right: max(1rem, env(safe-area-inset-right));
-        font-size: 1.15rem;
-      }
-      .weather-indicator {
-        right: max(1rem, env(safe-area-inset-right));
-        bottom: calc(1.25rem + 58px);
-        max-width: calc(100vw - 2rem);
-      }
-      #hero { padding: 88px 1rem 48px; }
-      .photo-secondary-wrap {
-        width: 104px;
-        height: 104px;
-        right: -8px;
-        bottom: -16px;
-      }
-      .photo-stat-card { left: -16px; padding: 10px 14px; }
-      .hero-stats { flex-wrap: wrap; justify-content: center; gap: 1.25rem; }
-    }
-
-    @media (max-width: 360px) {
-      .hero-name { font-size: clamp(1.85rem, 10vw, 2.6rem); }
-      .section-title { font-size: clamp(1.65rem, 8vw, 2.25rem); }
-    }
-  </style>
 </head>
 
 <body>
@@ -1340,12 +25,13 @@
        NAVIGATION
        ===================== -->
   <nav>
-    <div class="nav-logo">Dev<span>.</span></div>
+    <div class="nav-logo"><img src="Assets/img/roth.jpg" alt="Dev Logo" /></div>
     <ul class="nav-links">
       <li><a href="#hero" data-i18n="nav.home">Home</a></li>
       <li><a href="#projects" data-i18n="nav.projects">Projects</a></li>
       <li><a href="#certificates" data-i18n="nav.certificates">Certificates</a></li>
       <li><a href="#about" data-i18n="nav.about">About</a></li>
+      <li><a href="#resume" data-i18n="nav.resume">Resume</a></li>
       <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
     </ul>
     <div class="nav-actions">
@@ -1371,6 +57,7 @@
     <a href="#projects" onclick="closeMobileMenu()" data-i18n="nav.projects">Projects</a>
     <a href="#certificates" onclick="closeMobileMenu()" data-i18n="nav.certificates">Certificates</a>
     <a href="#about" onclick="closeMobileMenu()" data-i18n="nav.about">About</a>
+    <a href="#resume" onclick="closeMobileMenu()" data-i18n="nav.resume">Resume</a>
     <a href="#contact" onclick="closeMobileMenu()" data-i18n="nav.contact">Contact</a>
   </div>
 
@@ -1388,11 +75,11 @@
         </div>
 
         <h1 class="hero-name">
-          <span data-i18n="hero.nameLine1">Your Name</span><br />
+          <span data-i18n="hero.nameLine1">Rotana NOB</span><br />
           <span class="line-accent" data-i18n="hero.nameAccent">Developer</span>
         </h1>
 
-        <div class="hero-role" data-i18n="hero.role">Full-Stack & Firebase Developer</div>
+        <div class="hero-role" data-i18n="hero.role">Full-Stack With Firebase </div>
 
         <p class="hero-bio" data-i18n="hero.bio">
           I craft immersive web experiences with clean code and pixel-perfect design.
@@ -1412,15 +99,15 @@
         <div class="hero-stats">
           <!-- 🔥 FIREBASE: Fetch these numbers from Firestore "profile/stats" document -->
           <div class="hero-stat-item">
-            <strong>20+</strong>
+            <strong>15+</strong>
             <span data-i18n="hero.statProjects">Projects Done</span>
           </div>
           <div class="hero-stat-item">
-            <strong>3+</strong>
+            <strong>2+</strong>
             <span data-i18n="hero.statYears">Years Experience</span>
           </div>
           <div class="hero-stat-item">
-            <strong>15+</strong>
+            <strong>8+</strong>
             <span data-i18n="hero.statCerts">Certificates</span>
           </div>
         </div>
@@ -1434,31 +121,19 @@
         <div class="photo-stat-card">
           <div class="stat-card-icon"><i class="fa-brands fa-firebase"></i></div>
           <div class="stat-card-text">
-            <strong data-i18n="hero.statCardTitle">Firebase Pro</strong>
-            <span data-i18n="hero.statCardSub">Cloud & Realtime DB</span>
+            <strong data-i18n="hero.statCardTitle">Firebase </strong>
+            <span data-i18n="hero.statCardSub">Cloud & Realtime Database</span>
           </div>
         </div>
 
         <!-- 📸 PHOTO 1: Replace src with your main profile photo URL -->
         <div class="photo-main-wrap">
-          <div class="photo-placeholder">
-            <i class="fa-regular fa-image"></i>
-            <span data-i18n-html="hero.photoMainHint">Your Profile Photo<br /><small>Replace with &lt;img src="your-photo.jpg"&gt;</small></span>
-          </div>
-          <!-- UNCOMMENT AND REPLACE:
-          <img src="YOUR_MAIN_PHOTO_URL" alt="Profile Photo" />
-          -->
+          <img src="Assets/img/profile_main.png" alt="Profile Photo" />
         </div>
 
         <!-- 📸 PHOTO 2: Replace src with your secondary/action photo URL -->
         <div class="photo-secondary-wrap">
-          <div class="photo-placeholder" style="font-size:0.65rem;">
-            <i class="fa-regular fa-image" style="font-size:1.2rem;"></i>
-            <span style="line-height:1.3;" data-i18n-html="hero.photo2Hint">Photo 2<br/>Replace</span>
-        </div>
-          <!-- UNCOMMENT AND REPLACE:
-          <img src="YOUR_SECONDARY_PHOTO_URL" alt="Secondary Photo" />
-          -->
+          <img src="Assets/img/profile_action.png" alt="Secondary Photo" />
         </div>
       </div>
     </div>
@@ -1480,9 +155,11 @@
     <div class="section-inner">
       <div class="section-header reveal">
         <div class="section-tag" data-i18n="projects.sectionTag">Portfolio</div>
-        <h2 class="section-title"><span data-i18n="projects.titleBefore">Featured</span> <span class="highlight" data-i18n="projects.titleHighlight">Projects</span></h2>
+        <h2 class="section-title"><span data-i18n="projects.titleBefore">Featured</span> <span class="highlight"
+            data-i18n="projects.titleHighlight">Projects</span></h2>
         <p class="section-desc" data-i18n="projects.desc">
-          A showcase of things I've built — from real-time Firebase apps to full-stack platforms and creative experiments.
+          A showcase of things I've built — from real-time Firebase apps to full-stack platforms and creative
+          experiments.
         </p>
       </div>
 
@@ -1493,20 +170,7 @@
 
         <div class="project-card reveal">
           <div class="project-media">
-            <!-- IMAGE type: use <img src="..."> -->
-            <div class="media-placeholder">
-              <i class="fa-regular fa-image"></i>
-              <span data-i18n="proj1.placeholder">Project Screenshot / Demo</span>
-            </div>
-            <!-- UNCOMMENT for image:  <img src="project1-screenshot.png" alt="Project 1" />  -->
-            <!-- UNCOMMENT for video:
-            <video autoplay muted loop playsinline>
-              <source src="project1-demo.mp4" type="video/mp4">
-            </video>
-            -->
-            <!-- UNCOMMENT for YouTube:
-            <iframe src="https://www.youtube.com/embed/VIDEO_ID?autoplay=1&mute=1&loop=1" allowfullscreen></iframe>
-            -->
+            <img src="Assets/img/project_web.png" alt="Project 1" />
             <div class="project-media-badge" data-i18n="common.badgeImage">Image</div>
           </div>
           <div class="project-body">
@@ -1516,20 +180,22 @@
               <span class="tag">Tailwind</span>
             </div>
             <h3 class="project-title" data-i18n="proj1.title">Project Title One</h3>
-            <p class="project-desc" data-i18n="proj1.desc">A brief description of this project — what it does, the problem it solves, and the tech stack used. Make it compelling.</p>
+            <p class="project-desc" data-i18n="proj1.desc">A brief description of this project — what it does, the
+              problem it solves, and the tech stack used. Make it compelling.</p>
             <div class="project-links">
-              <a href="#" class="project-link"><i class="fa-brands fa-github"></i> <span data-i18n="common.code">Code</span></a>
-              <a href="#" class="project-link"><i class="fa-solid fa-arrow-up-right-from-square"></i> <span data-i18n="common.live">Live</span></a>
+              <a href="https://github.com/Rotana-NOB/project-one" class="project-link" target="_blank"
+                rel="noopener noreferrer"><i class="fa-brands fa-github"></i> <span
+                  data-i18n="common.code">Code</span></a>
+              <a href="https://rotana-elearningg.web.app/" class="project-link" target="_blank"
+                rel="noopener noreferrer"><i class="fa-solid fa-arrow-up-right-from-square"></i> <span
+                  data-i18n="common.live">Live</span></a>
             </div>
           </div>
         </div>
 
         <div class="project-card reveal">
           <div class="project-media">
-            <div class="media-placeholder">
-              <i class="fa-solid fa-film"></i>
-              <span data-i18n="proj2.placeholder">Video Demo</span>
-            </div>
+            <img src="Assets/img/project_mobile.png" alt="Project 2" />
             <div class="project-media-badge" data-i18n="common.badgeVideo">Video</div>
           </div>
           <div class="project-body">
@@ -1539,32 +205,39 @@
               <span class="tag">APIs</span>
             </div>
             <h3 class="project-title" data-i18n="proj2.title">Project Title Two</h3>
-            <p class="project-desc" data-i18n="proj2.desc">Another project description. This slot supports a video demo using HTML5 &lt;video&gt; or an embedded YouTube iframe.</p>
+            <p class="project-desc" data-i18n="proj2.desc">Another project description. This slot supports a video demo
+              using HTML5 &lt;video&gt; or an embedded YouTube iframe.</p>
             <div class="project-links">
-              <a href="#" class="project-link"><i class="fa-brands fa-github"></i> <span data-i18n="common.code">Code</span></a>
-              <a href="#" class="project-link"><i class="fa-solid fa-arrow-up-right-from-square"></i> <span data-i18n="common.live">Live</span></a>
+              <a href="https://github.com/Rotana-NOB/project-one" class="project-link" target="_blank"
+                rel="noopener noreferrer"><i class="fa-brands fa-github"></i> <span
+                  data-i18n="common.code">Code</span></a>
+              <a href="https://rotana-elearningg.web.app/" class="project-link" target="_blank"
+                rel="noopener noreferrer"><i class="fa-solid fa-arrow-up-right-from-square"></i> <span
+                  data-i18n="common.live">Live</span></a>
             </div>
           </div>
         </div>
 
         <div class="project-card reveal">
           <div class="project-media">
-            <div class="media-placeholder">
-              <i class="fa-brands fa-youtube"></i>
-              <span data-i18n="proj3.placeholder">Embedded iframe / YouTube</span>
-            </div>
+            <img src="Assets/img/project_dashboard.png" alt="Project 3" />
             <div class="project-media-badge" data-i18n="common.badgeIframe">Iframe</div>
           </div>
           <div class="project-body">
             <div class="project-tags">
               <span class="tag">Flutter</span>
-              <span class="tag">Firebase Auth</span>
+              <span class="tag">Firebse Auth</span>
             </div>
             <h3 class="project-title" data-i18n="proj3.title">Project Title Three</h3>
-            <p class="project-desc" data-i18n="proj3.desc">This card demonstrates iframe support — embed a YouTube link, Loom, or Figma prototype directly inside the card.</p>
+            <p class="project-desc" data-i18n="proj3.desc">This card demonstrates iframe support — embed a YouTube link,
+              Loom, or Figma prototype directly inside the card.</p>
             <div class="project-links">
-              <a href="#" class="project-link"><i class="fa-brands fa-github"></i> <span data-i18n="common.code">Code</span></a>
-              <a href="#" class="project-link"><i class="fa-solid fa-arrow-up-right-from-square"></i> <span data-i18n="common.live">Live</span></a>
+              <a href="https://github.com/Rotana-NOB/project-one" class="project-link" target="_blank"
+                rel="noopener noreferrer"><i class="fa-brands fa-github"></i> <span
+                  data-i18n="common.code">Code</span></a>
+              <a href="https://rotana-elearningg.web.app/" class="project-link" target="_blank"
+                rel="noopener noreferrer"><i class="fa-solid fa-arrow-up-right-from-square"></i> <span
+                  data-i18n="common.live">Live</span></a>
             </div>
           </div>
         </div>
@@ -1579,7 +252,8 @@
     <div class="section-inner">
       <div class="section-header reveal">
         <div class="section-tag" data-i18n="certs.sectionTag">Achievements</div>
-        <h2 class="section-title"><span data-i18n="certs.titleBefore">Certificates &amp;</span> <span class="highlight" data-i18n="certs.titleHighlight">Awards</span></h2>
+        <h2 class="section-title"><span data-i18n="certs.titleBefore">Certificates &amp;</span> <span class="highlight"
+            data-i18n="certs.titleHighlight">Awards</span></h2>
         <p class="section-desc" data-i18n="certs.desc">
           Credentials and recognition from courses, competitions, and industry platforms that shaped my skills.
         </p>
@@ -1594,11 +268,10 @@
             <div class="cert-issuer" data-i18n="cert1.issuer">Google Cloud</div>
             <div class="cert-card-title" data-i18n="cert1.title">Google Cloud Associate Developer</div>
           </div>
-          <!-- UNCOMMENT to show certificate image:
-          <img src="certificate1.jpg" alt="Certificate" class="cert-preview-img" />
-          -->
+          <img src="Assets/img/cert_sample.png" alt="Certificate" class="cert-preview-img" />
           <div class="cert-date"><i class="fa-regular fa-calendar"></i> Jan 2024</div>
-          <a href="#" class="cert-link"><span data-i18n="cert.view">View Credential</span> <i class="fa-solid fa-arrow-right"></i></a>
+          <a href="#" class="cert-link"><span data-i18n="cert.view">View Credential</span> <i
+              class="fa-solid fa-arrow-right"></i></a>
         </div>
 
         <div class="cert-card reveal">
@@ -1608,7 +281,8 @@
             <div class="cert-card-title" data-i18n="cert2.title">Firebase Advanced Development</div>
           </div>
           <div class="cert-date"><i class="fa-regular fa-calendar"></i> Mar 2024</div>
-          <a href="#" class="cert-link"><span data-i18n="cert.view">View Credential</span> <i class="fa-solid fa-arrow-right"></i></a>
+          <a href="#" class="cert-link"><span data-i18n="cert.view">View Credential</span> <i
+              class="fa-solid fa-arrow-right"></i></a>
         </div>
 
         <div class="cert-card reveal">
@@ -1618,7 +292,8 @@
             <div class="cert-card-title" data-i18n="cert3.title">Meta Front-End Developer Professional</div>
           </div>
           <div class="cert-date"><i class="fa-regular fa-calendar"></i> Jun 2024</div>
-          <a href="#" class="cert-link"><span data-i18n="cert.view">View Credential</span> <i class="fa-solid fa-arrow-right"></i></a>
+          <a href="#" class="cert-link"><span data-i18n="cert.view">View Credential</span> <i
+              class="fa-solid fa-arrow-right"></i></a>
         </div>
 
         <div class="cert-card reveal">
@@ -1628,7 +303,8 @@
             <div class="cert-card-title" data-i18n="cert4.title">Full-Stack Web Development Specialization</div>
           </div>
           <div class="cert-date"><i class="fa-regular fa-calendar"></i> Sep 2023</div>
-          <a href="#" class="cert-link"><span data-i18n="cert.view">View Credential</span> <i class="fa-solid fa-arrow-right"></i></a>
+          <a href="#" class="cert-link"><span data-i18n="cert.view">View Credential</span> <i
+              class="fa-solid fa-arrow-right"></i></a>
         </div>
 
         <div class="cert-card reveal">
@@ -1638,7 +314,8 @@
             <div class="cert-card-title" data-i18n="cert5.title">AWS Certified Cloud Practitioner</div>
           </div>
           <div class="cert-date"><i class="fa-regular fa-calendar"></i> Dec 2023</div>
-          <a href="#" class="cert-link"><span data-i18n="cert.view">View Credential</span> <i class="fa-solid fa-arrow-right"></i></a>
+          <a href="#" class="cert-link"><span data-i18n="cert.view">View Credential</span> <i
+              class="fa-solid fa-arrow-right"></i></a>
         </div>
 
         <div class="cert-card reveal">
@@ -1648,7 +325,44 @@
             <div class="cert-card-title" data-i18n="cert6.title">1st Place — National Hackathon Winner</div>
           </div>
           <div class="cert-date"><i class="fa-regular fa-calendar"></i> Aug 2024</div>
-          <a href="#" class="cert-link"><span data-i18n="cert.details">View Details</span> <i class="fa-solid fa-arrow-right"></i></a>
+          <a href="#" class="cert-link"><span data-i18n="cert.details">View Details</span> <i
+              class="fa-solid fa-arrow-right"></i></a>
+        </div>
+
+        <div class="cert-card reveal">
+          <div class="cert-icon-wrap" style="background:rgba(10,10,35,0.15); border-color:rgba(99,179,237,0.2);">
+            <i class="fa-solid fa-campground" style="color:#0a0a23;"></i>
+          </div>
+          <div>
+            <div class="cert-issuer" data-i18n="cert7.issuer">freeCodeCamp</div>
+            <div class="cert-card-title" data-i18n="cert7.title">Responsive Web Design Certification</div>
+          </div>
+          <div class="cert-date"><i class="fa-regular fa-calendar"></i> 2023</div>
+          <a href="https://www.freecodecamp.org/certification/your-username/responsive-web-design" class="cert-link" target="_blank" rel="noopener noreferrer"><span data-i18n="cert.view">View Credential</span> <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+
+        <div class="cert-card reveal">
+          <div class="cert-icon-wrap" style="background:rgba(0,80,180,0.12); border-color:rgba(0,130,220,0.25);">
+            <i class="fa-solid fa-industry" style="color:#0055b3;"></i>
+          </div>
+          <div>
+            <div class="cert-issuer" data-i18n="cert8.issuer">TVET Cambodia</div>
+            <div class="cert-card-title" data-i18n="cert8.title">Internship Certificate — TVET</div>
+          </div>
+          <div class="cert-date"><i class="fa-regular fa-calendar"></i> 2023</div>
+          <a href="#" class="cert-link"><span data-i18n="cert.view">View Credential</span> <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+
+        <div class="cert-card reveal">
+          <div class="cert-icon-wrap" style="background:rgba(180,0,0,0.1); border-color:rgba(200,0,0,0.2);">
+            <i class="fa-solid fa-school" style="color:#b30000;"></i>
+          </div>
+          <div>
+            <div class="cert-issuer" data-i18n="cert9.issuer">SETEC Institute</div>
+            <div class="cert-card-title" data-i18n="cert9.title">Internship Certificate — SETEC</div>
+          </div>
+          <div class="cert-date"><i class="fa-regular fa-calendar"></i> 2024</div>
+          <a href="#" class="cert-link"><span data-i18n="cert.view">View Credential</span> <i class="fa-solid fa-arrow-right"></i></a>
         </div>
 
       </div>
@@ -1662,22 +376,27 @@
     <div class="section-inner">
       <div class="section-header reveal">
         <div class="section-tag" data-i18n="about.sectionTag">About Me</div>
-        <h2 class="section-title"><span data-i18n="about.titleBefore">Skills &amp;</span> <span class="highlight" data-i18n="about.titleHighlight">Expertise</span></h2>
+        <h2 class="section-title"><span data-i18n="about.titleBefore">Skills &amp;</span> <span class="highlight"
+            data-i18n="about.titleHighlight">Expertise</span></h2>
       </div>
       <div class="about-grid">
         <div class="reveal">
           <!-- 🔥 FIREBASE: Fetch bio/about text from Firestore "profile/about" document -->
-          <p style="color:var(--text-secondary);line-height:1.8;margin-bottom:1.5rem;font-size:1rem;" data-i18n-html="about.p1">
+          <p style="color:var(--text-secondary);line-height:1.8;margin-bottom:1.5rem;font-size:1rem;"
+            data-i18n-html="about.p1">
             I'm a passionate developer with a love for building fast, scalable, and beautiful web applications.
-            My core stack revolves around <strong style="color:var(--text-primary)">React, Firebase, and Node.js</strong>,
+            My core stack revolves around <strong style="color:var(--text-primary)">React, Firebase, and
+              Node.js</strong>,
             and I'm constantly exploring new tools to sharpen my craft.
           </p>
-          <p style="color:var(--text-secondary);line-height:1.8;margin-bottom:2rem;font-size:1rem;" data-i18n="about.p2">
-            When I'm not coding, you'll find me contributing to open source, mentoring juniors, or brewing the perfect cup of coffee before a deep work session.
+          <p style="color:var(--text-secondary);line-height:1.8;margin-bottom:2rem;font-size:1rem;"
+            data-i18n="about.p2">
+            When I'm not coding, you'll find me contributing to open source, mentoring juniors, or brewing the perfect
+            cup of coffee before a deep work session.
           </p>
           <div class="tech-pills">
             <!-- 🔥 FIREBASE: Fetch tech stack from Firestore "profile/techStack" array field -->
-            <span class="tech-pill">React</span>
+            <span class="tech-pill">Reac</span>
             <span class="tech-pill">Firebase</span>
             <span class="tech-pill">Node.js</span>
             <span class="tech-pill">TypeScript</span>
@@ -1693,32 +412,176 @@
         </div>
 
         <div class="skills-list reveal">
-          <!-- 🔥 FIREBASE: Fetch skill levels from Firestore "profile/skills" array field -->
+          <!-- Skills matching the Ticker -->
           <div class="skill-item">
-            <div class="skill-label"><span data-i18n="skill.frontend">Frontend (React / Tailwind)</span><span>92%</span></div>
-            <div class="skill-bar"><div class="skill-bar-fill" data-width="92"></div></div>
-          </div>
-          <div class="skill-item">
-            <div class="skill-label"><span data-i18n="skill.firebase">Firebase &amp; Firestore</span><span>90%</span></div>
+            <div class="skill-label"><span data-i18n="skill.frontend">React &amp; JavaScript</span><span>90%</span></div>
             <div class="skill-bar"><div class="skill-bar-fill" data-width="90"></div></div>
           </div>
           <div class="skill-item">
-            <div class="skill-label"><span data-i18n="skill.backend">Backend (Node.js / APIs)</span><span>80%</span></div>
-            <div class="skill-bar"><div class="skill-bar-fill" data-width="80"></div></div>
+            <div class="skill-label"><span data-i18n="skill.firebase">Firebase (Auth, Firestore, Storage)</span><span>88%</span></div>
+            <div class="skill-bar"><div class="skill-bar-fill" data-width="88"></div></div>
           </div>
           <div class="skill-item">
-            <div class="skill-label"><span data-i18n="skill.mobile">Mobile (Flutter)</span><span>75%</span></div>
-            <div class="skill-bar"><div class="skill-bar-fill" data-width="75"></div></div>
+            <div class="skill-label"><span data-i18n="skill.realtimedb">Realtime Database &amp; Cloud Storage</span><span>82%</span></div>
+            <div class="skill-bar"><div class="skill-bar-fill" data-width="82"></div></div>
           </div>
           <div class="skill-item">
-            <div class="skill-label"><span data-i18n="skill.uiux">UI/UX Design</span><span>70%</span></div>
-            <div class="skill-bar"><div class="skill-bar-fill" data-width="70"></div></div>
+            <div class="skill-label"><span data-i18n="skill.htmlcss">HTML5 &amp; CSS3</span><span>95%</span></div>
+            <div class="skill-bar"><div class="skill-bar-fill" data-width="95"></div></div>
           </div>
           <div class="skill-item">
-            <div class="skill-label"><span data-i18n="skill.devops">DevOps / Cloud</span><span>65%</span></div>
+            <div class="skill-label"><span data-i18n="skill.cpp">C++ &amp; C#</span><span>65%</span></div>
             <div class="skill-bar"><div class="skill-bar-fill" data-width="65"></div></div>
           </div>
+          <div class="skill-item">
+            <div class="skill-label"><span data-i18n="skill.git">Git &amp; GitHub</span><span>85%</span></div>
+            <div class="skill-bar"><div class="skill-bar-fill" data-width="85"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-label"><span data-i18n="skill.ai">AI Tool Coding</span><span>78%</span></div>
+            <div class="skill-bar"><div class="skill-bar-fill" data-width="78"></div></div>
+          </div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =====================
+       RESUME SECTION
+       ===================== -->
+  <section id="resume" style="background: var(--bg-secondary);">
+    <div class="section-inner">
+      <div class="section-header reveal">
+        <div class="section-tag" data-i18n="resume.sectionTag">Resume</div>
+        <h2 class="section-title">
+          <span data-i18n="resume.titleBefore">My</span>
+          <span class="highlight" data-i18n="resume.titleHighlight">Journey</span>
+        </h2>
+        <p class="section-desc" data-i18n="resume.desc">A timeline of my education and professional experience — where I've been and what I've built along the way.</p>
+      </div>
+
+      <div class="resume-columns">
+
+        <!-- EDUCATION COLUMN -->
+        <div class="resume-col reveal">
+          <div class="resume-col-header">
+            <i class="fa-solid fa-graduation-cap"></i>
+            <h3 data-i18n="resume.edu">Education</h3>
+          </div>
+
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-content">
+                <div class="timeline-period">2023 – Present</div>
+                <h4 data-i18n="resume.edu1.title">Bachelor's in Information Technology</h4>
+                <div class="timeline-place" data-i18n="resume.edu1.place">University of Your City</div>
+                <p data-i18n="resume.edu1.desc">Specializing in software engineering, web technologies, and cloud computing. Graduated with distinction.</p>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-content">
+                <div class="timeline-period">2020 – 2023</div>
+                <h4 data-i18n="resume.edu2.title">High School Diploma — Science</h4>
+                <div class="timeline-place" data-i18n="resume.edu2.place">Your High School Name</div>
+                <p data-i18n="resume.edu2.desc">Focused on mathematics, physics, and computer fundamentals. First exposure to HTML and JavaScript.</p>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-content">
+                <div class="timeline-period">2016 – 2020</div>
+                <h4 data-i18n="resume.edu3.title">Middle School</h4>
+                <div class="timeline-place" data-i18n="resume.edu3.place">Your Middle School Name</div>
+                <p data-i18n="resume.edu3.desc">Discovered a passion for technology and problem-solving from a young age.</p>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-content">
+                <div class="timeline-period">2015 – 2016</div>
+                <h4 data-i18n="resume.edu4.title">Primary School</h4>
+                <div class="timeline-place" data-i18n="resume.edu4.place">Your Primary School Name</div>
+                <p data-i18n="resume.edu4.desc">Early education and foundational learning.</p>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-content">
+                <div class="timeline-period">2014 – 2015</div>
+                <h4 data-i18n="resume.edu5.title">Extra Course / Certification</h4>
+                <div class="timeline-place" data-i18n="resume.edu5.place">Training Center Name</div>
+                <p data-i18n="resume.edu5.desc">Gained fundamental knowledge in computer literacy and basic programming concepts.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- EXPERIENCE COLUMN -->
+        <div class="resume-col reveal">
+          <div class="resume-col-header">
+            <i class="fa-solid fa-briefcase"></i>
+            <h3 data-i18n="resume.exp">Experience</h3>
+          </div>
+
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-content">
+                <div class="timeline-period">2024 – Present</div>
+                <h4 data-i18n="resume.exp1.title">Frontend Developer — Freelance</h4>
+                <div class="timeline-place" data-i18n="resume.exp1.place">Self-employed</div>
+                <p data-i18n="resume.exp1.desc">Building Firebase-powered web apps and portfolios for clients. Specializing in React, real-time databases, and cloud deployments.</p>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-content">
+                <div class="timeline-period">2023 – 2024</div>
+                <h4 data-i18n="resume.exp2.title">Junior Web Developer — Intern</h4>
+                <div class="timeline-place" data-i18n="resume.exp2.place">Local Tech Company</div>
+                <p data-i18n="resume.exp2.desc">Worked on internal dashboards and client websites using HTML, CSS, JavaScript, and Firebase. Participated in Agile sprints.</p>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-content">
+                <div class="timeline-period">2022 – 2023</div>
+                <h4 data-i18n="resume.exp3.title">Web Design Student Project</h4>
+                <div class="timeline-place" data-i18n="resume.exp3.place">University</div>
+                <p data-i18n="resume.exp3.desc">Led a 4-person team to build a campus news platform with authentication, real-time notifications, and a mobile-first design.</p>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-content">
+                <div class="timeline-period">2021 – 2022</div>
+                <h4 data-i18n="resume.exp4.title">IT Support Intern</h4>
+                <div class="timeline-place" data-i18n="resume.exp4.place">Tech Support Co.</div>
+                <p data-i18n="resume.exp4.desc">Assisted in network setup, hardware troubleshooting, and resolving software issues for various clients.</p>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-content">
+                <div class="timeline-period">2020 – 2021</div>
+                <h4 data-i18n="resume.exp5.title">Volunteer Web Master</h4>
+                <div class="timeline-place" data-i18n="resume.exp5.place">Local NGO</div>
+                <p data-i18n="resume.exp5.desc">Managed and updated content for a non-profit organization's website, improving loading speed and accessibility.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
@@ -1730,8 +593,10 @@
     <div class="section-inner">
       <div class="section-header reveal">
         <div class="section-tag" data-i18n="contact.sectionTag">Contact</div>
-        <h2 class="section-title"><span data-i18n="contact.titleBefore">Let's</span> <span class="highlight" data-i18n="contact.titleHighlight">Connect</span></h2>
-        <p class="section-desc" data-i18n="contact.desc">Have a project in mind? I'd love to hear about it. Drop me a message and let's make something great together.</p>
+        <h2 class="section-title"><span data-i18n="contact.titleBefore">Let's</span> <span class="highlight"
+            data-i18n="contact.titleHighlight">Connect</span></h2>
+        <p class="section-desc" data-i18n="contact.desc">Have a project in mind? I'd love to hear about it. Drop me a
+          message and let's make something great together.</p>
       </div>
       <div class="contact-wrapper">
         <form class="contact-form reveal" id="contact-form">
@@ -1739,15 +604,28 @@
                See submitContactForm() function below -->
           <div class="form-group">
             <label class="form-label" data-i18n="form.name">Name</label>
-            <input type="text" class="form-input" data-i18n-placeholder="form.namePh" placeholder="Your full name" id="form-name" required />
+            <input type="text" class="form-input" data-i18n-placeholder="form.namePh" placeholder="Your full name"
+              id="form-name" required />
           </div>
           <div class="form-group">
             <label class="form-label" data-i18n="form.email">Email</label>
-            <input type="email" class="form-input" data-i18n-placeholder="form.emailPh" placeholder="your@email.com" id="form-email" required />
+            <input type="email" class="form-input" data-i18n-placeholder="form.emailPh" placeholder="your@email.com"
+              id="form-email" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label" data-i18n="form.telegram">Telegram (Optional)</label>
+            <input type="text" class="form-input" data-i18n-placeholder="form.telegramPh" placeholder="t.me/yourusername"
+              id="form-telegram" />
+          </div>
+          <div class="form-group">
+            <label class="form-label" data-i18n="form.linkedin">LinkedIn (Optional)</label>
+            <input type="url" class="form-input" data-i18n-placeholder="form.linkedinPh" placeholder="linkedin.com/in/yourprofile"
+              id="form-linkedin" />
           </div>
           <div class="form-group">
             <label class="form-label" data-i18n="form.message">Message</label>
-            <textarea class="form-textarea" data-i18n-placeholder="form.msgPh" placeholder="Tell me about your project or idea..." id="form-message" required></textarea>
+            <textarea class="form-textarea" data-i18n-placeholder="form.msgPh"
+              placeholder="Tell me about your project or idea..." id="form-message" required></textarea>
           </div>
           <button type="submit" class="btn-primary" id="form-submit-btn" style="align-self:flex-start;">
             <i class="fa-solid fa-paper-plane"></i> <span data-i18n="form.send">Send Message</span>
@@ -1781,7 +659,9 @@
 
           <!-- Social links inside contact -->
           <div style="margin-top:1rem;">
-            <div style="font-size:0.78rem;color:var(--text-muted);font-family:'JetBrains Mono',monospace;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:0.75rem;" data-i18n="contact.findMe">Find me on</div>
+            <div
+              style="font-size:0.78rem;color:var(--text-muted);font-family:'JetBrains Mono',monospace;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:0.75rem;"
+              data-i18n="contact.findMe">Find me on</div>
             <div class="social-links">
               <!-- 🔥 FIREBASE: Fetch social URLs from Firestore "profile/socials" document -->
               <a href="#" class="social-link" title="GitHub"><i class="fa-brands fa-github"></i></a>
@@ -1831,765 +711,29 @@
        ===================== -->
   <!--
     🔊 AUDIO SOURCES: Replace with actual audio file URLs.
-    These audio elements are muted/paused by default and ONLY play when user clicks the weather button.
-    Free audio sources: https://freesound.org (rain: #399095, snow/wind: #425370)
+    Free audio sources: https://freesound.org
   -->
   <audio id="rain-audio" loop>
-    <!-- Replace with your own rain audio URL -->
-    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg" />
-    <!-- Fallback: <source src="rain.ogg" type="audio/ogg" /> -->
+    <!-- Upbeat Lo-Fi Chill Beat for Rain Mode -->
+    <source src="https://cdn.pixabay.com/audio/2022/05/27/audio_1808fbf7df.mp3" type="audio/mpeg" />
+    <source src="https://assets.mixkit.co/active_storage/sfx/2433/2433-preview.mp3" type="audio/mpeg" />
   </audio>
 
   <audio id="snow-audio" loop>
-    <!-- Replace with your own snow/wind audio URL -->
-    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" type="audio/mpeg" />
+    <!-- Chill Synthwave / Upbeat for Snow Mode -->
+    <source src="https://cdn.pixabay.com/audio/2022/01/21/audio_51474dddb0.mp3" type="audio/mpeg" />
+    <source src="https://assets.mixkit.co/active_storage/sfx/2242/2242-preview.mp3" type="audio/mpeg" />
   </audio>
 
   <!-- Firebase (compat — works with a single inline script block) -->
-  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+  <script src=" https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js">
+  </script>
   <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
 
   <!-- =====================
        JAVASCRIPT
        ===================== -->
-  <script>
-    /* ========== i18n: English (default) & Khmer ========== */
-    const LANG_KEY = 'portfolio-lang';
-    let weatherState = 0;
-
-    const I18N = { en: {}, km: {} };
-
-    Object.assign(I18N.en, {
-      'page.title': 'Dev Portfolio',
-      'nav.home': 'Home',
-      'nav.projects': 'Projects',
-      'nav.certificates': 'Certificates',
-      'nav.about': 'About',
-      'nav.contact': 'Contact',
-      'nav.hire': 'Hire Me',
-      'nav.themeToggle': 'Toggle light / dark theme',
-      'hero.badge': 'Available for work',
-      'hero.nameLine1': 'Your Name',
-      'hero.nameAccent': 'Developer',
-      'hero.role': 'Full-Stack & Firebase Developer',
-      'hero.bio': 'I craft immersive web experiences with clean code and pixel-perfect design. Passionate about Firebase, real-time apps, and pushing the web forward — one commit at a time.',
-      'hero.viewProjects': 'View Projects',
-      'hero.getInTouch': 'Get In Touch',
-      'hero.statProjects': 'Projects Done',
-      'hero.statYears': 'Years Experience',
-      'hero.statCerts': 'Certificates',
-      'hero.statCardTitle': 'Firebase Pro',
-      'hero.statCardSub': 'Cloud & Realtime DB',
-      'hero.photoMainHint': 'Your Profile Photo<br /><small>Replace with &lt;img src="your-photo.jpg"&gt;</small>',
-      'hero.photo2Hint': 'Photo 2<br />Replace',
-      'projects.sectionTag': 'Portfolio',
-      'projects.titleBefore': 'Featured',
-      'projects.titleHighlight': 'Projects',
-      'projects.desc': 'A showcase of things I\'ve built — from real-time Firebase apps to full-stack platforms and creative experiments.',
-      'proj1.placeholder': 'Project Screenshot / Demo',
-      'proj1.title': 'Project Title One',
-      'proj1.desc': 'A brief description of this project — what it does, the problem it solves, and the tech stack used. Make it compelling.',
-      'proj2.placeholder': 'Video Demo',
-      'proj2.title': 'Project Title Two',
-      'proj2.desc': 'Another project description. This slot supports a video demo using HTML5 <video> or an embedded YouTube iframe.',
-      'proj3.placeholder': 'Embedded iframe / YouTube',
-      'proj3.title': 'Project Title Three',
-      'proj3.desc': 'This card demonstrates iframe support — embed a YouTube link, Loom, or Figma prototype directly inside the card.',
-      'common.badgeImage': 'Image',
-      'common.badgeVideo': 'Video',
-      'common.badgeIframe': 'Iframe',
-      'common.code': 'Code',
-      'common.live': 'Live',
-      'certs.sectionTag': 'Achievements',
-      'certs.titleBefore': 'Certificates &',
-      'certs.titleHighlight': 'Awards',
-      'certs.desc': 'Credentials and recognition from courses, competitions, and industry platforms that shaped my skills.',
-      'cert.view': 'View Credential',
-      'cert.details': 'View Details',
-      'cert1.issuer': 'Google Cloud',
-      'cert1.title': 'Google Cloud Associate Developer',
-      'cert2.issuer': 'Firebase / Google',
-      'cert2.title': 'Firebase Advanced Development',
-      'cert3.issuer': 'Meta',
-      'cert3.title': 'Meta Front-End Developer Professional',
-      'cert4.issuer': 'Coursera',
-      'cert4.title': 'Full-Stack Web Development Specialization',
-      'cert5.issuer': 'Amazon Web Services',
-      'cert5.title': 'AWS Certified Cloud Practitioner',
-      'cert6.issuer': 'Hackathon 2024',
-      'cert6.title': '1st Place — National Hackathon Winner',
-      'about.sectionTag': 'About Me',
-      'about.titleBefore': 'Skills &',
-      'about.titleHighlight': 'Expertise',
-      'about.p1': 'I\'m a passionate developer with a love for building fast, scalable, and beautiful web applications. My core stack revolves around <strong style="color:var(--text-primary)">React, Firebase, and Node.js</strong>, and I\'m constantly exploring new tools to sharpen my craft.',
-      'about.p2': 'When I\'m not coding, you\'ll find me contributing to open source, mentoring juniors, or brewing the perfect cup of coffee before a deep work session.',
-      'skill.frontend': 'Frontend (React / Tailwind)',
-      'skill.firebase': 'Firebase & Firestore',
-      'skill.backend': 'Backend (Node.js / APIs)',
-      'skill.mobile': 'Mobile (Flutter)',
-      'skill.uiux': 'UI/UX Design',
-      'skill.devops': 'DevOps / Cloud',
-      'contact.sectionTag': 'Contact',
-      'contact.titleBefore': 'Let\'s',
-      'contact.titleHighlight': 'Connect',
-      'contact.desc': 'Have a project in mind? I\'d love to hear about it. Drop me a message and let\'s make something great together.',
-      'form.name': 'Name',
-      'form.email': 'Email',
-      'form.message': 'Message',
-      'form.namePh': 'Your full name',
-      'form.emailPh': 'your@email.com',
-      'form.msgPh': 'Tell me about your project or idea...',
-      'form.send': 'Send Message',
-      'form.sending': 'Sending...',
-      'form.success': '✓ Message sent! I\'ll get back to you within 24 hours.',
-      'form.error': '✗ Something went wrong. Please try again.',
-      'contact.labelEmail': 'Email',
-      'contact.labelLoc': 'Location',
-      'contact.labelResp': 'Response Time',
-      'contact.valLoc': 'Your City, Your Country',
-      'contact.valResp': 'Within 24 hours',
-      'contact.findMe': 'Find me on',
-      'footer.copy': '© 2025 Your Name. All rights reserved.',
-      'weather.btnTitle': 'Toggle weather ambience (rain / snow)',
-      'weather.zen': 'Zen Mode',
-      'weather.nextSnow': 'Next: Snow',
-      'weather.nextOff': 'Next: Off',
-      'weather.rainMode': '🌧 Rain Mode',
-      'weather.snowMode': '❄️ Snow Mode'
-    });
-
-    Object.assign(I18N.km, {
-             'page.title': 'Portfolio អ្នកអភិវឌ្ឍន៍',
-             'nav.home': 'ទំព័រដើម',
-             'nav.projects': 'គម្រោង',
-             'nav.certificates': 'វិញ្ញាបនបត្រ',
-             'nav.about': 'អំពីខ្ញុំ',
-             'nav.contact': 'ទំនាក់ទំនង',
-             'nav.hire': 'ជួលខ្ញុំ',
-             'nav.themeToggle': 'បិទ/បើករចនាបថភ្លឺ ឬងងឹត',
-             'hero.badge': 'ទទួលការងារ',
-             'hero.nameLine1': 'ឈ្មោះរបស់អ្នក',
-             'hero.nameAccent': 'អ្នកអភិវឌ្ឍន៍',
-             'hero.role': 'អ្នកអភិវឌ្ឍន៍ Full-Stack និង Firebase',
-             'hero.bio': 'ខ្ញុំបង្កើតបទពិសោធវិបដែលរស់រវើកជាមួយកូដស្អាត និងការកាន់តួនាទីភីក់សែល។ ចូលចិត្ត Firebase កម្មវិធីពេលវេលាពិត និងការផ្លាស់ប្តូរវិបតែមជាលំដាប់។',
-             'hero.viewProjects': 'មើលគម្រោង',
-             'hero.getInTouch': 'ទាក់ទងមក',
-             'hero.statProjects': 'គម្រោងបានធ្វើ',
-             'hero.statYears': 'បទពិសោធឆ្នាំ',
-             'hero.statCerts': 'វិញ្ញាបនបត្រ',
-             'hero.statCardTitle': 'Firebase Pro',
-             'hero.statCardSub': 'Cloud និង Realtime DB',
-             'hero.photoMainHint': 'រូបអាវតារ<br /><small>ជំនួសដោយ &lt;img src="your-photo.jpg"&gt;</small>',
-             'hero.photo2Hint': 'រូបទី ២<br />ជំនួស',
-             'projects.sectionTag': 'Portfolio',
-             'projects.titleBefore': 'គម្រោង',
-             'projects.titleHighlight': 'ពិសេស',
-             'projects.desc': 'ការបង្ហាញអ្វីដែលខ្ញុំបានបង្កើត — ពីកម្មវិធី Firebase រហូតដល់វេទិកាពេញលេញ និងការសាកល្បងច្នៃប្រឌិត។',
-             'proj1.placeholder': 'រូបថត/ស្រាប់ពីគម្រោង',
-             'proj1.title': 'ចំណងជើងគម្រោង ១',
-             'proj1.desc': 'ការពិពណ៌នាខ្លីអំពីគម្រោងនេះ — ឧបសគ្គ បច្ចេកទេស និងតម្លៃដែលផ្តល់។',
-             'proj2.placeholder': 'វីដេអូសាកល្បង',
-             'proj2.title': 'ចំណងជើងគម្រោង ២',
-             'proj2.desc': 'គម្រោងនេះគាំទ្រវីដេអូ HTML5 ឬ embedding YouTube។',
-             'proj3.placeholder': 'iframe / YouTube',
-             'proj3.title': 'ចំណងជើងគម្រោង ៣',
-             'proj3.desc': 'ប័ណ្ណនេះគាំទ្រការបង្កប់ YouTube Loom ឬ Figma ផ្ទាល់ក្នុងកាត។',
-             'common.badgeImage': 'រូបភាព',
-             'common.badgeVideo': 'វីដេអូ',
-             'common.badgeIframe': 'Iframe',
-             'common.code': 'កូដ',
-      'common.live': 'Live',
-      'certs.sectionTag': 'សមិទ្ធផល',
-      'certs.titleBefore': 'វិញ្ញាបនបត្រ និង',
-      'certs.titleHighlight': 'កិត្តិយស',
-      'certs.desc': 'ការទទួលស្គាល់ពីវគ្គសិក្សា ការប្រកួតប្រជែង និងវេទិកាឧស្សាហ៍។',
-      'cert.view': 'មើលវិញ្ញាបនបត្រ',
-      'cert.details': 'មើលព័ត៌មានលម្អិត',
-      'cert1.issuer': 'Google Cloud',
-      'cert1.title': 'Google Cloud Associate Developer',
-      'cert2.issuer': 'Firebase / Google',
-      'cert2.title': 'Firebase Advanced Development',
-      'cert3.issuer': 'Meta',
-      'cert3.title': 'Meta Front-End Developer Professional',
-      'cert4.issuer': 'Coursera',
-      'cert4.title': 'វគ្គសិក្សា Full-Stack Web Development',
-      'cert5.issuer': 'Amazon Web Services',
-      'cert5.title': 'AWS Certified Cloud Practitioner',
-      'cert6.issuer': 'Hackathon ២០២៤',
-      'cert6.title': 'ជើងឯកថ្នាក់ជាតិ — Hackathon',
-      'about.sectionTag': 'អំពីខ្ញុំ',
-      'about.titleBefore': 'ជំនាញ និង',
-      'about.titleHighlight': 'ជំនាញជ្រាយជ្រះ',
-      'about.p1': 'ខ្ញុំជាអ្នកអភិវឌ្ឍន៍ដែលចូលចិត្តបង្កើតគេហទំព័រលឿន មានស្ថេរភាព និងស្រស់ស្អាត។ បច្ចុប្បន្នខ្ញុំန្រើ <strong style="color:var(--text-primary)">React, Firebase និង Node.js</strong> ជាស្នូល ហើយតែងតែស្វែងរកឧបករណ៍ថ្មីដើម្បីអភិវឌ្ឍខ្លួន។',
-      'about.p2': 'នៅពេលមិនសរសេរកូដ ខ្ញុំចូលចិត្តចូលរួមប្រភពបើកចំហ ណែនាំអ្នកចាប់ផ្តើម ឬផឹកកាហ្វេមុនការងារជ្រៅ។',
-      'skill.frontend': 'Frontend (React / Tailwind)',
-      'skill.firebase': 'Firebase និង Firestore',
-      'skill.backend': 'Backend (Node.js / APIs)',
-      'skill.mobile': 'Mobile (Flutter)',
-      'skill.uiux': 'រចនា UI/UX',
-      'skill.devops': 'DevOps / Cloud',
-      'contact.sectionTag': 'ទំនាក់ទំនង',
-      'contact.titleBefore': 'មក',
-      'contact.titleHighlight': 'ភ្ជាប់ទំនាក់ទំនង',
-      'contact.desc': 'មានគម្រោងគូរគំនិត? ខ្ញុំចង់ឮពីវា។ ផ្ញើសារ ហើយរួមគ្នាបង្កើតអ្វីដែលអស្ចារ្យ។',
-      'form.name': 'ឈ្មោះ',
-      'form.email': 'អ៊ីមែល',
-      'form.message': 'សារ',
-      'form.namePh': 'ឈ្មោះពេញរបស់អ្នក',
-      'form.emailPh': 'your@email.com',
-      'form.msgPh': 'ប្រាប់ខ្ញុំអំពីគម្រោងរបស់អ្នក...',
-      'form.send': 'ផ្ញើសារ',
-      'form.sending': 'កំពុងផ្ញើ...',
-      'form.success': '✓ ផ្ញើរួចរាល់! ខ្ញុំនឹងឆ្លើយតបក្នុងរយៈពេល ២៤ ម៉ោង។',
-      'form.error': '✗ មានបញ្ហា។ សូមព្យាយាមម្តងទៀត។',
-      'contact.labelEmail': 'អ៊ីមែល',
-      'contact.labelLoc': 'ទីកន្លែង',
-      'contact.labelResp': 'រយៈពេលឆ្លើយតប',
-      'contact.valLoc': 'ទីក្រុង ប្រទេសរបស់អ្នក',
-      'contact.valResp': 'ក្នុងរយៈពេល ២៤ ម៉ោង',
-      'contact.findMe': 'រកខ្ញុំនៅ',
-      'footer.copy': '© ២០២៥ ឈ្មោះរបស់អ្នក។ រក្សាសិទ្ធិគ្រប់យ៉ាង។',
-      'weather.btnTitle': 'ប្តូរបរិយាកាស (ភ្លៀង / ព្រិល)',
-      'weather.zen': 'Zen',
-      'weather.nextSnow': 'បន្ទាប់៖ ព្រិល',
-      'weather.nextOff': 'បន្ទាប់៖ បិទ',
-      'weather.rainMode': '🌧 របៀបភ្លៀង',
-      'weather.snowMode': '❄️ របៀបព្រិល'
-    });
-
-    function getLang() {
-      return localStorage.getItem(LANG_KEY) === 'km' ? 'km' : 'en';
-    }
-
-    function t(key) {
-      const L = getLang();
-      return (I18N[L] && I18N[L][key]) || I18N.en[key] || key;
-    }
-
-    function applyI18n() {
-      document.documentElement.lang = getLang() === 'km' ? 'km' : 'en';
-      document.querySelectorAll('[data-i18n]').forEach((el) => {
-        const k = el.getAttribute('data-i18n');
-        if (k && t(k)) el.textContent = t(k);
-      });
-      document.querySelectorAll('[data-i18n-html]').forEach((el) => {
-        const k = el.getAttribute('data-i18n-html');
-        if (k && t(k)) el.innerHTML = t(k);
-      });
-      document.querySelectorAll('[data-i18n-placeholder]').forEach((el) => {
-        const k = el.getAttribute('data-i18n-placeholder');
-        if (k && t(k)) el.setAttribute('placeholder', t(k));
-      });
-      document.querySelectorAll('[data-i18n-title]').forEach((el) => {
-        const k = el.getAttribute('data-i18n-title');
-        if (k && t(k)) el.setAttribute('title', t(k));
-      });
-      document.querySelectorAll('.lang-btn').forEach((btn) => {
-        const on = btn.getAttribute('data-set-lang') === getLang();
-        btn.classList.toggle('active', on);
-        btn.setAttribute('aria-pressed', on ? 'true' : 'false');
-      });
-      document.title = t('page.title');
-      if (typeof applyWeatherUiLabels === 'function') applyWeatherUiLabels();
-    }
-
-    document.querySelectorAll('.lang-btn').forEach((btn) => {
-      btn.addEventListener('click', () => {
-        localStorage.setItem(LANG_KEY, btn.getAttribute('data-set-lang'));
-        applyI18n();
-      });
-    });
-
-    /* ========================================================
-       🔥 FIREBASE INTEGRATION ZONE
-       ========================================================
-       TO CONNECT FIREBASE:
-       1. Go to https://console.firebase.google.com
-       2. Create / open your project
-       3. Go to Project Settings > Your apps > Add web app
-       4. Copy the firebaseConfig object below and paste yours
-
-       Then install SDK (if using bundler):
-         npm install firebase
-       Or add the CDN scripts above this <script> block:
-         <script type="module">
-           import { initializeApp } from "https://www.gstatic.com/firebasejs/10.x.x/firebase-app.js";
-           import { getFirestore, collection, getDocs } from "...firebase-firestore.js";
-       ======================================================== */
-
-    // ── Firebase init (config របស់អ្នក — រក្សាក្នុង Console តែត្រូវកំណត់ Firestore rules) ──
-    const firebaseConfig = {
-      apiKey: 'AIzaSyDhGv1POoU1Pq1XhZHNQu6qZF0_dCKZi-g',
-      authDomain: 'nobrotana.firebaseapp.com',
-      projectId: 'nobrotana',
-      storageBucket: 'nobrotana.firebasestorage.app',
-      messagingSenderId: '692013232245',
-      appId: '1:692013232245:web:400e0286983edcbb06083c',
-      measurementId: 'G-YNKFRQ7RP6'
-    };
-
-    let db = null;
-    if (typeof firebase !== 'undefined') {
-      try {
-        firebase.initializeApp(firebaseConfig);
-        db = firebase.firestore();
-      } catch (e) {
-        console.error('Firebase init error:', e);
-      }
-    }
-
-    function escapeHtml(str) {
-      if (str == null) return '';
-      const d = document.createElement('div');
-      d.textContent = String(str);
-      return d.innerHTML;
-    }
-
-    function escapeAttr(str) {
-      return String(str ?? '')
-        .replace(/&/g, '&amp;')
-        .replace(/"/g, '&quot;')
-        .replace(/</g, '&lt;');
-    }
-
-    function observeRevealNodes(nodes) {
-      if (!nodes || !nodes.length) return;
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            entry.target.querySelectorAll('.skill-bar-fill').forEach((bar) => {
-              bar.style.width = bar.getAttribute('data-width') + '%';
-            });
-            observer.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-      nodes.forEach((el) => observer.observe(el));
-    }
-
-    async function loadProjectsFromFirestore() {
-      const grid = document.getElementById('projects-grid');
-      if (!grid || !db) return;
-      try {
-        const snapshot = await db.collection('projects').get();
-        if (snapshot.empty) return;
-
-        const parts = [];
-        snapshot.forEach((docSnap) => {
-          const p = docSnap.data();
-          const title = escapeHtml(p.title || '');
-          const desc = escapeHtml(p.description || '');
-          const mt = String(p.mediaType || 'image').toLowerCase();
-          let mediaInner = '';
-          if (mt === 'video' && p.videoUrl) {
-            mediaInner = '<video controls muted loop playsinline preload="metadata"><source src="' + escapeAttr(p.videoUrl) + '" type="video/mp4"></video>';
-          } else if (mt === 'iframe' && p.iframeUrl) {
-            mediaInner = '<iframe src="' + escapeAttr(p.iframeUrl) + '" allowfullscreen loading="lazy"></iframe>';
-          } else if (p.imageUrl) {
-            mediaInner = '<img src="' + escapeAttr(p.imageUrl) + '" alt="' + title + '" />';
-          } else {
-            mediaInner = '<div class="media-placeholder"><i class="fa-regular fa-image"></i><span>Project</span></div>';
-          }
-          const badge = escapeHtml(mt === 'iframe' ? 'iframe' : mt);
-          const tags = (p.tags || []).map((tag) => '<span class="tag">' + escapeHtml(tag) + '</span>').join('');
-          const codeLink = p.githubUrl
-            ? '<a href="' + escapeAttr(p.githubUrl) + '" class="project-link" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> Code</a>'
-            : '';
-          const liveLink = p.liveUrl
-            ? '<a href="' + escapeAttr(p.liveUrl) + '" class="project-link" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-arrow-up-right-from-square"></i> Live</a>'
-            : '';
-          parts.push(
-            '<div class="project-card reveal"><div class="project-media">' +
-              mediaInner +
-              '<div class="project-media-badge">' + badge + '</div></div><div class="project-body"><div class="project-tags">' +
-              tags +
-              '</div><h3 class="project-title">' +
-              title +
-              '</h3><p class="project-desc">' +
-              desc +
-              '</p><div class="project-links">' +
-              codeLink +
-              liveLink +
-              '</div></div></div>'
-          );
-        });
-        grid.innerHTML = parts.join('');
-        observeRevealNodes(grid.querySelectorAll('.reveal'));
-      } catch (e) {
-        console.warn('Firestore projects (keeping static content):', e);
-      }
-    }
-
-    async function loadCertificatesFromFirestore() {
-      const grid = document.getElementById('certs-grid');
-      if (!grid || !db) return;
-      try {
-        const snapshot = await db.collection('certificates').get();
-        if (snapshot.empty) return;
-
-        const parts = [];
-        snapshot.forEach((docSnap) => {
-          const c = docSnap.data();
-          const issuer = escapeHtml(c.issuer || '');
-          const title = escapeHtml(c.title || '');
-          const dateStr = escapeHtml(c.date || '');
-          const iconClass = escapeAttr(c.icon || 'fa-solid fa-award');
-          const preview = c.previewImageUrl
-            ? '<img src="' + escapeAttr(c.previewImageUrl) + '" alt="' + title + '" class="cert-preview-img" />'
-            : '';
-          const link = c.credentialUrl ? escapeAttr(c.credentialUrl) : '#';
-          parts.push(
-            '<div class="cert-card reveal">' +
-              '<div class="cert-icon-wrap"><i class="' + iconClass + '"></i></div>' +
-              '<div><div class="cert-issuer">' + issuer + '</div><div class="cert-card-title">' + title + '</div></div>' +
-              preview +
-              '<div class="cert-date"><i class="fa-regular fa-calendar"></i> ' + dateStr + '</div>' +
-              '<a href="' + link + '" class="cert-link" target="_blank" rel="noopener noreferrer">View Credential <i class="fa-solid fa-arrow-right"></i></a>' +
-              '</div>'
-          );
-        });
-        grid.innerHTML = parts.join('');
-        observeRevealNodes(grid.querySelectorAll('.reveal'));
-      } catch (e) {
-        console.warn('Firestore certificates (keeping static content):', e);
-      }
-    }
-
-    async function submitContactForm(name, email, message) {
-      if (!db) {
-        return { success: false, error: 'Firebase not ready' };
-      }
-      try {
-        await db.collection('messages').add({
-          name: String(name).trim(),
-          email: String(email).trim(),
-          message: String(message).trim(),
-          createdAt: firebase.firestore.FieldValue.serverTimestamp()
-        });
-        return { success: true };
-      } catch (e) {
-        console.error('Firestore messages:', e);
-        return { success: false, error: e.message || String(e) };
-      }
-    }
-
-    /* ========================================================
-       THEME TOGGLE
-       ======================================================== */
-    const themeToggle = document.getElementById('theme-toggle');
-    const themeIcon   = document.getElementById('theme-icon');
-    let isDark = true;
-
-    // Load saved preference
-    const savedTheme = localStorage.getItem('portfolio-theme');
-    if (savedTheme) {
-      isDark = savedTheme === 'dark';
-      document.documentElement.setAttribute('data-theme', savedTheme);
-      themeIcon.className = isDark ? 'fa-solid fa-moon' : 'fa-solid fa-sun';
-    }
-
-    themeToggle.addEventListener('click', () => {
-      isDark = !isDark;
-      const theme = isDark ? 'dark' : 'light';
-      document.documentElement.setAttribute('data-theme', theme);
-      themeIcon.className = isDark ? 'fa-solid fa-moon' : 'fa-solid fa-sun';
-      localStorage.setItem('portfolio-theme', theme);
-    });
-
-    /* ========================================================
-       MOBILE MENU
-       ======================================================== */
-    const hamburger  = document.getElementById('hamburger');
-    const mobileMenu = document.getElementById('mobile-menu');
-
-    hamburger.addEventListener('click', () => {
-      mobileMenu.classList.toggle('open');
-    });
-
-    function closeMobileMenu() {
-      mobileMenu.classList.remove('open');
-    }
-
-    /* ========================================================
-       SKILLS TICKER
-       ======================================================== */
-    const skills = [
-      { icon: 'fa-brands fa-react',      label: 'React' },
-      { icon: 'fa-brands fa-js',         label: 'JavaScript' },
-      { icon: 'fa-brands fa-node-js',    label: 'Node.js' },
-      { icon: 'fa-brands fa-firebase',   label: 'Firebase' },
-      { icon: 'fa-brands fa-css3-alt',   label: 'Tailwind CSS' },
-      { icon: 'fa-brands fa-python',     label: 'Python' },
-      { icon: 'fa-solid fa-database',    label: 'Firestore' },
-      { icon: 'fa-brands fa-git-alt',    label: 'Git' },
-      { icon: 'fa-brands fa-docker',     label: 'Docker' },
-      { icon: 'fa-brands fa-figma',      label: 'Figma' },
-      { icon: 'fa-brands fa-aws',        label: 'AWS' },
-      { icon: 'fa-solid fa-mobile-alt',  label: 'Flutter' },
-    ];
-
-    const tickerTrack = document.getElementById('ticker-track');
-    const doubled = [...skills, ...skills]; // duplicate for seamless loop
-    tickerTrack.innerHTML = doubled.map(s =>
-      `<div class="ticker-item"><i class="${s.icon}"></i>${s.label}</div>`
-    ).join('');
-
-    /* ========================================================
-       WEATHER EFFECT (Canvas + Audio)
-       RULE: Does NOT auto-play. Only activates on user click.
-       States: 0=Off, 1=Rain, 2=Snow
-       ======================================================== */
-    const weatherBtn       = document.getElementById('weather-btn');
-    const weatherIcon      = document.getElementById('weather-icon');
-    const weatherLabel     = document.getElementById('weather-label');
-    const weatherIndicator = document.getElementById('weather-indicator');
-    const weatherCanvas    = document.getElementById('weather-canvas');
-    const rainAudio        = document.getElementById('rain-audio');
-    const snowAudio        = document.getElementById('snow-audio');
-    const ctx              = weatherCanvas.getContext('2d');
-
-    let particles    = [];
-    let animFrame    = null;
-    let canvasReady  = false;
-
-    function resizeCanvas() {
-      weatherCanvas.width  = window.innerWidth;
-      weatherCanvas.height = window.innerHeight;
-    }
-
-    window.addEventListener('resize', resizeCanvas);
-    resizeCanvas();
-
-    /* ── Particle factory ── */
-    function createRainDrop() {
-      return {
-        x:     Math.random() * weatherCanvas.width,
-        y:     Math.random() * -weatherCanvas.height,
-        speed: 8 + Math.random() * 8,
-        len:   12 + Math.random() * 20,
-        thick: 0.5 + Math.random() * 1,
-        alpha: 0.4 + Math.random() * 0.5,
-        wind:  2 + Math.random() * 2
-      };
-    }
-
-    function createSnowFlake() {
-      return {
-        x:     Math.random() * weatherCanvas.width,
-        y:     Math.random() * -weatherCanvas.height,
-        r:     1 + Math.random() * 4,
-        speed: 1 + Math.random() * 2,
-        drift: (Math.random() - 0.5) * 0.8,
-        alpha: 0.5 + Math.random() * 0.5,
-        wobble: Math.random() * Math.PI * 2
-      };
-    }
-
-    function initParticles() {
-      particles = [];
-      const count = weatherState === 1 ? 220 : 120;
-      for (let i = 0; i < count; i++) {
-        if (weatherState === 1) {
-          const d = createRainDrop();
-          d.y = Math.random() * weatherCanvas.height; // start spread
-          particles.push(d);
-        } else {
-          const s = createSnowFlake();
-          s.y = Math.random() * weatherCanvas.height;
-          particles.push(s);
-        }
-      }
-    }
-
-    function drawRain() {
-      ctx.clearRect(0, 0, weatherCanvas.width, weatherCanvas.height);
-      particles.forEach((d, i) => {
-        ctx.save();
-        ctx.globalAlpha = d.alpha;
-        ctx.strokeStyle = isDark ? 'rgba(150,210,255,0.8)' : 'rgba(70,130,200,0.6)';
-        ctx.lineWidth = d.thick;
-        ctx.beginPath();
-        ctx.moveTo(d.x, d.y);
-        ctx.lineTo(d.x + d.wind, d.y + d.len);
-        ctx.stroke();
-        ctx.restore();
-
-        d.x += d.wind;
-        d.y += d.speed;
-
-        if (d.y > weatherCanvas.height || d.x > weatherCanvas.width) {
-          particles[i] = createRainDrop();
-        }
-      });
-    }
-
-    function drawSnow() {
-      ctx.clearRect(0, 0, weatherCanvas.width, weatherCanvas.height);
-      particles.forEach((s, i) => {
-        s.wobble += 0.02;
-        ctx.save();
-        ctx.globalAlpha = s.alpha;
-        ctx.fillStyle = isDark ? 'rgba(220,240,255,0.9)' : 'rgba(180,210,240,0.8)';
-        ctx.beginPath();
-        ctx.arc(s.x + Math.sin(s.wobble) * 1.5, s.y, s.r, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.restore();
-
-        s.x += s.drift;
-        s.y += s.speed;
-
-        if (s.y > weatherCanvas.height + 10) {
-          particles[i] = createSnowFlake();
-        }
-      });
-    }
-
-    function animateWeather() {
-      if (weatherState === 0) return;
-      weatherState === 1 ? drawRain() : drawSnow();
-      animFrame = requestAnimationFrame(animateWeather);
-    }
-
-    function stopWeather() {
-      cancelAnimationFrame(animFrame);
-      ctx.clearRect(0, 0, weatherCanvas.width, weatherCanvas.height);
-      weatherCanvas.classList.remove('active');
-      rainAudio.pause(); rainAudio.currentTime = 0;
-      snowAudio.pause(); snowAudio.currentTime = 0;
-      weatherIndicator.classList.remove('visible');
-    }
-
-    function applyWeatherUiLabels() {
-      const btn = document.getElementById('weather-btn');
-      if (btn) btn.setAttribute('title', t('weather.btnTitle'));
-      if (!weatherLabel || !weatherIcon) return;
-      if (weatherState === 0) {
-        weatherLabel.textContent = t('weather.zen');
-        weatherIcon.className = 'fa-solid fa-cloud-sun';
-        weatherIndicator.classList.remove('visible');
-      } else if (weatherState === 1) {
-        weatherLabel.textContent = t('weather.nextSnow');
-        weatherIcon.className = 'fa-solid fa-cloud-rain';
-        weatherIndicator.textContent = t('weather.rainMode');
-        weatherIndicator.classList.add('visible');
-      } else {
-        weatherLabel.textContent = t('weather.nextOff');
-        weatherIcon.className = 'fa-solid fa-snowflake';
-        weatherIndicator.textContent = t('weather.snowMode');
-        weatherIndicator.classList.add('visible');
-      }
-    }
-
-    function startWeather() {
-      resizeCanvas();
-      initParticles();
-      weatherCanvas.classList.add('active');
-      animateWeather();
-
-      if (weatherState === 1) {
-        snowAudio.pause();
-        rainAudio.volume = 0.35;
-        rainAudio.play().catch(() => {});
-      } else {
-        rainAudio.pause();
-        snowAudio.volume = 0.2;
-        snowAudio.play().catch(() => {});
-      }
-      applyWeatherUiLabels();
-    }
-
-    /* ── Weather button click (Off → Rain → Snow → Off) ── */
-    weatherBtn.addEventListener('click', () => {
-      weatherState = (weatherState + 1) % 3;
-      if (weatherState === 0) {
-        stopWeather();
-        applyWeatherUiLabels();
-      } else {
-        stopWeather();
-        startWeather();
-      }
-    });
-
-    /* ========================================================
-       SCROLL REVEAL
-       ======================================================== */
-    function observeReveal() {
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            // Animate skill bars when they appear
-            entry.target.querySelectorAll('.skill-bar-fill').forEach(bar => {
-              bar.style.width = bar.getAttribute('data-width') + '%';
-            });
-            observer.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-
-      document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-    }
-
-    observeReveal();
-    loadProjectsFromFirestore();
-    loadCertificatesFromFirestore();
-
-    /* ========================================================
-       CONTACT FORM → Firestore
-       ======================================================== */
-    document.getElementById('contact-form').addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const name    = document.getElementById('form-name').value;
-      const email   = document.getElementById('form-email').value;
-      const message = document.getElementById('form-message').value;
-      const btn     = e.target.querySelector('button[type=submit]');
-      const fb      = document.getElementById('form-feedback');
-
-      btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> ' + t('form.sending');
-      btn.disabled = true;
-
-      // 🔥 FIREBASE: Replace with your Firestore submit function
-      const result = await submitContactForm(name, email, message);
-
-      if (result.success) {
-        fb.style.color = '';
-        fb.style.display = 'block';
-        fb.textContent = t('form.success');
-        e.target.reset();
-      } else {
-        fb.style.color = 'var(--accent-warm)';
-        fb.style.display = 'block';
-        fb.textContent = t('form.error');
-      }
-
-      btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> <span data-i18n="form.send">' + t('form.send') + '</span>';
-      btn.disabled = false;
-    });
-
-    /* ========================================================
-       SMOOTH NAV HIGHLIGHT (active section)
-       ======================================================== */
-    const sections   = document.querySelectorAll('section[id]');
-    const navAnchors = document.querySelectorAll('.nav-links a');
-
-    const navObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          navAnchors.forEach(a => {
-            a.style.color = '';
-            if (a.getAttribute('href') === '#' + entry.target.id) {
-              a.style.color = 'var(--accent)';
-            }
-          });
-        }
-      });
-    }, { threshold: 0.4 });
-
-    sections.forEach(s => navObserver.observe(s));
-
-    /* Initial language: English by default; Khmer if saved in localStorage */
-    applyI18n();
-  </script>
+  <script src="script.js"></script>
 </body>
+
 </html>
