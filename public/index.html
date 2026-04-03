@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>Dev Portfolio</title>
+  <title>NOB Rotana Portfolio</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
@@ -21,11 +21,11 @@
        ===================== -->
   <canvas id="weather-canvas"></canvas>
 
-  <!-- =====================
+  <!-- =====================  
        NAVIGATION
        ===================== -->
   <nav>
-    <div class="nav-logo"><img src="Assets/img/roth.jpg" alt="Dev Logo" /></div>
+    <div class="nav-logo"><img src="Assets/IMG/pic4.JPG" alt="NOB Rotana Logo" class="profile-logo" /></div>
     <ul class="nav-links">
       <li><a href="#hero" data-i18n="nav.home">Home</a></li>
       <li><a href="#projects" data-i18n="nav.projects">Projects</a></li>
@@ -61,6 +61,12 @@
     <a href="#contact" onclick="closeMobileMenu()" data-i18n="nav.contact">Contact</a>
   </div>
 
+  <!-- Floating Mobile Hire Me Button -->
+  <a href="#contact" class="mobile-hire-btn">
+    <span class="pulse-ring"></span>
+    <i class="fa-solid fa-handshake"></i> <span data-i18n="nav.hire">Hire Me</span>
+  </a>
+
   <!-- =====================
        HERO SECTION
        ===================== -->
@@ -76,7 +82,7 @@
 
         <h1 class="hero-name">
           <span data-i18n="hero.nameLine1">Rotana NOB</span><br />
-          <span class="line-accent" data-i18n="hero.nameAccent">Developer</span>
+          <span class="line-accent" data-i18n="hero.nameAccent">Dev</span>
         </h1>
 
         <div class="hero-role" data-i18n="hero.role">Full-Stack With Firebase </div>
@@ -119,7 +125,7 @@
 
         <!-- Floating stat card -->
         <div class="photo-stat-card">
-          <div class="stat-card-icon"><i class="fa-brands fa-firebase"></i></div>
+          <div class="stat-card-icon"><i class="fa-solid fa-fire" style="color: #FFA000;"></i></div>
           <div class="stat-card-text">
             <strong data-i18n="hero.statCardTitle">Firebase </strong>
             <span data-i18n="hero.statCardSub">Cloud & Realtime Database</span>
@@ -128,12 +134,18 @@
 
         <!-- 📸 PHOTO 1: Replace src with your main profile photo URL -->
         <div class="photo-main-wrap">
-          <img src="Assets/img/profile_main.png" alt="Profile Photo" />
+          <img src="Assets/IMG/pic2.JPG" alt="Profile Photo" />
         </div>
 
         <!-- 📸 PHOTO 2: Replace src with your secondary/action photo URL -->
         <div class="photo-secondary-wrap">
-          <img src="Assets/img/profile_action.png" alt="Secondary Photo" />
+          <img src="Assets/IMG/pic3.JPG" alt="Secondary Photo" />
+        </div>
+
+
+        <!-- 📸 PHOTO 4 -->
+        <div class="photo-quaternary-wrap">
+          <img src="Assets/IMG/pic1.JPG" alt="Photo 4" />
         </div>
       </div>
     </div>
@@ -170,7 +182,7 @@
 
         <div class="project-card reveal">
           <div class="project-media">
-            <img src="Assets/img/project_web.png" alt="Project 1" />
+            <img src="Assets/IMG/project_web.png" alt="Project 1" />
             <div class="project-media-badge" data-i18n="common.badgeImage">Image</div>
           </div>
           <div class="project-body">
@@ -183,10 +195,10 @@
             <p class="project-desc" data-i18n="proj1.desc">A brief description of this project — what it does, the
               problem it solves, and the tech stack used. Make it compelling.</p>
             <div class="project-links">
-              <a href="https://github.com/Rotana-NOB/project-one" class="project-link" target="_blank"
+              <a href="https://github.com/Rotananob?tab=repositories" class="project-link" target="_blank"
                 rel="noopener noreferrer"><i class="fa-brands fa-github"></i> <span
                   data-i18n="common.code">Code</span></a>
-              <a href="https://rotana-elearningg.web.app/" class="project-link" target="_blank"
+              <a href="https://bacii-cal.firebaseapp.com/" class="project-link" target="_blank"
                 rel="noopener noreferrer"><i class="fa-solid fa-arrow-up-right-from-square"></i> <span
                   data-i18n="common.live">Live</span></a>
             </div>
@@ -195,7 +207,7 @@
 
         <div class="project-card reveal">
           <div class="project-media">
-            <img src="Assets/img/project_mobile.png" alt="Project 2" />
+            <img src="Assets/IMG/project_mobile.png" alt="Project 2" />
             <div class="project-media-badge" data-i18n="common.badgeVideo">Video</div>
           </div>
           <div class="project-body">
@@ -208,9 +220,9 @@
             <p class="project-desc" data-i18n="proj2.desc">Another project description. This slot supports a video demo
               using HTML5 &lt;video&gt; or an embedded YouTube iframe.</p>
             <div class="project-links">
-              <a href="https://github.com/Rotana-NOB/project-one" class="project-link" target="_blank"
-                rel="noopener noreferrer"><i class="fa-brands fa-github"></i> <span
-                  data-i18n="common.code">Code</span></a>
+              <a href="#" class="project-link"
+                onclick="showPrivateRepoAlert('https://github.com/Rotananob'); return false;"><i
+                  class="fa-brands fa-github"></i> <span data-i18n="common.code">Code</span></a>
               <a href="https://rotana-elearningg.web.app/" class="project-link" target="_blank"
                 rel="noopener noreferrer"><i class="fa-solid fa-arrow-up-right-from-square"></i> <span
                   data-i18n="common.live">Live</span></a>
@@ -220,7 +232,7 @@
 
         <div class="project-card reveal">
           <div class="project-media">
-            <img src="Assets/img/project_dashboard.png" alt="Project 3" />
+            <img src="Assets/IMG/project_dashboard.png" alt="Project 3" />
             <div class="project-media-badge" data-i18n="common.badgeIframe">Iframe</div>
           </div>
           <div class="project-body">
@@ -232,12 +244,11 @@
             <p class="project-desc" data-i18n="proj3.desc">This card demonstrates iframe support — embed a YouTube link,
               Loom, or Figma prototype directly inside the card.</p>
             <div class="project-links">
-              <a href="https://github.com/Rotana-NOB/project-one" class="project-link" target="_blank"
-                rel="noopener noreferrer"><i class="fa-brands fa-github"></i> <span
-                  data-i18n="common.code">Code</span></a>
-              <a href="https://rotana-elearningg.web.app/" class="project-link" target="_blank"
-                rel="noopener noreferrer"><i class="fa-solid fa-arrow-up-right-from-square"></i> <span
-                  data-i18n="common.live">Live</span></a>
+              <a href="#" class="project-link"
+                onclick="showPrivateRepoAlert('https://github.com/Rotananob); return false;"><i
+                  class="fa-brands fa-github"></i> <span data-i18n="common.code">Code</span></a>
+              <a href="https://www.youngpos.app/" class="project-link" target="_blank" rel="noopener noreferrer"><i
+                  class="fa-solid fa-arrow-up-right-from-square"></i> <span data-i18n="common.live">Live</span></a>
             </div>
           </div>
         </div>
@@ -268,14 +279,14 @@
             <div class="cert-issuer" data-i18n="cert1.issuer">Google Cloud</div>
             <div class="cert-card-title" data-i18n="cert1.title">Google Cloud Associate Developer</div>
           </div>
-          <img src="Assets/img/cert_sample.png" alt="Certificate" class="cert-preview-img" />
+          <img src="Assets/IMG/cert_sample.png" alt="Certificate" class="cert-preview-img" />
           <div class="cert-date"><i class="fa-regular fa-calendar"></i> Jan 2024</div>
           <a href="#" class="cert-link"><span data-i18n="cert.view">View Credential</span> <i
               class="fa-solid fa-arrow-right"></i></a>
         </div>
 
         <div class="cert-card reveal">
-          <div class="cert-icon-wrap"><i class="fa-brands fa-firebase"></i></div>
+          <div class="cert-icon-wrap"><i class="fa-solid fa-fire" style="color: #FFA000;"></i></div>
           <div>
             <div class="cert-issuer" data-i18n="cert2.issuer">Firebase / Google</div>
             <div class="cert-card-title" data-i18n="cert2.title">Firebase Advanced Development</div>
@@ -338,7 +349,9 @@
             <div class="cert-card-title" data-i18n="cert7.title">Responsive Web Design Certification</div>
           </div>
           <div class="cert-date"><i class="fa-regular fa-calendar"></i> 2023</div>
-          <a href="https://www.freecodecamp.org/certification/your-username/responsive-web-design" class="cert-link" target="_blank" rel="noopener noreferrer"><span data-i18n="cert.view">View Credential</span> <i class="fa-solid fa-arrow-right"></i></a>
+          <a href="https://www.freecodecamp.org/certification/your-username/responsive-web-design" class="cert-link"
+            target="_blank" rel="noopener noreferrer"><span data-i18n="cert.view">View Credential</span> <i
+              class="fa-solid fa-arrow-right"></i></a>
         </div>
 
         <div class="cert-card reveal">
@@ -350,7 +363,9 @@
             <div class="cert-card-title" data-i18n="cert8.title">Internship Certificate — TVET</div>
           </div>
           <div class="cert-date"><i class="fa-regular fa-calendar"></i> 2023</div>
-          <a href="#" class="cert-link"><span data-i18n="cert.view">View Credential</span> <i class="fa-solid fa-arrow-right"></i></a>
+          <a href="#" class="cert-link"
+            onclick="openCertModal('Assets/IMG/cert_sample.png', 'TVET Cambodia Certificate'); return false;"><span
+              data-i18n="cert.view">View Credential</span> <i class="fa-solid fa-arrow-right"></i></a>
         </div>
 
         <div class="cert-card reveal">
@@ -362,7 +377,9 @@
             <div class="cert-card-title" data-i18n="cert9.title">Internship Certificate — SETEC</div>
           </div>
           <div class="cert-date"><i class="fa-regular fa-calendar"></i> 2024</div>
-          <a href="#" class="cert-link"><span data-i18n="cert.view">View Credential</span> <i class="fa-solid fa-arrow-right"></i></a>
+          <a href="#" class="cert-link"
+            onclick="openCertModal('Assets/IMG/cert_sample.png', 'SETEC Institute Certificate'); return false;"><span
+              data-i18n="cert.view">View Credential</span> <i class="fa-solid fa-arrow-right"></i></a>
         </div>
 
       </div>
@@ -396,50 +413,67 @@
           </p>
           <div class="tech-pills">
             <!-- 🔥 FIREBASE: Fetch tech stack from Firestore "profile/techStack" array field -->
-            <span class="tech-pill">Reac</span>
+            <span class="tech-pill">React</span>
             <span class="tech-pill">Firebase</span>
             <span class="tech-pill">Node.js</span>
             <span class="tech-pill">TypeScript</span>
-            <span class="tech-pill">Flutter</span>
+            <span class="tech-pill">Mern Stack</span>
             <span class="tech-pill">Tailwind CSS</span>
             <span class="tech-pill">Firestore</span>
             <span class="tech-pill">Cloud Functions</span>
-            <span class="tech-pill">REST APIs</span>
+            <span class="tech-pill">Integration APIs</span>
             <span class="tech-pill">Git / GitHub</span>
-            <span class="tech-pill">Docker</span>
-            <span class="tech-pill">Figma</span>
+            <span class="tech-pill">Database Realtime</span>
+            <span class="tech-pill">HTML/CSS/JS</span>
           </div>
         </div>
 
         <div class="skills-list reveal">
           <!-- Skills matching the Ticker -->
           <div class="skill-item">
-            <div class="skill-label"><span data-i18n="skill.frontend">React &amp; JavaScript</span><span>90%</span></div>
-            <div class="skill-bar"><div class="skill-bar-fill" data-width="90"></div></div>
+            <div class="skill-label"><span data-i18n="skill.frontend">React &amp; JavaScript</span><span>90%</span>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-bar-fill" data-width="90"></div>
+            </div>
           </div>
           <div class="skill-item">
-            <div class="skill-label"><span data-i18n="skill.firebase">Firebase (Auth, Firestore, Storage)</span><span>88%</span></div>
-            <div class="skill-bar"><div class="skill-bar-fill" data-width="88"></div></div>
+            <div class="skill-label"><span data-i18n="skill.firebase">Firebase (Auth, Firestore,
+                Storage)</span><span>88%</span></div>
+            <div class="skill-bar">
+              <div class="skill-bar-fill" data-width="88"></div>
+            </div>
           </div>
           <div class="skill-item">
-            <div class="skill-label"><span data-i18n="skill.realtimedb">Realtime Database &amp; Cloud Storage</span><span>82%</span></div>
-            <div class="skill-bar"><div class="skill-bar-fill" data-width="82"></div></div>
+            <div class="skill-label"><span data-i18n="skill.realtimedb">Realtime Database &amp; Cloud
+                Storage</span><span>82%</span></div>
+            <div class="skill-bar">
+              <div class="skill-bar-fill" data-width="82"></div>
+            </div>
           </div>
           <div class="skill-item">
             <div class="skill-label"><span data-i18n="skill.htmlcss">HTML5 &amp; CSS3</span><span>95%</span></div>
-            <div class="skill-bar"><div class="skill-bar-fill" data-width="95"></div></div>
+            <div class="skill-bar">
+              <div class="skill-bar-fill" data-width="95"></div>
+            </div>
           </div>
           <div class="skill-item">
-            <div class="skill-label"><span data-i18n="skill.cpp">C++ &amp; C#</span><span>65%</span></div>
-            <div class="skill-bar"><div class="skill-bar-fill" data-width="65"></div></div>
+            <div class="skill-label"><span data-i18n="skill.cpp">Java &amp; C#</span><span>65%</span></div>
+            <div class="skill-bar">
+              <div class="skill-bar-fill" data-width="65"></div>
+            </div>
           </div>
           <div class="skill-item">
             <div class="skill-label"><span data-i18n="skill.git">Git &amp; GitHub</span><span>85%</span></div>
-            <div class="skill-bar"><div class="skill-bar-fill" data-width="85"></div></div>
+            <div class="skill-bar">
+              <div class="skill-bar-fill" data-width="85"></div>
+            </div>
           </div>
           <div class="skill-item">
-            <div class="skill-label"><span data-i18n="skill.ai">AI Tool Coding</span><span>78%</span></div>
-            <div class="skill-bar"><div class="skill-bar-fill" data-width="78"></div></div>
+            <div class="skill-label"><span data-i18n="skill.ai">AI Tool Coding</span><span>86%</span></div>
+            <div class="skill-bar">
+              <div class="skill-bar-fill" data-width="86"></div>
+            </div>
           </div>
         </div>
       </div>
@@ -457,7 +491,8 @@
           <span data-i18n="resume.titleBefore">My</span>
           <span class="highlight" data-i18n="resume.titleHighlight">Journey</span>
         </h2>
-        <p class="section-desc" data-i18n="resume.desc">A timeline of my education and professional experience — where I've been and what I've built along the way.</p>
+        <p class="section-desc" data-i18n="resume.desc">A timeline of my education and professional experience — where
+          I've been and what I've built along the way.</p>
       </div>
 
       <div class="resume-columns">
@@ -473,50 +508,40 @@
             <div class="timeline-item">
               <div class="timeline-dot"></div>
               <div class="timeline-content">
-                <div class="timeline-period">2023 – Present</div>
-                <h4 data-i18n="resume.edu1.title">Bachelor's in Information Technology</h4>
-                <div class="timeline-place" data-i18n="resume.edu1.place">University of Your City</div>
-                <p data-i18n="resume.edu1.desc">Specializing in software engineering, web technologies, and cloud computing. Graduated with distinction.</p>
+                <div class="timeline-period">2025 – Present</div>
+                <h4>Asia Euro University</h4>
+                <div class="timeline-place">Phnom Penh, Cambodia</div>
+                <p>Currently pursuing higher education in Information Technology and Computer Science.</p>
               </div>
             </div>
 
             <div class="timeline-item">
               <div class="timeline-dot"></div>
               <div class="timeline-content">
-                <div class="timeline-period">2020 – 2023</div>
-                <h4 data-i18n="resume.edu2.title">High School Diploma — Science</h4>
-                <div class="timeline-place" data-i18n="resume.edu2.place">Your High School Name</div>
-                <p data-i18n="resume.edu2.desc">Focused on mathematics, physics, and computer fundamentals. First exposure to HTML and JavaScript.</p>
+                <div class="timeline-period">2023 – 2025</div>
+                <h4>Setec Institute</h4>
+                <div class="timeline-place">Phnom Penh, Cambodia</div>
+                <p>Specialized training in information technology and digital technologies.</p>
               </div>
             </div>
 
             <div class="timeline-item">
               <div class="timeline-dot"></div>
               <div class="timeline-content">
-                <div class="timeline-period">2016 – 2020</div>
-                <h4 data-i18n="resume.edu3.title">Middle School</h4>
-                <div class="timeline-place" data-i18n="resume.edu3.place">Your Middle School Name</div>
-                <p data-i18n="resume.edu3.desc">Discovered a passion for technology and problem-solving from a young age.</p>
+                <div class="timeline-period">2019 – 2022</div>
+                <h4>Preah Sihanouk High School</h4>
+                <div class="timeline-place">Preah Sihanouk Province, Cambodia</div>
+                <p>Completed upper secondary education with focus on science and mathematics.</p>
               </div>
             </div>
 
             <div class="timeline-item">
               <div class="timeline-dot"></div>
               <div class="timeline-content">
-                <div class="timeline-period">2015 – 2016</div>
-                <h4 data-i18n="resume.edu4.title">Primary School</h4>
-                <div class="timeline-place" data-i18n="resume.edu4.place">Your Primary School Name</div>
-                <p data-i18n="resume.edu4.desc">Early education and foundational learning.</p>
-              </div>
-            </div>
-
-            <div class="timeline-item">
-              <div class="timeline-dot"></div>
-              <div class="timeline-content">
-                <div class="timeline-period">2014 – 2015</div>
-                <h4 data-i18n="resume.edu5.title">Extra Course / Certification</h4>
-                <div class="timeline-place" data-i18n="resume.edu5.place">Training Center Name</div>
-                <p data-i18n="resume.edu5.desc">Gained fundamental knowledge in computer literacy and basic programming concepts.</p>
+                <div class="timeline-period">2008 – 2019</div>
+                <h4>Toul Thmor Secondary School</h4>
+                <div class="timeline-place">Phnom Penh, Cambodia</div>
+                <p>Completed lower and upper secondary education with foundational knowledge across all subjects.</p>
               </div>
             </div>
           </div>
@@ -530,53 +555,63 @@
           </div>
 
           <div class="timeline">
+            <!-- Exp 1: 2025 - Present -->
             <div class="timeline-item">
               <div class="timeline-dot"></div>
               <div class="timeline-content">
-                <div class="timeline-period">2024 – Present</div>
-                <h4 data-i18n="resume.exp1.title">Frontend Developer — Freelance</h4>
-                <div class="timeline-place" data-i18n="resume.exp1.place">Self-employed</div>
-                <p data-i18n="resume.exp1.desc">Building Firebase-powered web apps and portfolios for clients. Specializing in React, real-time databases, and cloud deployments.</p>
+                <div class="timeline-period" data-i18n="resume.exp1.date">2025 – Present</div>
+                <h4 data-i18n="resume.exp1.title">Web Developer Freelancer & Startup Founder</h4>
+                <div class="timeline-place" data-i18n="resume.exp1.place">Freelance / Startup</div>
+                <p data-i18n="resume.exp1.desc">Developing bespoke web solutions as a freelancer while building "Cloud
+                  POS", a startup web application for business management.</p>
               </div>
             </div>
 
+            <!-- Exp 2: 2024 - 2025 -->
             <div class="timeline-item">
               <div class="timeline-dot"></div>
               <div class="timeline-content">
-                <div class="timeline-period">2023 – 2024</div>
-                <h4 data-i18n="resume.exp2.title">Junior Web Developer — Intern</h4>
-                <div class="timeline-place" data-i18n="resume.exp2.place">Local Tech Company</div>
-                <p data-i18n="resume.exp2.desc">Worked on internal dashboards and client websites using HTML, CSS, JavaScript, and Firebase. Participated in Agile sprints.</p>
+                <div class="timeline-period" data-i18n="resume.exp2.date">2024 – 2025</div>
+                <h4 data-i18n="resume.exp2.title">Assistant IT Support</h4>
+                <div class="timeline-place" data-i18n="resume.exp2.place">IT Department</div>
+                <p data-i18n="resume.exp2.desc">Provided technical assistance, hardware maintenance, and software
+                  troubleshooting for organizational efficiency.</p>
               </div>
             </div>
 
+            <!-- Exp 3: 2022 - 2023 -->
             <div class="timeline-item">
               <div class="timeline-dot"></div>
               <div class="timeline-content">
-                <div class="timeline-period">2022 – 2023</div>
-                <h4 data-i18n="resume.exp3.title">Web Design Student Project</h4>
-                <div class="timeline-place" data-i18n="resume.exp3.place">University</div>
-                <p data-i18n="resume.exp3.desc">Led a 4-person team to build a campus news platform with authentication, real-time notifications, and a mobile-first design.</p>
+                <div class="timeline-period" data-i18n="resume.exp3.date">2022 – 2023</div>
+                <h4 data-i18n="resume.exp3.title">Graphic Design</h4>
+                <div class="timeline-place" data-i18n="resume.exp3.place">TVET Cambodia</div>
+                <p data-i18n="resume.exp3.desc">Crafted visual identities, marketing materials, and digital assets for
+                  diverse client projects.</p>
               </div>
             </div>
 
+            <!-- Exp 4: 2021 - Present -->
             <div class="timeline-item">
               <div class="timeline-dot"></div>
               <div class="timeline-content">
-                <div class="timeline-period">2021 – 2022</div>
-                <h4 data-i18n="resume.exp4.title">IT Support Intern</h4>
-                <div class="timeline-place" data-i18n="resume.exp4.place">Tech Support Co.</div>
-                <p data-i18n="resume.exp4.desc">Assisted in network setup, hardware troubleshooting, and resolving software issues for various clients.</p>
+                <div class="timeline-period" data-i18n="resume.exp4.date">2021 – Present</div>
+                <h4 data-i18n="resume.exp4.title">Content Creation</h4>
+                <div class="timeline-place" data-i18n="resume.exp4.place">Social Media</div>
+                <p data-i18n="resume.exp4.desc">Producing engaging digital content across platforms, focusing on tech
+                  culture and brand building.</p>
               </div>
             </div>
 
+            <!-- Exp 5: 2020 - 2021 -->
             <div class="timeline-item">
               <div class="timeline-dot"></div>
               <div class="timeline-content">
-                <div class="timeline-period">2020 – 2021</div>
-                <h4 data-i18n="resume.exp5.title">Volunteer Web Master</h4>
-                <div class="timeline-place" data-i18n="resume.exp5.place">Local NGO</div>
-                <p data-i18n="resume.exp5.desc">Managed and updated content for a non-profit organization's website, improving loading speed and accessibility.</p>
+                <div class="timeline-period" data-i18n="resume.exp5.date">2020 – 2021</div>
+                <h4 data-i18n="resume.exp5.title">Business Online</h4>
+                <div class="timeline-place" data-i18n="resume.exp5.place">E-commerce</div>
+                <p data-i18n="resume.exp5.desc">Managed digital store operations, customer relationship management, and
+                  online sales strategies.</p>
               </div>
             </div>
           </div>
@@ -614,13 +649,13 @@
           </div>
           <div class="form-group">
             <label class="form-label" data-i18n="form.telegram">Telegram (Optional)</label>
-            <input type="text" class="form-input" data-i18n-placeholder="form.telegramPh" placeholder="t.me/yourusername"
-              id="form-telegram" />
+            <input type="text" class="form-input" data-i18n-placeholder="form.telegramPh"
+              placeholder="t.me/yourusername" id="form-telegram" />
           </div>
           <div class="form-group">
             <label class="form-label" data-i18n="form.linkedin">LinkedIn (Optional)</label>
-            <input type="url" class="form-input" data-i18n-placeholder="form.linkedinPh" placeholder="linkedin.com/in/yourprofile"
-              id="form-linkedin" />
+            <input type="url" class="form-input" data-i18n-placeholder="form.linkedinPh"
+              placeholder="linkedin.com/in/yourprofile" id="form-linkedin" />
           </div>
           <div class="form-group">
             <label class="form-label" data-i18n="form.message">Message</label>
@@ -682,17 +717,25 @@
        ===================== -->
   <footer>
     <div class="footer-inner">
-      <div>
-        <div class="footer-logo">Dev<span>.</span></div>
-        <div class="footer-copy" data-i18n="footer.copy">© 2025 Your Name. All rights reserved.</div>
+      <div class="footer-top reveal">
+        <h2 class="footer-heading" data-i18n="footer.heading">Let's build something amazing together.</h2>
+        <a href="mailto:your.email@gmail.com" class="footer-email">your.email@gmail.com</a>
       </div>
-      <div class="social-links">
-        <!-- 🔥 FIREBASE: Fetch social URLs from Firestore "profile/socials" document -->
-        <a href="#" class="social-link" title="GitHub"><i class="fa-brands fa-github"></i></a>
-        <a href="#" class="social-link" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
-        <a href="#" class="social-link" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
-        <a href="#" class="social-link" title="Twitter / X"><i class="fa-brands fa-x-twitter"></i></a>
-        <a href="#" class="social-link" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+
+      <div class="footer-bottom">
+        <div class="footer-brand">
+          <div class="footer-logo">Rotana<span>.</span></div>
+          <div class="footer-copy" data-i18n="footer.copy">© 2025​ NOB Rotana. All rights reserved.</div>
+        </div>
+
+        <div class="social-links">
+          <!-- 🔥 FIREBASE: Fetch social URLs from Firestore "profile/socials" document -->
+          <a href="#" class="social-link" title="GitHub"><i class="fa-brands fa-github"></i></a>
+          <a href="#" class="social-link" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+          <a href="#" class="social-link" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#" class="social-link" title="Telegram"><i class="fa-brands fa-telegram"></i></a>
+          <a href="#" class="social-link" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+        </div>
       </div>
     </div>
   </footer>
@@ -713,10 +756,9 @@
     🔊 AUDIO SOURCES: Replace with actual audio file URLs.
     Free audio sources: https://freesound.org
   -->
-  <audio id="rain-audio" loop>
+  <audio id="rain-audio" loop autoplay>
     <!-- Upbeat Lo-Fi Chill Beat for Rain Mode -->
-    <source src="https://cdn.pixabay.com/audio/2022/05/27/audio_1808fbf7df.mp3" type="audio/mpeg" />
-    <source src="https://assets.mixkit.co/active_storage/sfx/2433/2433-preview.mp3" type="audio/mpeg" />
+    <source src="Assets/sound/rain.mp3" type="audio/mpeg" />
   </audio>
 
   <audio id="snow-audio" loop>
@@ -726,9 +768,36 @@
   </audio>
 
   <!-- Firebase (compat — works with a single inline script block) -->
-  <script src=" https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js">
-  </script>
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
+
+  <!-- =====================    
+       CERTIFICATE IMAGE MODAL
+       ===================== -->
+  <div id="cert-modal" class="cert-modal">
+    <span class="cert-modal-close" onclick="closeCertModal()">&times;</span>
+    <img class="cert-modal-content" id="cert-modal-img" src="" alt="Certificate" />
+    <div id="cert-modal-caption"></div>
+  </div>
+
+  <!-- =====================
+       PRIVATE REPO ALERT MODAL
+       ===================== -->
+  <div id="private-repo-modal" class="alert-modal">
+    <div class="alert-card">
+      <div class="alert-icon-wrap">
+        <i class="fa-solid fa-lock"></i>
+      </div>
+      <h3 class="alert-title">Private Repository</h3>
+      <p class="alert-message">
+        កូដនេះត្រូវបានដាក់ជា Private។ ចង់ប្រាប់ថានៅពេលអ្នកចុចបន្ត អ្នកនឹងឃើញតែ Public Repositories ប៉ុណ្ណោះ។
+      </p>
+      <div class="alert-actions">
+        <button id="alert-confirm-btn" class="alert-btn-confirm">យល់ព្រម និងបន្ត</button>
+        <button class="alert-btn-cancel" onclick="closePrivateRepoAlert()">បោះបង់</button>
+      </div>
+    </div>
+  </div>
 
   <!-- =====================
        JAVASCRIPT
