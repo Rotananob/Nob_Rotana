@@ -5,6 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>NOB Rotana Portfolio</title>
+  <link rel="icon" type="image/png" href="Assets/IMG/pic3.JPG">
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
@@ -109,11 +110,11 @@
             <span data-i18n="hero.statProjects">Projects Done</span>
           </div>
           <div class="hero-stat-item">
-            <strong>2+</strong>
+            <strong>1+</strong>
             <span data-i18n="hero.statYears">Years Experience</span>
           </div>
           <div class="hero-stat-item">
-            <strong>8+</strong>
+            <strong>15+</strong>
             <span data-i18n="hero.statCerts">Certificates</span>
           </div>
         </div>
@@ -182,16 +183,18 @@
 
         <div class="project-card reveal">
           <div class="project-media">
-            <img src="Assets/IMG/project_web.png" alt="Project 1" />
+            <img src="Assets/IMG/project1.png" alt="BacII Calculator"
+              style="object-fit: contain; background: var(--bg-secondary);" />
             <div class="project-media-badge" data-i18n="common.badgeImage">Image</div>
           </div>
           <div class="project-body">
             <div class="project-tags">
-              <span class="tag">React</span>
-              <span class="tag">Firebase</span>
+              <span class="tag">HTML5/CSS3/Javasripts</span>
+              <span class="tag">Firebase APIs Integration</span>
               <span class="tag">Tailwind</span>
+
             </div>
-            <h3 class="project-title" data-i18n="proj1.title">Project Title One</h3>
+            <h3 class="project-title" data-i18n="proj1.title">BacII Calculator</h3>
             <p class="project-desc" data-i18n="proj1.desc">A brief description of this project — what it does, the
               problem it solves, and the tech stack used. Make it compelling.</p>
             <div class="project-links">
@@ -245,13 +248,37 @@
               Loom, or Figma prototype directly inside the card.</p>
             <div class="project-links">
               <a href="#" class="project-link"
-                onclick="showPrivateRepoAlert('https://github.com/Rotananob); return false;"><i
+                onclick="showPrivateRepoAlert('https://github.com/Rotananob'); return false;"><i
                   class="fa-brands fa-github"></i> <span data-i18n="common.code">Code</span></a>
               <a href="https://www.youngpos.app/" class="project-link" target="_blank" rel="noopener noreferrer"><i
                   class="fa-solid fa-arrow-up-right-from-square"></i> <span data-i18n="common.live">Live</span></a>
             </div>
           </div>
         </div>
+
+        <div class="project-card reveal">
+          <div class="project-media">
+            <video src="Assets/vdo/coffee_demo.mp4" autoplay muted loop playsinline class="project-video"></video>
+            <div class="project-media-badge" data-i18n="common.badgeVideo">Video</div>
+          </div>
+          <div class="project-body">
+            <div class="project-tags">
+              <span class="tag">Firebase</span>
+              <span class="tag">PWA</span>
+              <span class="tag">Telegram Bot</span>
+            </div>
+            <h3 class="project-title" data-i18n="proj4.title">Moon Coffee</h3>
+            <p class="project-desc" data-i18n="proj4.desc">A high-performance coffee shop web app designed with an app-like experience. Features include an Admin panel, Telegram Bot order alerts, and full PWA support. Currently 55% complete.</p>
+            <div class="project-links">
+              <a href="#" class="project-link"
+                onclick="showPrivateRepoAlert('https://github.com/Rotananob'); return false;"><i
+                  class="fa-brands fa-github"></i> <span data-i18n="common.code">Code</span></a>
+              <a href="#" class="project-link" target="_blank" rel="noopener noreferrer"><i
+                  class="fa-solid fa-arrow-up-right-from-square"></i> <span data-i18n="common.live">Live</span></a>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
@@ -364,8 +391,10 @@
           </div>
           <div class="cert-date"><i class="fa-regular fa-calendar"></i> 2023</div>
           <a href="#" class="cert-link"
-            onclick="openCertModal('Assets/IMG/cert_sample.png', 'TVET Cambodia Certificate'); return false;"><span
-              data-i18n="cert.view">View Credential</span> <i class="fa-solid fa-arrow-right"></i></a>
+            onclick="openCertModal('Assets/IMG/cert_sample2.png', 'TVET Cambodia Certificate'); return false;">
+            <span data-i18n="cert.view">View Credential</span> <i class="fa-solid fa-arrow-right"></i>
+          </a>
+
         </div>
 
         <div class="cert-card reveal">
@@ -378,8 +407,107 @@
           </div>
           <div class="cert-date"><i class="fa-regular fa-calendar"></i> 2024</div>
           <a href="#" class="cert-link"
-            onclick="openCertModal('Assets/IMG/cert_sample.png', 'SETEC Institute Certificate'); return false;"><span
-              data-i18n="cert.view">View Credential</span> <i class="fa-solid fa-arrow-right"></i></a>
+            onclick="openCertModal('Assets/IMG/cert_sample.png', 'SETEC Institute Certificate'); return false;">
+            <span data-i18n="cert.view">View Credential</span> <i class="fa-solid fa-arrow-right"></i>
+          </a>
+        </div>
+
+        <div class="cert-card reveal">
+          <div class="cert-icon-wrap"><i class="fa-brands fa-free-code-camp"></i></div>
+          <div>
+            <div class="cert-issuer" data-i18n="cert10.issuer">freeCodeCamp</div>
+            <div class="cert-card-title" data-i18n="cert10.title">JavaScript Algorithms and Data Structures</div>
+          </div>
+          <div class="cert-date"><i class="fa-regular fa-calendar"></i> 2024</div>
+          <a href="#" class="cert-link"><span data-i18n="cert.view">View Credential</span> <i
+              class="fa-solid fa-arrow-right"></i></a>
+        </div>
+
+        <div class="cert-card reveal">
+          <div class="cert-icon-wrap"><i class="fa-solid fa-layer-group"></i></div>
+          <div>
+            <div class="cert-issuer" data-i18n="cert11.issuer">freeCodeCamp</div>
+            <div class="cert-card-title" data-i18n="cert11.title">Front End Development Libraries</div>
+          </div>
+          <div class="cert-date"><i class="fa-regular fa-calendar"></i> 2024</div>
+          <a href="#" class="cert-link"><span data-i18n="cert.view">View Credential</span> <i
+              class="fa-solid fa-arrow-right"></i></a>
+        </div>
+
+        <div class="cert-card reveal">
+          <div class="cert-icon-wrap" style="background:rgba(0,100,200,0.1); border-color:rgba(0,100,200,0.2);"><i
+              class="fa-brands fa-wordpress" style="color:#21759b;"></i></div>
+          <div>
+            <div class="cert-issuer" data-i18n="cert12.issuer">Coursera Project</div>
+            <div class="cert-card-title" data-i18n="cert12.title">WordPress for Business</div>
+          </div>
+          <div class="cert-date"><i class="fa-regular fa-calendar"></i> 2024</div>
+          <a href="#" class="cert-link"><span data-i18n="cert.view">View Credential</span> <i
+              class="fa-solid fa-arrow-right"></i></a>
+        </div>
+
+        <div class="cert-card reveal">
+          <div class="cert-icon-wrap" style="background:rgba(0,100,200,0.1); border-color:rgba(0,100,200,0.2);"><i
+              class="fa-brands fa-wordpress" style="color:#21759b;"></i></div>
+          <div>
+            <div class="cert-issuer" data-i18n="cert13.issuer">Coursera Project</div>
+            <div class="cert-card-title" data-i18n="cert13.title">Build Website WordPress</div>
+          </div>
+          <div class="cert-date"><i class="fa-regular fa-calendar"></i> 2024</div>
+          <a href="#" class="cert-link"><span data-i18n="cert.view">View Credential</span> <i
+              class="fa-solid fa-arrow-right"></i></a>
+        </div>
+
+        <div class="cert-card reveal">
+          <div class="cert-icon-wrap"><i class="fa-solid fa-graduation-cap"></i></div>
+          <div>
+            <div class="cert-issuer" data-i18n="cert14.issuer">Ministry of Education (MoEYS)</div>
+            <div class="cert-card-title" data-i18n="cert14.title">Lower Secondary School Certificate (Grade 9)</div>
+          </div>
+          <div class="cert-date"><i class="fa-regular fa-calendar"></i> 2019</div>
+          <a href="#" class="cert-link"
+            onclick="openCertModal('Assets/IMG/cert_sample.png', 'Lower Secondary School Certificate (Grade 9)'); return false;">
+            <span data-i18n="cert.view">View Credential</span> <i class="fa-solid fa-arrow-right"></i>
+          </a>
+        </div>
+
+        <div class="cert-card reveal">
+          <div class="cert-icon-wrap"><i class="fa-solid fa-user-graduate"></i></div>
+          <div>
+            <div class="cert-issuer" data-i18n="cert15.issuer">Ministry of Education (MoEYS)</div>
+            <div class="cert-card-title" data-i18n="cert15.title">High School Diploma (Grade 12 / BacII)</div>
+          </div>
+          <div class="cert-date"><i class="fa-regular fa-calendar"></i> 2022</div>
+          <a href="#" class="cert-link"><span data-i18n="cert.view">View Credential</span> <i
+              class="fa-solid fa-arrow-right"></i></a>
+        </div>
+
+        <div class="cert-card reveal">
+          <div class="cert-icon-wrap" style="background:rgba(100,50,200,0.1); border-color:rgba(100,50,200,0.2);"><i
+              class="fa-solid fa-diagram-project" style="color:#6432c8;"></i></div>
+          <div>
+            <div class="cert-issuer" data-i18n="cert16.issuer">CTH</div>
+            <div class="cert-card-title" data-i18n="cert16.title">CTH Mind Map Certification</div>
+          </div>
+          <div class="cert-date"><i class="fa-regular fa-calendar"></i> 2024</div>
+          <a href="#" class="cert-link"
+            onclick="openCertModal('Assets/IMG/cert_sample.png', 'CTH Mind Map Certification'); return false;">
+            <span data-i18n="cert.view">View Credential</span> <i class="fa-solid fa-arrow-right"></i>
+          </a>
+        </div>
+
+        <div class="cert-card reveal">
+          <div class="cert-icon-wrap" style="background:rgba(0,119,181,0.1); border-color:rgba(0,119,181,0.2);">
+            <i class="fa-brands fa-linkedin" style="color:#0077b5;"></i>
+          </div>
+          <div>
+            <div class="cert-issuer" data-i18n="cert17.issuer">LinkedIn Learning</div>
+            <div class="cert-card-title" data-i18n="cert17.title">LinkedIn Marketing Fundamentals / Advertising</div>
+          </div>
+          <div class="cert-date"><i class="fa-regular fa-calendar"></i> 2024</div>
+          <a href="https://www.linkedin.com/learning/" class="cert-link" target="_blank" rel="noopener noreferrer">
+            <span data-i18n="cert.view">View Credential</span> <i class="fa-solid fa-arrow-right"></i>
+          </a>
         </div>
 
       </div>
@@ -508,40 +636,40 @@
             <div class="timeline-item">
               <div class="timeline-dot"></div>
               <div class="timeline-content">
-                <div class="timeline-period">2025 – Present</div>
-                <h4>Asia Euro University</h4>
-                <div class="timeline-place">Phnom Penh, Cambodia</div>
-                <p>Currently pursuing higher education in Information Technology and Computer Science.</p>
+                <div class="timeline-period" data-i18n="resume.edu1.date">2025 – Present</div>
+                <h4 data-i18n="resume.edu1.title">Asia Euro University</h4>
+                <div class="timeline-place" data-i18n="resume.edu1.place">Phnom Penh, Cambodia</div>
+                <p data-i18n="resume.edu1.desc">Currently pursuing higher education in Information Technology and Computer Science.</p>
               </div>
             </div>
 
             <div class="timeline-item">
               <div class="timeline-dot"></div>
               <div class="timeline-content">
-                <div class="timeline-period">2023 – 2025</div>
-                <h4>Setec Institute</h4>
-                <div class="timeline-place">Phnom Penh, Cambodia</div>
-                <p>Specialized training in information technology and digital technologies.</p>
+                <div class="timeline-period" data-i18n="resume.edu2.date">2023 – 2025</div>
+                <h4 data-i18n="resume.edu2.title">SETEC Institute</h4>
+                <div class="timeline-place" data-i18n="resume.edu2.place">Phnom Penh, Cambodia</div>
+                <p data-i18n="resume.edu2.desc">Specialized training in information technology and digital technologies.</p>
               </div>
             </div>
 
             <div class="timeline-item">
               <div class="timeline-dot"></div>
               <div class="timeline-content">
-                <div class="timeline-period">2019 – 2022</div>
-                <h4>Preah Sihanouk High School</h4>
-                <div class="timeline-place">Preah Sihanouk Province, Cambodia</div>
-                <p>Completed upper secondary education with focus on science and mathematics.</p>
+                <div class="timeline-period" data-i18n="resume.edu3.date">2019 – 2022</div>
+                <h4 data-i18n="resume.edu3.title">Preah Sihanouk High School</h4>
+                <div class="timeline-place" data-i18n="resume.edu3.place">Preah Sihanouk Province, Cambodia</div>
+                <p data-i18n="resume.edu3.desc">Completed upper secondary education with a focus on science and mathematics.</p>
               </div>
             </div>
 
             <div class="timeline-item">
               <div class="timeline-dot"></div>
               <div class="timeline-content">
-                <div class="timeline-period">2008 – 2019</div>
-                <h4>Toul Thmor Secondary School</h4>
-                <div class="timeline-place">Phnom Penh, Cambodia</div>
-                <p>Completed lower and upper secondary education with foundational knowledge across all subjects.</p>
+                <div class="timeline-period" data-i18n="resume.edu4.date">2008 – 2019</div>
+                <h4 data-i18n="resume.edu4.title">Toul Thmor Secondary School</h4>
+                <div class="timeline-place" data-i18n="resume.edu4.place">Phnom Penh, Cambodia</div>
+                <p data-i18n="resume.edu4.desc">Completed lower and upper secondary education with foundational knowledge across all subjects.</p>
               </div>
             </div>
           </div>
