@@ -18,9 +18,13 @@
 
 <body>
   <!-- =====================
-       WEATHER CANVAS
+       WEATHER CANVAS & VIDEO
        ===================== -->
   <canvas id="weather-canvas"></canvas>
+  <video id="storm-video" loop muted playsinline class="weather-video">
+    <source src="https://assets.mixkit.co/videos/preview/mixkit-lightning-strikes-in-the-night-sky-1510-large.mp4"
+      type="video/mp4" />
+  </video>
 
   <!-- =====================  
        NAVIGATION
@@ -104,7 +108,7 @@
         </div>
 
         <div class="hero-stats">
-          <!-- 🔥 FIREBASE: Fetch these numbers from Firestore "profile/stats" document -->
+          <!-- 🔥 FIREBASE: Fetch these numbers from Firestore "yprofile/stats" document -->
           <div class="hero-stat-item">
             <strong>15+</strong>
             <span data-i18n="hero.statProjects">Projects Done</span>
@@ -114,7 +118,7 @@
             <span data-i18n="hero.statYears">Years Experience</span>
           </div>
           <div class="hero-stat-item">
-            <strong>15+</strong>
+            <strong>13 +</strong>
             <span data-i18n="hero.statCerts">Certificates</span>
           </div>
         </div>
@@ -135,18 +139,18 @@
 
         <!-- 📸 PHOTO 1: Replace src with your main profile photo URL -->
         <div class="photo-main-wrap">
-          <img src="Assets/IMG/pic2.JPG" alt="Profile Photo" />
+          <img src="Assets/IMG/pic3.JPG" alt="Profile Photo" />
         </div>
 
         <!-- 📸 PHOTO 2: Replace src with your secondary/action photo URL -->
         <div class="photo-secondary-wrap">
-          <img src="Assets/IMG/pic3.JPG" alt="Secondary Photo" />
+          <img src="Assets/IMG/pic1.JPG" alt="Secondary Photo" />
         </div>
 
 
         <!-- 📸 PHOTO 4 -->
         <div class="photo-quaternary-wrap">
-          <img src="Assets/IMG/pic1.JPG" alt="Photo 4" />
+          <img src="Assets/IMG/pic2.JPG" alt="Photo 4" />
         </div>
       </div>
     </div>
@@ -181,7 +185,7 @@
       <div class="projects-grid" id="projects-grid">
         <!-- Static placeholder cards — replace with dynamic rendering from Firestore -->
 
-        <div class="project-card reveal">
+        <div class="project-card reveal" onclick="openCertModal('Assets/IMG/project1.png', t('proj1.title'))">
           <div class="project-media">
             <img src="Assets/IMG/project1.png" alt="BacII Calculator"
               style="object-fit: contain; background: var(--bg-secondary);" />
@@ -189,68 +193,50 @@
           </div>
           <div class="project-body">
             <div class="project-tags">
-              <span class="tag">HTML5/CSS3/Javasripts</span>
-              <span class="tag">Firebase APIs Integration</span>
-              <span class="tag">Tailwind</span>
-
+              <span class="tag">HTML5/CSS3</span>
+              <span class="tag">JavaScript</span>
+              <span class="tag">Tailwind CSS</span>
+              <span class="tag">Firebase</span>
             </div>
             <h3 class="project-title" data-i18n="proj1.title">BacII Calculator</h3>
-            <p class="project-desc" data-i18n="proj1.desc">A brief description of this project — what it does, the
-              problem it solves, and the tech stack used. Make it compelling.</p>
+            <p class="project-desc" data-i18n="proj1.desc"></p>
             <div class="project-links">
               <a href="https://github.com/Rotananob?tab=repositories" class="project-link" target="_blank"
-                rel="noopener noreferrer"><i class="fa-brands fa-github"></i> <span
+                rel="noopener noreferrer" onclick="event.stopPropagation();"><i class="fa-brands fa-github"></i> <span
                   data-i18n="common.code">Code</span></a>
               <a href="https://bacii-cal.firebaseapp.com/" class="project-link" target="_blank"
-                rel="noopener noreferrer"><i class="fa-solid fa-arrow-up-right-from-square"></i> <span
-                  data-i18n="common.live">Live</span></a>
+                rel="noopener noreferrer" onclick="event.stopPropagation();"><i
+                  class="fa-solid fa-arrow-up-right-from-square"></i> <span data-i18n="common.live">Live</span></a>
             </div>
           </div>
         </div>
 
-        <div class="project-card reveal">
+        <div class="project-card reveal"
+          onclick="openVideoPlayer('Assets/vdo/rotanna_elearninnng.mp4', t('proj2.title'))">
           <div class="project-media">
-            <img src="Assets/IMG/project_mobile.png" alt="Project 2" />
+            <video src="Assets/vdo/rotanna_elearninnng.mp4" autoplay muted loop playsinline
+              class="project-video"></video>
             <div class="project-media-badge" data-i18n="common.badgeVideo">Video</div>
           </div>
           <div class="project-body">
             <div class="project-tags">
+              <span class="tag">Firebase</span>
+              <span class="tag">PWA</span>
               <span class="tag">Node.js</span>
               <span class="tag">Firestore</span>
+              <span class="tag">Realtime Database</span>
+              <span class="tag">Authentication</span>
               <span class="tag">APIs</span>
+              <span class="tag">Email-alert</span>
             </div>
-            <h3 class="project-title" data-i18n="proj2.title">Project Title Two</h3>
-            <p class="project-desc" data-i18n="proj2.desc">Another project description. This slot supports a video demo
-              using HTML5 &lt;video&gt; or an embedded YouTube iframe.</p>
+            <h3 class="project-title" data-i18n="proj2.title">Rotana E-Learning</h3>
+            <p class="project-desc" data-i18n="proj2.desc"></p>
             <div class="project-links">
               <a href="#" class="project-link"
-                onclick="showPrivateRepoAlert('https://github.com/Rotananob'); return false;"><i
+                onclick="event.stopPropagation(); showPrivateRepoAlert('https://github.com/Rotananob'); return false;"><i
                   class="fa-brands fa-github"></i> <span data-i18n="common.code">Code</span></a>
               <a href="https://rotana-elearningg.web.app/" class="project-link" target="_blank"
-                rel="noopener noreferrer"><i class="fa-solid fa-arrow-up-right-from-square"></i> <span
-                  data-i18n="common.live">Live</span></a>
-            </div>
-          </div>
-        </div>
-
-        <div class="project-card reveal">
-          <div class="project-media">
-            <img src="Assets/IMG/project_dashboard.png" alt="Project 3" />
-            <div class="project-media-badge" data-i18n="common.badgeIframe">Iframe</div>
-          </div>
-          <div class="project-body">
-            <div class="project-tags">
-              <span class="tag">Flutter</span>
-              <span class="tag">Firebse Auth</span>
-            </div>
-            <h3 class="project-title" data-i18n="proj3.title">Project Title Three</h3>
-            <p class="project-desc" data-i18n="proj3.desc">This card demonstrates iframe support — embed a YouTube link,
-              Loom, or Figma prototype directly inside the card.</p>
-            <div class="project-links">
-              <a href="#" class="project-link"
-                onclick="showPrivateRepoAlert('https://github.com/Rotananob'); return false;"><i
-                  class="fa-brands fa-github"></i> <span data-i18n="common.code">Code</span></a>
-              <a href="https://www.youngpos.app/" class="project-link" target="_blank" rel="noopener noreferrer"><i
+                rel="noopener noreferrer" onclick="event.stopPropagation();"><i
                   class="fa-solid fa-arrow-up-right-from-square"></i> <span data-i18n="common.live">Live</span></a>
             </div>
           </div>
@@ -258,7 +244,74 @@
 
         <div class="project-card reveal">
           <div class="project-media">
-            <video src="Assets/vdo/coffee_demo.mp4" autoplay muted loop playsinline class="project-video"></video>
+            <iframe id="proj3-video" src="https://www.youtube.com/embed/AurZL1FkU-I?si=8glhJ5yImK7KYT9R"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen></iframe>
+            <div class="project-media-badge" data-i18n="proj3.placeholder">Multiple Demos</div>
+          </div>
+
+          <div class="video-switcher-wrap">
+            <div class="video-switcher">
+              <button class="video-tab active yt-tab" data-i18n="common.demo1"
+                onclick="switchProjectVideo('proj3-video', 'https://www.youtube.com/embed/AurZL1FkU-I?si=8glhJ5yImK7KYT9R', this)">Demo
+                1</button>
+              <button class="video-tab yt-tab" data-i18n="common.demo2"
+                onclick="switchProjectVideo('proj3-video', 'https://www.youtube.com/embed/IymClkvSd_U?si=tRoEgxdA7tl4PY8U', this)">Demo
+                2</button>
+              <button class="video-tab yt-tab" data-i18n="common.demo3"
+                onclick="switchProjectVideo('proj3-video', 'https://www.youtube.com/embed/Wrz4pZgTZQI?si=09sBZls7pf72xUy7', this)">Demo
+                3</button>
+
+              <div class="video-switcher-divider"></div>
+
+              <button class="video-tab fb-tab" data-i18n="common.fbDemo1"
+                onclick="switchProjectVideo('proj3-video', 'https://www.facebook.com/plugins/video.php?href=https://web.facebook.com/share/v/1GFowRs4bg/&show_text=false&width=560', this, 'https://web.facebook.com/share/v/1GFowRs4bg/')">FB
+                Demo 1</button>
+              <button class="video-tab fb-tab" data-i18n="common.fbDemo2"
+                onclick="switchProjectVideo('proj3-video', 'https://www.facebook.com/plugins/video.php?href=https://web.facebook.com/share/v/18XwQZR9Uy/&show_text=false&width=560', this, 'https://web.facebook.com/share/v/18XwQZR9Uy/')">FB
+                Demo 2</button>
+              <button class="video-tab fb-tab" data-i18n="common.fbDemo3"
+                onclick="switchProjectVideo('proj3-video', 'https://www.facebook.com/plugins/video.php?href=https://web.facebook.com/share/v/1DwCic5zEw/&show_text=false&width=560', this, 'https://web.facebook.com/share/v/1DwCic5zEw/')">FB
+                Demo 3</button>
+            </div>
+          </div>
+
+          <div class="project-body">
+            <div class="project-tags">
+              <span class="tag">Flutter</span>
+              <span class="tag">React Native</span>
+              <span class="tag">PHP</span>
+              <span class="tag">React.js</span>
+              <span class="tag">Cloudflare</span>
+              <span class="tag">Local Cloud(Khmer)</span>
+              <span class="tag">PWA</span>
+            </div>
+            <h3 class="project-title" data-i18n="proj3.title">YoungPOS Cambodia</h3>
+            <p class="project-desc" data-i18n="proj3.desc"></p>
+            <div class="project-links">
+              <a href="#" class="project-link"
+                onclick="event.stopPropagation(); showPrivateRepoAlert('https://github.com/Rotananob'); return false;"><i
+                  class="fa-brands fa-github"></i> <span data-i18n="common.github">Code</span></a>
+              <a href="https://www.youngpos.app/" class="project-link" target="_blank" rel="noopener noreferrer"><i
+                  class="fa-solid fa-globe"></i> Website</a>
+              <a href="https://www.youtube.com/@YoungPOSCambodia" class="project-link" target="_blank"
+                rel="noopener noreferrer"><i class="fa-brands fa-youtube"></i> Channel</a>
+              <a href="https://play.google.com/store/apps/details?id=com.odebackend.ode_pos" class="project-link"
+                target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-google-play"></i> <span
+                  data-i18n="common.dashApp">Young-Dash</span></a>
+              <a href="https://play.google.com/store/apps/details?id=com.ode.pos.pos_app" class="project-link"
+                target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-google-play"></i> <span
+                  data-i18n="common.posApp">Young-POS</span></a>
+              <a href="https://t.me/youngposcambbbodia" class="project-link" target="_blank"
+                rel="noopener noreferrer"><i class="fa-brands fa-telegram"></i> <span>Telegram Channel</span></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card reveal" onclick="openVideoPlayer('Assets/vdo/moon_coffee.mp4', t('proj4.title'))">
+          <div class="project-media">
+            <video src="Assets/vdo/moon_coffee.mp4" autoplay muted loop playsinline preload="metadata"
+              class="project-video" style="pointer-events:none;" aria-hidden="true"></video>
             <div class="project-media-badge" data-i18n="common.badgeVideo">Video</div>
           </div>
           <div class="project-body">
@@ -266,15 +319,117 @@
               <span class="tag">Firebase</span>
               <span class="tag">PWA</span>
               <span class="tag">Telegram Bot</span>
+              <span class="tag">Admin Page</span>
             </div>
             <h3 class="project-title" data-i18n="proj4.title">Moon Coffee</h3>
-            <p class="project-desc" data-i18n="proj4.desc">A high-performance coffee shop web app designed with an app-like experience. Features include an Admin panel, Telegram Bot order alerts, and full PWA support. Currently 55% complete.</p>
+            <p class="project-desc" data-i18n="proj4.desc"></p>
             <div class="project-links">
               <a href="#" class="project-link"
-                onclick="showPrivateRepoAlert('https://github.com/Rotananob'); return false;"><i
+                onclick="event.stopPropagation(); showPrivateRepoAlert('https://github.com/Rotananob'); return false;"><i
                   class="fa-brands fa-github"></i> <span data-i18n="common.code">Code</span></a>
-              <a href="#" class="project-link" target="_blank" rel="noopener noreferrer"><i
+              <a href="https://moon-coffee-kh.web.app/" class="project-link" target="_blank" rel="noopener noreferrer"
+                onclick="event.stopPropagation();"><i class="fa-solid fa-arrow-up-right-from-square"></i> <span
+                  data-i18n="common.live">Live</span></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card reveal"
+          onclick="openCertModal('https://student-management-syste-70290.web.app/logo.png', t('proj5.title'))">
+          <div class="project-media">
+            <img src="https://student-management-syste-70290.web.app/logo.png" alt="YOUNG SMS"
+              style="object-fit: contain; background: linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #4338ca 100%); padding: 2rem;" />
+            <div class="project-media-badge" data-i18n="common.badgeImage">Image</div>
+          </div>
+          <div class="project-body">
+            <div class="project-tags">
+              <span class="tag">React.js</span>
+              <span class="tag">Node.js</span>
+              <span class="tag">Express</span>
+              <span class="tag">Firebase</span>
+              <span class="tag">Firestore</span>
+              <span class="tag">Realtime Database</span>
+              <span class="tag">Authentication</span>
+              <span class="tag">Firebase Hosting</span>
+            </div>
+            <h3 class="project-title" data-i18n="proj5.title">YOUNG SMS</h3>
+            <p class="project-desc" data-i18n="proj5.desc"></p>
+            <div class="project-links">
+              <a href="https://github.com/Rotananob/SMS" class="project-link" target="_blank" rel="noopener noreferrer"
+                onclick="event.stopPropagation();"><i class="fa-brands fa-github"></i> <span
+                  data-i18n="common.code">Code</span></a>
+              <a href="https://student-management-syste-70290.web.app/" class="project-link" target="_blank"
+                rel="noopener noreferrer" onclick="event.stopPropagation();"><i
                   class="fa-solid fa-arrow-up-right-from-square"></i> <span data-i18n="common.live">Live</span></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card reveal" onclick="openCertModal('', t('proj6.title'))">
+          <div class="project-media">
+            <div
+              style="display:flex;align-items:center;justify-content:center;height:100%;background:linear-gradient(135deg, #0f172a 0%, #1e3a5f 40%, #3b82f6 100%);padding:2rem;">
+              <div style="text-align:center;">
+                <i class="fa-solid fa-handshake"
+                  style="font-size:3.5rem;color:#60a5fa;margin-bottom:0.75rem;display:block;"></i>
+                <span
+                  style="font-family:'Battambang','Dangrek',sans-serif;font-size:2rem;font-weight:700;color:#fff;letter-spacing:0.02em;">បានលុយ</span>
+                <span
+                  style="display:block;font-size:0.85rem;color:#93c5fd;margin-top:0.3rem;font-family:'DM Sans',sans-serif;">Freelancer
+                  & Client Hub</span>
+              </div>
+            </div>
+            <div class="project-media-badge" data-i18n="common.badgeImage">Image</div>
+          </div>
+          <div class="project-body">
+            <div class="project-tags">
+              <span class="tag">React 18</span>
+              <span class="tag">Vite</span>
+              <span class="tag">TailwindCSS</span>
+              <span class="tag">Node.js</span>
+              <span class="tag">Express</span>
+              <span class="tag">MongoDB</span>
+              <span class="tag">Socket.io</span>
+              <span class="tag">JWT Auth</span>
+            </div>
+            <h3 class="project-title" data-i18n="proj6.title">BanLuy (បានលុយ)</h3>
+            <p class="project-desc" data-i18n="proj6.desc"></p>
+            <div class="project-links">
+              <a href="https://github.com/Rotananob/BanLuy" class="project-link" target="_blank"
+                rel="noopener noreferrer" onclick="event.stopPropagation();"><i class="fa-brands fa-github"></i> <span
+                  data-i18n="common.code">Code</span></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card reveal"
+          onclick="openCertModal('https://rotana-education.web.app/assets/img/images/logo.png', t('proj7.title'))">
+          <div class="project-media">
+            <img src="https://rotana-education.web.app/assets/img/images/logo.png" alt="Rotana E-Learning V2"
+              style="object-fit: contain; background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 50%, #3b82f6 100%); padding: 2rem;" />
+            <div class="project-media-badge" data-i18n="common.badgeImage">Image</div>
+          </div>
+          <div class="project-body">
+            <div class="project-tags">
+              <span class="tag">React 18</span>
+              <span class="tag">TypeScript</span>
+              <span class="tag">Vite</span>
+              <span class="tag">Firebase</span>
+              <span class="tag">Node.js</span>
+              <span class="tag">Express</span>
+              <span class="tag">Cloudflare</span>
+              <span class="tag">PWA</span>
+              <span class="tag">Gemini AI</span>
+            </div>
+            <h3 class="project-title" data-i18n="proj7.title">Rotana E-Learning V2</h3>
+            <p class="project-desc" data-i18n="proj7.desc"></p>
+            <div class="project-links">
+              <a href="https://github.com/Rotananob/e-learning-v2-react-ts" class="project-link" target="_blank"
+                rel="noopener noreferrer" onclick="event.stopPropagation();"><i class="fa-brands fa-github"></i> <span
+                  data-i18n="common.code">Code</span></a>
+              <a href="https://rotana-education.web.app/" class="project-link" target="_blank" rel="noopener noreferrer"
+                onclick="event.stopPropagation();"><i class="fa-solid fa-arrow-up-right-from-square"></i> <span
+                  data-i18n="common.live">Live</span></a>
             </div>
           </div>
         </div>
@@ -297,73 +452,104 @@
         </p>
       </div>
 
+      <div class="cert-featured reveal">
+        <div class="cert-featured-media" onclick="openCertModal('Assets/IMG/pic5.PNG', t('certs.featuredTitle'))">
+          <img src="Assets/IMG/pic9.jpg" alt="Rotana Professional Profile">
+        </div>
+        <div class="cert-featured-content">
+          <div class="cert-featured-badge" data-i18n="certs.featuredBadge">Featured Recognition</div>
+          <h3 class="cert-featured-title" data-i18n="certs.featuredTitle">Professional Identity & Excellence</h3>
+          <p class="cert-featured-desc" data-i18n="certs.featuredDesc">
+            This representation highlights my commitment to digital innovation, branding, and professional growth.
+            A symbol of the dedication I bring to every project.
+          </p>
+          <div class="cert-featured-footer">
+            <div class="cert-date"><i class="fa-regular fa-calendar"></i> 2025</div>
+            <a href="#" class="cert-link"
+              onclick="openCertModal('Assets/IMG/pic5.PNG', t('certs.featuredTitle')); return false;">
+              <span data-i18n="cert.view">View Full Recognition</span> <i class="fa-solid fa-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
       <!-- 🔥 FIREBASE: This grid is populated by loadCertificatesFromFirestore() below. -->
+
       <div class="certs-grid" id="certs-grid">
 
         <div class="cert-card reveal">
           <div class="cert-icon-wrap"><i class="fa-brands fa-google"></i></div>
           <div>
-            <div class="cert-issuer" data-i18n="cert1.issuer">Google Cloud</div>
-            <div class="cert-card-title" data-i18n="cert1.title">Google Cloud Associate Developer</div>
+            <div class="cert-issuer" data-i18n="cert1.issuer">Google</div>
+            <div class="cert-card-title" data-i18n="cert1.title">IT Security: Defense against the digital dark arts
+            </div>
           </div>
-          <img src="Assets/IMG/cert_sample.png" alt="Certificate" class="cert-preview-img" />
-          <div class="cert-date"><i class="fa-regular fa-calendar"></i> Jan 2024</div>
-          <a href="#" class="cert-link"><span data-i18n="cert.view">View Credential</span> <i
+          <div class="cert-date"><i class="fa-regular fa-calendar"></i> Nov 3, 2025</div>
+          <a href="https://www.coursera.org/account/accomplishments/verify/S0D4F5XDMFNH" class="cert-link"
+            target="_blank" rel="noopener noreferrer">
+            <span data-i18n="cert.view">View Credential</span> <i class="fa-solid fa-arrow-right"></i>
+          </a>
+        </div>
+
+        <div class="cert-card reveal">
+          <div class="cert-icon-wrap"><i class="fa-solid fa-server"></i></div>
+          <div>
+            <div class="cert-issuer" data-i18n="cert2.issuer">Google</div>
+            <div class="cert-card-title" data-i18n="cert2.title">System Administration and IT Infrastructure Services
+            </div>
+          </div>
+          <div class="cert-date"><i class="fa-regular fa-calendar"></i> Oct 4, 2025</div>
+          <a href="https://www.coursera.org/account/accomplishments/verify/Q5LWX4YPVZVM" class="cert-link"
+            target="_blank" rel="noopener noreferrer">
+            <span data-i18n="cert.view">View Credential</span> <i class="fa-solid fa-arrow-right"></i>
+          </a>
+        </div>
+
+        <div class="cert-card reveal">
+          <div class="cert-icon-wrap"><i class="fa-brands fa-free-code-camp"></i></div>
+          <div>
+            <div class="cert-issuer" data-i18n="cert3.issuer">freeCodeCamp</div>
+            <div class="cert-card-title" data-i18n="cert3.title">Front End Development Libraries</div>
+          </div>
+          <div class="cert-date"><i class="fa-regular fa-calendar"></i> Oct 2025</div>
+          <a href="https://www.freecodecamp.org/certification/rotananob/front-end-development-libraries"
+            class="cert-link" target="_blank" rel="noopener noreferrer"><span data-i18n="cert.view">View
+              Credential</span> <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+
+        <div class="cert-card reveal">
+          <div class="cert-icon-wrap"><i class="fa-brands fa-js-square"></i></div>
+          <div>
+            <div class="cert-issuer" data-i18n="cert4.issuer">freeCodeCamp</div>
+            <div class="cert-card-title" data-i18n="cert4.title">JavaScript Algorithms and Data Structures</div>
+          </div>
+          <div class="cert-date"><i class="fa-regular fa-calendar"></i> Oct 2025</div>
+          <a href="https://www.freecodecamp.org/certification/rotananob/javascript-algorithms-and-data-structures-v8"
+            class="cert-link" target="_blank" rel="noopener noreferrer"><span data-i18n="cert.view">View
+              Credential</span> <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+
+        <div class="cert-card reveal">
+          <div class="cert-icon-wrap"><i class="fa-brands fa-wordpress"></i></div>
+          <div>
+            <div class="cert-issuer" data-i18n="cert5.issuer">Coursera</div>
+            <div class="cert-card-title" data-i18n="cert5.title">Build a free website with WordPress</div>
+          </div>
+          <div class="cert-date"><i class="fa-regular fa-calendar"></i> Nov 2025</div>
+          <a href="https://www.coursera.org/account/accomplishments/verify/GD6LLTBGNMKP" class="cert-link"
+            target="_blank" rel="noopener noreferrer"><span data-i18n="cert.view">View Credential</span> <i
               class="fa-solid fa-arrow-right"></i></a>
         </div>
 
         <div class="cert-card reveal">
-          <div class="cert-icon-wrap"><i class="fa-solid fa-fire" style="color: #FFA000;"></i></div>
+          <div class="cert-icon-wrap"><i class="fa-brands fa-wordpress"></i></div>
           <div>
-            <div class="cert-issuer" data-i18n="cert2.issuer">Firebase / Google</div>
-            <div class="cert-card-title" data-i18n="cert2.title">Firebase Advanced Development</div>
+            <div class="cert-issuer" data-i18n="cert6.issuer">Coursera</div>
+            <div class="cert-card-title" data-i18n="cert6.title">Use WordPress to Create a Blog for your Business</div>
           </div>
-          <div class="cert-date"><i class="fa-regular fa-calendar"></i> Mar 2024</div>
-          <a href="#" class="cert-link"><span data-i18n="cert.view">View Credential</span> <i
-              class="fa-solid fa-arrow-right"></i></a>
-        </div>
-
-        <div class="cert-card reveal">
-          <div class="cert-icon-wrap"><i class="fa-brands fa-react"></i></div>
-          <div>
-            <div class="cert-issuer" data-i18n="cert3.issuer">Meta</div>
-            <div class="cert-card-title" data-i18n="cert3.title">Meta Front-End Developer Professional</div>
-          </div>
-          <div class="cert-date"><i class="fa-regular fa-calendar"></i> Jun 2024</div>
-          <a href="#" class="cert-link"><span data-i18n="cert.view">View Credential</span> <i
-              class="fa-solid fa-arrow-right"></i></a>
-        </div>
-
-        <div class="cert-card reveal">
-          <div class="cert-icon-wrap"><i class="fa-solid fa-award"></i></div>
-          <div>
-            <div class="cert-issuer" data-i18n="cert4.issuer">Coursera</div>
-            <div class="cert-card-title" data-i18n="cert4.title">Full-Stack Web Development Specialization</div>
-          </div>
-          <div class="cert-date"><i class="fa-regular fa-calendar"></i> Sep 2023</div>
-          <a href="#" class="cert-link"><span data-i18n="cert.view">View Credential</span> <i
-              class="fa-solid fa-arrow-right"></i></a>
-        </div>
-
-        <div class="cert-card reveal">
-          <div class="cert-icon-wrap"><i class="fa-brands fa-aws"></i></div>
-          <div>
-            <div class="cert-issuer" data-i18n="cert5.issuer">Amazon Web Services</div>
-            <div class="cert-card-title" data-i18n="cert5.title">AWS Certified Cloud Practitioner</div>
-          </div>
-          <div class="cert-date"><i class="fa-regular fa-calendar"></i> Dec 2023</div>
-          <a href="#" class="cert-link"><span data-i18n="cert.view">View Credential</span> <i
-              class="fa-solid fa-arrow-right"></i></a>
-        </div>
-
-        <div class="cert-card reveal">
-          <div class="cert-icon-wrap"><i class="fa-solid fa-trophy"></i></div>
-          <div>
-            <div class="cert-issuer" data-i18n="cert6.issuer">Hackathon 2024</div>
-            <div class="cert-card-title" data-i18n="cert6.title">1st Place — National Hackathon Winner</div>
-          </div>
-          <div class="cert-date"><i class="fa-regular fa-calendar"></i> Aug 2024</div>
-          <a href="#" class="cert-link"><span data-i18n="cert.details">View Details</span> <i
+          <div class="cert-date"><i class="fa-regular fa-calendar"></i> Nov 2025</div>
+          <a href="https://www.coursera.org/account/accomplishments/verify/IZPWMUQHNWFP" class="cert-link"
+            target="_blank" rel="noopener noreferrer"><span data-i18n="cert.view">View Credential</span> <i
               class="fa-solid fa-arrow-right"></i></a>
         </div>
 
@@ -375,8 +561,8 @@
             <div class="cert-issuer" data-i18n="cert7.issuer">freeCodeCamp</div>
             <div class="cert-card-title" data-i18n="cert7.title">Responsive Web Design Certification</div>
           </div>
-          <div class="cert-date"><i class="fa-regular fa-calendar"></i> 2023</div>
-          <a href="https://www.freecodecamp.org/certification/your-username/responsive-web-design" class="cert-link"
+          <div class="cert-date"><i class="fa-regular fa-calendar"></i> Oct 2025</div>
+          <a href="https://www.freecodecamp.org/certification/rotananob/responsive-web-design" class="cert-link"
             target="_blank" rel="noopener noreferrer"><span data-i18n="cert.view">View Credential</span> <i
               class="fa-solid fa-arrow-right"></i></a>
         </div>
@@ -387,11 +573,11 @@
           </div>
           <div>
             <div class="cert-issuer" data-i18n="cert8.issuer">TVET Cambodia</div>
-            <div class="cert-card-title" data-i18n="cert8.title">Internship Certificate — TVET</div>
+            <div class="cert-card-title" data-i18n="cert8.title">Internship Certificate — TET</div>
           </div>
-          <div class="cert-date"><i class="fa-regular fa-calendar"></i> 2023</div>
+          <div class="cert-date"><i class="fa-regular fa-calendar"></i> 2022-2023</div>
           <a href="#" class="cert-link"
-            onclick="openCertModal('Assets/IMG/cert_sample2.png', 'TVET Cambodia Certificate'); return false;">
+            onclick="openCertModal('Assets/IMG/cert_gd.jpg', 'TVET Cambodia Certificate'); return false;">
             <span data-i18n="cert.view">View Credential</span> <i class="fa-solid fa-arrow-right"></i>
           </a>
 
@@ -402,71 +588,44 @@
             <i class="fa-solid fa-school" style="color:#b30000;"></i>
           </div>
           <div>
-            <div class="cert-issuer" data-i18n="cert9.issuer">SETEC Institute</div>
-            <div class="cert-card-title" data-i18n="cert9.title">Internship Certificate — SETEC</div>
+            <div class="cert-issuer">SETEC Institute</div>
+            <div class="cert-card-title">
+              ​​​Assosiation of​​​​​​​​ ​MIS<br>
+              <span style="font-size:0.98em;color:var(--text-secondary);">Sub-degree in Management Information System
+                (MIS)</span>
+            </div>
           </div>
-          <div class="cert-date"><i class="fa-regular fa-calendar"></i> 2024</div>
+          <div class="cert-date"><i class="fa-regular fa-calendar"></i> Dec 2024</div>
           <a href="#" class="cert-link"
-            onclick="openCertModal('Assets/IMG/cert_sample.png', 'SETEC Institute Certificate'); return false;">
-            <span data-i18n="cert.view">View Credential</span> <i class="fa-solid fa-arrow-right"></i>
+            onclick="openCertModal('Assets/IMG/cert_setec.jpg', 'សញ្ញាបត្ររង MIS SETEC Institute'); return false;">
+            <span>View Credential</span> <i class="fa-solid fa-arrow-right"></i>
           </a>
         </div>
 
         <div class="cert-card reveal">
-          <div class="cert-icon-wrap"><i class="fa-brands fa-free-code-camp"></i></div>
+          <div class="cert-icon-wrap"><i class="fa-brands fa-linkedin" style="color:#0077b5;"></i></div>
           <div>
-            <div class="cert-issuer" data-i18n="cert10.issuer">freeCodeCamp</div>
-            <div class="cert-card-title" data-i18n="cert10.title">JavaScript Algorithms and Data Structures</div>
+            <div class="cert-issuer">LinkedIn</div>
+            <div class="cert-card-title">Marketing Fundamentals (Foundational)</div>
           </div>
-          <div class="cert-date"><i class="fa-regular fa-calendar"></i> 2024</div>
-          <a href="#" class="cert-link"><span data-i18n="cert.view">View Credential</span> <i
-              class="fa-solid fa-arrow-right"></i></a>
+          <div class="cert-date"><i class="fa-regular fa-calendar"></i> 2025</div>
+          <a href="https://verify.skilljar.com/c/bxrjj77gov47" class="cert-link" target="_blank"
+            rel="noopener noreferrer">
+            <span>View Credential</span> <i class="fa-solid fa-arrow-right"></i>
+          </a>
         </div>
 
-        <div class="cert-card reveal">
-          <div class="cert-icon-wrap"><i class="fa-solid fa-layer-group"></i></div>
-          <div>
-            <div class="cert-issuer" data-i18n="cert11.issuer">freeCodeCamp</div>
-            <div class="cert-card-title" data-i18n="cert11.title">Front End Development Libraries</div>
-          </div>
-          <div class="cert-date"><i class="fa-regular fa-calendar"></i> 2024</div>
-          <a href="#" class="cert-link"><span data-i18n="cert.view">View Credential</span> <i
-              class="fa-solid fa-arrow-right"></i></a>
-        </div>
 
-        <div class="cert-card reveal">
-          <div class="cert-icon-wrap" style="background:rgba(0,100,200,0.1); border-color:rgba(0,100,200,0.2);"><i
-              class="fa-brands fa-wordpress" style="color:#21759b;"></i></div>
-          <div>
-            <div class="cert-issuer" data-i18n="cert12.issuer">Coursera Project</div>
-            <div class="cert-card-title" data-i18n="cert12.title">WordPress for Business</div>
-          </div>
-          <div class="cert-date"><i class="fa-regular fa-calendar"></i> 2024</div>
-          <a href="#" class="cert-link"><span data-i18n="cert.view">View Credential</span> <i
-              class="fa-solid fa-arrow-right"></i></a>
-        </div>
-
-        <div class="cert-card reveal">
-          <div class="cert-icon-wrap" style="background:rgba(0,100,200,0.1); border-color:rgba(0,100,200,0.2);"><i
-              class="fa-brands fa-wordpress" style="color:#21759b;"></i></div>
-          <div>
-            <div class="cert-issuer" data-i18n="cert13.issuer">Coursera Project</div>
-            <div class="cert-card-title" data-i18n="cert13.title">Build Website WordPress</div>
-          </div>
-          <div class="cert-date"><i class="fa-regular fa-calendar"></i> 2024</div>
-          <a href="#" class="cert-link"><span data-i18n="cert.view">View Credential</span> <i
-              class="fa-solid fa-arrow-right"></i></a>
-        </div>
 
         <div class="cert-card reveal">
           <div class="cert-icon-wrap"><i class="fa-solid fa-graduation-cap"></i></div>
           <div>
             <div class="cert-issuer" data-i18n="cert14.issuer">Ministry of Education (MoEYS)</div>
-            <div class="cert-card-title" data-i18n="cert14.title">Lower Secondary School Certificate (Grade 9)</div>
+            <div class="cert-card-title" data-i18n="cert14.title">Lower Secondary School Certificate (Diploma)</div>
           </div>
           <div class="cert-date"><i class="fa-regular fa-calendar"></i> 2019</div>
           <a href="#" class="cert-link"
-            onclick="openCertModal('Assets/IMG/cert_sample.png', 'Lower Secondary School Certificate (Grade 9)'); return false;">
+            onclick="openCertModal('Assets/IMG/cert_g9.jpg', 'Lower Secondary School Certificate (Grade 9)'); return false;">
             <span data-i18n="cert.view">View Credential</span> <i class="fa-solid fa-arrow-right"></i>
           </a>
         </div>
@@ -474,28 +633,72 @@
         <div class="cert-card reveal">
           <div class="cert-icon-wrap"><i class="fa-solid fa-user-graduate"></i></div>
           <div>
-            <div class="cert-issuer" data-i18n="cert15.issuer">Ministry of Education (MoEYS)</div>
-            <div class="cert-card-title" data-i18n="cert15.title">High School Diploma (Grade 12 / BacII)</div>
+            <div class="cert-issuer">Ministry of Education (MoEYS)</div>
+            <div class="cert-card-title">High School Diploma (Grade 12 / BacII)</div>
           </div>
-          <div class="cert-date"><i class="fa-regular fa-calendar"></i> 2022</div>
-          <a href="#" class="cert-link"><span data-i18n="cert.view">View Credential</span> <i
+          <div class="cert-date"><i class="fa-regular fa-calendar"></i> 2022-2023</div>
+          <a href="https://verify.gov.kh/verify/dd13aa5a4a4c4971293dae4e347261646b9f909fbcc25045d75e38e564bcd630?key=8ac7df91f8fedbb67832029fa144577817f1f5c6d91ec34f67bc69f5cc0c3f26"
+            class="cert-link" target="_blank" rel="noopener noreferrer"><span>View Credential</span> <i
               class="fa-solid fa-arrow-right"></i></a>
         </div>
 
         <div class="cert-card reveal">
           <div class="cert-icon-wrap" style="background:rgba(100,50,200,0.1); border-color:rgba(100,50,200,0.2);"><i
-              class="fa-solid fa-diagram-project" style="color:#6432c8;"></i></div>
+              class="fa-solid fa-bullseye" style="color:#6432c8;"></i></div>
           <div>
-            <div class="cert-issuer" data-i18n="cert16.issuer">CTH</div>
-            <div class="cert-card-title" data-i18n="cert16.title">CTH Mind Map Certification</div>
+            <div class="cert-issuer">CTH</div>
+            <div class="cert-card-title">CTH Mind Map Certification (Generation 51)</div>
+          </div>
+          <div class="cert-date"><i class="fa-regular fa-calendar"></i> Oct 25, 2024</div>
+          <a href="#" class="cert-link"
+            onclick="openCertModal('Assets/IMG/cert_cth51th.png ', 'CTH Mind Map Certification Generation 51'); return false;">
+            <span>View Credential</span> <i class="fa-solid fa-arrow-right"></i>
+          </a>
+        </div>
+
+        <div class="cert-card reveal">
+          <div class="cert-icon-wrap" style="background:rgba(100,50,200,0.1); border-color:rgba(100,50,200,0.2);"><i
+              class="fa-solid fa-bullseye" style="color:#6432c8;"></i></div>
+          <div>
+            <div class="cert-issuer">CTH</div>
+            <div class="cert-card-title">CTH Mind Map Certification (Generation 8)</div>
+          </div>
+          <div class="cert-date"><i class="fa-regular fa-calendar"></i> 2021</div>
+          <a href="#" class="cert-link"
+            onclick="openCertModal('Assets/IMG/certificate8th.jpg', 'CTH Mind Map Certification Generation 8 '); return false;">
+            <span>View Credential</span> <i class="fa-solid fa-arrow-right"></i>
+          </a>
+        </div>
+
+        <div class="cert-card reveal">
+          <div class="cert-icon-wrap" style="background:rgba(200,100,50,0.1); border-color:rgba(200,100,50,0.2);">
+            <i class="fa-solid fa-file-contract" style="color:#c86432;"></i>
+          </div>
+          <div>
+            <div class="cert-issuer" data-i18n="cert18.issuer">SETEC Institute</div>
+            <div class="cert-card-title" data-i18n="cert18.title">Management Information System (MIS) - Transcript</div>
           </div>
           <div class="cert-date"><i class="fa-regular fa-calendar"></i> 2024</div>
-          <a href="#" class="cert-link"
-            onclick="openCertModal('Assets/IMG/cert_sample.png', 'CTH Mind Map Certification'); return false;">
+          <a href="#" class="cert-link" onclick="openCertModal('', t('cert18.title')); return false;">
             <span data-i18n="cert.view">View Credential</span> <i class="fa-solid fa-arrow-right"></i>
           </a>
         </div>
 
+        <div class="cert-card reveal">
+          <div class="cert-icon-wrap" style="background:rgba(50,100,200,0.1); border-color:rgba(50,100,200,0.2);">
+            <i class="fa-solid fa-file-signature" style="color:#3264c8;"></i>
+          </div>
+          <div>
+            <div class="cert-issuer" data-i18n="cert19.issuer">Asia Euro University</div>
+            <div class="cert-card-title" data-i18n="cert19.title">Computer Science (CS) - Transcript</div>
+          </div>
+          <div class="cert-date"><i class="fa-regular fa-calendar"></i> 2024-Present</div>
+          <a href="#" class="cert-link" onclick="openCertModal('', t('cert19.title')); return false;">
+            <span data-i18n="cert.view">View Credential</span> <i class="fa-solid fa-arrow-right"></i>
+          </a>
+        </div>
+
+        <!-- 
         <div class="cert-card reveal">
           <div class="cert-icon-wrap" style="background:rgba(0,119,181,0.1); border-color:rgba(0,119,181,0.2);">
             <i class="fa-brands fa-linkedin" style="color:#0077b5;"></i>
@@ -509,7 +712,7 @@
             <span data-i18n="cert.view">View Credential</span> <i class="fa-solid fa-arrow-right"></i>
           </a>
         </div>
-
+-->
       </div>
     </div>
   </section>
@@ -543,13 +746,13 @@
             <!-- 🔥 FIREBASE: Fetch tech stack from Firestore "profile/techStack" array field -->
             <span class="tech-pill">React</span>
             <span class="tech-pill">Firebase</span>
-            <span class="tech-pill">Node.js</span>
+            <span class="tech-pill">Basic Node.js</span>
             <span class="tech-pill">TypeScript</span>
             <span class="tech-pill">Mern Stack</span>
             <span class="tech-pill">Tailwind CSS</span>
             <span class="tech-pill">Firestore</span>
             <span class="tech-pill">Cloud Functions</span>
-            <span class="tech-pill">Integration APIs</span>
+            <span class="tech-pill">Integration APIs​ Firebase<br>& Other google services</span>
             <span class="tech-pill">Git / GitHub</span>
             <span class="tech-pill">Database Realtime</span>
             <span class="tech-pill">HTML/CSS/JS</span>
@@ -580,9 +783,9 @@
             </div>
           </div>
           <div class="skill-item">
-            <div class="skill-label"><span data-i18n="skill.htmlcss">HTML5 &amp; CSS3</span><span>95%</span></div>
+            <div class="skill-label"><span data-i18n="skill.htmlcss">HTML5 &amp; CSS3</span><span>91%</span></div>
             <div class="skill-bar">
-              <div class="skill-bar-fill" data-width="95"></div>
+              <div class="skill-bar-fill" data-width="91"></div>
             </div>
           </div>
           <div class="skill-item">
@@ -639,7 +842,8 @@
                 <div class="timeline-period" data-i18n="resume.edu1.date">2025 – Present</div>
                 <h4 data-i18n="resume.edu1.title">Asia Euro University</h4>
                 <div class="timeline-place" data-i18n="resume.edu1.place">Phnom Penh, Cambodia</div>
-                <p data-i18n="resume.edu1.desc">Currently pursuing higher education in Information Technology and Computer Science.</p>
+                <p data-i18n="resume.edu1.desc">Currently pursuing higher education in Information Technology and
+                  Computer Science.</p>
               </div>
             </div>
 
@@ -649,7 +853,8 @@
                 <div class="timeline-period" data-i18n="resume.edu2.date">2023 – 2025</div>
                 <h4 data-i18n="resume.edu2.title">SETEC Institute</h4>
                 <div class="timeline-place" data-i18n="resume.edu2.place">Phnom Penh, Cambodia</div>
-                <p data-i18n="resume.edu2.desc">Specialized training in information technology and digital technologies.</p>
+                <p data-i18n="resume.edu2.desc">Specialized training in information technology and digital technologies.
+                </p>
               </div>
             </div>
 
@@ -659,7 +864,8 @@
                 <div class="timeline-period" data-i18n="resume.edu3.date">2019 – 2022</div>
                 <h4 data-i18n="resume.edu3.title">Preah Sihanouk High School</h4>
                 <div class="timeline-place" data-i18n="resume.edu3.place">Preah Sihanouk Province, Cambodia</div>
-                <p data-i18n="resume.edu3.desc">Completed upper secondary education with a focus on science and mathematics.</p>
+                <p data-i18n="resume.edu3.desc">Completed upper secondary education with a focus on science and
+                  mathematics.</p>
               </div>
             </div>
 
@@ -669,7 +875,8 @@
                 <div class="timeline-period" data-i18n="resume.edu4.date">2008 – 2019</div>
                 <h4 data-i18n="resume.edu4.title">Toul Thmor Secondary School</h4>
                 <div class="timeline-place" data-i18n="resume.edu4.place">Phnom Penh, Cambodia</div>
-                <p data-i18n="resume.edu4.desc">Completed lower and upper secondary education with foundational knowledge across all subjects.</p>
+                <p data-i18n="resume.edu4.desc">Completed lower and upper secondary education with foundational
+                  knowledge across all subjects.</p>
               </div>
             </div>
           </div>
@@ -802,14 +1009,14 @@
             <div class="contact-info-icon"><i class="fa-solid fa-envelope"></i></div>
             <div class="contact-info-text">
               <strong data-i18n="contact.labelEmail">Email</strong>
-              <span>your.email@gmail.com</span>
+              <span>nobrothana180703@gmail.com</span>
             </div>
           </div>
           <div class="contact-info-item">
             <div class="contact-info-icon"><i class="fa-solid fa-location-dot"></i></div>
             <div class="contact-info-text">
               <strong data-i18n="contact.labelLoc">Location</strong>
-              <span data-i18n="contact.valLoc">Your City, Your Country</span>
+              <span data-i18n="contact.valLoc">Phnom Penh, Cambodia</span>
             </div>
           </div>
           <div class="contact-info-item">
@@ -823,21 +1030,66 @@
           <!-- Social links inside contact -->
           <div style="margin-top:1rem;">
             <div
-              style="font-size:0.78rem;color:var(--text-muted);font-family:'JetBrains Mono',monospace;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:0.75rem;"
-              data-i18n="contact.findMe">Find me on</div>
-            <div class="social-links">
-              <!-- 🔥 FIREBASE: Fetch social URLs from Firestore "profile/socials" document -->
-              <a href="#" class="social-link" title="GitHub"><i class="fa-brands fa-github"></i></a>
-              <a href="#" class="social-link" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
-              <a href="#" class="social-link" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
-              <a href="#" class="social-link" title="Twitter / X"><i class="fa-brands fa-x-twitter"></i></a>
-              <a href="#" class="social-link" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
-              <a href="#" class="social-link" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
+              style="font-size:0.78rem; color:var(--text-muted); font-family:'JetBrains Mono',monospace; letter-spacing:0.06em; text-transform:uppercase; margin-bottom:1rem;"
+              data-i18n="contact.findMe">
+              Find me on
+            </div>
+
+            <div class="social-links" style="display: flex; flex-wrap: wrap; gap: 1.5rem;">
+
+              <!-- GitHub -->
+              <a href="https://github.com/Rotananob"
+                style="display: flex; flex-direction: column; align-items: center; text-decoration: none; color: inherit; gap: 5px;"
+                title="GitHub">
+                <i class="fa-brands fa-github" style="font-size: 1.5rem;"></i>
+                <span style="font-size: 0.65rem; font-family: 'JetBrains Mono', monospace;">GitHub</span>
+              </a>
+
+              <!-- LinkedIn -->
+              <a href="https://kh.linkedin.com/in/rotana-nob-1171992a4"
+                style="display: flex; flex-direction: column; align-items: center; text-decoration: none; color: inherit; gap: 5px;"
+                title="LinkedIn">
+                <i class="fa-brands fa-linkedin-in" style="font-size: 1.5rem;"></i>
+                <span style="font-size: 0.65rem; font-family: 'JetBrains Mono', monospace;">LinkedIn</span>
+              </a>
+
+              <!-- Khmer-24h -->
+              <a href="https://www.khmer24.com/en/g337784155997916871725559?srsltid=AfmBOooFr_CYyGB6tLoDjpFmK2LMM7L8SfeZXO46uirS2ffg87hYU3aW"
+                style="display: flex; flex-direction: column; align-items: center; text-decoration: none; color: inherit; gap: 5px;"
+                title="Khmer-24h">
+                <i class="fa-solid fa-shop" style="font-size: 1.5rem;"></i>
+                <span style="font-size: 0.65rem; font-family: 'JetBrains Mono', monospace;">Khmer24</span>
+              </a>
+
+              <!-- Twitter / X -->
+              <a href="https://x.com/rotananob"
+                style="display: flex; flex-direction: column; align-items: center; text-decoration: none; color: inherit; gap: 5px;"
+                title="Twitter / X">
+                <i class="fa-brands fa-x-twitter" style="font-size: 1.5rem;"></i>
+                <span style="font-size: 0.65rem; font-family: 'JetBrains Mono', monospace;">X</span>
+              </a>
+
+              <!-- Khmer-Coder -->
+              <a href="https://khmercoder.com/@rotana-nob"
+                style="display: flex; flex-direction: column; align-items: center; text-decoration: none; color: inherit; gap: 5px;"
+                title="Khmer-Coder">
+                <i class="fa-solid fa-code" style="font-size: 1.5rem;"></i>
+                <span style="font-size: 0.65rem; font-family: 'JetBrains Mono', monospace;">Khmer-Coder</span>
+              </a>
+
+              <!-- YouTube -->
+              <a href="https://www.youtube.com/@The-XFlow"
+                style="display: flex; flex-direction: column; align-items: center; text-decoration: none; color: inherit; gap: 5px;"
+                title="YouTube">
+                <i class="fa-brands fa-youtube" style="font-size: 1.5rem;"></i>
+                <span style="font-size: 0.65rem; font-family: 'JetBrains Mono', monospace;">YouTube</span>
+              </a>
+
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </div>​
   </section>
 
   <!-- =====================
@@ -847,7 +1099,7 @@
     <div class="footer-inner">
       <div class="footer-top reveal">
         <h2 class="footer-heading" data-i18n="footer.heading">Let's build something amazing together.</h2>
-        <a href="mailto:your.email@gmail.com" class="footer-email">your.email@gmail.com</a>
+        <a href="mailto:nobrothana180703l@gmail.com" class="footer-email">nobrothana180703@gmail.com</a>
       </div>
 
       <div class="footer-bottom">
@@ -858,11 +1110,16 @@
 
         <div class="social-links">
           <!-- 🔥 FIREBASE: Fetch social URLs from Firestore "profile/socials" document -->
-          <a href="#" class="social-link" title="GitHub"><i class="fa-brands fa-github"></i></a>
-          <a href="#" class="social-link" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
-          <a href="#" class="social-link" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
-          <a href="#" class="social-link" title="Telegram"><i class="fa-brands fa-telegram"></i></a>
-          <a href="#" class="social-link" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="https://github.com/Rotananob" class="social-link" title="GitHub"><i
+              class="fa-brands fa-github"></i></a>
+          <a href="https://kh.linkedin.com/in/rotana-nob-1171992a4" class="social-link" title="LinkedIn"><i
+              class="fa-brands fa-linkedin-in"></i></a>
+          <a href="https://web.facebook.com/TheRotanaNob/?_rdc=1&_rdr#" class="social-link" title="Facebook"><i
+              class="fa-brands fa-facebook-f"></i></a>
+          <a href="https://t.me/NobRotana" class="social-link" title="Telegram"><i
+              class="fa-brands fa-telegram"></i></a>
+          <a href="https://www.instagram.com/rotana.nob/" class="social-link" title="Instagram"><i
+              class="fa-brands fa-instagram"></i></a>
         </div>
       </div>
     </div>
@@ -890,12 +1147,18 @@
   </audio>
 
   <audio id="snow-audio" loop>
-    <!-- Chill Synthwave / Upbeat for Snow Mode -->
-    <source src="https://cdn.pixabay.com/audio/2022/01/21/audio_51474dddb0.mp3" type="audio/mpeg" />
-    <source src="https://assets.mixkit.co/active_storage/sfx/2242/2242-preview.mp3" type="audio/mpeg" />
+    <source src="Assets/sound/snow.mp3" type="audio/mpe g" />
+  </audio>
+
+  <audio id="thunder-audio" loop>
+    <!-- Powerful Thunder Strike sound -->
+    <source src="https://cdn.pixabay.com/audio/2022/03/10/audio_b3c959779e.mp3" type="audio/mpeg" />
   </audio>
 
   <!-- Firebase (compat — works with a single inline script block) -->
+  <!-- Back to top button -->
+  <button id="back-to-top" aria-label="Back to top" title="Back to top"><i class="fa-solid fa-arrow-up"></i></button>
+
   <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
 
@@ -911,6 +1174,19 @@
   <!-- =====================
        PRIVATE REPO ALERT MODAL
        ===================== -->
+  <!-- =====================
+       VIDEO PLAYER MODAL
+       ===================== -->
+  <div id="video-modal" class="video-modal">
+    <div class="video-modal-container">
+      <span class="video-modal-close" onclick="closeVideoPlayer()">&times;</span>
+      <h3 id="video-modal-title" class="video-modal-title">Project Video</h3>
+      <div class="video-wrapper">
+        <video id="video-modal-player" controls playsinline src=""></video>
+      </div>
+    </div>
+  </div>
+
   <div id="private-repo-modal" class="alert-modal">
     <div class="alert-card">
       <div class="alert-icon-wrap">

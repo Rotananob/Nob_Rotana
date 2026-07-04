@@ -136,6 +136,23 @@ img {
   opacity: 1;
 }
 
+.weather-video {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0;
+  transition: opacity 1.2s ease-in-out;
+}
+
+.weather-video.active {
+  opacity: 0.65;
+}
+
 /* =============================
        SCROLLBAR
        ============================= */
@@ -541,10 +558,12 @@ nav {
   background: var(--bg-secondary);
 }
 
-    .photo-main-wrap img, .photo-main-wrap .photo-placeholder {
-      width: 100%; height: 100%;
-      object-fit: cover;
-    }
+.photo-main-wrap img,
+.photo-main-wrap .photo-placeholder {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
 
 .photo-placeholder {
   display: flex;
@@ -608,16 +627,17 @@ nav {
   animation: float 4s ease-in-out infinite 1s;
 }
 
-    .photo-secondary-wrap img, 
-    .photo-tertiary-wrap img, 
-    .photo-quaternary-wrap img,
-    .photo-secondary-wrap .photo-placeholder,
-    .photo-tertiary-wrap .photo-placeholder,
-    .photo-quaternary-wrap .photo-placeholder {
-      width: 100%; height: 100%;
-      object-fit: contain;
-      background: var(--bg-secondary);
-    }
+.photo-secondary-wrap img,
+.photo-tertiary-wrap img,
+.photo-quaternary-wrap img,
+.photo-secondary-wrap .photo-placeholder,
+.photo-tertiary-wrap .photo-placeholder,
+.photo-quaternary-wrap .photo-placeholder {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: var(--bg-secondary);
+}
 
 @keyframes float {
 
@@ -943,6 +963,7 @@ section {
 
 .project-links {
   display: flex;
+  flex-wrap: wrap;
   gap: 0.75rem;
 }
 
@@ -958,6 +979,14 @@ section {
   border: 1px solid rgba(99, 179, 237, 0.2);
   background: rgba(99, 179, 237, 0.06);
   transition: all 0.2s;
+  white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+  .project-link {
+    padding: 6px 10px;
+    font-size: 0.725rem;
+  }
 }
 
 [data-theme="light"] .project-link {
@@ -1073,6 +1102,102 @@ section {
 
 .cert-link:hover {
   gap: 0.75rem;
+}
+
+/* Featured Cert Intro */
+.cert-featured {
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: 3rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 30px;
+  padding: 2.5rem;
+  margin-bottom: 3rem;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(20px);
+  border-left: 4px solid var(--accent);
+}
+
+.cert-featured-media {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1/1;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--glass-border);
+  cursor: pointer;
+}
+
+.cert-featured-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.cert-featured:hover .cert-featured-media img {
+  transform: scale(1.05);
+}
+
+.cert-featured-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.cert-featured-badge {
+  display: inline-flex;
+  padding: 6px 14px;
+  background: var(--glow);
+  color: var(--accent);
+  border-radius: 100px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  width: fit-content;
+}
+
+.cert-featured-title {
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.cert-featured-desc {
+  color: var(--text-secondary);
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+
+.cert-featured-footer {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-top: 0.5rem;
+}
+
+@media (max-width: 992px) {
+  .cert-featured {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding: 2rem;
+    text-align: center;
+  }
+  .cert-featured-badge {
+    margin: 0 auto;
+  }
+  .cert-featured-footer {
+    justify-content: center;
+  }
+  .cert-featured-media {
+    max-width: 400px;
+    margin: 0 auto;
+  }
 }
 
 /* =============================
@@ -2174,4 +2299,296 @@ footer::before {
   color: #fff;
   background: rgba(255, 255, 255, 0.1);
   border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* =============================
+   VIDEO PLAYER MODAL STYLES
+   ============================= */
+.video-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(8, 12, 20, 0.85);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  z-index: 2000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.video-modal.open {
+  opacity: 1;
+}
+
+.video-modal-container {
+  width: 90%;
+  max-width: 1000px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--glass-border);
+  border-radius: 24px;
+  padding: 2.5rem;
+  position: relative;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  transform: scale(0.9);
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.video-modal.open .video-modal-container {
+  transform: scale(1);
+}
+
+.video-modal-close {
+  position: absolute;
+  top: 20px;
+  right: 25px;
+  font-size: 2.5rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: color 0.2s;
+  line-height: 1;
+}
+
+.video-modal-close:hover {
+  color: var(--accent);
+}
+
+.video-modal-title {
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  padding-right: 40px;
+}
+
+.video-wrapper {
+  width: 100%;
+  aspect-ratio: 16/9;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #000;
+  border: 1px solid var(--border);
+}
+
+.video-wrapper video {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Play Icon Overlay for Project Cards */
+.project-media::after {
+  content: '\f04b';
+  font-family: 'Font Awesome 6 Free';
+  font-weight: 900;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.8);
+  width: 60px;
+  height: 60px;
+  background: var(--accent);
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  opacity: 0;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  pointer-events: none;
+  box-shadow: 0 0 20px var(--glow-strong);
+  z-index: 10;
+}
+
+.project-card:hover .project-media::after {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+/* Specific styling for Project 2 and 4 to show they are playable */
+.project-card[onclick] .project-media::after {
+  opacity: 0.6;
+}
+
+.project-card[onclick]:hover .project-media::after {
+  opacity: 1;
+}
+
+@media (max-width: 768px) {
+  .video-modal-container {
+    padding: 1.5rem;
+    width: 95%;
+  }
+
+  .video-modal-title {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+  }
+}
+
+/* Image Expansion Icon for projects with onclick image modal */
+.project-card[onclick*="openCertModal"] .project-media::after {
+  content: '\f00e';
+  /* Font Awesome search-plus icon for magnifying effect */
+}
+
+/* =============================
+   PROJECT VIDEO SWITCHER (TABS)
+   ============================= */
+.video-switcher-wrap {
+  padding: 12px 15px 4px;
+  background: var(--bg-primary);
+  border-bottom: 1px solid var(--border);
+}
+
+.video-switcher {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 4px 4px 10px;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+  scroll-behavior: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.video-switcher::-webkit-scrollbar {
+  display: none; /* Chrome/Safari */
+}
+
+.video-tab {
+  flex: 0 0 auto;
+  min-width: 100px;
+  padding: 9px 16px;
+  border-radius: 12px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  white-space: nowrap;
+  text-align: center;
+}
+
+.video-switcher-divider {
+  width: 1px;
+  height: 24px;
+  background: var(--border);
+  margin: auto 8px;
+  flex-shrink: 0;
+}
+
+.video-switcher-label {
+  display: none; /* Removed in favor of divider */
+}
+
+.video-tab:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.video-tab.active {
+  color: #fff;
+}
+
+.video-tab.yt-tab.active {
+  background: linear-gradient(135deg, #ff0000 0%, #ff4b2b 100%);
+  border-color: #ff0000;
+  box-shadow: 0 4px 15px rgba(255, 0, 0, 0.4);
+}
+
+.video-tab.fb-tab.active {
+  background: linear-gradient(135deg, #1877f2 0%, #00c6ff 100%);
+  border-color: #1877f2;
+  box-shadow: 0 4px 15px rgba(24, 119, 242, 0.4);
+}
+
+.video-tab.yt-tab:not(.active) {
+  background: rgba(255, 0, 0, 0.08);
+  border-color: rgba(255, 0, 0, 0.15);
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.video-tab.fb-tab:not(.active) {
+  background: rgba(24, 119, 242, 0.08);
+  border-color: rgba(24, 119, 242, 0.15);
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.video-tab.yt-tab:hover:not(.active) {
+  border-color: #ff0000;
+  color: #fff;
+  background: rgba(255, 0, 0, 0.3);
+  box-shadow: 0 0 12px rgba(255, 0, 0, 0.2);
+}
+
+.video-tab.fb-tab:hover:not(.active) {
+  border-color: #1877f2;
+  color: #fff;
+  background: rgba(24, 119, 242, 0.3);
+  box-shadow: 0 0 12px rgba(24, 119, 242, 0.2);
+}
+
+@media (max-width: 768px) {
+  .video-switcher-wrap {
+    padding: 10px 10px 2px;
+  }
+  
+  .video-switcher {
+    gap: 6px;
+  }
+
+  .video-tab {
+    padding: 8px 12px;
+    font-size: 0.7rem;
+    min-width: 90px;
+  }
+}
+
+/* =============================
+   BACK TO TOP BUTTON
+   ============================= */
+#back-to-top {
+  position: fixed;
+  right: 1rem;
+  bottom: 1.5rem;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: opacity .25s ease, transform .2s ease, visibility .2s;
+  z-index: 9999;
+  border: none;
+  cursor: pointer;
+}
+#back-to-top.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+#back-to-top i {
+  font-size: 1rem;
+}
+#back-to-top:focus {
+  outline: 2px solid rgba(255,255,255,0.18);
+}
+
+@media (max-width: 480px) {
+  #back-to-top { right: 0.75rem; bottom: 1rem; width: 40px; height: 40px; }
 }

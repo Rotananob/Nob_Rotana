@@ -34,43 +34,62 @@ Object.assign(I18N.en, {
   'projects.titleHighlight': 'Projects',
   'projects.desc': 'A showcase of things I\'ve built — from real-time Firebase apps to full-stack platforms and creative experiments. And also have backend and server.',
   'proj1.placeholder': 'Project Screenshot / Demo',
-  'proj1.title': 'BacII Caculator',
-  'proj1.desc': 'This project supports the calculation of BacII results and other features. Especially focusing on the Algorithm to not calculate the wrong technicality that focuses on the actual score calculation of the Ministry of Education, Youth and Sports.',
+  'proj1.title': 'BacII Calculator',
+  'proj1.desc': 'BacII Calculator is a high-precision tool designed for students to calculate their National High School Exam (BacII) results. It features a complex algorithm strictly aligned with the Ministry of Education, Youth and Sports (MoEYS) scoring standards to ensure 100% technical accuracy. Built with HTML5, JavaScript, and Tailwind CSS, it offers a seamless real-time calculation experience, automatic grade determination (A-F), and subject-specific analytics. Integrated with Firebase for reliable performance.',
   'proj2.placeholder': 'Video Demo',
-  'proj2.title': 'Project Title Two',
-  'proj2.desc': 'Another project description. This slot supports a video demo using HTML5 <video> or an embedded YouTube iframe.',
-  'proj3.placeholder': 'Embedded iframe / YouTube',
-  'proj3.title': 'Project Title Three',
-  'proj3.desc': 'This card demonstrates iframe support — embed a YouTube link, Loom, or Figma prototype directly inside the card.',
+  'proj2.title': 'Rotana E-Learning',
+  'proj2.desc': 'Rotana E-Learning is a comprehensive IT and CS education platform built with Firebase (80% complete). It offers a social experience where students can post, react, and comment on each other\'s updates. Features include a Leaderboard, AI Chatbot, Blue Verification, Profile Settings, and a vast library of courses in Khmer and English. Powered by Progressive Web App (PWA) technology.',
+  'proj3.placeholder': 'Multiple Demos Available',
+  'proj3.title': 'YoungPOS Cambodia(Startup)',
+  'proj3.desc': 'YoungPOS is a newly launched business management startup co-founded by a team of 3 people. This all-in-one POS system is specially designed for startups and mid-sized businesses, featuring two specialized platforms: Young-Dash (for owners) and Young-POS (for staff), plus an integrated Digital Menu. Built with Flutter, React Native, PHP, and React.js, and hosted on Dunpenh Cloud with Cloudflare. We are currently rolling out the system for active use by businesses while preparing for App Store expansion. Moreover, we use local cloud to protect data and increase performance.',
   'proj4.title': 'Moon Coffee',
-  'proj4.desc': 'A high-performance coffee shop web application designed with an app-like experience. Features include a dedicated Admin Page, Real-time Telegram Bot alerts for orders, and full PWA support. Powered by Firebase (Firestore, Real-time DB, Auth). (55% Complete).',
+  'proj4.desc': 'MOON-Coffee is a high-performance coffee shop web application designed with a premium, app-like experience. It features a complete online ordering system, integrated QR payment, and a dedicated user account system for order history and favorites. The ecosystem includes a powerful Admin Page for shop management and real-time Telegram Bot alerts for instant order notifications. Built as a Progressive Web App (PWA) and powered by Firebase (Firestore, Real-time DB, Auth).​ Currently, it is 50% complete.',
+  'proj5.title': 'YOUNG SMS',
+  'proj5.desc': 'YOUNG SMS (Student Management System) is a professional full-stack web application built for educational institutions to efficiently manage their academic operations in real-time. It features a comprehensive Dashboard with key analytics (student count, course count, enrollment, average scores, attendance rate), complete Student Management (CRUD operations with status filtering), Course Management, Attendance Tracking (mark, filter, and update records), Grade Management with automatic letter grade calculation, a Notification System (create, target by role, and manage alerts), and detailed Reports with analytics insights. Built with React.js on the frontend, Node.js & Express on the backend, and powered by Firebase (Firestore, Realtime Database, Authentication, and Firebase Hosting) for a seamless cloud-based experience. Features JWT-based secure authentication, session persistence, and bilingual support (EN/KH). Developed as an AEU University assignment project.',
+  'proj6.title': 'BanLuy (បានលុយ)',
+  'proj6.desc': 'BanLuy (បានលុយ) is a modern freelancer marketplace platform connecting skilled professionals with clients across Cambodia. It features a Dual Role System (Freelancer & Client accounts), complete Job Management (post jobs, submit proposals, hire, and manage projects through their lifecycle), Real-time Chat powered by Socket.io for seamless client-freelancer communication, a Rating & Review System for post-project feedback, and Advanced Search with filters by category, skills, budget, and experience level. The platform is built with a mobile-first responsive design using React 18 + Vite and TailwindCSS on the frontend, Node.js + Express on the backend, and MongoDB as the database. It features JWT-based authentication, bcrypt password hashing, and full Khmer language UI support with Khmer fonts (Battambang, Kantumruy Pro). Key pages include Homepage, Job Listings, Freelancer Directory, Dashboard, Real-time Chat, and Profile Settings. Currently 50% complete and under active development.',
+  'proj7.title': 'Rotana E-Learning V2',
+  'proj7.desc': 'Rotana E-Learning V2 is the completely redesigned version of the original Rotana E-Learning platform, rebuilt from the ground up with a modern React 18 + TypeScript + Vite architecture for superior performance and maintainability. This free IT and Coding education platform in Khmer features 20+ professional courses (HTML, CSS, JavaScript, React, Python, Mobile App Dev, SQL, Docker, and more), an Interactive Quiz System with automated scoring and professional certificate generation upon passing, Firebase Authentication & Firestore for secure login and real-time data syncing (community posts, leaderboards, user progress), an AI Chatbot Tutor powered by the Gemini API to assist students in Khmer, and a comprehensive Learning Dashboard tracking study time with Cambodia timezone (UTC+7) alignment, course progress, favorites, and completed lessons. The backend uses Node.js + Express, with Firebase and Cloudflare integration. Features ultimate SEO (JSON-LD, Open Graph, Twitter cards, dynamic sitemap), PWA installability, responsive glassmorphism UI, and Google Analytics. Currently under active development.',
   'common.badgeImage': 'Image',
   'common.badgeVideo': 'Video',
   'common.badgeIframe': 'Iframe',
   'common.code': 'Code',
   'common.live': 'Live',
+  'common.demo1': 'Tutorial 1',
+  'common.demo2': 'Tutorial 2',
+  'common.demo3': 'Tutorial 3',
+  'common.fbDemo1': 'Demo 1',
+  'common.fbDemo2': 'Demo 2',
+  'common.fbDemo3': 'Demo 3',
+  'common.fbSection': 'Facebook Demos',
+  'common.github': 'Code',
+  'common.dashApp': 'Young-Dash',
+  'common.posApp': 'Young-POS',
   'certs.sectionTag': 'Achievements',
   'certs.titleBefore': 'Certificates &',
   'certs.titleHighlight': 'Awards',
   'certs.desc': 'Credentials and recognition from courses, competitions, and industry platforms that shaped my skills.',
-  'cert.view': 'View Credential',
+  'certs.featuredBadge': '  Recognition',
+  'certs.featuredTitle': 'Professional Identity & Excellence',
+  'certs.featuredDesc': 'This representation highlights my commitment to digital innovation, branding, and professional growth. A symbol of the dedication I bring to every project.',
+  'cert.view': 'View Images ',
   'cert.details': 'View Details',
-  'cert1.issuer': 'Google Cloud',
-  'cert1.title': 'Google Cloud Associate Developer',
-  'cert2.issuer': 'Firebase / Google',
-  'cert2.title': 'Firebase Advanced Development',
-  'cert3.issuer': 'Meta',
-  'cert3.title': 'Meta Front-End Developer Professional',
-  'cert4.issuer': 'Coursera',
-  'cert4.title': 'Full-Stack Web Development Specialization',
-  'cert5.issuer': 'Amazon Web Services',
-  'cert5.title': 'AWS Certified Cloud Practitioner',
-  'cert6.issuer': 'Hackathon 2024',
-  'cert6.title': '1st Place — National Hackathon Winner',
+  'cert1.issuer': 'Google',
+  'cert1.title': 'IT Security: Defense against the digital dark arts',
+  'cert2.issuer': 'Google',
+  'cert2.title': 'System Administration and IT Infrastructure Services',
+  'cert3.issuer': 'freeCodeCamp',
+  'cert3.title': 'Front End Development Libraries',
+  'cert4.issuer': 'freeCodeCamp',
+  'cert4.title': 'JavaScript Algorithms and Data Structures',
+  'cert5.issuer': 'Coursera',
+  'cert5.title': 'Build a free website with WordPress',
+  'cert6.issuer': 'Coursera',
+  'cert6.title': 'Use WordPress to Create a Blog for your Business',
   'cert7.issuer': 'freeCodeCamp',
-  'cert7.title': 'Responsive Web Design Certification',
+  'cert7.title': 'Responsive Web Design',
   'cert8.issuer': 'TVET Cambodia',
-  'cert8.title': 'Internship Certificate — TVET',
+  'cert8.title': 'Internship Certificate — Graphic Design',
   'cert9.issuer': 'SETEC Institute',
   'cert9.title': 'Internship Certificate — SETEC',
   'cert10.issuer': 'freeCodeCamp',
@@ -82,17 +101,21 @@ Object.assign(I18N.en, {
   'cert13.issuer': 'Coursera Project',
   'cert13.title': 'Build Website WordPress',
   'cert14.issuer': 'Ministry of Education (MoEYS)',
-  'cert14.title': 'Lower Secondary School Certificate (Grade 9)',
+  'cert14.title': 'Lower Secondary School Certificate (Grade 9 / Diploma)',
   'cert15.issuer': 'Ministry of Education (MoEYS)',
-  'cert15.title': 'High School Diploma (Grade 12 / BacII)',
+  'cert15.title': 'High School (Grade 12 / BacII)',
   'cert16.issuer': 'CTH',
   'cert16.title': 'CTH Mind Map Certification',
   'cert17.issuer': 'LinkedIn Learning',
   'cert17.title': 'LinkedIn Marketing Fundamentals / Advertising',
+  'cert18.issuer': 'SETEC Institute',
+  'cert18.title': 'Management Information System (MIS) - Transcript',
+  'cert19.issuer': 'Asia Euro University',
+  'cert19.title': 'Computer Science (CS) - Transcript',
   'about.sectionTag': 'About Me',
   'about.titleBefore': 'Skills &',
   'about.titleHighlight': 'Expertise',
-  'about.p1': 'I\'m a passionate developer with a love for building fast, scalable, and beautiful web applications. My core stack revolves around <strong style="color:var(--text-primary)">React, Firebase, and Node.js</strong>, and I\'m constantly exploring new tools to sharpen my craft.',
+  'about.p1': 'I\'m a passionate developer with a love for building fast, scalable, and beautiful web applications. My core stack revolves around <strong style="color:var(--text-primary)">React, Firebase, and basic Node.js</strong>, and I\'m constantly exploring new tools to sharpen my craft.',
   'about.p2': 'When I\'m not coding, you\'ll find me contributing to open source, mentoring juniors, or brewing the perfect cup of coffee before a deep work session.',
   'skill.frontend': 'React & JavaScript',
   'skill.firebase': 'Firebase (Auth, Firestore, Storage)',
@@ -122,17 +145,19 @@ Object.assign(I18N.en, {
   'contact.labelEmail': 'Email',
   'contact.labelLoc': 'Location',
   'contact.labelResp': 'Response Time',
-  'contact.valLoc': 'Your City, Your Country',
+  'contact.valLoc': 'Phnom Penh, Cambodia',
   'contact.valResp': 'Within 24 hours',
   'contact.findMe': 'Find me on',
   'footer.heading': 'Let\'s build something amazing together.',
-  'footer.copy': '© 2025 Your Name. All rights reserved.',
-  'weather.btnTitle': 'Toggle weather ambience (rain / snow)',
+  'footer.copy': '© 2025 Rotana NOB. All rights reserved.',
+  'weather.btnTitle': 'Toggle weather ambience (rain / snow / storm)',
   'weather.zen': 'Zen Mode',
   'weather.nextSnow': 'Next: Snow',
+  'weather.nextThunder': 'Next: Storm',
   'weather.nextOff': 'Next: Off',
   'weather.rainMode': '🌧 Rain Mode',
   'weather.snowMode': '❄️ Snow Mode',
+  'weather.thunderMode': '🌩 Storm Mode',
   'nav.resume': 'Resume',
   'resume.sectionTag': 'My Story',
   'resume.titleBefore': 'My',
@@ -143,39 +168,39 @@ Object.assign(I18N.en, {
   'resume.edu1.date': '2025 – Present',
   'resume.edu1.title': 'Asia Euro University',
   'resume.edu1.place': 'Phnom Penh, Cambodia',
-  'resume.edu1.desc': 'Currently pursuing higher education in Information Technology and Computer Science.',
+  'resume.edu1.desc': 'Currently pursuing higher education in Computer Science.',
   'resume.edu2.date': '2023 – 2025',
   'resume.edu2.title': 'SETEC Institute',
   'resume.edu2.place': 'Phnom Penh, Cambodia',
-  'resume.edu2.desc': 'Specialized training in information technology and digital technologies.',
+  'resume.edu2.desc': 'Completed associate degree at SETEC Institute in Management information systems.',
   'resume.edu3.date': '2019 – 2022',
   'resume.edu3.title': 'Preah Sihanouk High School',
-  'resume.edu3.place': 'Preah Sihanouk Province, Cambodia',
-  'resume.edu3.desc': 'Completed upper secondary education with a focus on science and mathematics.',
+  'resume.edu3.place': 'Kampong Cham Province, Cambodia',
+  'resume.edu3.desc': 'Completed upper secondary education with a scoreboard 79.491.',
   'resume.edu4.date': '2008 – 2019',
   'resume.edu4.title': 'Toul Thmor Secondary School',
-  'resume.edu4.place': 'Phnom Penh, Cambodia',
-  'resume.edu4.desc': 'Completed lower and upper secondary education with foundational knowledge across all subjects.',
-  'resume.exp1.title': 'Web Developer Freelancer & Startup Founder',
+  'resume.edu4.place': 'Kampong Cham, Cambodia',
+  'resume.edu4.desc': 'Completed lower and upper secondary education with grade "Very Good" and foundational knowledge across all subjects.',
+  'resume.exp1.title': 'Web Developer Freelancer & Startup Founder Cloud POS',
   'resume.exp1.place': 'Freelance / Startup',
   'resume.exp1.date': '2025 – Present',
   'resume.exp1.desc': 'Developing bespoke web solutions as a freelancer while building "Cloud POS", a startup web application for business management with team.',
   'resume.exp2.title': 'Assistant IT Support',
   'resume.exp2.place': 'SETEC IT Department',
   'resume.exp2.date': '2024 – 2025',
-  'resume.exp2.desc': 'Provided technical assistance, hardware maintenance, and software troubleshooting for organizational efficiency.',
+  'resume.exp2.desc': 'Provided technical assistance, hardware maintenance, and software troubleshooting for organizational efficiency​ And help fix problems of setec students.',
   'resume.exp3.title': 'Graphic Design',
   'resume.exp3.place': 'TVET Cambodia',
   'resume.exp3.date': '2022 – 2023',
-  'resume.exp3.desc': 'Crafted visual identities, marketing materials, and digital assets for diverse client projects.',
+  'resume.exp3.desc': 'Crafted visual identities, marketing , and digital assets for diverse client projects.',
   'resume.exp4.title': 'Content Creation',
   'resume.exp4.place': 'Social Media',
   'resume.exp4.date': '2021 – Present',
-  'resume.exp4.desc': 'Producing engaging digital content across platforms, focusing on tech culture and brand building.',
+  'resume.exp4.desc': 'Producing engaging digital content across platforms, focusing on tech culture and brand building and learn about videos editing.',
   'resume.exp5.title': 'Business Online',
   'resume.exp5.place': 'E-commerce',
   'resume.exp5.date': '2020 – 2021',
-  'resume.exp5.desc': 'Managed digital store operations, customer relationship management, and online sales strategies.',
+  'resume.exp5.desc': 'Managed digital store operations, customer relationship management,page management and online sales strategies and delivery.',
   'alert.privateTitle': 'Private Repository',
   'alert.privateMessage': 'This code is set to Private. Please note that when you continue, you will only see Public Repositories.',
   'alert.confirm': 'Confirm and Continue',
@@ -210,43 +235,62 @@ Object.assign(I18N.km, {
   'projects.titleHighlight': 'ពិសេស',
   'projects.desc': 'ការបង្ហាញអ្វីដែលខ្ញុំបានបង្កើត — ពីកម្មវិធី Firebase រហូតដល់វេទិកាពេញលេញ និងមាន​​ Backend and server ផងដែរ។',
   'proj1.placeholder': 'រូបថត/ស្រាប់ពីគម្រោង',
-  'proj1.title': 'កម្មវិធីគណនាលិទ្ធផលបាក់ឌុប',
-  'proj1.desc': 'កម្មវិធីនេះគាំទ្រការគណនាលិទ្ធផលបាក់ឌុប និងមានមុខងារផ្សេងៗទៀត ជាពិសេសគឺផ្ដោតលើ Algorithm មិនឲគណនាខុសបច្ចេកទេសដែលផ្ដោតទៅលើការគណនាពិន្ទុជាក់ស្ដែងរបស់ក្រសួងអប់រំយុវជន និង កីឡា ។',
+  'proj1.title': 'BacII Calculator',
+  'proj1.desc': 'BacII Calculator គឺជាឧបករណ៍គណនាពិន្ទុដ៏ត្រឹមត្រូវបំផុតដែលត្រូវបានរចនាឡើងសម្រាប់សិស្សានុសិស្សក្នុងការផ្ទៀងផ្ទាត់លទ្ធផលប្រឡងបាក់ឌុប (BacII)។ វាប្រើប្រាស់ Algorithm ដ៏ស្មុគស្មាញដែលអនុលោមតាមស្ដង់ដារផ្ដល់ពិន្ទុរបស់ក្រសួងអប់រំ យុវជន និងកីឡា ដើម្បីធានាបាននូវសុក្រឹតភាពបច្ចេកទេស ១០០%។ បង្កើតឡើងដោយ HTML5, JavaScript និង Tailwind CSS កម្មវិធីនេះផ្ដល់នូវបទពិសោធន៍គណនាពេលវេលាពិត (Real-time), ការកំណត់និទ្ទេសស្វ័យប្រវត្តិ (A-F) និងការវិភាគពិន្ទុតាមមុខវិជ្ជា។ ភ្ជាប់ជាមួយ Firebase ដើម្បីធានាបាននូវដំណើរការកាន់តែល្អប្រសើរ។',
   'proj2.placeholder': 'វីដេអូសាកល្បង',
-  'proj2.title': 'ចំណងជើងគម្រោង ២',
-  'proj2.desc': 'គម្រោងនេះគាំទ្រវីដេអូ HTML5 ឬ embedding YouTube។',
-  'proj3.placeholder': 'iframe / YouTube',
-  'proj3.title': 'ចំណងជើងគម្រោង ៣',
-  'proj3.desc': 'ប័ណ្ណនេះគាំទ្រការបង្កប់ YouTube Loom ឬ Figma ផ្ទាល់ក្នុងកាត។',
+  'proj2.title': 'Rotana E-Learning',
+  'proj2.desc': 'Rotana E-Learning៖ ជាវេទិកាសិក្សាផ្នែក IT និង CS ដ៏ទូលំទូលាយដែលភ្ជាប់ជាមួយសេវ៉ាកម្ម Firebase (សម្រេចបាន ៨០%)។ វាផ្តល់នូវបទពិសោធន៍បែបបណ្តាញសង្គម ដែលសិស្សអាចផុស (Post) ផ្ដល់ប្រតិកម្ម (React) និងបញ្ចេញមតិ (Comment) ជាមួយគ្នាបាន។ មានមុខងារដូចជា តារាងចំណាត់ថ្នាក់ (Leaderboard), Chatbot, ឆ្នូតខៀវ Profile (Blue Verification), ការកំណត់ព័ត៌មានផ្ទាល់ខ្លួន (Profile Settings) និងមេរៀនជាច្រើនទៀត ដែលដំណើរការជា Progressive Web App (PWA)។',
+  'proj3.placeholder': 'វីដេអូបង្ហាញជាច្រើន',
+  'proj3.title': 'YoungPOS Cambodia(Startup)',
+  'proj3.desc': 'YoungPOS គឺជាកម្មវិធីគ្រប់គ្រងអាជីវកម្មបែប Startup និង ប្រភេទកណ្ដាល ដែលបង្កើតឡើងដោយក្រុមពួកយើងចំនួន ៣ នាក់។ វាជាប្រព័ន្ធ All-in-One Cloud POS ដ៏ទំនើបសម្រាប់អាជីវកម្មខ្នាតតូច និងមធ្យម (Startups & SMEs) ដែលមានមុខងារគ្រប់គ្រង តារាងមុខម្ហូបឌីជីថល (Digital Menu) និងច្រើនទៀត។ ក្នុងនោះមានកម្មវិធីពីរគឺ៖ Young-Dash (សម្រាប់ម្ចាស់) និង Young-POS (សម្រាប់បុគ្គលិក)។ បច្ចុប្បន្នយើងកំពុងដាក់ឱ្យអាជីវកម្មនានាប្រើប្រាស់តាមរយះ Website and Play store​ ប្រហែល២០ហាង និង កំពុងរៀបចំដាក់ចូល App Store ប្រសិនបើការរីកចម្រើននៅតែបន្ត។ ហើយជាពិសេសគឺយើងប្រើ Cloud នៅខ្មែរដែលការពារទិន្នន័យមិនឲចេញទៅក្រៅនិងបង្កើនល្បឿនការប្រើប្រាស់។',
   'proj4.title': 'Moon Coffee',
-  'proj4.desc': 'កម្មវិធីគេហទំព័រលក់កាហ្វេដែលមានលក្ខណៈដូច App និងមាន Admin Page សម្រាប់គ្រប់គ្រង។ មានប្រព័ន្ធ Telegram Bot Alert សម្រាប់ការជូនដំណឹង និងប្រើប្រាស់ Firebase ជា Backend (Realtime Database, Firestore, Auth)។ បច្ចុប្បន្នសម្រេចបាន ៥៥% កំពុងកែសម្រួលផ្នែក Algorithm និងមានលក្ខណៈជា PWA ផងដែរ។',
+  'proj4.desc': 'MOON-Coffee គឺជាកម្មវិធីគេហទំព័រលក់កាហ្វេ ម្ហូប និងតែ ដែលមានលក្ខណៈដូច App និងផ្ដល់នូវបទពិសោធន៍ប្រើប្រាស់ដ៏រលូន។ វាមានប្រព័ន្ធកម្ម៉ង់ម្ហូបអនឡាញពេញលេញ ការទូទាត់តាម QR Code និងការគ្រប់គ្រងគណនីអតិថិជន។ លើសពីនេះ វាក៏មាន Admin Page សម្រាប់គ្រប់គ្រងហាង និងប្រព័ន្ធ Telegram Bot សម្រាប់ជូនដំណឹងរាល់ពេលមានការកម្ម៉ង់ភ្លាមៗ (Real-time) ផងដែរ។ បង្កើតឡើងជាប្រភេទ PWA និងប្រើប្រាស់ Firebase ជា Backend (Realtime Database, Firestore, Auth)។​ជាក់ស្ដែងបច្ចប្បន្នគឺស្ថិតក្នុងការ develop នៅឡើយទេគឺបាន 50% ប៉ុណ្ណោះ។',
+  'proj5.title': 'YOUNG SMS',
+  'proj5.desc': 'YOUNG SMS (Student Management System) គឺជាប្រព័ន្ធគ្រប់គ្រងសិស្សពេញលេញដែលត្រូវបានបង្កើតឡើងសម្រាប់គ្រឹះស្ថានអប់រំ ដើម្បីគ្រប់គ្រងប្រតិបត្តិការសិក្សាដោយប្រសិទ្ធភាពក្នុងពេលវេលាពិត។ វាមានមុខងារសម្បូរបែបរួមមាន៖ Dashboard ជាមួយស្ថិតិសំខាន់ៗ (ចំនួនសិស្ស វគ្គសិក្សា ការចុះឈ្មោះ ពិន្ទុមធ្យម អត្រាវត្តមាន), ការគ្រប់គ្រងសិស្ស (បន្ថែម កែប្រែ លុប ត្រងតាមស្ថានភាព), ការគ្រប់គ្រងវគ្គសិក្សា, ការតាមដានវត្តមាន (កត់ត្រា ត្រង និងធ្វើបច្ចុប្បន្នភាព), ការគ្រប់គ្រងពិន្ទុជាមួយការគណនានិទ្ទេសស្វ័យប្រវត្តិ, ប្រព័ន្ធជូនដំណឹង (បង្កើត កំណត់គោលដៅតាមតួនាទី និងគ្រប់គ្រងការជូនដំណឹង) និងរបាយការណ៍លម្អិតជាមួយការវិភាគ។ បង្កើតដោយ React.js នៅ Frontend, Node.js និង Express នៅ Backend និងដំណើរការដោយ Firebase (Firestore, Realtime Database, Authentication និង Firebase Hosting)។ មានប្រព័ន្ធសុវត្ថិភាព JWT, ការរក្សាទុក Session និងគាំទ្រពីរភាសា (EN/KH)។ បង្កើតជាគម្រោងកិច្ចការសម្រាប់សាកលវិទ្យាល័យ AEU។',
+  'proj6.title': 'BanLuy (បានលុយ)',
+  'proj6.desc': 'BanLuy (បានលុយ) គឺជាវេទិកាផ្សារការងារឯករាជ្យ (Freelancer Marketplace) ដ៏ទំនើបដែលភ្ជាប់អ្នកជំនាញជាមួយអតិថិជននៅកម្ពុជា។ វាមានមុខងារសំខាន់ៗដូចជា៖ ប្រព័ន្ធតួនាទីពីរ (Freelancer និង Client), ការគ្រប់គ្រងការងារពេញលេញ (បង្ហោះការងារ ដាក់សំណើ ជ្រើសរើស និងគ្រប់គ្រងគម្រោង), ការជជែកពេលវេលាពិតដោយ Socket.io សម្រាប់ទំនាក់ទំនងរវាងអតិថិជន និងអ្នកជំនាញ, ប្រព័ន្ធវាយតម្លៃ និងផ្ដល់មតិ (Rating & Review) បន្ទាប់ពីគម្រោងបានបញ្ចប់, និងការស្វែងរកកម្រិតខ្ពស់ដែលអាចត្រងតាមប្រភេទ ជំនាញ ថវិកា និងកម្រិតបទពិសោធន៍។ បង្កើតដោយ React 18 + Vite និង TailwindCSS នៅ Frontend, Node.js + Express នៅ Backend និង MongoDB ជា Database។ មាន JWT Authentication, bcrypt សម្រាប់ការពារពាក្យសម្ងាត់ និង UI ពេញលេញជាភាសាខ្មែរជាមួយ Font ខ្មែរ (Battambang, Kantumruy Pro)។ ទំព័រសំខាន់ៗរួមមាន Homepage, Job Listings, Freelancer Directory, Dashboard, Real-time Chat និង Profile Settings។ បច្ចុប្បន្នបានសម្រេច ៥០% និងកំពុង Develop បន្ត។',
+  'proj7.title': 'Rotana E-Learning V2',
+  'proj7.desc': 'Rotana E-Learning V2 គឺជាកំណែថ្មីទាំងស្រុងនៃវេទិកា Rotana E-Learning ដើម ដែលត្រូវបានបង្កើតឡើងវិញពីដើមជាមួយស្ថាបត្យកម្ម React 18 + TypeScript + Vite ដ៏ទំនើបសម្រាប់ដំណើរការល្អប្រសើរ និងងាយស្រួលថែទាំ។ វេទិកាសិក្សា IT និង Coding ឥតគិតថ្លៃជាភាសាខ្មែរនេះមានវគ្គសិក្សាជាង ២០+ (HTML, CSS, JavaScript, React, Python, Mobile App Dev, SQL, Docker និងច្រើនទៀត), ប្រព័ន្ធប្រឡង Interactive Quiz ជាមួយការដាក់ពិន្ទុស្វ័យប្រវត្តិ និងការបង្កើតវិញ្ញាបនបត្រវិជ្ជាជីវៈនៅពេលប្រឡងជាប់, Firebase Authentication & Firestore សម្រាប់ការចូលគណនីសុវត្ថិភាព និងការធ្វើសមកាលកម្មទិន្នន័យពេលវេលាពិត (ផុស Leaderboard វឌ្ឍនភាពអ្នកប្រើ), AI Chatbot Tutor ដែលដំណើរការដោយ Gemini API ជួយសិស្សជាភាសាខ្មែរ, និង Dashboard សិក្សាដ៏ទូលំទូលាយតាមដានរយៈពេលសិក្សា (UTC+7 កម្ពុជា) វគ្គដែលកំពុងរៀន ចំណូលចិត្ត និងមេរៀនដែលបានបញ្ចប់។ Backend ប្រើ Node.js + Express ភ្ជាប់ Firebase និង Cloudflare។ មាន SEO កម្រិតខ្ពស់ (JSON-LD, Open Graph, Twitter cards, sitemap), PWA, UI glassmorphism ស្រស់ស្អាត និង Google Analytics។ បច្ចុប្បន្នកំពុង Develop បន្ត។',
   'common.badgeImage': 'រូបភាព',
   'common.badgeVideo': 'វីដេអូ',
   'common.badgeIframe': 'Iframe',
   'common.code': 'កូដ',
   'common.live': 'Live',
+  'common.demo1': 'វិឌីអូបង្រៀន ១',
+  'common.demo2': 'វិឌីអូបង្រៀន ២',
+  'common.demo3': 'វិឌីអូបង្រៀន ៣',
+  'common.fbDemo1': 'វីដេអូបង្ហាញ ១',
+  'common.fbDemo2': 'វីដេអូបង្ហាញ ២',
+  'common.fbDemo3': 'វីដេអូបង្ហាញ ៣',
+  'common.fbSection': 'វីដេអូបង្ហាញក្នុង Facebook',
+  'common.github': 'កូដ',
+  'common.dashApp': 'Young-Dash',
+  'common.posApp': 'Young-POS',
   'certs.sectionTag': 'សមិទ្ធផល',
   'certs.titleBefore': 'វិញ្ញាបនបត្រ និង',
   'certs.titleHighlight': 'កិត្តិយស',
   'certs.desc': 'ការទទួលស្គាល់ពីវគ្គសិក្សា ការប្រកួតប្រជែង និងវេទិកាឧស្សាហ៍។',
-  'cert.view': 'មើលវិញ្ញាបនបត្រ',
+  'certs.featuredBadge': 'ការទទួលស្គាល់',
+  'certs.featuredTitle': 'អត្តសញ្ញាណវិជ្ជាជីវៈ និងឧត្តមភាព',
+  'certs.featuredDesc': 'ការបង្ហាញនេះបញ្ជាក់ពីការប្តេជ្ញាចិត្តរបស់ខ្ញុំចំពោះការច្នៃប្រឌិតឌីជីថល ការកសាងម៉ាកសញ្ញា និងការរីកចម្រើនក្នុងវិជ្ជាជីវៈ។ វាជានិមិត្តរូបនៃការលះបង់ដែលខ្ញុំនាំយកទៅគ្រប់គម្រោងទាំងអស់។',
+  'cert.view': 'មើលរូបភាព ',
   'cert.details': 'មើលព័ត៌មានលម្អិត',
-  'cert1.issuer': 'Google Cloud',
-  'cert1.title': 'Google Cloud Associate Developer',
-  'cert2.issuer': 'Firebase / Google',
-  'cert2.title': 'Firebase Advanced Development',
-  'cert3.issuer': 'Meta',
-  'cert3.title': 'Meta Front-End Developer Professional',
-  'cert4.issuer': 'Coursera',
-  'cert4.title': 'វគ្គសិក្សា Full-Stack Web Development',
-  'cert5.issuer': 'Amazon Web Services',
-  'cert5.title': 'AWS Certified Cloud Practitioner',
-  'cert6.issuer': 'Hackathon ២០២៤',
-  'cert6.title': 'ជើងឯកថ្នាក់ជាតិ — Hackathon',
+  'cert1.issuer': 'Google',
+  'cert1.title': 'សន្តិសុខព័ត៌មានវិជ្ជា៖ ការការពារប្រឆាំងនឹងការវាយប្រហារឌីជីថល (IT Security)',
+  'cert2.issuer': 'Google',
+  'cert2.title': 'ការគ្រប់គ្រងប្រព័ន្ធ និងសេវាកម្មហេដ្ឋារចនាសម្ព័ន្ធ IT (System Administration)',
+  'cert3.issuer': 'freeCodeCamp',
+  'cert3.title': 'វិញ្ញាបនបត្រ Front End Development Libraries',
+  'cert4.issuer': 'freeCodeCamp',
+  'cert4.title': 'វិញ្ញាបនបត្រ JavaScript Algorithms and Data Structures',
+  'cert5.issuer': 'គម្រោង Coursera',
+  'cert5.title': 'វិញ្ញាបនបត្រ WordPress for Business',
+  'cert6.issuer': 'គម្រោង Coursera',
+  'cert6.title': 'វិញ្ញាបនបត្រ WordPress for Blog Business',
   'cert7.issuer': 'freeCodeCamp',
-  'cert7.title': 'វិញ្ញាបន Responsive Web Design',
+  'cert7.title': 'ការរចនាគេហទំព័រដែលមានភាពឆ្លើយតបគ្រប់​ Devices (Responsive Web Design)',
   'cert8.issuer': 'TVET Cambodia',
-  'cert8.title': 'វិញ្ញាបនការក្រាន — TVET',
+  'cert8.title': 'វិញ្ញាបនការហាត់ការ — Graphic Design',
   'cert9.issuer': 'SETEC Institute',
   'cert9.title': 'វិញ្ញាបនបត្របញ្ចប់ការសិក្សា — SETEC',
   'cert10.issuer': 'freeCodeCamp',
@@ -258,18 +302,22 @@ Object.assign(I18N.km, {
   'cert13.issuer': 'គម្រោង Coursera',
   'cert13.title': 'វិញ្ញាបនបត្រ Build Website WordPress',
   'cert14.issuer': 'ក្រសួងអប់រំ យុវជន និងកីឡា',
-  'cert14.title': 'វិញ្ញាបនបត្របញ្ចប់ការសិក្សាកម្រិតអនុវិទ្យាល័យ (ថ្នាក់ទី៩)',
+  'cert14.title': 'វិញ្ញាបនបត្របញ្ចប់ការសិក្សាកម្រិតអនុវិទ្យាល័យ (Diploma)',
   'cert15.issuer': 'ក្រសួងអប់រំ យុវជន និងកីឡា',
   'cert15.title': 'សញ្ញាបត្រមធ្យមសិក្សាទុតិយភូមិ (បាក់ឌុប)',
   'cert16.issuer': 'CTH',
   'cert16.title': 'វិញ្ញាបនបត្រ CTH Mind Map',
   'cert17.issuer': 'LinkedIn Learning',
   'cert17.title': 'វិញ្ញាបនបត្រ LinkedIn Marketing Fundamentals / Advertising',
+  'cert18.issuer': 'វិទ្យាស្ថាន ស៊ីតិក (SETEC Institute)',
+  'cert18.title': 'ព្រឹត្តិបត្រពិន្ទុ - ជំនាញប្រព័ន្ធព័ត៌មានវិទ្យាគ្រប់គ្រង (MIS)',
+  'cert19.issuer': 'សាកលវិទ្យាល័យ អាស៊ី អឺរ៉ុប (Asia Euro University)',
+  'cert19.title': 'ព្រឹត្តិបត្រពិន្ទុ - ជំនាញវិទ្យាសាស្ត្រកុំព្យូទ័រ (CS)',
   'about.sectionTag': 'អំពីខ្ញុំ',
   'about.titleBefore': 'ជំនាញ និង',
-  'about.titleHighlight': 'ជំនាញជ្រាយជ្រះ',
-  'about.p1': 'ខ្ញុំជាអ្នកអភិវឌ្ឍន៍ដែលចូលចិត្តបង្កើតគេហទំព័រលឿន មានស្ថេរភាព និងស្រស់ស្អាត។ បច្ចុប្បន្នខ្ញុំប្រើ <strong style="color:var(--text-primary)">React, Firebase Node.js និង​​​​​​​​​​​​​​ Mern Stack</strong> ជាស្នូល ហើយតែងតែស្វែងរកឧបករណ៍ថ្មីដើម្បីអភិវឌ្ឍខ្លួន។',
-  'about.p2': 'នៅពេលមិនសរសេរកូដ ខ្ញុំចូលចិត្តចូលរួមប្រភពបើកចំហ ណែនាំអ្នកចាប់ផ្តើម ឬផឹកកាហ្វេមុនការងារជ្រៅ។',
+  'about.titleHighlight': 'ជំនាញដែលច្បាស់លាស់',
+  'about.p1': 'ខ្ញុំជាអ្នកអភិវឌ្ឍន៍ដែលចូលចិត្តបង្កើតគេហទំព័រលឿន មានស្ថេរភាព និងស្រស់ស្អាត។ បច្ចុប្បន្នខ្ញុំប្រើ <strong style="color:var(--text-primary)">React, Firebase, basic Node.js និង​​​​​​​​​​​​​​ Mern Stack</strong> ជាស្នូល ហើយតែងតែស្វែងរកឧបករណ៍ថ្មីដើម្បីអភិវឌ្ឍខ្លួន។',
+  'about.p2': 'នៅពេលមិនសរសេរកូដ ខ្ញុំចូលចិត្តចូលរួមប្រភពបើកចំហ ណែនាំអ្នកចាប់ផ្តើម ឬផឹកកាហ្វេមុនធ្ចើការងារពិបាកៗ។',
   'skill.frontend': 'React និង JavaScript',
   'skill.firebase': 'Firebase (Auth, Firestore, Storage)',
   'skill.realtimedb': 'Realtime Database និង Cloud Storage',
@@ -280,7 +328,7 @@ Object.assign(I18N.km, {
   'contact.sectionTag': 'ទំនាក់ទំនង',
   'contact.titleBefore': 'មក',
   'contact.titleHighlight': 'ភ្ជាប់ទំនាក់ទំនង',
-  'contact.desc': 'មានគម្រោងគូរគំនិត? ខ្ញុំចង់ឮពីវា។ ផ្ញើសារ ហើយរួមគ្នាបង្កើតអ្វីដែលអស្ចារ្យ។',
+  'contact.desc': 'មានគម្រោងចង់បង្ក់ើត? តោះអាចប្រាប់ខ្ញុំបាន។ ផ្ញើសារ ហើយរួមគ្នាបង្កើតអ្វីដែលអស្ចារ្យ។',
   'form.name': 'ឈ្មោះ',
   'form.email': 'អ៊ីមែល',
   'form.message': 'សារ',
@@ -298,17 +346,19 @@ Object.assign(I18N.km, {
   'contact.labelEmail': 'អ៊ីមែល',
   'contact.labelLoc': 'ទីកន្លែង',
   'contact.labelResp': 'រយៈពេលឆ្លើយតប',
-  'contact.valLoc': 'ទីក្រុង ប្រទេសរបស់អ្នក',
+  'contact.valLoc': 'ភ្នំពេញ, កម្ពុជា',
   'contact.valResp': 'ក្នុងរយៈពេល ២៤ ម៉ោង',
   'contact.findMe': 'រកខ្ញុំនៅ',
   'footer.heading': 'តោះ! រួមគ្នាបង្កើតអ្វីដែលអស្ចារ្យ។',
-  'footer.copy': '© ២០២៥ ឈ្មោះរបស់អ្នក។ រក្សាសិទ្ធិគ្រប់យ៉ាង។',
-  'weather.btnTitle': 'ប្តូរបរិយាកាស (ភ្លៀង / ព្រិល)',
+  'footer.copy': '© ២០២៥ ណុប រតនា។ រក្សាសិទ្ធិគ្រប់យ៉ាង។',
+  'weather.btnTitle': 'ប្តូរបរិយាកាស (ភ្លៀង / ព្រិល / ផ្គររន្ទះ)',
   'weather.zen': 'Zen',
   'weather.nextSnow': 'បន្ទាប់៖ ព្រិល',
+  'weather.nextThunder': 'បន្ទាប់៖ ផ្គររន្ទះ',
   'weather.nextOff': 'បន្ទាប់៖ បិទ',
   'weather.rainMode': '🌧 របៀបភ្លៀង',
   'weather.snowMode': '❄️ របៀបព្រិល',
+  'weather.thunderMode': '🌩 របៀបផ្គររន្ទះ',
   'nav.resume': 'ប្រវត្តិ',
   'resume.sectionTag': 'រឿងរ៉ាវរបស់ខ្ញុំ',
   'resume.titleBefore': 'ដំណើរ',
@@ -319,39 +369,39 @@ Object.assign(I18N.km, {
   'resume.edu1.date': '២០២៥ - បច្ចុប្បន្ន',
   'resume.edu1.title': 'សាកលវិទ្យាល័យ អាស៊ី អឺរ៉ុប',
   'resume.edu1.place': 'ភ្នំពេញ, កម្ពុជា',
-  'resume.edu1.desc': 'បច្ចុប្បន្ន កំពុងបន្តការសិក្សាថ្នាក់ឧត្តមសិក្សា ផ្នែកបច្ចេកវិទ្យាព័ត៌មាន និងវិទ្យាសាស្ត្រកុំព្យូទ័រ។',
+  'resume.edu1.desc': 'បច្ចុប្បន្ន កំពុងបន្តការសិក្សាថ្នាក់ឧត្តមសិក្សា ផ្នែក វិទ្យាសាស្ត្រកុំព្យូទ័រ។',
   'resume.edu2.date': '២០២៣ - ២០២៥',
-  'resume.edu2.title': 'វិទ្យាស្ថាន សេថិក (Setec Institute)',
+  'resume.edu2.title': 'វិទ្យាស្ថាន សុីតិក (Setec Institute)',
   'resume.edu2.place': 'ភ្នំពេញ, កម្ពុជា',
-  'resume.edu2.desc': 'វគ្គបណ្តុះបណ្តាលជំនាញឯកទេស ផ្នែកបច្ចេកវិទ្យាព័ត៌មាន និងបច្ចេកវិទ្យាឌីជីថល។',
+  'resume.edu2.desc': 'បានបញ្ចប់ថ្នាក់បរិញ្ញាបត្ររងនៅវិទ្យាស្ថាន  សុីតិក  (Setec Institute) ក្នុងជំនាញ​​​​​​  Management information systems។',
   'resume.edu3.date': '២០១៩ - ២០២២',
   'resume.edu3.title': 'វិទ្យាល័យ ព្រះសីហនុ',
-  'resume.edu3.place': 'ខេត្តព្រះសីហនុ, កម្ពុជា',
-  'resume.edu3.desc': 'បញ្ចប់ការសិក្សាមធ្យមសិក្សាទុតិយភូមិ ដោយផ្តោតលើវិទ្យាសាស្ត្រ និងគណិតវិទ្យា។',
+  'resume.edu3.place': 'ខេត្តកំពង់ចាម, កម្ពុជា',
+  'resume.edu3.desc': 'បញ្ចប់ការសិក្សាមធ្យមសិក្សាទុតិយភូមិ ទទួលបានលំដាប់ពិន្ទុ ៧៩.៤៩១​',
   'resume.edu4.date': '២០០៨ - ២០១៩',
-  'resume.edu4.title': 'អនុវិទ្យាល័យ ទួលធ្មម',
-  'resume.edu4.place': 'ភ្នំពេញ, កម្ពុជា',
-  'resume.edu4.desc': 'បញ្ចប់ការសិក្សាកម្រិតអនុវិទ្យាល័យ និងបឋមសិក្សា ដោយទទួលបានចំណេះដឹងមូលដ្ឋានលើគ្រប់មុខវិជ្ជា។',
-  'resume.exp1.title': 'អ្នកអភិវឌ្ឍវិបសាយ Freelancer & ស្ថាបនិក Startup',
+  'resume.edu4.title': 'សាលាបឋមសិស្សានិងអនុវិទ្យាល័យ ទួលថ្ម',
+  'resume.edu4.place': 'កំពង់ចាម, កម្ពុជា',
+  'resume.edu4.desc': 'បញ្ចប់ការសិក្សាកម្រិតអនុវិទ្យាល័យ និងបឋមសិក្សា ដោយទទួលបានននិន្ទេស"ល្អ" ក្នុងឌីបប្លូមនិងចំណេះដឹងមូលដ្ឋានលើគ្រប់មុខវិជ្ជា។',
+  'resume.exp1.title': 'អ្នកអភិវឌ្ឍវិបសាយ Freelancer & ស្ថាបនិក Startup CLoud POS',
   'resume.exp1.place': 'Freelance / Startup',
   'resume.exp1.date': '២០២៥ - បច្ចុប្បន្ន',
   'resume.exp1.desc': 'ធ្វើការងារជា Web Developer Freelancer ព្រមទាំងកំពុងបង្កើតគម្រោង Startup "Cloud POS" Web App ជាមួយនិងក្រុមផងដែរ។',
   'resume.exp2.title': 'ជំនួយការផ្នែក IT Support',
-  'resume.exp2.place': 'ផ្នែកព័ត៌មានវិទ្យា',
+  'resume.exp2.place': ' IT​​​​ ROOM​ នៃវិទ្យាស្ថាន សុីតិក ',
   'resume.exp2.date': '២០២៤ - ២០២៥',
-  'resume.exp2.desc': 'ជួយដោះស្រាយបញ្ហាបច្ចេកទេស ថែទាំ Hardware និងគាំទ្រផ្នែក Software សម្រាប់តម្រូវការស្ថាប័ន។',
+  'resume.exp2.desc': 'ជួយដោះស្រាយបញ្ហាបច្ចេកទេស ថែទាំ Hardware និងគាំទ្រផ្នែក Software សម្រាប់តម្រូវការស្ថាប័ន​ និងដោះស្រាយបញ្ហារបស់និស្សិតនៃ វិទ្យាស្ថាន សុីតិក។',
   'resume.exp3.title': 'រចនាក្រាហ្វិក (Graphic Design)',
-  'resume.exp3.place': 'ស្ទូឌីយោច្នៃប្រឌិត',
+  'resume.exp3.place': 'សាលាបច្ចេកទេស និងវិជ្ជាជីវៈ (TVET Cambodia)',
   'resume.exp3.date': '២០២២ - ២០២៣',
-  'resume.exp3.desc': 'បង្កើតគំនិត និងរចនារូបភាពសម្រាប់ Branding សម្ភារៈទីផ្សារ និងឯកសារឌីជីថលផ្សេងៗ។',
+  'resume.exp3.desc': 'បង្កើតគំនិត និងរចនារូបភាពសម្រាប់ Branding សម្ភារៈ និងឯកសារឌីជីថលផ្សេងៗ។',
   'resume.exp4.title': 'ផលិតមាតិកា (Content Creation)',
   'resume.exp4.place': 'បណ្តាញសង្គម',
   'resume.exp4.date': '២០២១ - បច្ចុប្បន្ន',
-  'resume.exp4.desc': 'បង្កើតមាតិកាឌីជីថលនៅលើបណ្តាញសង្គមផ្សេងៗ ដើម្បីកសាង Brand និងទាក់ទាញអ្នកទស្សនា។',
+  'resume.exp4.desc': 'បង្កើតមាតិកាឌីជីថលនៅលើបណ្តាញសង្គមផ្សេងៗ ដើម្បីកសាង Brand និងទាក់ទាញអ្នកទស្សនា និង រៀនកាត់តវិឌីអូឲទាក់ទាញ។',
   'resume.exp5.title': 'អាជីវកម្មអនឡាញ (Business Online)',
   'resume.exp5.place': 'ពាណិជ្ជកម្មតាមប្រព័ន្ធអេឡិចត្រូនិក',
   'resume.exp5.date': '២០២០ - ២០២១',
-  'resume.exp5.desc': 'គ្រប់គ្រង និងដំណើរការអាជីវកម្មតាមប្រព័ន្ធអនឡាញ ដោយផ្តោតលើការលក់ និងការទំនាក់ទំនងអតិថិជន។',
+  'resume.exp5.desc': 'គ្រប់គ្រង និងដំណើរការអាជីវកម្មតាមប្រព័ន្ធអនឡាញ ដោយផ្តោតលើការលក់ និងការទំនាក់ទំនងអតិថិជននិងកាន់ផេកនិងដឹកជញ្ចូន។',
   'alert.privateTitle': 'គម្រោងឯកជន (Private)',
   'alert.privateMessage': 'កូដនេះត្រូវបានដាក់ជា Private។ សូមប្រាប់ថានៅពេលអ្នកចុចបន្ត អ្នកនឹងឃើញតែ Public Repositories ប៉ុណ្ណោះ។',
   'alert.confirm': 'យល់ព្រម និងបន្ត',
@@ -632,10 +682,14 @@ const weatherIndicator = document.getElementById('weather-indicator');
 const weatherCanvas = document.getElementById('weather-canvas');
 const rainAudio = document.getElementById('rain-audio');
 const snowAudio = document.getElementById('snow-audio');
+const thunderAudio = document.getElementById('thunder-audio');
+const stormVideo = document.getElementById('storm-video');
 const ctx = weatherCanvas?.getContext('2d');
 
 let particles = [];
 let animFrame = null;
+let flashOpacity = 0;
+let lightningBolt = null;
 
 function resizeCanvas() {
   if (!weatherCanvas) return;
@@ -669,13 +723,28 @@ function createSnowFlake() {
 }
 function initParticles() {
   particles = [];
+  lightningBolt = null;
+  flashOpacity = 0;
+  if (weatherState === 0) return;
+  if (weatherState === 3) {
+    for (let i = 0; i < 10; i++) {
+      particles.push({
+        x: Math.random() * weatherCanvas.width,
+        y: Math.random() * (weatherCanvas.height * 0.4),
+        r: 200 + Math.random() * 300,
+        speed: 0.05 + Math.random() * 0.1,
+        alpha: isDark ? 0.12 : 0.25
+      });
+    }
+    return;
+  }
   const count = weatherState === 1 ? 220 : 120;
   for (let i = 0; i < count; i++) {
     if (weatherState === 1) {
       const d = createRainDrop();
       d.y = Math.random() * weatherCanvas.height;
       particles.push(d);
-    } else {
+    } else if (weatherState === 2) {
       const s = createSnowFlake();
       s.y = Math.random() * weatherCanvas.height;
       particles.push(s);
@@ -719,17 +788,99 @@ function drawSnow() {
     }
   });
 }
+
+function createFierceLightning(x, y, angle, branches) {
+  if (branches <= 0) return [];
+  const segments = [];
+  let curX = x, curY = y;
+  const length = Math.random() * 60 + 40;
+  const nX = curX + Math.sin(angle) * length + (Math.random() - 0.5) * 50;
+  const nY = curY + Math.cos(angle) * length + (Math.random() * 40);
+
+  segments.push({ x1: curX, y1: curY, x2: nX, y2: nY, width: branches * 0.8 });
+
+  // Main path
+  segments.push(...createFierceLightning(nX, nY, angle + (Math.random() - 0.5) * 0.3, branches - 1));
+
+  // Branching
+  if (Math.random() > 0.7 && branches > 2) {
+    segments.push(...createFierceLightning(nX, nY, angle + (Math.random() - 0.5) * 1.5, Math.floor(branches / 1.5)));
+  }
+
+  return segments;
+}
+
+function drawThunderstorm() {
+  ctx.clearRect(0, 0, weatherCanvas.width, weatherCanvas.height);
+
+  // Fierce Clouds
+  particles.forEach(c => {
+    ctx.save();
+    const grad = ctx.createRadialGradient(c.x, c.y, 0, c.x, c.y, c.r);
+    const color = isDark ? '60, 80, 120' : '160, 180, 200';
+    grad.addColorStop(0, `rgba(${color}, ${c.alpha})`);
+    grad.addColorStop(1, `rgba(${color}, 0)`);
+    ctx.fillStyle = grad;
+    ctx.beginPath();
+    ctx.arc(c.x, c.y, c.r, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.restore();
+    c.x += c.speed;
+    if (c.x - c.r > weatherCanvas.width) c.x = -c.r;
+  });
+
+  // Thunder Strike Logic
+  if (!lightningBolt && Math.random() > 0.99) {
+    const startX = Math.random() * weatherCanvas.width;
+    lightningBolt = createFierceLightning(startX, 0, 0, 12);
+    flashOpacity = 0.85; // Heavy flash
+  }
+
+  // Draw Fierce Bolt
+  if (lightningBolt) {
+    ctx.save();
+    ctx.strokeStyle = '#fff';
+    ctx.shadowBlur = 30;
+    ctx.shadowColor = 'rgba(100, 200, 255, 0.9)';
+    ctx.lineCap = 'round';
+    ctx.beginPath();
+    lightningBolt.forEach(s => {
+      ctx.lineWidth = s.width;
+      ctx.moveTo(s.x1, s.y1);
+      ctx.lineTo(s.x2, s.y2);
+    });
+    ctx.stroke();
+    ctx.restore();
+
+    if (Math.random() > 0.6) lightningBolt = null; // Stutter effect
+  }
+
+  // Heavy Flash Decay
+  if (flashOpacity > 0) {
+    ctx.save();
+    ctx.globalAlpha = flashOpacity;
+    ctx.fillStyle = isDark ? 'rgba(255, 255, 255, 0.5)' : 'rgba(255, 255, 255, 0.65)';
+    ctx.fillRect(0, 0, weatherCanvas.width, weatherCanvas.height);
+    ctx.restore();
+    flashOpacity -= 0.08; // Fast decay
+  }
+}
 function animateWeather() {
   if (weatherState === 0) return;
-  weatherState === 1 ? drawRain() : drawSnow();
+  if (weatherState === 1) drawRain();
+  else if (weatherState === 2) drawSnow();
+  else if (weatherState === 3) drawThunderstorm();
   animFrame = requestAnimationFrame(animateWeather);
 }
 function stopWeather() {
   cancelAnimationFrame(animFrame);
   if (ctx) ctx.clearRect(0, 0, weatherCanvas.width, weatherCanvas.height);
   weatherCanvas?.classList.remove('active');
+  stormVideo?.classList.remove('active');
+  if (stormVideo) stormVideo.pause();
   rainAudio?.pause(); if (rainAudio) rainAudio.currentTime = 0;
   snowAudio?.pause(); if (snowAudio) snowAudio.currentTime = 0;
+  thunderAudio?.pause(); if (thunderAudio) thunderAudio.currentTime = 0;
   weatherIndicator?.classList.remove('visible');
 }
 function applyWeatherUiLabels() {
@@ -744,35 +895,58 @@ function applyWeatherUiLabels() {
     weatherIcon.className = 'fa-solid fa-cloud-rain';
     weatherIndicator.textContent = t('weather.rainMode');
     weatherIndicator.classList.add('visible');
-  } else {
-    weatherLabel.textContent = t('weather.nextOff');
+  } else if (weatherState === 2) {
+    weatherLabel.textContent = t('weather.nextThunder');
     weatherIcon.className = 'fa-solid fa-snowflake';
     weatherIndicator.textContent = t('weather.snowMode');
+    weatherIndicator.classList.add('visible');
+  } else if (weatherState === 3) {
+    weatherLabel.textContent = t('weather.nextOff');
+    weatherIcon.className = 'fa-solid fa-cloud-bolt';
+    weatherIndicator.textContent = t('weather.thunderMode');
     weatherIndicator.classList.add('visible');
   }
 }
 function startWeather() {
   resizeCanvas();
   initParticles();
-  weatherCanvas?.classList.add('active');
+
+  if (weatherState === 3) {
+    stormVideo?.classList.add('active');
+    stormVideo?.play().catch(e => console.log("Video play blocked"));
+    // We can hide canvas for storm if user wants only video, 
+    // but canvas still draws clouds/flashes on top
+    weatherCanvas?.classList.add('active');
+  } else {
+    stormVideo?.classList.remove('active');
+    if (stormVideo) stormVideo.pause();
+    weatherCanvas?.classList.add('active');
+  }
+
   animateWeather();
+  rainAudio?.pause();
+  snowAudio?.pause();
+  thunderAudio?.pause();
   if (weatherState === 1) {
-    snowAudio?.pause();
     if (rainAudio) {
       rainAudio.volume = 0.5;
       rainAudio.play().catch(e => console.log("Autoplay blocked"));
     }
-  } else {
-    rainAudio?.pause();
+  } else if (weatherState === 2) {
     if (snowAudio) {
       snowAudio.volume = 0.4;
       snowAudio.play().catch(e => console.log("Autoplay blocked"));
+    }
+  } else if (weatherState === 3) {
+    if (thunderAudio) {
+      thunderAudio.volume = 0.6;
+      thunderAudio.play().catch(e => console.log("Autoplay blocked"));
     }
   }
   applyWeatherUiLabels();
 }
 weatherBtn?.addEventListener('click', () => {
-  weatherState = (weatherState + 1) % 3;
+  weatherState = (weatherState + 1) % 4;
   if (weatherState === 0) {
     stopWeather();
     applyWeatherUiLabels();
@@ -936,3 +1110,163 @@ function closePrivateRepoAlert() {
 document.getElementById('private-repo-modal')?.addEventListener('click', (e) => {
   if (e.target.id === 'private-repo-modal') closePrivateRepoAlert();
 });
+
+/* ========================================================
+   VIDEO PLAYER MODAL
+   ======================================================== */
+function openVideoPlayer(videoSrc, title) {
+  const modal = document.getElementById('video-modal');
+  const player = document.getElementById('video-modal-player');
+  const modalTitle = document.getElementById('video-modal-title');
+  if (!modal || !player) return;
+
+  player.src = videoSrc;
+  if (modalTitle) modalTitle.textContent = title;
+
+  modal.style.display = 'flex';
+  setTimeout(() => modal.classList.add('open'), 10);
+  player.play().catch(e => console.log("Video playback started manually"));
+}
+
+function closeVideoPlayer() {
+  const modal = document.getElementById('video-modal');
+  const player = document.getElementById('video-modal-player');
+  if (!modal || !player) return;
+
+  player.pause();
+  modal.classList.remove('open');
+  setTimeout(() => {
+    modal.style.display = 'none';
+    player.src = ""; // Clear src to stop loading
+  }, 300);
+}
+
+document.getElementById('video-modal')?.addEventListener('click', (e) => {
+  if (e.target.id === 'video-modal') closeVideoPlayer();
+});
+
+/* ========================================================
+   PROJECT VIDEO SWITCHER
+   ======================================================== */
+function switchProjectVideo(iframeId, videoUrl, btn, redirectUrl = null) {
+  const iframe = document.getElementById(iframeId);
+  if (!iframe) return;
+
+  // Set new URL
+  iframe.src = videoUrl;
+
+  // Handle overlay for redirect
+  const container = iframe.parentElement;
+  let overlay = container.querySelector('.video-overlay');
+  if (!overlay) {
+    overlay = document.createElement('div');
+    overlay.className = 'video-overlay';
+    overlay.style.position = 'absolute';
+    overlay.style.top = '0';
+    overlay.style.left = '0';
+    overlay.style.width = '100%';
+    overlay.style.height = '100%';
+    overlay.style.cursor = 'pointer';
+    overlay.style.zIndex = '10';
+    overlay.onclick = function () {
+      if (this.dataset.url) {
+        window.open(this.dataset.url, '_blank');
+      }
+    };
+    container.style.position = 'relative';
+    container.appendChild(overlay);
+  }
+
+  if (redirectUrl) {
+    overlay.style.display = 'block';
+    overlay.dataset.url = redirectUrl;
+  } else {
+    overlay.style.display = 'none';
+    overlay.dataset.url = '';
+  }
+
+  // Update active state for buttons (Synchronize across clones)
+  const tabsContainer = btn.parentElement;
+  const tabs = tabsContainer.querySelectorAll('.video-tab');
+  const btnText = btn.innerText.trim();
+
+  tabs.forEach(tab => {
+    tab.classList.remove('active');
+    if (tab.innerText.trim() === btnText) {
+      tab.classList.add('active');
+    }
+  });
+}
+
+/* ========================================================
+   BACK TO TOP BUTTON
+   - Shows when user scrolls down and smooth-scrolls to top on click
+   ======================================================== */
+(() => {
+  const backBtn = document.getElementById('back-to-top');
+  if (!backBtn) return;
+
+  const toggleThreshold = 300; // px
+
+  const onScroll = () => {
+    if (window.scrollY > toggleThreshold) backBtn.classList.add('show');
+    else backBtn.classList.remove('show');
+  };
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  backBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  // Initialize visibility on load
+  document.addEventListener('DOMContentLoaded', onScroll);
+})();
+
+/* ========================================================
+   VIDEO SWITCHER AUTO-SCROLL
+   ======================================================== */
+function initVideoSwitcherAutoScroll() {
+  const switchers = document.querySelectorAll('.video-switcher');
+  switchers.forEach(switcher => {
+    // 1. Duplicate content for seamless infinite looping
+    const originalContent = switcher.innerHTML;
+    switcher.innerHTML += originalContent;
+
+    let isPaused = false;
+    const speed = 1.2;
+
+    const step = () => {
+      if (!isPaused) {
+        switcher.scrollLeft += speed;
+
+        // 2. Seamless jump: When we reach the middle (end of first set), jump to start
+        // Use a small buffer to avoid jitter
+        if (switcher.scrollLeft >= (switcher.scrollWidth / 2)) {
+          switcher.scrollLeft = 0;
+        }
+      }
+    };
+
+    setInterval(step, 30);
+
+    // Pause on interaction
+    const pause = () => { isPaused = true; };
+    const resume = () => { isPaused = false; };
+
+    switcher.addEventListener('mouseenter', pause);
+    switcher.addEventListener('mouseleave', resume);
+    switcher.addEventListener('touchstart', pause, { passive: true });
+    switcher.addEventListener('touchend', resume, { passive: true });
+    switcher.addEventListener('mousedown', pause);
+    window.addEventListener('mouseup', resume);
+  });
+}
+
+// Initialize on load
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initVideoSwitcherAutoScroll);
+} else {
+  initVideoSwitcherAutoScroll();
+}
