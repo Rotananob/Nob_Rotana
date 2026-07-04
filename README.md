@@ -1,9 +1,5 @@
 # NOB Rotana — Developer Portfolio
 
-សូមស្វាគមន៍ — Portfolio អ្នកអភិវឌ្ឍន៍ (រចនាទំព័រមួយ) ជាមួយ **Firebase Hosting**, **Cloud Firestore**, របៀបភាសាពីរ (**English / ខ្មែរ**), និង **URLs ស្អាត** (គ្មាន `.html`)។
-
-Welcome — a single-page developer portfolio with Firebase Hosting, Firestore-backed contact messages & optional dynamic projects/certificates, i18n, and clean URLs.
-
 ## Live site
 
 - **Hosting:** [https://nobrotana.web.app](https://nobrotana.web.app) (Firebase — verify in your Firebase Console if you use a different project alias)
