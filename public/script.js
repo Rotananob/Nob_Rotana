@@ -205,6 +205,12 @@ Object.assign(I18N.en, {
   'alert.privateMessage': 'This code is set to Private. Please note that when you continue, you will only see Public Repositories.',
   'alert.confirm': 'Confirm and Continue',
   'alert.cancel': 'Cancel',
+  'proj8.title': 'S Tech Store',
+  'proj8.desc': 'S Tech Store is a premium computer & tech e-commerce platform built with a modern full-stack architecture. The frontend is powered by Next.js 14 (App Router) delivering a fast, SEO-optimized shopping experience, while the backend is a robust Laravel 11 REST API connected to PostgreSQL. Authentication is handled securely via Firebase Auth, and the entire infrastructure is protected and accelerated by Cloudflare. Features include a full product catalog, cart system, user accounts, and database-backed order management.',
+  'proj9.title': 'Delight Fashion',
+  'proj9.desc': 'Delight Fashion is a production-ready, mobile-first, high-end men\'s fashion e-commerce platform built for Phnom Penh, Cambodia. Built with Next.js 16 (App Router) and React 19, it features a luxury Black, White & Gold aesthetic. The serverless Firebase backend handles authentication (Google + Custom RBAC claims) and Firestore NoSQL data. Product images are delivered via Cloudinary CDN with WebP/AVIF optimization. Shop owners receive instant Telegram Bot push notifications for new orders. Supports Cambodia local payments: Cash on Delivery & ABA Bank QR PayWay. All 8 development phases completed.',
+  'proj10.title': 'NRI Studio',
+  'proj10.desc': 'NRI Studio is a full-stack, browser-based Integrated Development Environment (IDE) that closely mimics the behavior and UI of VSCode. Built for modern web development, it allows users to create, edit, save, and execute JavaScript and TypeScript code entirely in the cloud. Features include Monaco Editor with full IntelliSense & auto-completion, a collapsible sidebar with file explorer, multi-tab support, local folder upload, live terminal powered by a secure Node.js backend sandbox, real-time auto-save to MongoDB, and Firebase Authentication (email/password & Google). Deployed on Vercel (frontend) and Render (backend).',
 });
 
 Object.assign(I18N.km, {
@@ -406,6 +412,12 @@ Object.assign(I18N.km, {
   'alert.privateMessage': 'កូដនេះត្រូវបានដាក់ជា Private។ សូមប្រាប់ថានៅពេលអ្នកចុចបន្ត អ្នកនឹងឃើញតែ Public Repositories ប៉ុណ្ណោះ។',
   'alert.confirm': 'យល់ព្រម និងបន្ត',
   'alert.cancel': 'បោះបង់',
+  'proj8.title': 'S Tech Store',
+  'proj8.desc': 'S Tech Store គឺជាវេទិកា E-Commerce លក់ Computer និង Tech ដ៏ប្រណិត ដែលបង្កើតឡើងដោយស្ថាបត្យកម្ម Full-Stack ទំនើប។ Frontend ប្រើ Next.js 14 (App Router) ផ្ដល់នូវបទពិសោធទិញទំនិញលឿន និង SEO ល្អ ខណៈ Backend គឺ Laravel 11 REST API ភ្ជាប់ PostgreSQL។ Firebase Auth ដោះស្រាយការចូលគណនីយ៉ាងសុវត្ថិភាព ហើយ Cloudflare ការពារ និងបង្កើនល្បឿនហេដ្ឋារចនាសម្ព័ន្ធ។ មានមុខងារ Product Catalog, Cart, User Account និង Order Management ពេញលេញ។',
+  'proj9.title': 'Delight Fashion',
+  'proj9.desc': 'Delight Fashion គឺជាវេទិកា E-Commerce ម៉ូតប្រុសប្រណិតដែលត្រៀមសម្រាប់ Production ស្ថិតនៅភ្នំពេញ កម្ពុជា។ បង្កើតដោយ Next.js 16 និង React 19 ជាមួយ aesthetic ខ្មៅ ស និងមាស។ Firebase (Auth + Firestore) ដោះស្រាយ Backend ដោយគ្មាន Server។ រូបភាពផលិតផលបង្ហោះតាម Cloudinary CDN ជាមួយ WebP/AVIF Optimization។ ម្ចាស់ហាងទទួលការជូនដំណឹង Telegram Bot ភ្លាមៗ។ ទូទាត់បែប COD និង ABA Bank QR PayWay។ Phase ទាំង ៨ បានបញ្ចប់ស្រេច។',
+  'proj10.title': 'NRI Studio',
+  'proj10.desc': 'NRI Studio គឺជា IDE (Integrated Development Environment) ដំណើរការក្នុង Browser ដែលមានទម្រង់ស្រដៀង VSCode។ បង្កើតឡើងសម្រាប់ Developer ទំនើប អាចបង្កើត កែ រក្សាទុក និង Execute កូដ JavaScript/TypeScript ទាំងស្រុងក្នុង Cloud។ មុខងាររួមមាន Monaco Editor ជាមួយ IntelliSense, ការ Auto-Complete, Sidebar, Multi-Tab, Local Folder Upload, Terminal ស្ទួន Node.js Sandbox, Auto-Save ទៅ MongoDB, និង Firebase Auth (Email/Google)។ Deploy នៅ Vercel (Frontend) និង Render (Backend)។',
 });
 
 function getLang() {

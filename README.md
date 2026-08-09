@@ -6,6 +6,7 @@
 
 ## Features
 
+- **Latest Updates:** Integrated 3 new major projects (**S Tech Store**, **Delight Fashion**, and **NRI Studio**), featuring full bilingual support and modern UI cards. Reorganized featured projects grid to prioritize top works.
 - Responsive layout, dark/light theme, scroll effects, optional canvas weather + audio (user-triggered only)
 - Contact form writes to Firestore collection **`messages`**
 - Optional collections **`projects`** and **`certificates`** override static placeholder cards when documents exist

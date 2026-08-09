@@ -110,7 +110,7 @@
         <div class="hero-stats">
           <!-- 🔥 FIREBASE: Fetch these numbers from Firestore "yprofile/stats" document -->
           <div class="hero-stat-item">
-            <strong>15+</strong>
+            <strong>18+</strong>
             <span data-i18n="hero.statProjects">Projects Done</span>
           </div>
           <div class="hero-stat-item">
@@ -183,61 +183,161 @@
       <!-- 🔥 FIREBASE: This grid is populated by loadProjectsFromFirestore() below.
            Fallback static cards shown until Firebase is connected. -->
       <div class="projects-grid" id="projects-grid">
-        <!-- Static placeholder cards — replace with dynamic rendering from Firestore -->
-
-        <div class="project-card reveal" onclick="openCertModal('Assets/IMG/project1.png', t('proj1.title'))">
+        
+        <!-- #1 TOP: YOUNG SMS -->
+        <div class="project-card reveal"
+          onclick="openCertModal('https://student-management-syste-70290.web.app/logo.png', t('proj5.title'))">
           <div class="project-media">
-            <img src="Assets/IMG/project1.png" alt="BacII Calculator"
-              style="object-fit: contain; background: var(--bg-secondary);" />
+            <img src="https://student-management-syste-70290.web.app/logo.png" alt="YOUNG SMS"
+              style="object-fit: contain; background: linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #4338ca 100%); padding: 2rem;" />
             <div class="project-media-badge" data-i18n="common.badgeImage">Image</div>
           </div>
           <div class="project-body">
             <div class="project-tags">
-              <span class="tag">HTML5/CSS3</span>
-              <span class="tag">JavaScript</span>
-              <span class="tag">Tailwind CSS</span>
+              <span class="tag">React.js</span>
+              <span class="tag">Node.js</span>
+              <span class="tag">Express</span>
               <span class="tag">Firebase</span>
+              <span class="tag">Firestore</span>
+              <span class="tag">Realtime Database</span>
+              <span class="tag">Authentication</span>
+              <span class="tag">Firebase Hosting</span>
             </div>
-            <h3 class="project-title" data-i18n="proj1.title">BacII Calculator</h3>
-            <p class="project-desc" data-i18n="proj1.desc"></p>
+            <h3 class="project-title" data-i18n="proj5.title">YOUNG SMS</h3>
+            <p class="project-desc" data-i18n="proj5.desc"></p>
             <div class="project-links">
-              <a href="https://github.com/Rotananob?tab=repositories" class="project-link" target="_blank"
-                rel="noopener noreferrer" onclick="event.stopPropagation();"><i class="fa-brands fa-github"></i> <span
+              <a href="https://github.com/Rotananob/SMS" class="project-link" target="_blank" rel="noopener noreferrer"
+                onclick="event.stopPropagation();"><i class="fa-brands fa-github"></i> <span
                   data-i18n="common.code">Code</span></a>
-              <a href="https://bacii-cal.firebaseapp.com/" class="project-link" target="_blank"
+              <a href="https://student-management-syste-70290.web.app/" class="project-link" target="_blank"
                 rel="noopener noreferrer" onclick="event.stopPropagation();"><i
                   class="fa-solid fa-arrow-up-right-from-square"></i> <span data-i18n="common.live">Live</span></a>
             </div>
           </div>
         </div>
 
+        <!-- #2 TOP: Rotana E-Learning V2 -->
         <div class="project-card reveal"
-          onclick="openVideoPlayer('Assets/vdo/rotanna_elearninnng.mp4', t('proj2.title'))">
+          onclick="openCertModal('https://rotana-education.web.app/assets/img/images/logo.png', t('proj7.title'))">
           <div class="project-media">
-            <video src="Assets/vdo/rotanna_elearninnng.mp4" autoplay muted loop playsinline
-              class="project-video"></video>
-            <div class="project-media-badge" data-i18n="common.badgeVideo">Video</div>
+            <img src="https://rotana-education.web.app/assets/img/images/logo.png" alt="Rotana E-Learning V2"
+              style="object-fit: contain; background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 50%, #3b82f6 100%); padding: 2rem;" />
+            <div class="project-media-badge" data-i18n="common.badgeImage">Image</div>
           </div>
           <div class="project-body">
             <div class="project-tags">
+              <span class="tag">React 18</span>
+              <span class="tag">TypeScript</span>
+              <span class="tag">Vite</span>
               <span class="tag">Firebase</span>
-              <span class="tag">PWA</span>
               <span class="tag">Node.js</span>
-              <span class="tag">Firestore</span>
-              <span class="tag">Realtime Database</span>
-              <span class="tag">Authentication</span>
-              <span class="tag">APIs</span>
-              <span class="tag">Email-alert</span>
+              <span class="tag">Express</span>
+              <span class="tag">Cloudflare</span>
+              <span class="tag">PWA</span>
+              <span class="tag">Gemini AI</span>
             </div>
-            <h3 class="project-title" data-i18n="proj2.title">Rotana E-Learning</h3>
-            <p class="project-desc" data-i18n="proj2.desc"></p>
+            <h3 class="project-title" data-i18n="proj7.title">Rotana E-Learning V2</h3>
+            <p class="project-desc" data-i18n="proj7.desc"></p>
             <div class="project-links">
-              <a href="#" class="project-link"
-                onclick="event.stopPropagation(); showPrivateRepoAlert('https://github.com/Rotananob'); return false;"><i
-                  class="fa-brands fa-github"></i> <span data-i18n="common.code">Code</span></a>
-              <a href="https://rotana-elearningg.web.app/" class="project-link" target="_blank"
-                rel="noopener noreferrer" onclick="event.stopPropagation();"><i
-                  class="fa-solid fa-arrow-up-right-from-square"></i> <span data-i18n="common.live">Live</span></a>
+              <a href="https://github.com/Rotananob/e-learning-v2-react-ts" class="project-link" target="_blank"
+                rel="noopener noreferrer" onclick="event.stopPropagation();"><i class="fa-brands fa-github"></i> <span
+                  data-i18n="common.code">Code</span></a>
+              <a href="https://rotana-education.web.app/" class="project-link" target="_blank" rel="noopener noreferrer"
+                onclick="event.stopPropagation();"><i class="fa-solid fa-arrow-up-right-from-square"></i> <span
+                  data-i18n="common.live">Live</span></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- NEW: S Tech Store -->
+        <div class="project-card reveal" onclick="openCertModal('', t('proj8.title'))">
+          <div class="project-media">
+            <div style="display:flex;align-items:center;justify-content:center;height:100%;background:linear-gradient(135deg,#0f172a 0%,#1e293b 40%,#334155 100%);padding:2rem;">
+              <div style="text-align:center; font-family: 'Dangrek', cursive, sans-serif;">
+                <i class="fa-solid fa-laptop" style="font-size:3.5rem;color:#38bdf8;margin-bottom:0.75rem;display:block;"></i>
+                <span style="font-size:1.6rem;font-weight:700;color:#fff;letter-spacing:0.02em;">S Tech Store</span>
+                <span style="display:block;font-size:1rem;color:#94a3b8;margin-top:0.3rem;">ហាងបច្ចេកវិទ្យា Premium</span>
+              </div>
+            </div>
+            <div class="project-media-badge" data-i18n="common.badgeImage">Image</div>
+          </div>
+          <div class="project-body">
+            <div class="project-tags">
+              <span class="tag">Next.js 14</span>
+              <span class="tag">Laravel 11</span>
+              <span class="tag">PostgreSQL</span>
+              <span class="tag">Firebase Auth</span>
+              <span class="tag">Cloudflare</span>
+              <span class="tag">REST API</span>
+            </div>
+            <h3 class="project-title" style="font-family: 'Dangrek', cursive, sans-serif;" data-i18n="proj8.title">S Tech Store</h3>
+            <p class="project-desc" data-i18n="proj8.desc"></p>
+            <div class="project-links">
+              <a href="https://github.com/Rotananob/S_Tech_Store-Project" class="project-link" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();"><i class="fa-brands fa-github"></i> <span data-i18n="common.code">Code</span></a>
+              <a href="#" class="project-link" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();"><i class="fa-solid fa-arrow-up-right-from-square"></i> <span data-i18n="common.live">Live</span></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- NEW: Delight Fashion -->
+        <div class="project-card reveal" onclick="openCertModal('', t('proj9.title'))">
+          <div class="project-media">
+            <div style="display:flex;align-items:center;justify-content:center;height:100%;background:linear-gradient(135deg,#0a0a0a 0%,#1a1a1a 50%,#2a2a2a 100%);padding:2rem;">
+              <div style="text-align:center; font-family: 'Dangrek', cursive, sans-serif;">
+                <i class="fa-solid fa-shirt" style="font-size:3.5rem;color:#d4af37;margin-bottom:0.75rem;display:block;"></i>
+                <span style="font-size:1.6rem;font-weight:700;color:#fff;letter-spacing:0.04em;">Delight Fashion</span>
+                <span style="display:block;font-size:1rem;color:#d4af37;margin-top:0.3rem;">ម៉ូតប្រុសប្រណិត · ភ្នំពេញ</span>
+              </div>
+            </div>
+            <div class="project-media-badge" data-i18n="common.badgeImage">Image</div>
+          </div>
+          <div class="project-body">
+            <div class="project-tags">
+              <span class="tag">Next.js 16</span>
+              <span class="tag">React 19</span>
+              <span class="tag">TypeScript</span>
+              <span class="tag">Firebase</span>
+              <span class="tag">Cloudinary</span>
+              <span class="tag">Telegram Bot</span>
+              <span class="tag">TailwindCSS v4</span>
+            </div>
+            <h3 class="project-title" style="font-family: 'Dangrek', cursive, sans-serif;" data-i18n="proj9.title">Delight Fashion</h3>
+            <p class="project-desc" data-i18n="proj9.desc"></p>
+            <div class="project-links">
+              <a href="https://github.com/Rotananob/Delight-Fashion" class="project-link" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();"><i class="fa-brands fa-github"></i> <span data-i18n="common.code">Code</span></a>
+              <a href="#" class="project-link" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();"><i class="fa-solid fa-arrow-up-right-from-square"></i> <span data-i18n="common.live">Live</span></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- NEW: NRI Studio -->
+        <div class="project-card reveal" onclick="openCertModal('', t('proj10.title'))">
+          <div class="project-media">
+            <div style="display:flex;align-items:center;justify-content:center;height:100%;background:linear-gradient(135deg,#1e1e1e 0%,#252526 50%,#2d2d2d 100%);padding:2rem;">
+              <div style="text-align:center; font-family: 'Dangrek', cursive, sans-serif;">
+                <i class="fa-solid fa-code" style="font-size:3.5rem;color:#569cd6;margin-bottom:0.75rem;display:block;"></i>
+                <span style="font-size:1.6rem;font-weight:700;color:#d4d4d4;letter-spacing:0.02em;">NRI Studio</span>
+                <span style="display:block;font-size:1rem;color:#9cdcfe;margin-top:0.3rem;">VSCode-Style Web IDE</span>
+              </div>
+            </div>
+            <div class="project-media-badge" data-i18n="common.badgeImage">Image</div>
+          </div>
+          <div class="project-body">
+            <div class="project-tags">
+              <span class="tag">React 18</span>
+              <span class="tag">TypeScript</span>
+              <span class="tag">Vite</span>
+              <span class="tag">Monaco Editor</span>
+              <span class="tag">Node.js</span>
+              <span class="tag">MongoDB</span>
+              <span class="tag">Firebase Auth</span>
+              <span class="tag">Xterm.js</span>
+            </div>
+            <h3 class="project-title" style="font-family: 'Dangrek', cursive, sans-serif;" data-i18n="proj10.title">NRI Studio</h3>
+            <p class="project-desc" data-i18n="proj10.desc"></p>
+            <div class="project-links">
+              <a href="https://github.com/Rotananob/NRI-Studio" class="project-link" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();"><i class="fa-brands fa-github"></i> <span data-i18n="common.code">Code</span></a>
+              <a href="https://nri-studio.vercel.app" class="project-link" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();"><i class="fa-solid fa-arrow-up-right-from-square"></i> <span data-i18n="common.live">Live</span></a>
             </div>
           </div>
         </div>
@@ -308,6 +408,63 @@
           </div>
         </div>
 
+        <div class="project-card reveal"
+          onclick="openVideoPlayer('Assets/vdo/rotanna_elearninnng.mp4', t('proj2.title'))">
+          <div class="project-media">
+            <video src="Assets/vdo/rotanna_elearninnng.mp4" autoplay muted loop playsinline
+              class="project-video"></video>
+            <div class="project-media-badge" data-i18n="common.badgeVideo">Video</div>
+          </div>
+          <div class="project-body">
+            <div class="project-tags">
+              <span class="tag">Firebase</span>
+              <span class="tag">PWA</span>
+              <span class="tag">Node.js</span>
+              <span class="tag">Firestore</span>
+              <span class="tag">Realtime Database</span>
+              <span class="tag">Authentication</span>
+              <span class="tag">APIs</span>
+              <span class="tag">Email-alert</span>
+            </div>
+            <h3 class="project-title" data-i18n="proj2.title">Rotana E-Learning</h3>
+            <p class="project-desc" data-i18n="proj2.desc"></p>
+            <div class="project-links">
+              <a href="#" class="project-link"
+                onclick="event.stopPropagation(); showPrivateRepoAlert('https://github.com/Rotananob'); return false;"><i
+                  class="fa-brands fa-github"></i> <span data-i18n="common.code">Code</span></a>
+              <a href="https://rotana-elearningg.web.app/" class="project-link" target="_blank"
+                rel="noopener noreferrer" onclick="event.stopPropagation();"><i
+                  class="fa-solid fa-arrow-up-right-from-square"></i> <span data-i18n="common.live">Live</span></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card reveal" onclick="openCertModal('Assets/IMG/project1.png', t('proj1.title'))">
+          <div class="project-media">
+            <img src="Assets/IMG/project1.png" alt="BacII Calculator"
+              style="object-fit: contain; background: var(--bg-secondary);" />
+            <div class="project-media-badge" data-i18n="common.badgeImage">Image</div>
+          </div>
+          <div class="project-body">
+            <div class="project-tags">
+              <span class="tag">HTML5/CSS3</span>
+              <span class="tag">JavaScript</span>
+              <span class="tag">Tailwind CSS</span>
+              <span class="tag">Firebase</span>
+            </div>
+            <h3 class="project-title" data-i18n="proj1.title">BacII Calculator</h3>
+            <p class="project-desc" data-i18n="proj1.desc"></p>
+            <div class="project-links">
+              <a href="https://github.com/Rotananob?tab=repositories" class="project-link" target="_blank"
+                rel="noopener noreferrer" onclick="event.stopPropagation();"><i class="fa-brands fa-github"></i> <span
+                  data-i18n="common.code">Code</span></a>
+              <a href="https://bacii-cal.firebaseapp.com/" class="project-link" target="_blank"
+                rel="noopener noreferrer" onclick="event.stopPropagation();"><i
+                  class="fa-solid fa-arrow-up-right-from-square"></i> <span data-i18n="common.live">Live</span></a>
+            </div>
+          </div>
+        </div>
+
         <div class="project-card reveal" onclick="openVideoPlayer('Assets/vdo/moon_coffee.mp4', t('proj4.title'))">
           <div class="project-media">
             <video src="Assets/vdo/moon_coffee.mp4" autoplay muted loop playsinline preload="metadata"
@@ -330,37 +487,6 @@
               <a href="https://moon-coffee-kh.web.app/" class="project-link" target="_blank" rel="noopener noreferrer"
                 onclick="event.stopPropagation();"><i class="fa-solid fa-arrow-up-right-from-square"></i> <span
                   data-i18n="common.live">Live</span></a>
-            </div>
-          </div>
-        </div>
-
-        <div class="project-card reveal"
-          onclick="openCertModal('https://student-management-syste-70290.web.app/logo.png', t('proj5.title'))">
-          <div class="project-media">
-            <img src="https://student-management-syste-70290.web.app/logo.png" alt="YOUNG SMS"
-              style="object-fit: contain; background: linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #4338ca 100%); padding: 2rem;" />
-            <div class="project-media-badge" data-i18n="common.badgeImage">Image</div>
-          </div>
-          <div class="project-body">
-            <div class="project-tags">
-              <span class="tag">React.js</span>
-              <span class="tag">Node.js</span>
-              <span class="tag">Express</span>
-              <span class="tag">Firebase</span>
-              <span class="tag">Firestore</span>
-              <span class="tag">Realtime Database</span>
-              <span class="tag">Authentication</span>
-              <span class="tag">Firebase Hosting</span>
-            </div>
-            <h3 class="project-title" data-i18n="proj5.title">YOUNG SMS</h3>
-            <p class="project-desc" data-i18n="proj5.desc"></p>
-            <div class="project-links">
-              <a href="https://github.com/Rotananob/SMS" class="project-link" target="_blank" rel="noopener noreferrer"
-                onclick="event.stopPropagation();"><i class="fa-brands fa-github"></i> <span
-                  data-i18n="common.code">Code</span></a>
-              <a href="https://student-management-syste-70290.web.app/" class="project-link" target="_blank"
-                rel="noopener noreferrer" onclick="event.stopPropagation();"><i
-                  class="fa-solid fa-arrow-up-right-from-square"></i> <span data-i18n="common.live">Live</span></a>
             </div>
           </div>
         </div>
@@ -402,37 +528,8 @@
           </div>
         </div>
 
-        <div class="project-card reveal"
-          onclick="openCertModal('https://rotana-education.web.app/assets/img/images/logo.png', t('proj7.title'))">
-          <div class="project-media">
-            <img src="https://rotana-education.web.app/assets/img/images/logo.png" alt="Rotana E-Learning V2"
-              style="object-fit: contain; background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 50%, #3b82f6 100%); padding: 2rem;" />
-            <div class="project-media-badge" data-i18n="common.badgeImage">Image</div>
-          </div>
-          <div class="project-body">
-            <div class="project-tags">
-              <span class="tag">React 18</span>
-              <span class="tag">TypeScript</span>
-              <span class="tag">Vite</span>
-              <span class="tag">Firebase</span>
-              <span class="tag">Node.js</span>
-              <span class="tag">Express</span>
-              <span class="tag">Cloudflare</span>
-              <span class="tag">PWA</span>
-              <span class="tag">Gemini AI</span>
-            </div>
-            <h3 class="project-title" data-i18n="proj7.title">Rotana E-Learning V2</h3>
-            <p class="project-desc" data-i18n="proj7.desc"></p>
-            <div class="project-links">
-              <a href="https://github.com/Rotananob/e-learning-v2-react-ts" class="project-link" target="_blank"
-                rel="noopener noreferrer" onclick="event.stopPropagation();"><i class="fa-brands fa-github"></i> <span
-                  data-i18n="common.code">Code</span></a>
-              <a href="https://rotana-education.web.app/" class="project-link" target="_blank" rel="noopener noreferrer"
-                onclick="event.stopPropagation();"><i class="fa-solid fa-arrow-up-right-from-square"></i> <span
-                  data-i18n="common.live">Live</span></a>
-            </div>
-          </div>
-        </div>
+
+
 
       </div>
     </div>
@@ -1206,7 +1303,7 @@
   <!-- =====================
        JAVASCRIPT
        ===================== -->
-  <script src="script.js"></script>
+  <script src="script.js?v=2"></script>
 </body>
 
 </html>
