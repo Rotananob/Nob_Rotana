@@ -604,10 +604,30 @@ async function loadCertificatesFromFirestore() {
   }
 }
 
-// បងត្រូវដាក់ Token របស់ Bot និង Chat ID របស់បងនៅទីនេះ
-const TELEGRAM_BOT_TOKEN = '8876181869:AAHKHwTJOtaJBsZh92nBpb1nDP3IbEQZUlM';
-// Chat IDs - Add both Telegram accounts here
-const TELEGRAM_CHAT_IDS = ['6762495028', '5969556967'];
+// ====== DUAL BOT CONFIG ======
+// Bot 1 (Account 1: @NobRotana)
+// Bot 2 (Account 2: @rotananobSETEC)
+const BOTS = [
+  { token: '8876181869:AAHKHwTJOtaJBsZh92nBpb1nDP3IbEQZUlM', chat_id: '6762495028' }, // acc1
+  { token: '8930376959:AAE3jZqSvNWgteMNj4wrfCDEAGpd6FEsYrw', chat_id: '5969566967' }, // acc2
+];
+
+// Helper: send a message via all bots
+async function sendToAllBots(text) {
+  const results = await Promise.allSettled(
+    BOTS.map(bot =>
+      fetch(`https://api.telegram.org/bot${bot.token}/sendMessage`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ chat_id: bot.chat_id, text, parse_mode: 'Markdown', disable_web_page_preview: false })
+      }).then(r => r.json())
+    )
+  );
+  results.forEach((r, i) => {
+    if (r.status === 'fulfilled') console.log(`[TG] ✅ Bot${i+1} sent:`, r.value.ok);
+    else console.error(`[TG] ❌ Bot${i+1} failed:`, r.reason);
+  });
+}
 
 async function submitContactForm(name, email, message, telegram, linkedin) {
   if (!db) return { success: false, error: 'Firebase not ready' };
@@ -624,24 +644,15 @@ async function submitContactForm(name, email, message, telegram, linkedin) {
     await db.collection('messages').add(payload);
 
     // === SEND ALERT TO TELEGRAM WHEN SOMEONE CONTACTS ===
-    if (TELEGRAM_BOT_TOKEN !== 'YOUR_BOT_TOKEN_HERE') {
-      const text = `
-📩 *សារថ្មីពីអតិថិជន (Contact Form)*
-👤 ឈ្មោះ: ${payload.name}
-📧 អ៊ីមែល: ${payload.email}
-📱 Telegram: ${payload.telegram || 'គ្មាន'}
-💼 LinkedIn: ${payload.linkedin || 'គ្មាន'}
-📝 សារ: ${payload.message}
-      `;
-      // Send to ALL chat IDs
-      TELEGRAM_CHAT_IDS.forEach(cid => {
-        fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ chat_id: cid, text: text, parse_mode: 'Markdown' })
-        }).catch(console.error);
-      });
-    }
+    const contactText = [
+      '📩 *សារថ្មីពីអតិថិជន (Contact Form)*',
+      `👤 ឈ្មោះ: ${payload.name}`,
+      `📧 អ៊ីមែល: ${payload.email}`,
+      `📱 Telegram: ${payload.telegram || 'គ្មាន'}`,
+      `💼 LinkedIn: ${payload.linkedin || 'គ្មាន'}`,
+      `📝 សារ: ${payload.message}`,
+    ].join('\n');
+    sendToAllBots(contactText).catch(console.error);
 
     return { success: true };
   } catch (e) {
@@ -654,8 +665,17 @@ async function submitContactForm(name, email, message, telegram, linkedin) {
    TELEGRAM VISIT ALERT SYSTEM
    ======================================================== */
 async function sendVisitAlertToTelegram() {
-  if (TELEGRAM_BOT_TOKEN === 'YOUR_BOT_TOKEN_HERE' || !TELEGRAM_CHAT_IDS.length) return;
-  if (sessionStorage.getItem('visited_alert_sent')) return;
+  if (!BOTS.length) return;
+
+  // ---- Cooldown: Alert max once every 5 minutes per same browser ----
+  // When user closes tab & opens again (new session) = always alert
+  // When user just refreshes = skip if within 5 minutes
+  const COOLDOWN_MS = 5 * 60 * 1000; // 5 minutes
+  const lastSent = localStorage.getItem('tg_visit_last');
+  if (lastSent && (Date.now() - parseInt(lastSent)) < COOLDOWN_MS) {
+    console.log('[TG Alert] Skipped — within 5 min cooldown');
+    return;
+  }
 
   try {
     // ---- Detect Device Type ----
@@ -702,11 +722,11 @@ async function sendVisitAlertToTelegram() {
       const res = await fetch('https://ipapi.co/json/');
       if (res.ok) {
         const data = await res.json();
-        ip      = data.ip          || 'N/A';
-        city    = data.city        || 'Unknown';
-        region  = data.region      || 'Unknown';
+        ip      = data.ip           || 'N/A';
+        city    = data.city         || 'Unknown';
+        region  = data.region       || 'Unknown';
         country = data.country_name || 'Unknown';
-        isp     = data.org         || 'Unknown';
+        isp     = data.org          || 'Unknown';
         lat     = data.latitude;
         lon     = data.longitude;
         if (lat && lon) {
@@ -714,7 +734,7 @@ async function sendVisitAlertToTelegram() {
         }
       }
     } catch (e) {
-      console.warn('Could not fetch IP info', e);
+      console.warn('[TG Alert] Could not fetch IP info', e);
     }
 
     const time = new Date().toLocaleString('en-GB', { timeZone: 'Asia/Phnom_Penh' });
@@ -740,24 +760,14 @@ async function sendVisitAlertToTelegram() {
       mapsLink
     ].join('\n');
 
-    // Send to ALL chat IDs
-    const sendPromises = TELEGRAM_CHAT_IDS.map(cid =>
-      fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          chat_id: cid,
-          text: message,
-          parse_mode: 'Markdown',
-          disable_web_page_preview: false
-        })
-      })
-    );
-    await Promise.all(sendPromises);
+    console.log('[TG Alert] Sending via', BOTS.length, 'bots...');
+    await sendToAllBots(message);
 
-    sessionStorage.setItem('visited_alert_sent', 'true');
+    // Save timestamp — cooldown 5 min to avoid spam on refresh
+    localStorage.setItem('tg_visit_last', Date.now().toString());
+
   } catch (error) {
-    console.error('Error sending Telegram alert:', error);
+    console.error('[TG Alert] Fatal error:', error);
   }
 }
 
