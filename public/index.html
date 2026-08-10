@@ -110,11 +110,11 @@
         <div class="hero-stats">
           <!-- 🔥 FIREBASE: Fetch these numbers from Firestore "yprofile/stats" document -->
           <div class="hero-stat-item">
-            <strong>18+</strong>
+            <strong>20+</strong>
             <span data-i18n="hero.statProjects">Projects Done</span>
           </div>
           <div class="hero-stat-item">
-            <strong>1+</strong>
+            <strong>1,5+</strong>
             <span data-i18n="hero.statYears">Years Experience</span>
           </div>
           <div class="hero-stat-item">
@@ -183,35 +183,46 @@
       <!-- 🔥 FIREBASE: This grid is populated by loadProjectsFromFirestore() below.
            Fallback static cards shown until Firebase is connected. -->
       <div class="projects-grid" id="projects-grid">
-        
-        <!-- #1 TOP: YOUNG SMS -->
+
+        <!-- #1 TOP: Delight Fashion -->
         <div class="project-card reveal"
-          onclick="openCertModal('https://student-management-syste-70290.web.app/logo.png', t('proj5.title'))">
+          onclick="openCertModal('https://scontent-sin11-1.xx.fbcdn.net/v/t39.30808-6/712684117_122170022186956874_8315771445675368774_n.jpg?stp=dst-jpg_tt6&cstp=mx960x960&ctp=s960x960&_nc_cat=105&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeHLsphjOEVfhzB1Edc2uw__M5MfBgezw10zkx8GB7PDXfFUCRe7Ne6r-Yl67GnLIKqoAN-vcjA5EJcupbDx5jLL&_nc_ohc=7epAP6SFPqEQ7kNvwFAHN_q&_nc_oc=AdpX0DL6ryp8tdTEJqko0kxNNDSG09rp8tzwon1yMi_Fpf5VNYO76EDUGnwQi2TIWVg&_nc_zt=23&_nc_ht=scontent-sin11-1.xx&_nc_gid=hU4Ypf9xeOPFKP3bzMg9JQ&_nc_ss=7b2a8&oh=00_AQGr00C4cy0BEuBChFMXXoAcN82c1ulrdGyXpseVzMVqPg&oe=6A7FEC6B', t('proj9.title'))">
           <div class="project-media">
-            <img src="https://student-management-syste-70290.web.app/logo.png" alt="YOUNG SMS"
-              style="object-fit: contain; background: linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #4338ca 100%); padding: 2rem;" />
+            <img
+              src="https://scontent-sin11-1.xx.fbcdn.net/v/t39.30808-6/712684117_122170022186956874_8315771445675368774_n.jpg?stp=dst-jpg_tt6&cstp=mx960x960&ctp=s960x960&_nc_cat=105&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeHLsphjOEVfhzB1Edc2uw__M5MfBgezw10zkx8GB7PDXfFUCRe7Ne6r-Yl67GnLIKqoAN-vcjA5EJcupbDx5jLL&_nc_ohc=7epAP6SFPqEQ7kNvwFAHN_q&_nc_oc=AdpX0DL6ryp8tdTEJqko0kxNNDSG09rp8tzwon1yMi_Fpf5VNYO76EDUGnwQi2TIWVg&_nc_zt=23&_nc_ht=scontent-sin11-1.xx&_nc_gid=hU4Ypf9xeOPFKP3bzMg9JQ&_nc_ss=7b2a8&oh=00_AQGr00C4cy0BEuBChFMXXoAcN82c1ulrdGyXpseVzMVqPg&oe=6A7FEC6B"
+              alt="Delight Fashion" style="object-fit: cover;" />
             <div class="project-media-badge" data-i18n="common.badgeImage">Image</div>
           </div>
           <div class="project-body">
             <div class="project-tags">
-              <span class="tag">React.js</span>
-              <span class="tag">Node.js</span>
-              <span class="tag">Express</span>
+              <span class="tag">Next.js 16</span>
+              <span class="tag">React 19</span>
+              <span class="tag">TypeScript</span>
               <span class="tag">Firebase</span>
-              <span class="tag">Firestore</span>
-              <span class="tag">Realtime Database</span>
-              <span class="tag">Authentication</span>
-              <span class="tag">Firebase Hosting</span>
+              <span class="tag">Cloudinary</span>
+              <span class="tag">Telegram Bot</span>
+              <span class="tag">TailwindCSS v4</span>
             </div>
-            <h3 class="project-title" data-i18n="proj5.title">YOUNG SMS</h3>
-            <p class="project-desc" data-i18n="proj5.desc"></p>
+            <h3 class="project-title" style="font-family: 'Dangrek', cursive, sans-serif;" data-i18n="proj9.title">
+              Delight Fashion (Client Project)</h3>
+            <p class="project-desc" data-i18n="proj9.desc"></p>
             <div class="project-links">
-              <a href="https://github.com/Rotananob/SMS" class="project-link" target="_blank" rel="noopener noreferrer"
-                onclick="event.stopPropagation();"><i class="fa-brands fa-github"></i> <span
-                  data-i18n="common.code">Code</span></a>
-              <a href="https://student-management-syste-70290.web.app/" class="project-link" target="_blank"
-                rel="noopener noreferrer" onclick="event.stopPropagation();"><i
-                  class="fa-solid fa-arrow-up-right-from-square"></i> <span data-i18n="common.live">Live</span></a>
+              <a href="#" class="project-link"
+                onclick="event.stopPropagation(); showClientProjectAlert('https://www.figma.com/proto/cJ84aVxrJIEZbXijeocEfq/Untitled', 'https://github.com/Rotananob'); return false;"><i
+                  class="fa-solid fa-lock"></i> <span data-i18n="common.code">Code</span></a>
+              <a href="#" class="project-link" target="_blank" rel="noopener noreferrer"
+                onclick="event.stopPropagation();"><i class="fa-solid fa-arrow-up-right-from-square"></i> <span
+                  data-i18n="common.live">Live</span></a>
+              <a href="#" class="project-link" target="_blank" rel="noopener noreferrer"
+                onclick="event.stopPropagation();"><i class="fa-brands fa-facebook" style="color: #1877F2;"></i>
+                Facebook</a>
+              <a href="https://www.tiktok.com/@delightfashion21" class="project-link" target="_blank"
+                rel="noopener noreferrer" onclick="event.stopPropagation();"><i class="fa-brands fa-tiktok"></i>
+                TikTok</a>
+              <a href="tel:+855766606852" class="project-link" onclick="event.stopPropagation();"><i
+                  class="fa-solid fa-phone" style="color: #34d399;"></i> 076 660 6852</a>
+              <a href="mailto:sinornnosmoke063@gmail.com" class="project-link" onclick="event.stopPropagation();"><i
+                  class="fa-solid fa-envelope" style="color: #f87171;"></i> Email</a>
             </div>
           </div>
         </div>
@@ -250,62 +261,74 @@
         </div>
 
         <!-- NEW: S Tech Store -->
-        <div class="project-card reveal" onclick="openCertModal('', t('proj8.title'))">
+        <div class="project-card reveal" onclick="openCertModal('Assets/IMG/S_tech_store.jpg', t('proj8.title'))">
           <div class="project-media">
-            <div style="display:flex;align-items:center;justify-content:center;height:100%;background:linear-gradient(135deg,#0f172a 0%,#1e293b 40%,#334155 100%);padding:2rem;">
-              <div style="text-align:center; font-family: 'Dangrek', cursive, sans-serif;">
-                <i class="fa-solid fa-laptop" style="font-size:3.5rem;color:#38bdf8;margin-bottom:0.75rem;display:block;"></i>
-                <span style="font-size:1.6rem;font-weight:700;color:#fff;letter-spacing:0.02em;">S Tech Store</span>
-                <span style="display:block;font-size:1rem;color:#94a3b8;margin-top:0.3rem;">ហាងបច្ចេកវិទ្យា Premium</span>
-              </div>
-            </div>
+            <img src="Assets/IMG/S_tech_store.jpg" alt="S Tech Store"
+              style="object-fit: cover; background: #000; padding: 0;" />
             <div class="project-media-badge" data-i18n="common.badgeImage">Image</div>
           </div>
           <div class="project-body">
             <div class="project-tags">
               <span class="tag">Next.js 14</span>
+              <span class="tag">React 18</span>
+              <span class="tag">TypeScript</span>
+              <span class="tag">TailwindCSS v4</span>
               <span class="tag">Laravel 11</span>
+              <span class="tag">PHP 8.2</span>
               <span class="tag">PostgreSQL</span>
               <span class="tag">Firebase Auth</span>
               <span class="tag">Cloudflare</span>
-              <span class="tag">REST API</span>
+              <span class="tag">RESTful API</span>
+              <span class="tag">Framer Motion</span>
             </div>
-            <h3 class="project-title" style="font-family: 'Dangrek', cursive, sans-serif;" data-i18n="proj8.title">S Tech Store</h3>
+            <h3 class="project-title" style="font-family: 'Dangrek', cursive, sans-serif;" data-i18n="proj8.title">S
+              Tech Store (Client Project)</h3>
             <p class="project-desc" data-i18n="proj8.desc"></p>
             <div class="project-links">
-              <a href="https://github.com/Rotananob/S_Tech_Store-Project" class="project-link" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();"><i class="fa-brands fa-github"></i> <span data-i18n="common.code">Code</span></a>
-              <a href="#" class="project-link" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();"><i class="fa-solid fa-arrow-up-right-from-square"></i> <span data-i18n="common.live">Live</span></a>
+              <a href="#" class="project-link"
+                onclick="event.stopPropagation(); showClientProjectAlert('https://www.figma.com/proto/cJ84aVxrJIEZbXijeocEfq/Untitled', 'https://github.com/Rotananob'); return false;"><i
+                  class="fa-solid fa-lock"></i> <span data-i18n="common.code">Code</span></a>
+              <a href="#" class="project-link" target="_blank" rel="noopener noreferrer"
+                onclick="event.stopPropagation();"><i class="fa-solid fa-arrow-up-right-from-square"></i> <span
+                  data-i18n="common.live">Live</span></a>
+              <a href="https://www.facebook.com/share/1GrN9owQZG/?mibextid=wwXIfr" class="project-link" target="_blank"
+                rel="noopener noreferrer" onclick="event.stopPropagation();"><i class="fa-brands fa-facebook"
+                  style="color: #1877F2;"></i> Facebook</a>
+              <a href="https://t.me/COMPUTERSTOREBUY" class="project-link" target="_blank" rel="noopener noreferrer"
+                onclick="event.stopPropagation();"><i class="fa-brands fa-telegram" style="color: #26A5E4;"></i>
+                Telegram Channel</a>
             </div>
           </div>
         </div>
 
-        <!-- NEW: Delight Fashion -->
-        <div class="project-card reveal" onclick="openCertModal('', t('proj9.title'))">
+        <!-- NEW: YOUNG SMS -->
+        <div class="project-card reveal"
+          onclick="openCertModal('https://student-management-syste-70290.web.app/logo.png', t('proj5.title'))">
           <div class="project-media">
-            <div style="display:flex;align-items:center;justify-content:center;height:100%;background:linear-gradient(135deg,#0a0a0a 0%,#1a1a1a 50%,#2a2a2a 100%);padding:2rem;">
-              <div style="text-align:center; font-family: 'Dangrek', cursive, sans-serif;">
-                <i class="fa-solid fa-shirt" style="font-size:3.5rem;color:#d4af37;margin-bottom:0.75rem;display:block;"></i>
-                <span style="font-size:1.6rem;font-weight:700;color:#fff;letter-spacing:0.04em;">Delight Fashion</span>
-                <span style="display:block;font-size:1rem;color:#d4af37;margin-top:0.3rem;">ម៉ូតប្រុសប្រណិត · ភ្នំពេញ</span>
-              </div>
-            </div>
+            <img src="https://student-management-syste-70290.web.app/logo.png" alt="YOUNG SMS"
+              style="object-fit: contain; background: linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #4338ca 100%); padding: 2rem;" />
             <div class="project-media-badge" data-i18n="common.badgeImage">Image</div>
           </div>
           <div class="project-body">
             <div class="project-tags">
-              <span class="tag">Next.js 16</span>
-              <span class="tag">React 19</span>
-              <span class="tag">TypeScript</span>
+              <span class="tag">React.js</span>
+              <span class="tag">Node.js</span>
+              <span class="tag">Express</span>
               <span class="tag">Firebase</span>
-              <span class="tag">Cloudinary</span>
-              <span class="tag">Telegram Bot</span>
-              <span class="tag">TailwindCSS v4</span>
+              <span class="tag">Firestore</span>
+              <span class="tag">Realtime Database</span>
+              <span class="tag">Authentication</span>
+              <span class="tag">Firebase Hosting</span>
             </div>
-            <h3 class="project-title" style="font-family: 'Dangrek', cursive, sans-serif;" data-i18n="proj9.title">Delight Fashion</h3>
-            <p class="project-desc" data-i18n="proj9.desc"></p>
+            <h3 class="project-title" data-i18n="proj5.title">YOUNG SMS</h3>
+            <p class="project-desc" data-i18n="proj5.desc"></p>
             <div class="project-links">
-              <a href="https://github.com/Rotananob/Delight-Fashion" class="project-link" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();"><i class="fa-brands fa-github"></i> <span data-i18n="common.code">Code</span></a>
-              <a href="#" class="project-link" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();"><i class="fa-solid fa-arrow-up-right-from-square"></i> <span data-i18n="common.live">Live</span></a>
+              <a href="https://github.com/Rotananob/SMS" class="project-link" target="_blank" rel="noopener noreferrer"
+                onclick="event.stopPropagation();"><i class="fa-brands fa-github"></i> <span
+                  data-i18n="common.code">Code</span></a>
+              <a href="https://student-management-syste-70290.web.app/" class="project-link" target="_blank"
+                rel="noopener noreferrer" onclick="event.stopPropagation();"><i
+                  class="fa-solid fa-arrow-up-right-from-square"></i> <span data-i18n="common.live">Live</span></a>
             </div>
           </div>
         </div>
@@ -313,9 +336,11 @@
         <!-- NEW: NRI Studio -->
         <div class="project-card reveal" onclick="openCertModal('', t('proj10.title'))">
           <div class="project-media">
-            <div style="display:flex;align-items:center;justify-content:center;height:100%;background:linear-gradient(135deg,#1e1e1e 0%,#252526 50%,#2d2d2d 100%);padding:2rem;">
+            <div
+              style="display:flex;align-items:center;justify-content:center;height:100%;background:linear-gradient(135deg,#1e1e1e 0%,#252526 50%,#2d2d2d 100%);padding:2rem;">
               <div style="text-align:center; font-family: 'Dangrek', cursive, sans-serif;">
-                <i class="fa-solid fa-code" style="font-size:3.5rem;color:#569cd6;margin-bottom:0.75rem;display:block;"></i>
+                <i class="fa-solid fa-code"
+                  style="font-size:3.5rem;color:#569cd6;margin-bottom:0.75rem;display:block;"></i>
                 <span style="font-size:1.6rem;font-weight:700;color:#d4d4d4;letter-spacing:0.02em;">NRI Studio</span>
                 <span style="display:block;font-size:1rem;color:#9cdcfe;margin-top:0.3rem;">VSCode-Style Web IDE</span>
               </div>
@@ -333,11 +358,16 @@
               <span class="tag">Firebase Auth</span>
               <span class="tag">Xterm.js</span>
             </div>
-            <h3 class="project-title" style="font-family: 'Dangrek', cursive, sans-serif;" data-i18n="proj10.title">NRI Studio</h3>
+            <h3 class="project-title" style="font-family: 'Dangrek', cursive, sans-serif;" data-i18n="proj10.title">NRI
+              Studio</h3>
             <p class="project-desc" data-i18n="proj10.desc"></p>
             <div class="project-links">
-              <a href="https://github.com/Rotananob/NRI-Studio" class="project-link" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();"><i class="fa-brands fa-github"></i> <span data-i18n="common.code">Code</span></a>
-              <a href="https://nri-studio.vercel.app" class="project-link" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();"><i class="fa-solid fa-arrow-up-right-from-square"></i> <span data-i18n="common.live">Live</span></a>
+              <a href="https://github.com/Rotananob/NRI-Studio" class="project-link" target="_blank"
+                rel="noopener noreferrer" onclick="event.stopPropagation();"><i class="fa-brands fa-github"></i> <span
+                  data-i18n="common.code">Code</span></a>
+              <a href="https://nri-studio.vercel.app" class="project-link" target="_blank" rel="noopener noreferrer"
+                onclick="event.stopPropagation();"><i class="fa-solid fa-arrow-up-right-from-square"></i> <span
+                  data-i18n="common.live">Live</span></a>
             </div>
           </div>
         </div>
@@ -1280,6 +1310,30 @@
       <h3 id="video-modal-title" class="video-modal-title">Project Video</h3>
       <div class="video-wrapper">
         <video id="video-modal-player" controls playsinline src=""></video>
+      </div>
+    </div>
+  </div>
+
+  <!-- =====================
+       CLIENT PROJECT ALERT MODAL
+       ===================== -->
+  <div id="client-project-modal" class="alert-modal">
+    <div class="alert-card" style="text-align: center; max-width: 400px;">
+      <div class="alert-icon-wrap"
+        style="background: rgba(234, 179, 8, 0.2); color: #eab308; box-shadow: 0 0 15px rgba(234, 179, 8, 0.4); margin: 0 auto 1.5rem auto;">
+        <i class="fa-solid fa-briefcase"></i>
+      </div>
+      <h3 class="alert-title">Client Project (Private Code)</h3>
+      <p class="alert-message">
+        សុំទោសផង! នេះគឺជាគម្រោងរបស់អតិថិជន ដូច្នេះមិនអាចបើកកូដអោយមើលបានទេ។ ប៉ុន្តែអ្នកអាចចូលទៅមើលការរចនា UX/UI ជំនួសវិញ
+        ឬមើលកូដផ្សេងៗទៀតរបស់ខ្ញុំ។
+      </p>
+      <div class="alert-actions" style="flex-direction: column; gap: 0.8rem;">
+        <button id="client-btn-figma" class="alert-btn-confirm" style="width: 100%;"><i class="fa-brands fa-figma"></i>
+          View UX/UI (Figma)</button>
+        <button id="client-btn-github" class="alert-btn-confirm" style="width: 100%; background: #333; color: white;"><i
+            class="fa-brands fa-github"></i> View Other Repositories</button>
+        <button class="alert-btn-cancel" onclick="closeClientProjectAlert()" style="width: 100%;">បោះបង់</button>
       </div>
     </div>
   </div>

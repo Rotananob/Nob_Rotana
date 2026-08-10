@@ -205,9 +205,9 @@ Object.assign(I18N.en, {
   'alert.privateMessage': 'This code is set to Private. Please note that when you continue, you will only see Public Repositories.',
   'alert.confirm': 'Confirm and Continue',
   'alert.cancel': 'Cancel',
-  'proj8.title': 'S Tech Store',
-  'proj8.desc': 'S Tech Store is a premium computer & tech e-commerce platform built with a modern full-stack architecture. The frontend is powered by Next.js 14 (App Router) delivering a fast, SEO-optimized shopping experience, while the backend is a robust Laravel 11 REST API connected to PostgreSQL. Authentication is handled securely via Firebase Auth, and the entire infrastructure is protected and accelerated by Cloudflare. Features include a full product catalog, cart system, user accounts, and database-backed order management.',
-  'proj9.title': 'Delight Fashion',
+  'proj8.title': 'S Tech Store (Client Project)',
+  'proj8.desc': 'S Tech Store is an elite, high-performance e-commerce platform tailored for the modern computer and tech market in Cambodia. Built from the ground up with a cutting-edge full-stack architecture, it offers a seamless and luxurious shopping experience. The frontend utilizes Next.js 14 (App Router) and Tailwind CSS to ensure blazing-fast load times, exceptional SEO, and a fully responsive mobile-first UI. The backend is powered by a scalable Laravel 11 REST API connected to a PostgreSQL database, efficiently handling a vast product catalog, dynamic pricing, and complex order management. Security is paramount, with Firebase Authentication managing user sessions securely. The entire ecosystem is deployed globally and protected against threats via Cloudflare. Core features include an intelligent search system, dynamic shopping cart, user dashboard, automated invoice generation, and real-time inventory tracking, delivering a comprehensive enterprise-grade solution.',
+  'proj9.title': 'Delight Fashion (Client Project)',
   'proj9.desc': 'Delight Fashion is a production-ready, mobile-first, high-end men\'s fashion e-commerce platform built for Phnom Penh, Cambodia. Built with Next.js 16 (App Router) and React 19, it features a luxury Black, White & Gold aesthetic. The serverless Firebase backend handles authentication (Google + Custom RBAC claims) and Firestore NoSQL data. Product images are delivered via Cloudinary CDN with WebP/AVIF optimization. Shop owners receive instant Telegram Bot push notifications for new orders. Supports Cambodia local payments: Cash on Delivery & ABA Bank QR PayWay. All 8 development phases completed.',
   'proj10.title': 'NRI Studio',
   'proj10.desc': 'NRI Studio is a full-stack, browser-based Integrated Development Environment (IDE) that closely mimics the behavior and UI of VSCode. Built for modern web development, it allows users to create, edit, save, and execute JavaScript and TypeScript code entirely in the cloud. Features include Monaco Editor with full IntelliSense & auto-completion, a collapsible sidebar with file explorer, multi-tab support, local folder upload, live terminal powered by a secure Node.js backend sandbox, real-time auto-save to MongoDB, and Firebase Authentication (email/password & Google). Deployed on Vercel (frontend) and Render (backend).',
@@ -412,9 +412,9 @@ Object.assign(I18N.km, {
   'alert.privateMessage': 'កូដនេះត្រូវបានដាក់ជា Private។ សូមប្រាប់ថានៅពេលអ្នកចុចបន្ត អ្នកនឹងឃើញតែ Public Repositories ប៉ុណ្ណោះ។',
   'alert.confirm': 'យល់ព្រម និងបន្ត',
   'alert.cancel': 'បោះបង់',
-  'proj8.title': 'S Tech Store',
-  'proj8.desc': 'S Tech Store គឺជាវេទិកា E-Commerce លក់ Computer និង Tech ដ៏ប្រណិត ដែលបង្កើតឡើងដោយស្ថាបត្យកម្ម Full-Stack ទំនើប។ Frontend ប្រើ Next.js 14 (App Router) ផ្ដល់នូវបទពិសោធទិញទំនិញលឿន និង SEO ល្អ ខណៈ Backend គឺ Laravel 11 REST API ភ្ជាប់ PostgreSQL។ Firebase Auth ដោះស្រាយការចូលគណនីយ៉ាងសុវត្ថិភាព ហើយ Cloudflare ការពារ និងបង្កើនល្បឿនហេដ្ឋារចនាសម្ព័ន្ធ។ មានមុខងារ Product Catalog, Cart, User Account និង Order Management ពេញលេញ។',
-  'proj9.title': 'Delight Fashion',
+  'proj8.title': 'S Tech Store (Client Project)',
+  'proj8.desc': 'S Tech Store គឺជាវេទិកា E-Commerce លក់ Computer និងផលិតផលបច្ចេកវិទ្យាដ៏ប្រណិត និងឈានមុខគេ ដែលបង្កើតឡើងដោយស្ថាបត្យកម្ម Full-Stack ទំនើបបំផុត។ Frontend ប្រើប្រាស់ Next.js 14 (App Router) និង Tailwind CSS ដើម្បីផ្ដល់នូវបទពិសោធទិញទំនិញយ៉ាងលឿន (Blazing-fast) ជាមួយ SEO កម្រិតខ្ពស់ និង Responsive គ្រប់ទំហំអេក្រង់។ ចំណែក Backend ត្រូវបានរៀបចំឡើងដោយ Laravel 11 REST API យ៉ាងរឹងមាំ ភ្ជាប់ជាមួយមូលដ្ឋានទិន្នន័យ PostgreSQL សម្រាប់គ្រប់គ្រងទំនិញរាប់ពាន់មុខ និងការកុម្ម៉ង់យ៉ាងមានប្រសិទ្ធភាព។ ការចូលប្រើប្រាស់ត្រូវបានការពារសុវត្ថិភាពយ៉ាងតឹងរ៉ឹងដោយ Firebase Auth រីឯប្រព័ន្ធទាំងមូលត្រូវបានការពារនិងបង្កើនល្បឿនដោយ Cloudflare។ មុខងារសំខាន់ៗរួមមាន៖ ប្រព័ន្ធស្វែងរកឆ្លាតវៃ (Intelligent Search), កន្ត្រកទំនិញ (Dynamic Cart), គណនីអ្នកប្រើប្រាស់ (User Dashboard), ការបង្កើតវិក្កយបត្រស្វ័យប្រវត្តិ, និងការតាមដានស្តុកទំនិញក្នុងពេលជាក់ស្តែង (Real-time Inventory) ដែលស័ក្តិសមបំផុតសម្រាប់អាជីវកម្មខ្នាតធំ។',
+  'proj9.title': 'Delight Fashion (Client Project)',
   'proj9.desc': 'Delight Fashion គឺជាវេទិកា E-Commerce ម៉ូតប្រុសប្រណិតដែលត្រៀមសម្រាប់ Production ស្ថិតនៅភ្នំពេញ កម្ពុជា។ បង្កើតដោយ Next.js 16 និង React 19 ជាមួយ aesthetic ខ្មៅ ស និងមាស។ Firebase (Auth + Firestore) ដោះស្រាយ Backend ដោយគ្មាន Server។ រូបភាពផលិតផលបង្ហោះតាម Cloudinary CDN ជាមួយ WebP/AVIF Optimization។ ម្ចាស់ហាងទទួលការជូនដំណឹង Telegram Bot ភ្លាមៗ។ ទូទាត់បែប COD និង ABA Bank QR PayWay។ Phase ទាំង ៨ បានបញ្ចប់ស្រេច។',
   'proj10.title': 'NRI Studio',
   'proj10.desc': 'NRI Studio គឺជា IDE (Integrated Development Environment) ដំណើរការក្នុង Browser ដែលមានទម្រង់ស្រដៀង VSCode។ បង្កើតឡើងសម្រាប់ Developer ទំនើប អាចបង្កើត កែ រក្សាទុក និង Execute កូដ JavaScript/TypeScript ទាំងស្រុងក្នុង Cloud។ មុខងាររួមមាន Monaco Editor ជាមួយ IntelliSense, ការ Auto-Complete, Sidebar, Multi-Tab, Local Folder Upload, Terminal ស្ទួន Node.js Sandbox, Auto-Save ទៅ MongoDB, និង Firebase Auth (Email/Google)។ Deploy នៅ Vercel (Frontend) និង Render (Backend)។',
@@ -604,6 +604,11 @@ async function loadCertificatesFromFirestore() {
   }
 }
 
+// បងត្រូវដាក់ Token របស់ Bot និង Chat ID របស់បងនៅទីនេះ
+const TELEGRAM_BOT_TOKEN = '8876181869:AAHKHwTJOtaJBsZh92nBpb1nDP3IbEQZUlM';
+// Chat IDs - Add both Telegram accounts here
+const TELEGRAM_CHAT_IDS = ['6762495028', '5969556967'];
+
 async function submitContactForm(name, email, message, telegram, linkedin) {
   if (!db) return { success: false, error: 'Firebase not ready' };
   try {
@@ -615,13 +620,151 @@ async function submitContactForm(name, email, message, telegram, linkedin) {
     };
     if (telegram) payload.telegram = String(telegram).trim();
     if (linkedin) payload.linkedin = String(linkedin).trim();
+    
     await db.collection('messages').add(payload);
+
+    // === SEND ALERT TO TELEGRAM WHEN SOMEONE CONTACTS ===
+    if (TELEGRAM_BOT_TOKEN !== 'YOUR_BOT_TOKEN_HERE') {
+      const text = `
+📩 *សារថ្មីពីអតិថិជន (Contact Form)*
+👤 ឈ្មោះ: ${payload.name}
+📧 អ៊ីមែល: ${payload.email}
+📱 Telegram: ${payload.telegram || 'គ្មាន'}
+💼 LinkedIn: ${payload.linkedin || 'គ្មាន'}
+📝 សារ: ${payload.message}
+      `;
+      // Send to ALL chat IDs
+      TELEGRAM_CHAT_IDS.forEach(cid => {
+        fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ chat_id: cid, text: text, parse_mode: 'Markdown' })
+        }).catch(console.error);
+      });
+    }
+
     return { success: true };
   } catch (e) {
     console.error('Firestore messages:', e);
     return { success: false, error: e.message || String(e) };
   }
 }
+
+/* ========================================================
+   TELEGRAM VISIT ALERT SYSTEM
+   ======================================================== */
+async function sendVisitAlertToTelegram() {
+  if (TELEGRAM_BOT_TOKEN === 'YOUR_BOT_TOKEN_HERE' || !TELEGRAM_CHAT_IDS.length) return;
+  if (sessionStorage.getItem('visited_alert_sent')) return;
+
+  try {
+    // ---- Detect Device Type ----
+    const ua = navigator.userAgent;
+    let deviceType = '💻 Desktop';
+    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(ua)) {
+      deviceType = /iPad/i.test(ua) ? '📱 Tablet (iPad)' : '📱 Mobile';
+    }
+
+    // ---- Detect Browser ----
+    let browser = 'Unknown';
+    if (ua.includes('Edg')) browser = 'Edge';
+    else if (ua.includes('OPR') || ua.includes('Opera')) browser = 'Opera';
+    else if (ua.includes('Chrome')) browser = 'Chrome';
+    else if (ua.includes('Safari') && !ua.includes('Chrome')) browser = 'Safari';
+    else if (ua.includes('Firefox')) browser = 'Firefox';
+
+    // ---- Detect OS ----
+    let os = 'Unknown OS';
+    if (ua.includes('Windows NT 10')) os = 'Windows 10/11';
+    else if (ua.includes('Windows')) os = 'Windows';
+    else if (ua.includes('Mac OS')) os = 'macOS';
+    else if (ua.includes('Android')) os = 'Android';
+    else if (ua.includes('iPhone') || ua.includes('iPad')) os = 'iOS';
+    else if (ua.includes('Linux')) os = 'Linux';
+
+    // ---- Screen Size ----
+    const screen_size = `${window.screen.width}x${window.screen.height}`;
+
+    // ---- Referrer ----
+    const referrer = document.referrer ? document.referrer : 'Direct / No Referrer';
+
+    // ---- Fetch IP + Location (Silent) ----
+    let ip = 'N/A';
+    let city = 'Unknown';
+    let region = 'Unknown';
+    let country = 'Unknown';
+    let isp = 'Unknown';
+    let lat = null;
+    let lon = null;
+    let mapsLink = '';
+
+    try {
+      const res = await fetch('https://ipapi.co/json/');
+      if (res.ok) {
+        const data = await res.json();
+        ip      = data.ip          || 'N/A';
+        city    = data.city        || 'Unknown';
+        region  = data.region      || 'Unknown';
+        country = data.country_name || 'Unknown';
+        isp     = data.org         || 'Unknown';
+        lat     = data.latitude;
+        lon     = data.longitude;
+        if (lat && lon) {
+          mapsLink = `\n\n📍 [Open in Google Maps](https://www.google.com/maps?q=${lat},${lon})`;
+        }
+      }
+    } catch (e) {
+      console.warn('Could not fetch IP info', e);
+    }
+
+    const time = new Date().toLocaleString('en-GB', { timeZone: 'Asia/Phnom_Penh' });
+
+    const message = [
+      '👀 *មានអ្នកចូលមើល Portfolio!*',
+      '',
+      '━━━━━━━━━━━━ 📍 Location ━━━━━━━━━━━━',
+      `🌍 ប្រទេស: *${country}*`,
+      `🏙️ ខេត្ត/ទីក្រុង: ${region} › ${city}`,
+      `🌐 IP Address: \`${ip}\``,
+      `🏢 ISP/Network: ${isp}`,
+      '',
+      '━━━━━━━━━━━━ 💻 Device ━━━━━━━━━━━━',
+      `${deviceType}`,
+      `🖥️ OS: ${os}`,
+      `🌐 Browser: ${browser}`,
+      `📐 Screen: ${screen_size}`,
+      '',
+      '━━━━━━━━━━━━ 🔗 Session ━━━━━━━━━━━━',
+      `🔗 Came from: ${referrer}`,
+      `⏰ ម៉ោង (KH): ${time}`,
+      mapsLink
+    ].join('\n');
+
+    // Send to ALL chat IDs
+    const sendPromises = TELEGRAM_CHAT_IDS.map(cid =>
+      fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          chat_id: cid,
+          text: message,
+          parse_mode: 'Markdown',
+          disable_web_page_preview: false
+        })
+      })
+    );
+    await Promise.all(sendPromises);
+
+    sessionStorage.setItem('visited_alert_sent', 'true');
+  } catch (error) {
+    console.error('Error sending Telegram alert:', error);
+  }
+}
+
+// ពេល Website ដំណើរការពេញលេញ វានឹងហៅ Function នេះ
+window.addEventListener('load', () => {
+  setTimeout(sendVisitAlertToTelegram, 2000);
+});
 
 /* ========================================================
    THEME TOGGLE
@@ -674,7 +817,6 @@ const skills = [
   { icon: 'fa-brands fa-git-alt', label: 'Git' },
   { icon: 'fa-brands fa-github', label: 'GitHub' },
   { icon: 'fa-solid fa-bolt-lightning', label: 'Vite' },
-  { icon: 'fa-solid fa-code-branch', label: 'TypeScript' },
 ];
 const tickerTrack = document.getElementById('ticker-track');
 if (tickerTrack) {
@@ -1121,6 +1263,34 @@ function closePrivateRepoAlert() {
 }
 document.getElementById('private-repo-modal')?.addEventListener('click', (e) => {
   if (e.target.id === 'private-repo-modal') closePrivateRepoAlert();
+});
+
+/* ========================================================
+   CLIENT PROJECT ALERT MODAL
+   ======================================================== */
+function showClientProjectAlert(figmaUrl, githubUrl) {
+  const modal = document.getElementById('client-project-modal');
+  const btnFigma = document.getElementById('client-btn-figma');
+  const btnGithub = document.getElementById('client-btn-github');
+
+  if (!modal) return;
+
+  if (btnFigma) btnFigma.onclick = () => { window.open(figmaUrl, '_blank'); closeClientProjectAlert(); };
+  if (btnGithub) btnGithub.onclick = () => { window.open(githubUrl, '_blank'); closeClientProjectAlert(); };
+
+  modal.style.display = 'flex';
+  setTimeout(() => modal.classList.add('open'), 10);
+}
+
+function closeClientProjectAlert() {
+  const modal = document.getElementById('client-project-modal');
+  if (!modal) return;
+  modal.classList.remove('open');
+  setTimeout(() => modal.style.display = 'none', 300);
+}
+
+document.getElementById('client-project-modal')?.addEventListener('click', (e) => {
+  if (e.target.id === 'client-project-modal') closeClientProjectAlert();
 });
 
 /* ========================================================
