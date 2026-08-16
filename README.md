@@ -6,7 +6,7 @@
 
 ## Features
 
-- **Latest Updates:** Integrated 3 new major projects (**S Tech Store**, **Delight Fashion**, and **NRI Studio**), featuring full bilingual support and modern UI cards. Reorganized featured projects grid to prioritize top works.
+- **Latest Updates:** Added an **AI-Powered Development** section outlining workflow and use cases with AI tools. Updated Hero section to reflect "Software & Web App Builder" title. Integrated new major projects (**S Tech Store**, **Delight Fashion**, and **NRI Studio**), featuring full bilingual support and modern UI cards. Reorganized featured projects grid and updated media links.
 - Responsive layout, dark/light theme, scroll effects, optional canvas weather + audio (user-triggered only)
 - Contact form writes to Firestore collection **`messages`**
 - Optional collections **`projects`** and **`certificates`** override static placeholder cards when documents exist

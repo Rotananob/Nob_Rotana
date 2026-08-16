@@ -17,8 +17,7 @@ Object.assign(I18N.en, {
   'nav.themeToggle': 'Toggle light / dark theme',
   'hero.badge': 'Available for work',
   'hero.nameLine1': 'Rotana NOB',
-  'hero.nameAccent': 'Dev.',
-  'hero.role': 'Full-Stack With Firebase ',
+  'hero.nameAccent': 'Software & Web App Builder',
   'hero.bio': 'I craft immersive web experiences with clean code and pixel-perfect design. Passionate about Firebase, real-time apps, and pushing the web forward — one commit at a time.',
   'hero.viewProjects': 'View Projects',
   'hero.getInTouch': 'Get In Touch',
@@ -211,6 +210,19 @@ Object.assign(I18N.en, {
   'proj9.desc': 'Delight Fashion is a production-ready, mobile-first, high-end men\'s fashion e-commerce platform built for Phnom Penh, Cambodia. Built with Next.js 16 (App Router) and React 19, it features a luxury Black, White & Gold aesthetic. The serverless Firebase backend handles authentication (Google + Custom RBAC claims) and Firestore NoSQL data. Product images are delivered via Cloudinary CDN with WebP/AVIF optimization. Shop owners receive instant Telegram Bot push notifications for new orders. Supports Cambodia local payments: Cash on Delivery & ABA Bank QR PayWay. All 8 development phases completed.',
   'proj10.title': 'NRI Studio',
   'proj10.desc': 'NRI Studio is a full-stack, browser-based Integrated Development Environment (IDE) that closely mimics the behavior and UI of VSCode. Built for modern web development, it allows users to create, edit, save, and execute JavaScript and TypeScript code entirely in the cloud. Features include Monaco Editor with full IntelliSense & auto-completion, a collapsible sidebar with file explorer, multi-tab support, local folder upload, live terminal powered by a secure Node.js backend sandbox, real-time auto-save to MongoDB, and Firebase Authentication (email/password & Google). Deployed on Vercel (frontend) and Render (backend).',
+  'ai.sectionTag': 'AI-Powered Development',
+  'ai.titleBefore': 'Supercharged with',
+  'ai.titleHighlight': 'AI Tools',
+  'ai.intro': 'Equipped with advanced AI coding tools, my development speed is highly accelerated. I can rapidly architect and build both Backend and Frontend systems across multiple stacks—including <strong style="color:var(--text-primary)">Next.js, NestJS, PHP, Java, and C#</strong>, along with seamless Firebase integration. I leverage these tools to write highly optimized, secure, and clean code faster than ever before.',
+  'ai.usecase1.title': '1. AI-Assisted Development (Cursor, Google Antigravity, Devin, GitHub Copilot)',
+  'ai.usecase1.desc': 'I use AI coding agents to accelerate implementation. Before using an agent, I define the requirements and create an implementation plan. I then review, understand, test, and verify the changes step-by-step before accepting or merging them.',
+  'ai.usecase2.title': '2. Coding & Complex Problem Solving (Claude, ChatGPT, DeepSeek, Kimi)',
+  'ai.usecase2.desc': 'I use these tools to explore software architecture, understand complex logic, debug code, optimize solutions, and analyze large codebases. I compare different approaches rather than relying on a single AI-generated answer.',
+  'ai.usecase3.title': '3. Technology News & Research (Grok, NotebookLM, Perplexity)',
+  'ai.usecase3.desc': 'I use Grok to stay updated on the latest technology news and developments, especially in areas such as AI, cybersecurity, new programming tools, frameworks, and emerging coding techniques. It helps me discover new technologies and technical approaches early. I use NotebookLM for source-based research and Perplexity for deeper technical research and exploring emerging technologies.',
+  'ai.usecase4.title': '4. Documentation, Planning & Learning (ChatGPT, Gemini, Notion)',
+  'ai.usecase4.desc': 'I use ChatGPT and Gemini for architectural brainstorming, documentation, explaining technical concepts, and learning new technologies. I use Notion for project planning, task tracking, and team documentation.',
+  'ai.conclusion': 'Overall, I treat AI as a productivity and learning tool—not a replacement for my own judgment. I always review, test, and validate AI-generated outputs before using them in a project. This allows me to develop faster while maintaining code quality, reliability, and a strong understanding of what I build.',
 });
 
 Object.assign(I18N.km, {
@@ -224,7 +236,7 @@ Object.assign(I18N.km, {
   'nav.themeToggle': 'បិទ/បើករចនាបថភ្លឺ ឬងងឹត',
   'hero.badge': 'ទទួលការងារ',
   'hero.nameLine1': 'ណុប រតនា',
-  'hero.nameAccent': 'អ្នកអភិវឌ្ឍន៍',
+  'hero.nameAccent': 'Software & Web App Builder',
   'hero.role': 'អ្នកអភិវឌ្ឍន៍ Full-Stack និង Firebase',
   'hero.bio': 'ខ្ញុំបង្កើតបទពិសោធវិបដែលរស់រវើកជាមួយកូដស្អាត និងការកាន់តួនាទីភីក់សែល។ ចូលចិត្ត Firebase កម្មវិធីពេលវេលាពិត និងបង្កើតContent នៃវេបសាយបានល្អ',
   'hero.viewProjects': 'មើលគម្រោង',
@@ -418,6 +430,19 @@ Object.assign(I18N.km, {
   'proj9.desc': 'Delight Fashion គឺជាវេទិកា E-Commerce ម៉ូតប្រុសប្រណិតដែលត្រៀមសម្រាប់ Production ស្ថិតនៅភ្នំពេញ កម្ពុជា។ បង្កើតដោយ Next.js 16 និង React 19 ជាមួយ aesthetic ខ្មៅ ស និងមាស។ Firebase (Auth + Firestore) ដោះស្រាយ Backend ដោយគ្មាន Server។ រូបភាពផលិតផលបង្ហោះតាម Cloudinary CDN ជាមួយ WebP/AVIF Optimization។ ម្ចាស់ហាងទទួលការជូនដំណឹង Telegram Bot ភ្លាមៗ។ ទូទាត់បែប COD និង ABA Bank QR PayWay។ Phase ទាំង ៨ បានបញ្ចប់ស្រេច។',
   'proj10.title': 'NRI Studio',
   'proj10.desc': 'NRI Studio គឺជា IDE (Integrated Development Environment) ដំណើរការក្នុង Browser ដែលមានទម្រង់ស្រដៀង VSCode។ បង្កើតឡើងសម្រាប់ Developer ទំនើប អាចបង្កើត កែ រក្សាទុក និង Execute កូដ JavaScript/TypeScript ទាំងស្រុងក្នុង Cloud។ មុខងាររួមមាន Monaco Editor ជាមួយ IntelliSense, ការ Auto-Complete, Sidebar, Multi-Tab, Local Folder Upload, Terminal ស្ទួន Node.js Sandbox, Auto-Save ទៅ MongoDB, និង Firebase Auth (Email/Google)។ Deploy នៅ Vercel (Frontend) និង Render (Backend)។',
+  'ai.sectionTag': 'ការអភិវឌ្ឍន៍ដោយប្រើ AI',
+  'ai.titleBefore': 'ពន្លឿនការងារជាមួយ',
+  'ai.titleHighlight': 'ឧបករណ៍ AI',
+  'ai.intro': 'ដោយមានជំនួយពីឧបករណ៍ AI ទំនើបៗ ខ្ញុំអាចអភិវឌ្ឍន៍កម្មវិធីបានយ៉ាងលឿនបំផុត។ ខ្ញុំអាចរៀបចំ Architecture និងបង្កើតទាំង Backend និង Frontend ជាមួយនឹងបច្ចេកវិទ្យាជាច្រើនដូចជា <strong style="color:var(--text-primary)">Next.js, NestJS, PHP, Java, និង C#</strong> ព្រមទាំងប្រើប្រាស់ Firebase យ៉ាងស្ទាត់ជំនាញ។ ខ្ញុំប្រើប្រាស់ឧបករណ៍ទាំងនេះដើម្បីសរសេរកូដឲ្យមានប្រសិទ្ធភាពខ្ពស់ ស្អាត និងមានសុវត្ថិភាពខ្ពស់ (Security) ក្នុងរយៈពេលដ៏ខ្លី។',
+  'ai.usecase1.title': '១. ការអភិវឌ្ឍន៍ដោយជំនួយពី AI (Cursor, Google Antigravity, Devin, GitHub Copilot)',
+  'ai.usecase1.desc': 'ខ្ញុំប្រើ AI Coding Agents ដើម្បីពន្លឿនការសរសេរកូដ។ មុនពេលប្រើពួកវា ខ្ញុំកំណត់តម្រូវការច្បាស់លាស់ និងបង្កើតផែនការ (Implementation Plan) ជាមុនសិន។ បន្ទាប់មក ខ្ញុំពិនិត្យ ស្វែងយល់ តេស្ត និងផ្ទៀងផ្ទាត់ការផ្លាស់ប្តូរមួយជំហានម្តងៗ មុនពេលទទួលយក ឬប្រើប្រាស់វា។',
+  'ai.usecase2.title': '២. ការសរសេរកូដ និងដោះស្រាយបញ្ហាស្មុគស្មាញ (Claude, ChatGPT, DeepSeek, Kimi)',
+  'ai.usecase2.desc': 'ខ្ញុំប្រើឧបករណ៍ទាំងនេះដើម្បីសិក្សាពី Software Architecture, ស្វែងយល់ពី Logic ស្មុគស្មាញ, ស្វែងរកកំហុសកូដ (Debug), ធ្វើឲ្យដំណោះស្រាយកាន់តែប្រសើរ និងវិភាគកូដខ្នាតធំ។ ខ្ញុំតែងប្រៀបធៀបវិធីសាស្ត្រផ្សេងៗគ្នា ជាជាងពឹងផ្អែកលើចម្លើយតែមួយរបស់ AI។',
+  'ai.usecase3.title': '៣. ព័ត៌មានបច្ចេកវិទ្យា និងការស្រាវជ្រាវ (Grok, NotebookLM, Perplexity)',
+  'ai.usecase3.desc': 'ខ្ញុំប្រើ Grok ដើម្បីតាមដានព័ត៌មានបច្ចេកវិទ្យាថ្មីៗ ជាពិសេសផ្នែក AI, សន្តិសុខបណ្តាញ (Cybersecurity), ឧបករណ៍សរសេរកូដថ្មីៗ និង Frameworks ដែលជួយឲ្យខ្ញុំដឹងពីបច្ចេកវិទ្យាថ្មីៗបានលឿន។ ខ្ញុំប្រើ NotebookLM សម្រាប់ការស្រាវជ្រាវផ្អែកលើឯកសារយោង និង Perplexity សម្រាប់ការស្រាវជ្រាវបច្ចេកទេសស៊ីជម្រៅ។',
+  'ai.usecase4.title': '៤. ការចងក្រងឯកសារ ការរៀបចំផែនការ និងការរៀនសូត្រ (ChatGPT, Gemini, Notion)',
+  'ai.usecase4.desc': 'ខ្ញុំប្រើ ChatGPT និង Gemini សម្រាប់ជួយគិតគូរពី Architecture, ចងក្រងឯកសារ, ពន្យល់ពីគោលគំនិតបច្ចេកទេស និងរៀនបច្ចេកវិទ្យាថ្មីៗ។ ខ្ញុំប្រើ Notion សម្រាប់ការរៀបចំផែនការគម្រោង តាមដានការងារ និងការចងក្រងឯកសារជាក្រុម។',
+  'ai.conclusion': 'ជារួម ខ្ញុំចាត់ទុក AI ជាឧបករណ៍ជួយបង្កើនផលិតភាព និងរៀនសូត្រ មិនមែនជំនួសការវិនិច្ឆ័យរបស់ខ្ញុំឡើយ។ ខ្ញុំតែងតែពិនិត្យ តេស្ត និងផ្ទៀងផ្ទាត់លទ្ធផលរបស់ AI មុននឹងប្រើក្នុងគម្រោង។ នេះជួយខ្ញុំឲ្យធ្វើការបានលឿន ប៉ុន្តែនៅតែរក្សាបាននូវគុណភាពកូដ ទំនុកចិត្ត និងការយល់ដឹងច្បាស់លាស់ពីអ្វីដែលខ្ញុំបានបង្កើត។',
 });
 
 function getLang() {
@@ -813,6 +838,12 @@ function closeMobileMenu() {
    ======================================================== */
 const skills = [
   { icon: 'fa-brands fa-react', label: 'React' },
+  { icon: 'fa-brands fa-react', label: 'Next.js' },
+  { icon: 'fa-brands fa-node-js', label: 'NestJS' },
+  { icon: 'fa-brands fa-php', label: 'PHP' },
+  { icon: 'fa-brands fa-java', label: 'Java' },
+  { icon: 'fa-solid fa-terminal', label: 'C#' },
+  { icon: 'fa-solid fa-robot', label: 'AI Tools (Antigravity, Copilot, Cursor)' },
   { icon: 'fa-solid fa-fire', label: 'Firebase' },
   { icon: 'fa-solid fa-database', label: 'Firestore' },
   { icon: 'fa-solid fa-bolt', label: 'Realtime DB' },
@@ -820,13 +851,9 @@ const skills = [
   { icon: 'fa-brands fa-html5', label: 'HTML5' },
   { icon: 'fa-brands fa-css3-alt', label: 'CSS3' },
   { icon: 'fa-brands fa-js', label: 'JavaScript' },
-  { icon: 'fa-solid fa-code', label: 'C++' },
-  { icon: 'fa-solid fa-terminal', label: 'C#' },
   { icon: 'fa-solid fa-user-shield', label: 'Firebase Auth' },
-  { icon: 'fa-solid fa-robot', label: 'AI Tool Coding' },
   { icon: 'fa-brands fa-git-alt', label: 'Git' },
   { icon: 'fa-brands fa-github', label: 'GitHub' },
-  { icon: 'fa-solid fa-bolt-lightning', label: 'Vite' },
 ];
 const tickerTrack = document.getElementById('ticker-track');
 if (tickerTrack) {
