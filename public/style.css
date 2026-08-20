@@ -1568,7 +1568,7 @@ footer::before {
 /* =============================
        WEATHER TOGGLE BUTTON
        ============================= */
-#weather-btn {
+#weather-btn, #mute-btn {
   position: fixed;
   bottom: 2rem;
   right: 2rem;
@@ -1590,7 +1590,15 @@ footer::before {
   box-shadow: var(--shadow-card);
 }
 
-#weather-btn:hover {
+#weather-btn {
+  right: 2rem;
+}
+
+#mute-btn {
+  right: calc(2rem + 64px); /* 54px width + 10px gap */
+}
+
+#weather-btn:hover, #mute-btn:hover {
   border-color: var(--border-hover);
   transform: scale(1.08);
   box-shadow: 0 8px 24px var(--glow-strong);
@@ -1868,6 +1876,14 @@ footer::before {
     bottom: auto;
     top: 80px;
     right: 1rem;
+    font-size: 1.1rem;
+  }
+  #mute-btn {
+    width: 44px;
+    height: 44px;
+    bottom: auto;
+    top: 80px;
+    right: calc(1rem + 52px); /* 44px width + 8px gap */
     font-size: 1.1rem;
   }
 

@@ -1147,6 +1147,33 @@ weatherBtn?.addEventListener('click', () => {
   }
 });
 
+// --- AUDIO MUTE LOGIC ---
+const muteBtn = document.getElementById('mute-btn');
+const muteIcon = document.getElementById('mute-icon');
+let isMuted = false;
+
+if (muteBtn) {
+  muteBtn.addEventListener('click', () => {
+    isMuted = !isMuted;
+    if (rainAudio) rainAudio.muted = isMuted;
+    if (snowAudio) snowAudio.muted = isMuted;
+    if (thunderAudio) thunderAudio.muted = isMuted;
+    
+    if (isMuted) {
+      muteIcon.classList.remove('fa-volume-high');
+      muteIcon.classList.add('fa-volume-xmark');
+    } else {
+      muteIcon.classList.remove('fa-volume-xmark');
+      muteIcon.classList.add('fa-volume-high');
+      // Attempt to play if weather is active and audio was paused
+      const targetAudio = weatherState === 1 ? rainAudio : (weatherState === 2 ? snowAudio : (weatherState === 3 ? thunderAudio : null));
+      if (targetAudio && targetAudio.paused) {
+        targetAudio.play().catch(e => console.log("Autoplay blocked"));
+      }
+    }
+  });
+}
+
 /* ========================================================
    SCROLL REVEAL & INIT
    ======================================================== */
