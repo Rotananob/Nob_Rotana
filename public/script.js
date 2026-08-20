@@ -1316,6 +1316,7 @@ function showPrivateRepoAlert(url) {
   if (cancelBtn) cancelBtn.textContent = t('alert.cancel');
 
   confirmBtn.onclick = () => { window.open(url, '_blank'); closePrivateRepoAlert(); };
+  if (cancelBtn) cancelBtn.onclick = () => { closePrivateRepoAlert(); };
   modal.style.display = 'flex';
   setTimeout(() => modal.classList.add('open'), 10);
 }
@@ -1336,11 +1337,13 @@ function showClientProjectAlert(figmaUrl, githubUrl) {
   const modal = document.getElementById('client-project-modal');
   const btnFigma = document.getElementById('client-btn-figma');
   const btnGithub = document.getElementById('client-btn-github');
+  const cancelBtn = modal?.querySelector('.alert-btn-cancel');
 
   if (!modal) return;
 
   if (btnFigma) btnFigma.onclick = () => { window.open(figmaUrl, '_blank'); closeClientProjectAlert(); };
   if (btnGithub) btnGithub.onclick = () => { window.open(githubUrl, '_blank'); closeClientProjectAlert(); };
+  if (cancelBtn) cancelBtn.onclick = () => { closeClientProjectAlert(); };
 
   modal.style.display = 'flex';
   setTimeout(() => modal.classList.add('open'), 10);
