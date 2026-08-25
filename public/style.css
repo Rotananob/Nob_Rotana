@@ -2176,6 +2176,7 @@ footer::before {
   inset: 0;
   padding: 2px;
   border-radius: 32px;
+  pointer-events: none;
   background: linear-gradient(135deg, var(--accent) 0%, var(--accent-purple) 50%, var(--accent-warm) 100%);
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
@@ -2284,6 +2285,7 @@ footer::before {
   left: -50%;
   width: 200%;
   height: 200%;
+  pointer-events: none;
   background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, transparent 60%);
   transform: scale(0);
   transition: transform 0.6s ease-out;

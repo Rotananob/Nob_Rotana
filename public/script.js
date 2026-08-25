@@ -36,7 +36,7 @@ Object.assign(I18N.en, {
   'proj1.title': 'BacII Calculator',
   'proj1.desc': 'BacII Calculator is a high-precision tool designed for students to calculate their National High School Exam (BacII) results. It features a complex algorithm strictly aligned with the Ministry of Education, Youth and Sports (MoEYS) scoring standards to ensure 100% technical accuracy. Built with HTML5, JavaScript, and Tailwind CSS, it offers a seamless real-time calculation experience, automatic grade determination (A-F), and subject-specific analytics. Integrated with Firebase for reliable performance.',
   'proj2.placeholder': 'Video Demo',
-  'proj2.title': 'Rotana E-Learning',
+  'proj2.title': 'Rotana E-Learning (Old Version)',
   'proj2.desc': 'Rotana E-Learning is a comprehensive IT and CS education platform built with Firebase (80% complete). It offers a social experience where students can post, react, and comment on each other\'s updates. Features include a Leaderboard, AI Chatbot, Blue Verification, Profile Settings, and a vast library of courses in Khmer and English. Powered by Progressive Web App (PWA) technology.',
   'proj3.placeholder': 'Multiple Demos Available',
   'proj3.title': 'YoungPOS Cambodia(Startup)',
@@ -120,7 +120,10 @@ Object.assign(I18N.en, {
   'skill.firebase': 'Firebase (Auth, Firestore, Storage)',
   'skill.realtimedb': 'Realtime Database & Cloud Storage',
   'skill.htmlcss': 'HTML5 & CSS3',
+  'skill.next': 'Build with AI (Human-like Workflow & Multilingual)',
   'skill.cpp': 'Java & C#',
+  'skill.cplusplus': 'C++',
+  'skill.jsts': 'JS / TS',
   'skill.git': 'Git & GitHub',
   'skill.ai': 'AI Tool Coding',
   'contact.sectionTag': 'Contact',
@@ -213,6 +216,11 @@ Object.assign(I18N.en, {
   'ai.sectionTag': 'AI-Powered Development',
   'ai.titleBefore': 'Supercharged with',
   'ai.titleHighlight': 'AI Tools',
+  'clientAlert.title': 'Client Project (Private Code)',
+  'clientAlert.message': 'Sorry! This is a client project so the code is private. However, you can view the UX/UI design or look at other repositories.',
+  'clientAlert.figma': 'View UX/UI (Figma)',
+  'clientAlert.github': 'View Other Repositories',
+  'clientAlert.cancel': 'Cancel',
   'ai.intro': 'Equipped with advanced AI coding tools, my development speed is highly accelerated. I can rapidly architect and build both Backend and Frontend systems across multiple stacks—including <strong style="color:var(--text-primary)">Next.js, NestJS, PHP, Java, and C#</strong>, along with seamless Firebase integration. I leverage these tools to write highly optimized, secure, and clean code faster than ever before.',
   'ai.usecase1.title': '1. AI-Assisted Development (Cursor, Google Antigravity, Devin, GitHub Copilot)',
   'ai.usecase1.desc': 'I use AI coding agents to accelerate implementation. Before using an agent, I define the requirements and create an implementation plan. I then review, understand, test, and verify the changes step-by-step before accepting or merging them.',
@@ -256,7 +264,7 @@ Object.assign(I18N.km, {
   'proj1.title': 'BacII Calculator',
   'proj1.desc': 'BacII Calculator គឺជាឧបករណ៍គណនាពិន្ទុដ៏ត្រឹមត្រូវបំផុតដែលត្រូវបានរចនាឡើងសម្រាប់សិស្សានុសិស្សក្នុងការផ្ទៀងផ្ទាត់លទ្ធផលប្រឡងបាក់ឌុប (BacII)។ វាប្រើប្រាស់ Algorithm ដ៏ស្មុគស្មាញដែលអនុលោមតាមស្ដង់ដារផ្ដល់ពិន្ទុរបស់ក្រសួងអប់រំ យុវជន និងកីឡា ដើម្បីធានាបាននូវសុក្រឹតភាពបច្ចេកទេស ១០០%។ បង្កើតឡើងដោយ HTML5, JavaScript និង Tailwind CSS កម្មវិធីនេះផ្ដល់នូវបទពិសោធន៍គណនាពេលវេលាពិត (Real-time), ការកំណត់និទ្ទេសស្វ័យប្រវត្តិ (A-F) និងការវិភាគពិន្ទុតាមមុខវិជ្ជា។ ភ្ជាប់ជាមួយ Firebase ដើម្បីធានាបាននូវដំណើរការកាន់តែល្អប្រសើរ។',
   'proj2.placeholder': 'វីដេអូសាកល្បង',
-  'proj2.title': 'Rotana E-Learning',
+  'proj2.title': 'Rotana E-Learning (ជំនាន់ចាស់)',
   'proj2.desc': 'Rotana E-Learning៖ ជាវេទិកាសិក្សាផ្នែក IT និង CS ដ៏ទូលំទូលាយដែលភ្ជាប់ជាមួយសេវ៉ាកម្ម Firebase (សម្រេចបាន ៨០%)។ វាផ្តល់នូវបទពិសោធន៍បែបបណ្តាញសង្គម ដែលសិស្សអាចផុស (Post) ផ្ដល់ប្រតិកម្ម (React) និងបញ្ចេញមតិ (Comment) ជាមួយគ្នាបាន។ មានមុខងារដូចជា តារាងចំណាត់ថ្នាក់ (Leaderboard), Chatbot, ឆ្នូតខៀវ Profile (Blue Verification), ការកំណត់ព័ត៌មានផ្ទាល់ខ្លួន (Profile Settings) និងមេរៀនជាច្រើនទៀត ដែលដំណើរការជា Progressive Web App (PWA)។',
   'proj3.placeholder': 'វីដេអូបង្ហាញជាច្រើន',
   'proj3.title': 'YoungPOS Cambodia(Startup)',
@@ -340,7 +348,10 @@ Object.assign(I18N.km, {
   'skill.firebase': 'Firebase (Auth, Firestore, Storage)',
   'skill.realtimedb': 'Realtime Database និង Cloud Storage',
   'skill.htmlcss': 'HTML5 និង CSS3',
-  'skill.cpp': 'Java និង C#  ',
+  'skill.next': 'Build with AI (ធ្វើការដូចមនុស្ស & ពហុភាសា)',
+  'skill.cpp': 'Java និង C#',
+  'skill.cplusplus': 'C++',
+  'skill.jsts': 'JS / TS',
   'skill.git': 'Git និង GitHub',
   'skill.ai': 'ការប្រើប្រាស់ AI ជំនួយកូដ',
   'contact.sectionTag': 'ទំនាក់ទំនង',
@@ -352,6 +363,11 @@ Object.assign(I18N.km, {
   'form.message': 'សារ',
   'form.namePh': 'ឈ្មោះពេញរបស់អ្នក',
   'form.emailPh': 'your@email.com',
+  'clientAlert.title': 'គម្រោងអតិថិជន (កូដឯកជន)',
+  'clientAlert.message': 'សុំទោសផង! នេះគឺជាគម្រោងរបស់អតិថិជន ដូច្នេះមិនអាចបើកកូដអោយមើលបានទេ។ ប៉ុន្តែអ្នកអាចចូលទៅមើលការរចនា UX/UI ជំនួសវិញ ឬមើល Other Repositories ផ្សេងទៀត។',
+  'clientAlert.figma': 'មើលការរចនា UX/UI (Figma)',
+  'clientAlert.github': 'មើល Other Repositories ផ្សេងទៀត',
+  'clientAlert.cancel': 'បោះបង់',
   'form.telegram': 'តេឡេក្រាម (ជាជម្រើស)',
   'form.telegramPh': 't.me/yourusername',
   'form.linkedin': 'LinkedIn (ជាជម្រើស)',
@@ -1401,37 +1417,54 @@ function switchProjectVideo(iframeId, videoUrl, btn, redirectUrl = null) {
   const iframe = document.getElementById(iframeId);
   if (!iframe) return;
 
-  // Set new URL
-  iframe.src = videoUrl;
-
-  // Handle overlay for redirect
   const container = iframe.parentElement;
-  let overlay = container.querySelector('.video-overlay');
-  if (!overlay) {
-    overlay = document.createElement('div');
-    overlay.className = 'video-overlay';
-    overlay.style.position = 'absolute';
-    overlay.style.top = '0';
-    overlay.style.left = '0';
-    overlay.style.width = '100%';
-    overlay.style.height = '100%';
-    overlay.style.cursor = 'pointer';
-    overlay.style.zIndex = '10';
-    overlay.onclick = function () {
+  let placeholder = container.querySelector('.fb-video-placeholder');
+  
+  if (!placeholder) {
+    placeholder = document.createElement('div');
+    placeholder.className = 'fb-video-placeholder';
+    placeholder.style.position = 'absolute';
+    placeholder.style.top = '0';
+    placeholder.style.left = '0';
+    placeholder.style.width = '100%';
+    placeholder.style.height = '100%';
+    placeholder.style.display = 'flex';
+    placeholder.style.flexDirection = 'column';
+    placeholder.style.alignItems = 'center';
+    placeholder.style.justifyContent = 'center';
+    placeholder.style.background = 'var(--bg-card)';
+    placeholder.style.borderRadius = '24px';
+    placeholder.style.cursor = 'pointer';
+    placeholder.style.zIndex = '10';
+    placeholder.style.color = 'var(--text-primary)';
+    placeholder.style.textAlign = 'center';
+    placeholder.style.border = '1px solid var(--border)';
+    placeholder.innerHTML = `
+      <i class="fa-brands fa-facebook" style="font-size: 4rem; color: #1877F2; margin-bottom: 1rem; filter: drop-shadow(0 4px 10px rgba(24,119,242,0.3));"></i>
+      <h3 style="font-family: 'Dangrek', cursive, sans-serif; font-size: 1.4rem;">Watch video on Facebook</h3>
+      <p style="font-size: 1rem; opacity: 0.7; margin-top: 0.5rem; max-width: 80%;">Click here to open the video in the Facebook App or Browser.</p>
+    `;
+    placeholder.onclick = function () {
       if (this.dataset.url) {
         window.open(this.dataset.url, '_blank');
       }
     };
     container.style.position = 'relative';
-    container.appendChild(overlay);
+    container.appendChild(placeholder);
   }
 
   if (redirectUrl) {
-    overlay.style.display = 'block';
-    overlay.dataset.url = redirectUrl;
+    // Show placeholder, hide iframe
+    placeholder.style.display = 'flex';
+    placeholder.dataset.url = redirectUrl;
+    iframe.style.display = 'none';
+    iframe.src = ""; // Stop loading the unavailable video
   } else {
-    overlay.style.display = 'none';
-    overlay.dataset.url = '';
+    // Show iframe, hide placeholder
+    placeholder.style.display = 'none';
+    placeholder.dataset.url = '';
+    iframe.style.display = 'block';
+    iframe.src = videoUrl;
   }
 
   // Update active state for buttons (Synchronize across clones)
