@@ -1,0 +1,1509 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rotana NOB - Curriculum Vitae</title>
+  <link rel="icon" type="image/jpeg" href="Assets/IMG/pic4.JPG">
+  <meta name="description" content="Rotana NOB Web Developer Computer Science Student CV">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <style>
+    :root {
+      --bg: #fdf8f2;
+      --paper: #ffffff;
+      --sb: #fff9f4;
+      --ac: #2d6a4f;
+      --ac2: #52b788;
+      --rust: #c1440e;
+      --gold: #d4924a;
+      --gold2: #f0b855;
+      --navy: #1a3a5c;
+      --navy2: #2c5f8a;
+      --ink: #1e1e1e;
+      --soft: #5a5a6a;
+      --muted: #888899;
+      --bd: rgba(0, 0, 0, 0.08);
+      --card: rgba(0, 0, 0, 0.03);
+      --gl: rgba(255, 255, 255, 0.7);
+      --sans: 'Inter', system-ui, sans-serif;
+      --serif: 'Playfair Display', Georgia, serif;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--sans);
+      background: var(--bg);
+      color: var(--ink);
+      min-height: 100vh;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* === FULL PAGE ANIMATED BACKGROUND === */
+    #bg-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    /* warm gradient overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 15% 20%, rgba(212, 146, 74, 0.12) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 60% at 85% 80%, rgba(82, 183, 136, 0.10) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 40% at 50% 50%, rgba(253, 248, 242, 0.8) 0%, transparent 80%);
+      pointer-events: none;
+    }
+
+    /* Toolbar */
+    .toolbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      padding: 13px 24px;
+      background: rgba(253, 248, 242, 0.92);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+    }
+
+    .tb-brand {
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--navy);
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      margin-right: auto;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .tb-brand i {
+      color: var(--ac2);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-family: var(--sans);
+      font-size: 13px;
+      font-weight: 600;
+      padding: 9px 18px;
+      border-radius: 8px;
+      border: 1.5px solid transparent;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all .22s;
+    }
+
+    .btn-p {
+      background: var(--navy);
+      color: #fff;
+      box-shadow: 0 3px 14px rgba(26, 58, 92, 0.25);
+    }
+
+    .btn-s {
+      background: transparent;
+      color: var(--navy);
+      border-color: rgba(26, 58, 92, 0.25);
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-p:hover {
+      box-shadow: 0 6px 20px rgba(26, 58, 92, 0.35);
+    }
+
+    .btn-s:hover {
+      background: rgba(26, 58, 92, 0.06);
+    }
+
+    /* Page */
+    .page-wrap {
+      position: relative;
+      z-index: 1;
+      max-width: 1080px;
+      margin: 28px auto 80px;
+      padding: 0 20px;
+    }
+
+    .paper {
+      background: var(--paper);
+      border-radius: 20px;
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.04), 0 20px 50px rgba(0, 0, 0, 0.08);
+      display: grid;
+      grid-template-columns: 295px 1fr;
+      overflow: hidden;
+      min-height: 900px;
+    }
+
+    @media(max-width:768px) {
+      .paper {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* SIDEBAR */
+    .sidebar {
+      background: var(--sb);
+      border-right: 1px solid rgba(0, 0, 0, 0.07);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .sb-top {
+      padding: 44px 28px 32px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(160deg, rgba(26, 58, 92, 0.06) 0%, rgba(82, 183, 136, 0.05) 100%);
+    }
+
+    /* decorative arc */
+    .sb-top::after {
+      content: '';
+      position: absolute;
+      bottom: -40px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 200px;
+      height: 80px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(212, 146, 74, 0.15), transparent);
+    }
+
+    .av-wrap {
+      position: relative;
+      width: 116px;
+      height: 116px;
+      margin: 0 auto 18px;
+    }
+
+    /* Human warm ring - not spinning laser, just a calm breathing glow */
+    .av-ring {
+      position: absolute;
+      inset: -5px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold) 0%, var(--ac2) 50%, var(--navy) 100%);
+      animation: breathe 4s ease-in-out infinite;
+      opacity: 0.8;
+    }
+
+    @keyframes breathe {
+
+      0%,
+      100% {
+        opacity: 0.7;
+        transform: scale(1);
+      }
+
+      50% {
+        opacity: 1;
+        transform: scale(1.04);
+      }
+    }
+
+    .av-in {
+      position: absolute;
+      inset: 4px;
+      border-radius: 50%;
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      font-size: 38px;
+      color: var(--navy);
+      box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.08);
+    }
+
+    .av-in img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .cv-name {
+      font-family: var(--serif);
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--navy);
+      letter-spacing: .01em;
+      margin-bottom: 6px;
+    }
+
+    .cv-role {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+      color: var(--ac);
+      background: rgba(45, 106, 79, 0.08);
+      border: 1px solid rgba(45, 106, 79, 0.2);
+      padding: 5px 14px;
+      border-radius: 999px;
+    }
+
+    .sb-body {
+      padding: 26px 24px 28px;
+      flex: 1;
+    }
+
+    .sblock {
+      margin-bottom: 26px;
+    }
+
+    .sblock-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .16em;
+      color: var(--navy);
+      margin-bottom: 13px;
+      padding-bottom: 7px;
+      border-bottom: 2px solid rgba(26, 58, 92, 0.1);
+    }
+
+    .crow {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 12.5px;
+      color: var(--soft);
+      margin-bottom: 9px;
+      padding: 7px 8px;
+      border-radius: 8px;
+      transition: background .18s;
+    }
+
+    .crow:hover {
+      background: rgba(0, 0, 0, 0.04);
+    }
+
+    .cico {
+      width: 26px;
+      height: 26px;
+      flex: none;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11.5px;
+    }
+
+    .pu {
+      background: rgba(26, 58, 92, 0.1);
+      color: var(--navy);
+    }
+
+    .bl {
+      background: rgba(44, 95, 138, 0.1);
+      color: var(--navy2);
+    }
+
+    .gr {
+      background: rgba(45, 106, 79, 0.1);
+      color: var(--ac);
+    }
+
+    .or {
+      background: rgba(212, 146, 74, 0.15);
+      color: var(--gold);
+    }
+
+    .re {
+      background: rgba(193, 68, 14, 0.1);
+      color: var(--rust);
+    }
+
+    .pk {
+      background: rgba(126, 34, 206, 0.08);
+      color: #7e22ce;
+    }
+
+    .tl {
+      background: rgba(20, 184, 166, 0.1);
+      color: #0d9488;
+    }
+
+    .cinfo {
+      flex: 1;
+      line-height: 1.4;
+    }
+
+    .cinfo a {
+      color: var(--soft);
+      text-decoration: none;
+    }
+
+    .cinfo a:hover {
+      color: var(--navy);
+    }
+
+    .clbl {
+      font-size: 10px;
+      color: var(--muted);
+      margin-bottom: 1px;
+      font-weight: 600;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+
+    .cbtn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--muted);
+      font-size: 10.5px;
+      padding: 0;
+      font-family: var(--sans);
+      transition: color .15s;
+      margin-left: 4px;
+    }
+
+    .cbtn:hover {
+      color: var(--navy);
+    }
+
+    .lang-item {
+      margin-bottom: 13px;
+    }
+
+    .lang-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 5px;
+    }
+
+    .lang-name {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--ink);
+    }
+
+    .lang-level {
+      font-size: 10.5px;
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    .lang-bar {
+      height: 5px;
+      border-radius: 99px;
+      background: rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+    }
+
+    .lang-fill {
+      height: 100%;
+      border-radius: 99px;
+      transition: width 1.2s cubic-bezier(.2, .8, .2, 1);
+      width: 0;
+    }
+
+    .lf-n {
+      background: linear-gradient(90deg, var(--navy), var(--navy2));
+    }
+
+    .lf-w {
+      background: linear-gradient(90deg, var(--ac), var(--ac2));
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+    }
+
+    .tag {
+      font-size: 11.5px;
+      font-weight: 500;
+      padding: 5px 11px;
+      border-radius: 999px;
+      border: 1.5px solid rgba(0, 0, 0, 0.1);
+      color: var(--soft);
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: all .2s;
+      cursor: default;
+    }
+
+    .tag:hover {
+      border-color: var(--ac);
+      color: var(--ac);
+      background: rgba(45, 106, 79, 0.06);
+    }
+
+    .prow {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 12.5px;
+      color: var(--soft);
+      margin-bottom: 8px;
+    }
+
+    .prow i {
+      width: 16px;
+      color: var(--navy);
+      font-size: 12px;
+      text-align: center;
+    }
+
+    /* MAIN */
+    .main {
+      padding: 46px 46px 52px;
+    }
+
+    @media(max-width:640px) {
+      .main {
+        padding: 34px 24px 44px;
+      }
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--rust);
+      background: rgba(193, 68, 14, 0.07);
+      border: 1px solid rgba(193, 68, 14, 0.15);
+      padding: 5px 14px;
+      border-radius: 999px;
+      margin-bottom: 14px;
+    }
+
+    .sumcard {
+      background: linear-gradient(135deg, rgba(26, 58, 92, 0.04), rgba(82, 183, 136, 0.05));
+      border: 1px solid rgba(0, 0, 0, 0.07);
+      border-left: 3px solid var(--navy);
+      border-radius: 0 12px 12px 0;
+      padding: 16px 20px;
+      margin-bottom: 40px;
+    }
+
+    .sumcard p {
+      font-size: 14px;
+      color: var(--soft);
+      line-height: 1.8;
+    }
+
+    .sumcard p strong {
+      color: var(--ink);
+    }
+
+    .msec {
+      margin-bottom: 40px;
+    }
+
+    .shead {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .sico {
+      width: 36px;
+      height: 36px;
+      border-radius: 9px;
+      flex: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+    }
+
+    .sico.nv {
+      background: rgba(26, 58, 92, 0.1);
+      color: var(--navy);
+    }
+
+    .sico.go {
+      background: rgba(212, 146, 74, 0.12);
+      color: var(--gold);
+    }
+
+    .sico.gr {
+      background: rgba(45, 106, 79, 0.1);
+      color: var(--ac);
+    }
+
+    .sico.rs {
+      background: rgba(193, 68, 14, 0.1);
+      color: var(--rust);
+    }
+
+    .sico.pk {
+      background: rgba(126, 34, 206, 0.08);
+      color: #7e22ce;
+    }
+
+    .stitle {
+      font-family: var(--serif);
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--navy);
+      flex: 0 0 auto;
+    }
+
+    .sline {
+      flex: 1;
+      height: 1.5px;
+      background: rgba(0, 0, 0, 0.07);
+    }
+
+    /* Entries */
+    .entry {
+      background: #fff;
+      border: 1.5px solid rgba(0, 0, 0, 0.07);
+      border-radius: 12px;
+      margin-bottom: 10px;
+      overflow: hidden;
+      transition: border-color .2s, box-shadow .2s, transform .2s;
+    }
+
+    .entry:hover {
+      border-color: rgba(26, 58, 92, 0.2);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.07);
+      transform: translateY(-1px);
+    }
+
+    .entry:last-child {
+      margin-bottom: 0;
+    }
+
+    .entry-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 15px 16px;
+      cursor: pointer;
+    }
+
+    .el {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+
+    .badge {
+      width: 38px;
+      height: 38px;
+      border-radius: 9px;
+      flex: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+      margin-top: 1px;
+    }
+
+    .badge.nv {
+      background: rgba(26, 58, 92, 0.1);
+      color: var(--navy);
+    }
+
+    .badge.bl {
+      background: rgba(44, 95, 138, 0.1);
+      color: var(--navy2);
+    }
+
+    .badge.gr {
+      background: rgba(45, 106, 79, 0.1);
+      color: var(--ac);
+    }
+
+    .badge.go {
+      background: rgba(212, 146, 74, 0.12);
+      color: var(--gold);
+    }
+
+    .badge.rs {
+      background: rgba(193, 68, 14, 0.08);
+      color: var(--rust);
+    }
+
+    .badge.tl {
+      background: rgba(13, 148, 136, 0.1);
+      color: #0d9488;
+    }
+
+    .etw {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .erole {
+      font-weight: 700;
+      font-size: 14.5px;
+      color: var(--ink);
+    }
+
+    .eorg {
+      font-size: 12px;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .er {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 6px;
+      flex-shrink: 0;
+    }
+
+    .edate {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--navy);
+      background: rgba(26, 58, 92, 0.07);
+      border: 1px solid rgba(26, 58, 92, 0.12);
+      padding: 3px 10px;
+      border-radius: 999px;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .chev {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(0, 0, 0, 0.1);
+      background: #f8f8fa;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      font-size: 11px;
+      transition: all .25s;
+      flex: none;
+    }
+
+    .entry.open .chev {
+      transform: rotate(180deg);
+      background: var(--navy);
+      color: #fff;
+      border-color: var(--navy);
+    }
+
+    .ebody {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height .4s cubic-bezier(.4, 0, .2, 1);
+    }
+
+    .entry.open .ebody {
+      max-height: 600px;
+    }
+
+    .ebi {
+      padding: 0 16px 16px 66px;
+    }
+
+    .ebi ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .ebi ul li {
+      display: flex;
+      gap: 9px;
+      align-items: flex-start;
+      font-size: 13.5px;
+      color: var(--soft);
+    }
+
+    .ebi ul li::before {
+      content: '›';
+      color: var(--ac2);
+      font-weight: 800;
+      font-size: 16px;
+      line-height: 1.4;
+      flex: none;
+    }
+
+    .ebi ul li b {
+      color: var(--ink);
+    }
+
+    /* Skills */
+    .sg {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px 32px;
+    }
+
+    @media(max-width:600px) {
+      .sg {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .ski {
+      padding: 7px 0;
+    }
+
+    .skr {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+    }
+
+    .skn {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--ink);
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .skn i {
+      font-size: 13px;
+      color: var(--navy);
+      width: 16px;
+      text-align: center;
+    }
+
+    .skp {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--ac);
+    }
+
+    .skt {
+      height: 5px;
+      border-radius: 99px;
+      background: rgba(0, 0, 0, 0.07);
+      overflow: hidden;
+    }
+
+    .skf {
+      height: 100%;
+      width: 0;
+      background: linear-gradient(90deg, var(--navy), var(--navy2));
+      border-radius: 99px;
+      transition: width 1.1s cubic-bezier(.2, .8, .2, 1);
+    }
+
+    /* Personality traits */
+    .traits {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .trait {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 500;
+      padding: 10px 16px;
+      border-radius: 10px;
+      border: 1.5px solid rgba(0, 0, 0, 0.09);
+      color: var(--soft);
+      background: #fff;
+      transition: all .22s;
+      cursor: default;
+    }
+
+    .trait i {
+      font-size: 13px;
+    }
+
+    .trait:hover {
+      border-color: var(--navy);
+      color: var(--navy);
+      background: rgba(26, 58, 92, 0.05);
+      transform: translateY(-2px);
+    }
+
+    /* Reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity .6s ease, transform .6s ease;
+    }
+
+    .reveal.show {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* Print */
+    @media print {
+      .toolbar {
+        display: none;
+      }
+
+      #bg-canvas {
+        display: none;
+      }
+
+      body::before {
+        display: none;
+      }
+
+      .page-wrap {
+        max-width: 100%;
+        margin: 0;
+        padding: 0;
+      }
+
+      .paper {
+        box-shadow: none;
+        border-radius: 0;
+        min-height: auto;
+        border: none;
+      }
+
+      .ebody {
+        max-height: none !important;
+      }
+
+      .chev {
+        display: none;
+      }
+
+      .av-ring {
+        animation: none;
+      }
+    }
+
+    a:focus-visible,
+    button:focus-visible {
+      outline: 2px solid var(--navy);
+      outline-offset: 2px;
+    }
+
+    @media(prefers-reduced-motion:reduce) {
+
+      *,
+      .av-ring {
+        animation: none !important;
+        transition-duration: .01ms !important;
+      }
+    }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+
+<body>
+  <canvas id="bg-canvas"></canvas>
+  <div class="toolbar">
+    <span class="tb-brand" style="display:flex;align-items:center;gap:8px;"><img src="Assets/IMG/pic4.JPG" alt="Logo" style="width:20px;height:20px;border-radius:50%;object-fit:cover;"> Rotana NOB</span>
+    <button class="btn btn-p" id="downloadPdfBtn" style="background:linear-gradient(135deg,#c1440e,#d4924a);box-shadow:0 4px 16px rgba(193,68,14,0.3);"><i class="fa-solid fa-file-arrow-down"></i> Download PDF</button>
+    <button class="btn btn-p" id="printBtn"><i class="fa-solid fa-print"></i> Print</button>
+    <a class="btn btn-s" href="mailto:Nobrothana180703@gmail.com"><i class="fa-solid fa-envelope"></i> Email Me</a>
+  </div>
+  <div class="page-wrap">
+    <div class="paper">
+      <aside class="sidebar">
+        <div class="sb-top">
+          <div class="av-wrap">
+            <div class="av-ring"></div>
+            <div class="av-in"><img src="Assets/IMG/pic3.jpg" alt="Rotana NOB" style="width:100%;height:100%;object-fit:cover;"></div>
+          </div>
+          <div class="cv-name">Rotana NOB</div>
+          <div class="cv-role"><i class="fa-solid fa-laptop-code"></i> Web Developer</div>
+        </div>
+        <div class="sb-body">
+          <div class="sblock reveal">
+            <div class="sblock-title"><i class="fa-solid fa-address-card"></i>&nbsp;Contact</div>
+            <div class="crow">
+              <div class="cico pu"><i class="fa-solid fa-envelope"></i></div>
+              <div class="cinfo">
+                <div class="clbl">Email</div><a
+                  href="mailto:Nobrothana180703@gmail.com">Nobrothana180703@gmail.com</a><button class="cbtn"
+                  data-copy="Nobrothana180703@gmail.com"><i class="fa-regular fa-copy"></i> copy</button>
+              </div>
+            </div>
+            <div class="crow">
+              <div class="cico gr"><i class="fa-solid fa-phone"></i></div>
+              <div class="cinfo">
+                <div class="clbl">Phone</div><a href="tel:+85587986045">+855 87 986 045</a>
+              </div>
+            </div>
+            <div class="crow">
+              <div class="cico bl"><i class="fa-brands fa-telegram"></i></div>
+              <div class="cinfo">
+                <div class="clbl">Telegram</div><span>+855 87 986 045</span>
+              </div>
+            </div>
+            <div class="crow">
+              <div class="cico or"><i class="fa-solid fa-location-dot"></i></div>
+              <div class="cinfo">
+                <div class="clbl">Location</div><span>Sangkat Tuek Thla, Sen Sok, Phnom Penh</span>
+              </div>
+            </div>
+            <div class="crow">
+              <div class="cico tl"><i class="fa-brands fa-linkedin-in"></i></div>
+              <div class="cinfo">
+                <div class="clbl">LinkedIn</div><a href="https://www.linkedin.com/in/rotana-nob-1171992a4"
+                  target="_blank" rel="noopener">linkedin.com/in/rotana-nob</a>
+              </div>
+            </div>
+            <div class="crow">
+              <div class="cico pk"><i class="fa-brands fa-github"></i></div>
+              <div class="cinfo">
+                <div class="clbl">GitHub</div><a href="https://github.com/Rotananob" target="_blank"
+                  rel="noopener">github.com/Rotananob</a>
+              </div>
+            </div>
+            <div class="crow">
+              <div class="cico re"><i class="fa-solid fa-globe"></i></div>
+              <div class="cinfo">
+                <div class="clbl">Portfolio</div><a href="https://nobrotana.web.app" target="_blank"
+                  rel="noopener">nobrotana.web.app</a>
+              </div>
+            </div>
+          </div>
+          <div class="sblock reveal">
+            <div class="sblock-title"><i class="fa-solid fa-circle-info"></i>&nbsp;Personal</div>
+            <div class="prow"><i class="fa-solid fa-cake-candles"></i><span>Born 18 July 2003 &middot; Kampong
+                Cham</span></div>
+            <div class="prow"><i class="fa-solid fa-flag"></i><span>Nationality: Khmer</span></div>
+            <div class="prow"><i class="fa-solid fa-heart"></i><span>Single</span></div>
+          </div>
+          <div class="sblock reveal">
+            <div class="sblock-title"><i class="fa-solid fa-language"></i>&nbsp;Languages</div>
+            <div class="lang-item">
+              <div class="lang-row"><span class="lang-name"><i class="fa-solid fa-circle-check"
+                    style="color:var(--navy);font-size:11px;margin-right:4px;"></i>Khmer</span><span
+                  class="lang-level">Native</span></div>
+              <div class="lang-bar">
+                <div class="lang-fill lf-n" data-w="100"></div>
+              </div>
+            </div>
+            <div class="lang-item">
+              <div class="lang-row"><span class="lang-name"><i class="fa-solid fa-circle-check"
+                    style="color:var(--ac2);font-size:11px;margin-right:4px;"></i>English</span><span
+                  class="lang-level">Working Proficiency</span></div>
+              <div class="lang-bar">
+                <div class="lang-fill lf-w" data-w="60"></div>
+              </div>
+            </div>
+          </div>
+          <div class="sblock reveal">
+            <div class="sblock-title"><i class="fa-solid fa-star"></i>&nbsp;Hobbies</div>
+            <div class="tags">
+              <span class="tag"><i class="fa-solid fa-book-open" style="color:var(--navy)"></i>Reading</span>
+              <span class="tag"><i class="fa-solid fa-magnifying-glass" style="color:var(--gold)"></i>Research</span>
+              <span class="tag"><i class="fa-solid fa-music" style="color:var(--ac)"></i>Music</span>
+            </div>
+          </div>
+        </div>
+      </aside>
+      <main class="main">
+        <div class="reveal">
+          <div class="eyebrow"><i class="fa-solid fa-file-lines"></i>&nbsp;Curriculum Vitae</div>
+          <div class="sumcard">
+            <p>A <strong>Computer Science student</strong> with hands-on experience in web development, frontend, and
+              strong foundational knowledge of backend, IT support, and cloud-based applications. Experienced with
+              <strong>JavaScript, React, Node.js, Firebase, databases, and Git/GitHub</strong>. Passionate about
+              building practical software solutions, learning new technologies, and collaborating with teams to solve
+              real-world problems &mdash; seeking to grow as a <strong>Web Developer</strong> and contribute to
+              real-world projects.</p>
+          </div>
+        </div>
+        <div class="msec reveal">
+          <div class="shead">
+            <div class="sico nv"><i class="fa-solid fa-briefcase"></i></div>
+            <h2 class="stitle">Experience</h2>
+            <div class="sline"></div><small
+              style="font-size:11px;color:var(--muted);white-space:nowrap;margin-left:8px;"><i
+                class="fa-solid fa-hand-pointer"></i> click</small>
+          </div>
+          <div class="entry open">
+            <div class="entry-head">
+              <div class="el">
+                <div class="badge nv"><i class="fa-solid fa-code"></i></div>
+                <div class="etw"><span class="erole">Freelance Web &amp; Cloud Developer</span><span class="eorg"><i
+                      class="fa-solid fa-building"></i>&nbsp;Independent</span></div>
+              </div>
+              <div class="er">
+                <div class="edate"><i class="fa-solid fa-calendar-days"></i>&nbsp;2025 &mdash; Present</div>
+                <div class="chev"><i class="fa-solid fa-chevron-down"></i></div>
+              </div>
+            </div>
+            <div class="ebody">
+              <div class="ebi">
+                <ul>
+                  <li><b>Frontend:</b> Developed responsive, pixel-perfect, user-friendly websites for individual
+                    clients.</li>
+                  <li><b>Cloud POS</b> (startup team of 3): handled client demos, support, content marketing, and
+                    contributed to front-end system builds.</li>
+                  <li><b>Backend &amp; Cloud Backend:</b> Built APIs with Node.js and implemented backend services
+                    (Firebase Auth, Firestore, real-time DB) for dynamic websites requiring large-scale data handling.
+                  </li>
+                  <li><b>Infrastructure:</b> Managed hosting, cloud storage, and third-party API integrations.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="entry">
+            <div class="entry-head">
+              <div class="el">
+                <div class="badge bl"><i class="fa-solid fa-screwdriver-wrench"></i></div>
+                <div class="etw"><span class="erole">Assistant IT Support</span><span class="eorg"><i
+                      class="fa-solid fa-school"></i>&nbsp;SETEC Institute</span></div>
+              </div>
+              <div class="er">
+                <div class="edate"><i class="fa-solid fa-calendar-days"></i>&nbsp;2024 &mdash; 2025</div>
+                <div class="chev"><i class="fa-solid fa-chevron-down"></i></div>
+              </div>
+            </div>
+            <div class="ebody">
+              <div class="ebi">
+                <ul>
+                  <li>Computer maintenance (hardware/software), OS installation (Windows/Linux).</li>
+                  <li>Internet cabling, software deployment, and troubleshooting.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="entry">
+            <div class="entry-head">
+              <div class="el">
+                <div class="badge gr"><i class="fa-solid fa-users"></i></div>
+                <div class="etw"><span class="erole">Academic Team Leader</span><span class="eorg"><i
+                      class="fa-solid fa-school"></i>&nbsp;AEU &amp; SETEC Institute</span></div>
+              </div>
+              <div class="er">
+                <div class="edate"><i class="fa-solid fa-calendar-days"></i>&nbsp;Ongoing</div>
+                <div class="chev"><i class="fa-solid fa-chevron-down"></i></div>
+              </div>
+            </div>
+            <div class="ebody">
+              <div class="ebi">
+                <ul>
+                  <li>Led student teams for programming and networking assignments.</li>
+                  <li>Ensured all projects were completed and submitted on schedule.</li>
+                  <li>Achieved strong results specifically in programming and networking subjects.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="entry">
+            <div class="entry-head">
+              <div class="el">
+                <div class="badge go"><i class="fa-solid fa-pen-nib"></i></div>
+                <div class="etw"><span class="erole">Graphic Design Trainee</span><span class="eorg"><i
+                      class="fa-solid fa-building"></i>&nbsp;TVET</span></div>
+              </div>
+              <div class="er">
+                <div class="edate"><i class="fa-solid fa-calendar-days"></i>&nbsp;2022 &mdash; 2023</div>
+                <div class="chev"><i class="fa-solid fa-chevron-down"></i></div>
+              </div>
+            </div>
+            <div class="ebody">
+              <div class="ebi">
+                <ul>
+                  <li>Adobe Photoshop and video editing.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="msec reveal">
+          <div class="shead">
+            <div class="sico go"><i class="fa-solid fa-graduation-cap"></i></div>
+            <h2 class="stitle">Education</h2>
+            <div class="sline"></div>
+          </div>
+          <div class="entry open">
+            <div class="entry-head">
+              <div class="el">
+                <div class="badge nv" style="background:#fff;padding:3px;overflow:hidden;"><img src="Assets/IMG/aeuLogo.png" alt="AEU" style="width:100%;height:100%;object-fit:contain;border-radius:4px;"></div>
+                <div class="etw"><span class="erole">Bachelor of Computer Science</span><span class="eorg"><i
+                      class="fa-solid fa-school"></i>&nbsp;Asia Euro University (AEU)</span></div>
+              </div>
+              <div class="er">
+                <div class="edate"><i class="fa-solid fa-calendar-days"></i>&nbsp;2025 &mdash; Present</div>
+                <div class="chev"><i class="fa-solid fa-chevron-down"></i></div>
+              </div>
+            </div>
+            <div class="ebody">
+              <div class="ebi">
+                <ul>
+                  <li>Year 4 &middot; Expected graduation: <b>February 2027</b>.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="entry">
+            <div class="entry-head">
+              <div class="el">
+                <div class="badge tl" style="background:#fff;padding:3px;overflow:hidden;"><img src="Assets/IMG/setecLogo.png" alt="SETEC" style="width:100%;height:100%;object-fit:contain;border-radius:4px;"></div>
+                <div class="etw"><span class="erole">Associate of Science &mdash; Management Information
+                    Systems</span><span class="eorg"><i class="fa-solid fa-school"></i>&nbsp;SETEC Institute</span>
+                </div>
+              </div>
+              <div class="er">
+                <div class="edate"><i class="fa-solid fa-calendar-days"></i>&nbsp;2022 &mdash; 2024</div>
+                <div class="chev"><i class="fa-solid fa-chevron-down"></i></div>
+              </div>
+            </div>
+            <div class="ebody">
+              <div class="ebi">
+                <ul>
+                  <li>Graduated <b>December 12, 2024</b>.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="entry">
+            <div class="entry-head">
+              <div class="el">
+                <div class="badge gr" style="background:#fff;padding:3px;overflow:hidden;"><img src="Assets/IMG/Preash_sihanoukLogo.jpg" alt="Preah Sihanouk High School" style="width:100%;height:100%;object-fit:cover;border-radius:4px;"></div>
+                <div class="etw"><span class="erole">High School Diploma</span><span class="eorg"><i
+                      class="fa-solid fa-school"></i>&nbsp;Preah Sihanouk High School</span></div>
+              </div>
+              <div class="er">
+                <div class="edate"><i class="fa-solid fa-calendar-days"></i>&nbsp;2019 &mdash; 2022</div>
+                <div class="chev"><i class="fa-solid fa-chevron-down"></i></div>
+              </div>
+            </div>
+            <div class="ebody">
+              <div class="ebi">
+                <ul>
+                  <li>General secondary education.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="msec reveal">
+          <div class="shead">
+            <div class="sico gr"><i class="fa-solid fa-microchip"></i></div>
+            <h2 class="stitle">Computer Skills</h2>
+            <div class="sline"></div>
+          </div>
+          <div class="sg">
+            <div class="ski" data-level="90">
+              <div class="skr"><span class="skn"><i class="fa-brands fa-google"></i>Google Cloud Platform</span><span
+                  class="skp">90%</span></div>
+              <div class="skt">
+                <div class="skf"></div>
+              </div>
+            </div>
+            <div class="ski" data-level="95">
+              <div class="skr"><span class="skn"><i class="fa-solid fa-fire"></i>Firebase / Supabase</span><span
+                  class="skp">95%</span></div>
+              <div class="skt">
+                <div class="skf"></div>
+              </div>
+            </div>
+            <div class="ski" data-level="90">
+              <div class="skr"><span class="skn"><i class="fa-brands fa-git-alt"></i>Version Control (Git)</span><span
+                  class="skp">90%</span></div>
+              <div class="skt">
+                <div class="skf"></div>
+              </div>
+            </div>
+            <div class="ski" data-level="95">
+              <div class="skr"><span class="skn"><i class="fa-solid fa-wifi"></i>Internet &amp; Social Media</span><span
+                  class="skp">95%</span></div>
+              <div class="skt">
+                <div class="skf"></div>
+              </div>
+            </div>
+            <div class="ski" data-level="80">
+              <div class="skr"><span class="skn"><i class="fa-brands fa-linux"></i>CentOS / Linux</span><span
+                  class="skp">80%</span></div>
+              <div class="skt">
+                <div class="skf"></div>
+              </div>
+            </div>
+            <div class="ski" data-level="90">
+              <div class="skr"><span class="skn"><i class="fa-solid fa-robot"></i>AI Tools</span><span
+                  class="skp">90%</span></div>
+              <div class="skt">
+                <div class="skf"></div>
+              </div>
+            </div>
+            <div class="ski" data-level="85">
+              <div class="skr"><span class="skn"><i class="fa-solid fa-cloud-arrow-up"></i>Vercel / Render /
+                  aaPanel</span><span class="skp">85%</span></div>
+              <div class="skt">
+                <div class="skf"></div>
+              </div>
+            </div>
+            <div class="ski" data-level="90">
+              <div class="skr"><span class="skn"><i class="fa-solid fa-terminal"></i>Programming Languages</span><span
+                  class="skp">90%</span></div>
+              <div class="skt">
+                <div class="skf"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="msec reveal" style="margin-bottom:0;">
+          <div class="shead">
+            <div class="sico pk"><i class="fa-solid fa-brain"></i></div>
+            <h2 class="stitle">Personality</h2>
+            <div class="sline"></div>
+          </div>
+          <div class="traits">
+            <span class="trait"><i class="fa-solid fa-puzzle-piece" style="color:var(--navy)"></i>Problem Solving</span>
+            <span class="trait"><i class="fa-solid fa-handshake" style="color:var(--gold)"></i>Honesty</span>
+            <span class="trait"><i class="fa-solid fa-people-group" style="color:var(--ac)"></i>Team Work</span>
+            <span class="trait"><i class="fa-solid fa-bolt" style="color:var(--rust)"></i>Fast Learning</span>
+            <span class="trait"><i class="fa-solid fa-lightbulb" style="color:var(--gold2)"></i>Open-Minded</span>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+  <script>
+    // ===== FULL PAGE ANIMATED BACKGROUND CANVAS =====
+    (function () {
+      const canvas = document.getElementById('bg-canvas');
+      const ctx = canvas.getContext('2d');
+      let W, H, particles = [], shapes = [];
+
+      function resize() {
+        W = canvas.width = window.innerWidth;
+        H = canvas.height = document.body.scrollHeight;
+      }
+
+      // Warm human palette blobs
+      const colors = [
+        'rgba(212,146,74,0.12)',
+        'rgba(82,183,136,0.10)',
+        'rgba(26,58,92,0.07)',
+        'rgba(193,68,14,0.08)',
+        'rgba(82,183,136,0.08)',
+        'rgba(240,184,85,0.09)',
+      ];
+
+      function Particle() {
+        this.reset = function () {
+          this.x = Math.random() * W;
+          this.y = Math.random() * H;
+          this.r = 60 + Math.random() * 140;
+          this.color = colors[Math.floor(Math.random() * colors.length)];
+          this.vx = (Math.random() - 0.5) * 0.3;
+          this.vy = (Math.random() - 0.5) * 0.25;
+          this.phase = Math.random() * Math.PI * 2;
+          this.speed = 0.005 + Math.random() * 0.008;
+        };
+        this.reset();
+        this.draw = function (t) {
+          const pulse = 1 + 0.08 * Math.sin(t * this.speed + this.phase);
+          const grad = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.r * pulse);
+          grad.addColorStop(0, this.color);
+          grad.addColorStop(1, 'rgba(0,0,0,0)');
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.r * pulse, 0, Math.PI * 2);
+          ctx.fillStyle = grad;
+          ctx.fill();
+          this.x += this.vx;
+          this.y += this.vy;
+          if (this.x < -this.r * 2) this.x = W + this.r;
+          if (this.x > W + this.r * 2) this.x = -this.r;
+          if (this.y < -this.r * 2) this.y = H + this.r;
+          if (this.y > H + this.r * 2) this.y = -this.r;
+        };
+      }
+
+      // Small floating dots — like pollen/dust (human nature)
+      function Dot() {
+        this.reset = function () {
+          this.x = Math.random() * W;
+          this.y = Math.random() * H;
+          this.r = 1.5 + Math.random() * 3;
+          this.alpha = 0.08 + Math.random() * 0.18;
+          this.vx = (Math.random() - 0.5) * 0.4;
+          this.vy = -0.2 - Math.random() * 0.5;
+          this.hue = [38, 150, 210, 25][Math.floor(Math.random() * 4)];
+        };
+        this.reset();
+        this.draw = function () {
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+          ctx.fillStyle = 'hsla(' + this.hue + ',55%,45%,' + this.alpha + ')';
+          ctx.fill();
+          this.x += this.vx;
+          this.y += this.vy;
+          if (this.y < -10) { this.x = Math.random() * W; this.y = H + 10; }
+          if (this.x < 0 || this.x > W) this.x = Math.random() * W;
+        };
+      }
+
+      function init() {
+        resize();
+        particles = [];
+        shapes = [];
+        for (let i = 0; i < 14; i++) particles.push(new Particle());
+        for (let i = 0; i < 40; i++) shapes.push(new Dot());
+      }
+
+      let raf, t = 0;
+      function draw() {
+        // Resize canvas to match page scroll height every frame
+        const newH = Math.max(document.body.scrollHeight, window.innerHeight);
+        if (canvas.height !== newH) { canvas.height = newH; H = newH; }
+        if (canvas.width !== window.innerWidth) { canvas.width = window.innerWidth; W = canvas.width; }
+
+        ctx.clearRect(0, 0, W, H);
+        // warm base
+        ctx.fillStyle = 'rgba(253,248,242,1)';
+        ctx.fillRect(0, 0, W, H);
+
+        t++;
+        particles.forEach(p => p.draw(t));
+        shapes.forEach(d => d.draw());
+        raf = requestAnimationFrame(draw);
+      }
+
+      window.addEventListener('resize', () => { resize(); });
+      init();
+      draw();
+    })();
+
+    // ===== ACCORDION =====
+    document.querySelectorAll('.entry-head').forEach(h => {
+      h.addEventListener('click', () => h.parentElement.classList.toggle('open'));
+    });
+
+    // ===== SKILL BARS =====
+    const io1 = new IntersectionObserver(e => { e.forEach(x => { if (x.isIntersecting) { x.target.querySelector('.skf').style.width = x.target.dataset.level + '%'; io1.unobserve(x.target); } }); }, { threshold: .4 });
+    document.querySelectorAll('.ski[data-level]').forEach(r => io1.observe(r));
+
+    // ===== LANGUAGE BARS =====
+    const io3 = new IntersectionObserver(e => { e.forEach(x => { if (x.isIntersecting) { x.target.style.width = x.target.dataset.w + '%'; io3.unobserve(x.target); } }); }, { threshold: .4 });
+    document.querySelectorAll('.lang-fill[data-w]').forEach(f => io3.observe(f));
+
+    // ===== REVEAL =====
+    const revs = document.querySelectorAll('.reveal');
+    const io2 = new IntersectionObserver(e => { e.forEach(x => { if (x.isIntersecting) { x.target.classList.add('show'); io2.unobserve(x.target); } }); }, { threshold: .06 });
+    revs.forEach(r => io2.observe(r));
+    setTimeout(() => revs.forEach(r => { if (r.getBoundingClientRect().top < window.innerHeight) r.classList.add('show'); }), 60);
+
+    // ===== COPY BUTTON =====
+    document.querySelectorAll('.cbtn').forEach(b => {
+      b.addEventListener('click', async e => {
+        e.preventDefault();
+        try {
+          await navigator.clipboard.writeText(b.dataset.copy);
+          const o = b.innerHTML;
+          b.innerHTML = '<i class="fa-solid fa-check"></i> copied!';
+          setTimeout(() => b.innerHTML = o, 1500);
+        } catch (er) { }
+      });
+    });
+
+    // ===== PRINT =====
+    document.getElementById('printBtn').addEventListener('click', () => window.print());
+
+    // ===== DOWNLOAD PDF =====
+    document.getElementById('downloadPdfBtn').addEventListener('click', async () => {
+      const btn = document.getElementById('downloadPdfBtn');
+      const orig = btn.innerHTML;
+      btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Generating...';
+      btn.disabled = true;
+
+      // Temporarily hide canvas & toolbar for clean PDF
+      const canvas = document.getElementById('bg-canvas');
+      const toolbar = document.querySelector('.toolbar');
+      canvas.style.display = 'none';
+      toolbar.style.display = 'none';
+
+      // Open all accordion entries
+      document.querySelectorAll('.entry').forEach(e => e.classList.add('open'));
+
+      await new Promise(r => setTimeout(r, 400));
+
+      const element = document.querySelector('.paper');
+      const opt = {
+        margin: 0,
+        filename: 'Rotana-NOB-CV.pdf',
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: {
+          scale: 2,
+          useCORS: true,
+          logging: false,
+          allowTaint: true,
+          backgroundColor: '#ffffff'
+        },
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+      };
+
+      try {
+        await html2pdf().set(opt).from(element).save();
+      } catch(e) { console.error(e); }
+
+      // Restore
+      canvas.style.display = '';
+      toolbar.style.display = '';
+      btn.innerHTML = '<i class="fa-solid fa-circle-check"></i> Downloaded!';
+      setTimeout(() => {
+        btn.innerHTML = orig;
+        btn.disabled = false;
+      }, 2500);
+    });
+  </script>
+</body>
+
+</html>

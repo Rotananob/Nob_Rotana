@@ -1,0 +1,1254 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rotana NOB - Creative CV</title>
+    <link rel="icon" type="image/jpeg" href="Assets/IMG/pic4.JPG">
+    <meta name="description" content="Rotana NOB Creative Receipt CV">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Caveat:wght@600&display=swap');
+
+        :root {
+            --page-bg: #dcd7c9;
+            --paper: #fbfaf4;
+            --ink: #232019;
+            --ink-soft: #5c584c;
+            --rule: #c9c4b2;
+            --stamp: #b33951;
+            --ok: #2f6f52;
+            --term-bg: #12201a;
+            --term-text: #8ee6a5;
+            --term-amber: #e0b25a;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            background: radial-gradient(ellipse at top, #e6e1d3, var(--page-bg) 60%);
+            color: var(--ink);
+            font-family: 'Space Mono', ui-monospace, monospace;
+            min-height: 100vh;
+            padding: 30px 12px 70px;
+            overflow-x: hidden;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: .01ms !important;
+                transition-duration: .01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+
+        .icon {
+            width: 15px;
+            height: 15px;
+            flex: none;
+            stroke: currentColor;
+            fill: none;
+            stroke-width: 1.7;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            vertical-align: -3px;
+        }
+
+        .visually-hidden {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            overflow: hidden;
+            clip: rect(0 0 0 0);
+            white-space: nowrap;
+        }
+
+        /* ---- scroll progress ---- */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px;
+            width: 0%;
+            background: var(--stamp);
+            z-index: 200;
+            transition: width .1s linear;
+        }
+
+        /* ---- floating ambient icons (page-wide) ---- */
+        .float-layer {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .float-icon {
+            position: absolute;
+            color: var(--ink);
+            opacity: .07;
+            font-size: 26px;
+            animation: drift 14s ease-in-out infinite;
+        }
+
+        @keyframes drift {
+
+            0%,
+            100% {
+                transform: translateY(0) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-26px) rotate(8deg);
+            }
+        }
+
+        .float-icon:nth-child(1) {
+            top: 8%;
+            left: 6%;
+            animation-duration: 16s;
+        }
+
+        .float-icon:nth-child(2) {
+            top: 18%;
+            left: 88%;
+            animation-duration: 12s;
+            animation-delay: 1s;
+        }
+
+        .float-icon:nth-child(3) {
+            top: 42%;
+            left: 3%;
+            animation-duration: 18s;
+            animation-delay: 2s;
+        }
+
+        .float-icon:nth-child(4) {
+            top: 65%;
+            left: 92%;
+            animation-duration: 15s;
+            animation-delay: .5s;
+        }
+
+        .float-icon:nth-child(5) {
+            top: 80%;
+            left: 10%;
+            animation-duration: 13s;
+            animation-delay: 1.5s;
+        }
+
+        .float-icon:nth-child(6) {
+            top: 30%;
+            left: 50%;
+            animation-duration: 20s;
+            animation-delay: 3s;
+        }
+
+        .float-icon:nth-child(7) {
+            top: 88%;
+            left: 70%;
+            animation-duration: 11s;
+            animation-delay: .8s;
+        }
+
+        /* ---- toolbar ---- */
+        .toolbar {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 22px;
+            flex-wrap: wrap;
+        }
+
+        .toolbar button,
+        .toolbar a {
+            font-family: 'Space Mono', monospace;
+            font-size: 12.5px;
+            font-weight: 700;
+            padding: 9px 16px;
+            border-radius: 3px;
+            border: 1px dashed var(--ink);
+            background: var(--paper);
+            color: var(--ink);
+            cursor: pointer;
+            text-decoration: none;
+            letter-spacing: .03em;
+            transition: .15s;
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .toolbar button:hover,
+        .toolbar a:hover {
+            background: var(--ink);
+            color: var(--paper);
+        }
+
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, .5);
+            transform: scale(0);
+            animation: rip .6s ease-out;
+        }
+
+        @keyframes rip {
+            to {
+                transform: scale(3);
+                opacity: 0;
+            }
+        }
+
+        /* ---- receipt paper ---- */
+        .receipt-shell {
+            max-width: 480px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+            animation: printOut .9s cubic-bezier(.2, .9, .25, 1) both;
+        }
+
+        @keyframes printOut {
+            from {
+                opacity: 0;
+                transform: translateY(-36px) scaleY(.94);
+                transform-origin: top;
+            }
+
+            to {
+                opacity: 1;
+                transform: none;
+            }
+        }
+
+        .receipt {
+            background: var(--paper);
+            padding: 34px 30px 26px;
+            position: relative;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, .05), 0 24px 50px -20px rgba(30, 25, 15, 0.35);
+            font-size: 13.5px;
+            color: var(--ink);
+        }
+
+        .receipt::before,
+        .receipt::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            height: 13px;
+            background: linear-gradient(135deg, transparent 50%, var(--page-bg) 50%) 0 0/15px 15px repeat-x, linear-gradient(45deg, transparent 50%, var(--page-bg) 50%) 0 0/15px 15px repeat-x;
+        }
+
+        .receipt::before {
+            top: -1px;
+        }
+
+        .receipt::after {
+            bottom: -1px;
+            transform: scaleY(-1);
+        }
+
+        /* stamp badge */
+        .stamp {
+            position: absolute;
+            top: 18px;
+            right: -14px;
+            width: 96px;
+            height: 96px;
+            border: 3px solid var(--stamp);
+            border-radius: 50%;
+            color: var(--stamp);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            transform: rotate(-14deg);
+            font-weight: 700;
+            font-size: 11px;
+            letter-spacing: .06em;
+            line-height: 1.3;
+            cursor: pointer;
+            user-select: none;
+            background: rgba(179, 57, 81, 0.03);
+            transition: transform .3s ease, background .3s ease;
+        }
+
+        .stamp:hover {
+            transform: rotate(-14deg) scale(1.07);
+            background: rgba(179, 57, 81, 0.08);
+        }
+
+        @media (max-width:560px) {
+            .stamp {
+                right: 6px;
+                width: 78px;
+                height: 78px;
+                font-size: 9.5px;
+            }
+        }
+
+        /* header + photo */
+        .masthead-row {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 4px;
+        }
+
+        .photo-frame {
+            width: 66px;
+            height: 82px;
+            flex: none;
+            border: 2px dashed var(--ink-soft);
+            border-radius: 3px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            cursor: pointer;
+            background: #f1efe6;
+            transition: .2s;
+        }
+
+        .photo-frame:hover {
+            border-color: var(--stamp);
+        }
+
+        .photo-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: none;
+        }
+
+        .photo-frame.has-img img {
+            display: block;
+        }
+
+        .photo-frame.has-img .ph-placeholder {
+            display: none;
+        }
+
+        .ph-placeholder {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 3px;
+            color: var(--ink-soft);
+            font-size: 8.5px;
+            text-align: center;
+            letter-spacing: .02em;
+            padding: 2px;
+        }
+
+        .masthead {
+            flex: 1;
+        }
+
+        .masthead .brand {
+            font-size: 22px;
+            font-weight: 700;
+            letter-spacing: .04em;
+        }
+
+        .masthead .role {
+            font-size: 11.5px;
+            color: var(--ink-soft);
+            margin-top: 3px;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .rule {
+            border: none;
+            border-top: 1px dashed var(--ink);
+            margin: 16px 0;
+        }
+
+        .rule.solid {
+            border-top: 2px solid var(--ink);
+        }
+
+        .meta-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 11px;
+            color: var(--ink-soft);
+            margin-bottom: 2px;
+        }
+
+        .sec-title {
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: .1em;
+            margin: 20px 0 10px;
+            display: flex;
+            align-items: center;
+            gap: 7px;
+        }
+
+        .sec-title .icon {
+            width: 16px;
+            height: 16px;
+        }
+
+        .line {
+            display: flex;
+            align-items: baseline;
+            gap: 6px;
+            font-size: 12.5px;
+            margin-bottom: 8px;
+        }
+
+        .line .icon {
+            color: var(--ink-soft);
+            flex: none;
+        }
+
+        .line .leader {
+            flex: 1;
+            border-bottom: 1px dotted var(--rule);
+            margin: 0 2px;
+            transform: translateY(-3px);
+        }
+
+        .line .val {
+            color: var(--ink-soft);
+            white-space: nowrap;
+            text-align: right;
+        }
+
+        .line a {
+            color: var(--ink);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--ink-soft);
+            transition: .15s;
+        }
+
+        .line a:hover {
+            color: var(--stamp);
+            border-color: var(--stamp);
+        }
+
+        .copy-x {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 10px;
+            color: var(--ink-soft);
+            text-decoration: underline;
+            padding: 0;
+            margin-left: 4px;
+            font-family: inherit;
+        }
+
+        .copy-x:hover {
+            color: var(--ok);
+        }
+
+        .item {
+            border-bottom: 1px dotted var(--rule);
+            padding: 10px 0;
+        }
+
+        .item:last-child {
+            border-bottom: none;
+        }
+
+        .item-head {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            cursor: pointer;
+            align-items: flex-start;
+        }
+
+        .item-head .qty {
+            color: var(--ink-soft);
+            margin-right: 6px;
+        }
+
+        .item-name {
+            font-weight: 700;
+            font-size: 13px;
+        }
+
+        .item-org {
+            font-size: 11px;
+            color: var(--ink-soft);
+            font-style: italic;
+            margin-top: 1px;
+        }
+
+        .item-price {
+            font-size: 11.5px;
+            color: var(--ink-soft);
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .mark {
+            font-size: 12px;
+            width: 14px;
+            text-align: center;
+            transition: transform .25s;
+        }
+
+        .item.open .mark {
+            transform: rotate(90deg);
+        }
+
+        .item-desc {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height .3s ease;
+        }
+
+        .item.open .item-desc {
+            max-height: 260px;
+        }
+
+        .item-desc ul {
+            margin: 8px 0 0;
+            padding-left: 16px;
+            font-size: 12px;
+            color: var(--ink-soft);
+        }
+
+        .item-desc ul li {
+            margin-bottom: 5px;
+        }
+
+        .item-desc ul li b {
+            color: var(--ink);
+        }
+
+        .run-btn {
+            font-family: 'Space Mono', monospace;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 6px 12px;
+            border-radius: 3px;
+            border: 1px solid var(--ink);
+            background: var(--ink);
+            color: var(--paper);
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-left: auto;
+            transition: .15s;
+        }
+
+        .run-btn:hover {
+            background: var(--ok);
+            border-color: var(--ok);
+        }
+
+        .run-btn:disabled {
+            opacity: .5;
+            cursor: progress;
+        }
+
+        .sec-title.with-btn {
+            justify-content: space-between;
+        }
+
+        .term-wrap {
+            margin: 12px 0 4px;
+            border-radius: 4px;
+            overflow: hidden;
+            border: 1px solid #0c1712;
+            display: none;
+        }
+
+        .term-wrap.show {
+            display: block;
+            animation: fadein .3s ease;
+        }
+
+        @keyframes fadein {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .term-topbar {
+            background: #0c1712;
+            color: var(--term-amber);
+            font-size: 10px;
+            padding: 5px 10px;
+            letter-spacing: .05em;
+        }
+
+        .term-body {
+            background: var(--term-bg);
+            color: var(--term-text);
+            font-family: 'Space Mono', monospace;
+            font-size: 11px;
+            padding: 12px 14px;
+            margin: 0;
+            min-height: 120px;
+            max-height: 220px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+            line-height: 1.6;
+        }
+
+        .term-body .ok {
+            color: var(--term-amber);
+        }
+
+        .skill-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 9px;
+            font-size: 12px;
+        }
+
+        .skill-row .sname {
+            width: 150px;
+            flex: none;
+        }
+
+        .meter {
+            display: flex;
+            gap: 3px;
+        }
+
+        .meter i {
+            width: 9px;
+            height: 13px;
+            background: #e6e2d4;
+            border: 1px solid var(--rule);
+            display: inline-block;
+            transition: background .25s ease;
+            font-style: normal;
+        }
+
+        .meter i.fill {
+            background: var(--ink);
+        }
+
+        .totals-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12.5px;
+            margin-bottom: 6px;
+        }
+
+        .totals-row .num {
+            font-weight: 700;
+        }
+
+        .grand {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 15px;
+            font-weight: 700;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 2px solid var(--ink);
+        }
+
+        .grand a {
+            color: var(--ink);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .grand a:hover {
+            color: var(--stamp);
+        }
+
+        .barcode {
+            height: 46px;
+            margin: 18px 0 6px;
+            background-image: repeating-linear-gradient(90deg, var(--ink) 0 2px, transparent 2px 4px, var(--ink) 4px 5px, transparent 5px 9px, var(--ink) 9px 12px, transparent 12px 15px);
+        }
+
+        .barcode-label {
+            text-align: center;
+            font-size: 10px;
+            letter-spacing: .35em;
+            color: var(--ink-soft);
+        }
+
+        .thanks {
+            text-align: center;
+            font-family: 'Caveat', cursive;
+            font-size: 26px;
+            margin: 20px 0 4px;
+            color: var(--ink);
+        }
+
+        .thanks-sub {
+            text-align: center;
+            font-size: 10.5px;
+            color: var(--ink-soft);
+            letter-spacing: .05em;
+        }
+
+        .tag-strip {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 8px;
+        }
+
+        .tag-strip span {
+            font-size: 10.5px;
+            border: 1px solid var(--rule);
+            padding: 4px 9px;
+            border-radius: 2px;
+            color: var(--ink-soft);
+            transition: .15s;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .tag-strip span:hover {
+            border-color: var(--ink);
+            color: var(--ink);
+            transform: translateY(-1px);
+        }
+
+        .footer-note {
+            text-align: center;
+            font-size: 10px;
+            color: var(--ink-soft);
+            margin-top: 18px;
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(14px);
+            transition: opacity .55s ease, transform .55s ease;
+        }
+
+        .reveal.show {
+            opacity: 1;
+            transform: none;
+        }
+
+        @media print {
+            body {
+                background: #fff;
+                padding: 0;
+            }
+
+            .toolbar,
+            .float-layer,
+            .scroll-progress {
+                display: none;
+            }
+
+            .receipt-shell {
+                max-width: 340px;
+                animation: none;
+            }
+
+            .receipt {
+                box-shadow: none;
+            }
+
+            .item-desc {
+                max-height: none !important;
+            }
+
+            .mark {
+                display: none;
+            }
+        }
+
+        a:focus-visible,
+        button:focus-visible {
+            outline: 2px solid var(--stamp);
+            outline-offset: 2px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="scroll-progress" id="scrollBar"></div>
+
+    <div class="float-layer" aria-hidden="true">
+        <span class="float-icon">&lt;/&gt;</span>
+        <span class="float-icon">☁</span>
+        <span class="float-icon">$</span>
+        <span class="float-icon">⚙</span>
+        <span class="float-icon">{ }</span>
+        <span class="float-icon">▮▮</span>
+        <span class="float-icon">☰</span>
+    </div>
+
+    <div class="toolbar">
+        <button id="printBtn"><svg class="icon" viewBox="0 0 24 24">
+                <path
+                    d="M6 9V3h12v6M6 18H4a1 1 0 0 1-1-1v-6a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1h-2M6 14h12v7H6z" />
+            </svg>PRINT RECEIPT</button>
+        <a href="mailto:Nobrothana180703@gmail.com"><svg class="icon" viewBox="0 0 24 24">
+                <path d="M3 6h18v12H3zM3 6l9 7 9-7" />
+            </svg>EMAIL ME</a>
+        <button id="expandAll"><svg class="icon" viewBox="0 0 24 24">
+                <path d="M9 3H3v6M15 3h6v6M9 21H3v-6M15 21h6v-6" />
+            </svg>EXPAND ALL</button>
+    </div>
+
+    <div class="receipt-shell">
+        <div class="receipt">
+            <div class="stamp" id="stampBtn"><span>OPEN</span><span>FOR</span><span>HIRE</span></div>
+
+            <div class="masthead-row">
+                <div class="photo-frame" id="photoFrame" title="Profile Photo">
+                    <img id="photoImg" src="Assets/IMG/pic5.PNG" alt="Rotana NOB Profile" style="display:block;width:100%;height:100%;object-fit:cover;">
+                    <span class="ph-placeholder" style="display:none;">
+                        <svg class="icon" style="width:20px;height:20px;" viewBox="0 0 24 24">
+                            <path d="M4 7h3l2-3h6l2 3h3v13H4z" />
+                            <circle cx="12" cy="13" r="3.5" />
+                        </svg>
+                        ATTACH<br>PHOTO
+                    </span>
+                    <input type="file" id="photoInput" accept="image/*" class="visually-hidden">
+                </div>
+                <div class="masthead">
+                    <div class="brand" style="display:flex;align-items:center;justify-content:center;gap:12px;"><img src="Assets/IMG/pic4.JPG" alt="Logo" style="width:28px;height:28px;border-radius:50%;object-fit:cover;"> ROTANA NOB</div>
+                    <div class="role"><svg class="icon" viewBox="0 0 24 24">
+                            <path d="M4 4h16v16H4z" />
+                            <path d="M4 9h16M9 4v16" />
+                        </svg>Web Developer · Full-Stack &amp; Cloud</div>
+                </div>
+            </div>
+            <div class="meta-row"><span>RECEIPT NO. CV-2026-0830</span><span>PHNOM PENH, KH</span></div>
+            <div class="meta-row"><span>ISSUED: 30 AUG 2026</span><span>STATUS: AVAILABLE</span></div>
+            <hr class="rule solid">
+
+            <div class="sec-title"><svg class="icon" viewBox="0 0 24 24">
+                    <path d="M12 2 2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+                </svg>CONTACT</div>
+            <div class="line"><svg class="icon" viewBox="0 0 24 24">
+                    <path d="M3 6h18v12H3zM3 6l9 7 9-7" />
+                </svg><span>Email</span><span class="leader"></span><span class="val"><a
+                        href="mailto:Nobrothana180703@gmail.com">Nobrothana180703@gmail.com</a><button class="copy-x"
+                        data-copy="Nobrothana180703@gmail.com">copy</button></span></div>
+            <div class="line"><svg class="icon" viewBox="0 0 24 24">
+                    <path
+                        d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.6a2 2 0 0 1-.4 2.1L8.1 9.6a16 16 0 0 0 6.3 6.3l1.2-1.2a2 2 0 0 1 2.1-.4c.8.3 1.7.5 2.6.6a2 2 0 0 1 1.7 2z" />
+                </svg><span>Phone</span><span class="leader"></span><span class="val"><a href="tel:+85587986045">+855 87
+                        986 045</a></span></div>
+            <div class="line"><svg class="icon" viewBox="0 0 24 24">
+                    <path d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7z" />
+                </svg><span>Telegram</span><span class="leader"></span><span class="val">+855 87 986 045</span></div>
+            <div class="line"><svg class="icon" viewBox="0 0 24 24">
+                    <path d="M8 3 4 7l4 4M16 3l4 4-4 4M14 3l-4 18" />
+                </svg><span>GitHub</span><span class="leader"></span><span class="val"><a
+                        href="https://github.com/Rotananob" target="_blank" rel="noopener">Rotananob</a></span></div>
+            <div class="line"><svg class="icon" viewBox="0 0 24 24">
+                    <path d="M4 4h16v16H4z" />
+                    <path d="M8 20v-6M8 11v-.01M12.5 20v-4a2 2 0 0 1 4 0v4M12.5 20v-6" />
+                </svg><span>LinkedIn</span><span class="leader"></span><span class="val"><a
+                        href="https://www.linkedin.com/in/rotana-nob-1171992a4" target="_blank"
+                        rel="noopener">rotana-nob</a></span></div>
+            <div class="line"><svg class="icon" viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="9" />
+                    <path d="M3 12h18M12 3a14 14 0 0 1 0 18 14 14 0 0 1 0-18z" />
+                </svg><span>Portfolio</span><span class="leader"></span><span class="val"><a
+                        href="https://nobrotana.web.app" target="_blank" rel="noopener">nobrotana.web.app</a></span>
+            </div>
+            <div class="line"><svg class="icon" viewBox="0 0 24 24">
+                    <path d="M12 22s7-7.5 7-12a7 7 0 1 0-14 0c0 4.5 7 12 7 12z" />
+                    <circle cx="12" cy="10" r="2.5" />
+                </svg><span>Address</span><span class="leader"></span><span class="val">Sen Sok, Phnom Penh</span></div>
+
+            <hr class="rule">
+            <div class="sec-title reveal"><svg class="icon" viewBox="0 0 24 24">
+                    <path d="M4 19.5V4.5A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5z" />
+                    <path d="M8 7h8M8 11h8" />
+                </svg>SUMMARY</div>
+            <p class="reveal" style="font-size:12px; color:var(--ink-soft); margin:0 0 4px;">Computer Science student
+                with hands-on experience in frontend, backend basics, IT support, and cloud infrastructure. Builds
+                practical software (JS, React, Node.js, Firebase, Git) and is currently growing YOUNG POS, a cloud
+                point-of-sale product, while freelancing for individual clients.</p>
+
+            <hr class="rule">
+            <div class="sec-title reveal"><svg class="icon" viewBox="0 0 24 24">
+                    <rect x="2" y="7" width="20" height="14" rx="2" />
+                    <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
+                </svg>EXPERIENCE <span style="font-weight:400;color:var(--ink-soft); font-size:10px;">(tap to
+                    expand)</span></div>
+
+            <div class="item open reveal">
+                <div class="item-head">
+                    <div><span class="qty">1x</span><span class="item-name">Freelance Web &amp; Cloud Developer</span>
+                        <div class="item-org">Independent</div>
+                    </div>
+                    <div class="item-price">2025–NOW <span class="mark">▸</span></div>
+                </div>
+                <div class="item-desc">
+                    <ul>
+                        <li><b>Frontend:</b> responsive, pixel-perfect sites for individual clients.</li>
+                        <li><b>Cloud POS</b> (team of 3): demos, support, content marketing, front-end builds.</li>
+                        <li><b>Backend:</b> Node.js APIs + Firebase Auth/Firestore/real-time DB.</li>
+                        <li><b>Infra:</b> hosting, cloud storage, third-party API integration.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="item reveal">
+                <div class="item-head">
+                    <div><span class="qty">1x</span><span class="item-name">Assistant IT Support</span>
+                        <div class="item-org">SETEC Institute</div>
+                    </div>
+                    <div class="item-price">2024–25 <span class="mark">▸</span></div>
+                </div>
+                <div class="item-desc">
+                    <ul>
+                        <li>Hardware/software maintenance, OS install (Windows/Linux).</li>
+                        <li>Internet cabling, software deployment &amp; troubleshooting.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="item reveal">
+                <div class="item-head">
+                    <div><span class="qty">1x</span><span class="item-name">Academic Team Leader</span>
+                        <div class="item-org">AEU &amp; SETEC Institute</div>
+                    </div>
+                    <div class="item-price">ONGOING <span class="mark">▸</span></div>
+                </div>
+                <div class="item-desc">
+                    <ul>
+                        <li>Led student teams for programming &amp; networking assignments.</li>
+                        <li>Ensured on-time project completion.</li>
+                        <li>Top results in programming &amp; networking subjects.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="item reveal">
+                <div class="item-head">
+                    <div><span class="qty">1x</span><span class="item-name">Graphic Design Trainee</span>
+                        <div class="item-org">TVET</div>
+                    </div>
+                    <div class="item-price">2022–23 <span class="mark">▸</span></div>
+                </div>
+                <div class="item-desc">
+                    <ul>
+                        <li>Adobe Photoshop &amp; video editing.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <hr class="rule">
+            <div class="sec-title reveal"><svg class="icon" viewBox="0 0 24 24">
+                    <path d="m22 10-10-6L2 10l10 6 10-6z" />
+                    <path d="M6 12v5c0 1.5 3 3 6 3s6-1.5 6-3v-5" />
+                </svg>EDUCATION</div>
+
+            <div class="item open reveal">
+                  <div class="item-head">
+                      <div><span class="qty">1x</span><span class="item-name">B.Sc. Computer Science</span>
+                          <div class="item-org" style="display:flex;align-items:center;gap:6px;"><img src="Assets/IMG/aeuLogo.png" alt="AEU" style="width:14px;height:14px;object-fit:contain;background:#fff;border-radius:2px;padding:1px;"> Asia Euro University</div>
+                      </div>
+                      <div class="item-price">2025&mdash;NOW <span class="mark">&middot;</span></div>
+                  </div>
+                <div class="item-desc">
+                    <ul>
+                        <li>Year 4 · expected graduation Feb 2027.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="item reveal">
+                  <div class="item-head">
+                      <div><span class="qty">1x</span><span class="item-name">Assoc. Science, MIS</span>
+                          <div class="item-org" style="display:flex;align-items:center;gap:6px;"><img src="Assets/IMG/setecLogo.png" alt="SETEC" style="width:14px;height:14px;object-fit:contain;background:#fff;border-radius:2px;padding:1px;"> SETEC Institute</div>
+                      </div>
+                      <div class="item-price">2022&mdash;24 <span class="mark">&middot;</span></div>
+                  </div>
+                <div class="item-desc">
+                    <ul>
+                        <li>Graduated 12 Dec 2024.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="item reveal">
+                  <div class="item-head">
+                      <div><span class="qty">1x</span><span class="item-name">High School Diploma</span>
+                          <div class="item-org" style="display:flex;align-items:center;gap:6px;"><img src="Assets/IMG/Preash_sihanoukLogo.jpg" alt="Preah Sihanouk" style="width:14px;height:14px;object-fit:cover;background:#fff;border-radius:2px;padding:1px;"> Preah Sihanouk High School</div>
+                      </div>
+                      <div class="item-price">2019&mdash;22 <span class="mark">&middot;</span></div>
+                  </div>
+                <div class="item-desc">
+                    <ul>
+                        <li>General secondary education.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <hr class="rule">
+            <div class="sec-title with-btn reveal">
+                <span style="display:flex;align-items:center;gap:7px;"><svg class="icon" viewBox="0 0 24 24">
+                        <rect x="4" y="4" width="16" height="16" rx="2" />
+                        <path d="M9 9h6v6H9zM4 9h2M4 15h2M18 9h2M18 15h2M9 4v2M15 4v2M9 18v2M15 18v2" />
+                    </svg>SKILLS</span>
+                <button class="run-btn" id="runBtn"><svg class="icon"
+                        style="width:12px;height:12px;stroke:currentColor;" viewBox="0 0 24 24">
+                        <path d="M6 3l14 9-14 9V3z" />
+                    </svg>RUN CHECK</button>
+            </div>
+
+            <div class="term-wrap" id="termWrap">
+                <div class="term-topbar">system_selftest.log</div>
+                <pre class="term-body" id="termBody"></pre>
+            </div>
+
+            <div class="skill-row" data-level="9"><span class="sname">Google Cloud Platform</span>
+                <div class="meter"></div>
+            </div>
+            <div class="skill-row" data-level="10"><span class="sname">Firebase / Supabase</span>
+                <div class="meter"></div>
+            </div>
+            <div class="skill-row" data-level="9"><span class="sname">Git / Version Control</span>
+                <div class="meter"></div>
+            </div>
+            <div class="skill-row" data-level="8"><span class="sname">CentOS / Linux</span>
+                <div class="meter"></div>
+            </div>
+            <div class="skill-row" data-level="10"><span class="sname">Internet &amp; Social Media</span>
+                <div class="meter"></div>
+            </div>
+            <div class="skill-row" data-level="9"><span class="sname">AI Tools</span>
+                <div class="meter"></div>
+            </div>
+            <div class="skill-row" data-level="8"><span class="sname">Vercel/Render/aaPanel</span>
+                <div class="meter"></div>
+            </div>
+            <div class="skill-row" data-level="9"><span class="sname">Programming Languages</span>
+                <div class="meter"></div>
+            </div>
+
+            <div class="sec-title reveal" style="margin-top:16px;"><svg class="icon" viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="9" />
+                    <path d="M3 12h18M12 3a14 14 0 0 1 0 18 14 14 0 0 1 0-18z" />
+                </svg>LANGUAGES</div>
+            <div class="skill-row" data-level="10"><span class="sname">Khmer (native)</span>
+                <div class="meter"></div>
+            </div>
+            <div class="skill-row" data-level="6"><span class="sname">English (working)</span>
+                <div class="meter"></div>
+            </div>
+
+            <div class="sec-title reveal" style="margin-top:16px;"><svg class="icon" viewBox="0 0 24 24">
+                    <path d="m12 2 2.9 6.3 6.9.8-5.1 4.6 1.4 6.8L12 17l-6.1 3.5 1.4-6.8-5.1-4.6 6.9-.8z" />
+                </svg>TRAITS</div>
+            <div class="tag-strip reveal">
+                <span>Problem Solving</span><span>Honesty</span><span>Team Work</span><span>Fast
+                    Learning</span><span>Open-Minded</span>
+            </div>
+
+            <div class="sec-title reveal" style="margin-top:16px;"><svg class="icon" viewBox="0 0 24 24">
+                    <path
+                        d="M20.8 4.6a5 5 0 0 0-7.1 0L12 6.3l-1.7-1.7a5 5 0 1 0-7.1 7.1L12 20.3l8.8-8.6a5 5 0 0 0 0-7.1z" />
+                </svg>HOBBIES</div>
+            <div class="tag-strip reveal"><span>Reading</span><span>Research</span><span>Music</span></div>
+
+            <hr class="rule solid">
+            <div class="totals-row"><span>SKILLS LISTED</span><span class="num" data-count="9">0</span></div>
+            <div class="totals-row"><span>LANGUAGES SPOKEN</span><span class="num" data-count="2">0</span></div>
+            <div class="totals-row"><span>ROLES HELD</span><span class="num" data-count="4">0</span></div>
+            <div class="grand"><span>STATUS</span><a href="mailto:Nobrothana180703@gmail.com"><svg class="icon"
+                        viewBox="0 0 24 24">
+                        <path d="M5 12h14M13 6l6 6-6 6" />
+                    </svg>HIRE ME</a></div>
+
+            <div class="barcode"></div>
+            <div class="barcode-label">SCAN · CV-ROTANANOB · 2026</div>
+
+            <div class="thanks">Thank you for reading!</div>
+            <div class="thanks-sub">— please keep this receipt for your records —</div>
+            <div class="footer-note">no refunds, only follow-ups · reply to the email above</div>
+        </div>
+    </div>
+
+    <script>
+        /* scroll progress */
+        window.addEventListener('scroll', () => {
+            const h = document.documentElement;
+            const pct = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+            document.getElementById('scrollBar').style.width = pct + '%';
+        });
+
+        /* ripple on toolbar buttons */
+        document.querySelectorAll('.toolbar button, .toolbar a').forEach(el => {
+            el.addEventListener('click', function (e) {
+                const r = document.createElement('span');
+                r.className = 'ripple';
+                const rect = this.getBoundingClientRect();
+                r.style.left = (e.clientX - rect.left) + 'px';
+                r.style.top = (e.clientY - rect.top) + 'px';
+                this.appendChild(r);
+                setTimeout(() => r.remove(), 650);
+            });
+        });
+
+        /* accordion */
+        document.querySelectorAll('.item-head').forEach(h => {
+            h.addEventListener('click', () => h.parentElement.classList.toggle('open'));
+        });
+        document.getElementById('expandAll').addEventListener('click', () => {
+            const items = document.querySelectorAll('.item');
+            const allOpen = [...items].every(i => i.classList.contains('open'));
+            items.forEach(i => i.classList.toggle('open', !allOpen));
+        });
+
+        /* reveal on scroll */
+        const revealEls = document.querySelectorAll('.reveal');
+        const ioReveal = new IntersectionObserver(entries => {
+            entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('show'); ioReveal.unobserve(e.target); } });
+        }, { threshold: 0.15 });
+        revealEls.forEach(el => ioReveal.observe(el));
+
+        /* skill meter fill (shared) */
+        function buildMeter(row) {
+            const meterEl = row.querySelector('.meter');
+            meterEl.innerHTML = '';
+            for (let k = 0; k < 10; k++) { meterEl.appendChild(document.createElement('i')); }
+            return meterEl.querySelectorAll('i');
+        }
+        function fillMeter(row, staggerMs) {
+            const level = parseInt(row.dataset.level, 10);
+            const boxes = buildMeter(row);
+            boxes.forEach((b, idx) => { setTimeout(() => { if (idx < level) b.classList.add('fill'); }, idx * (staggerMs || 55)); });
+        }
+        const skillRows = document.querySelectorAll('.skill-row');
+        const ioSkill = new IntersectionObserver(entries => {
+            entries.forEach(e => {
+                if (e.isIntersecting && !e.target.dataset.done) {
+                    e.target.dataset.done = '1';
+                    fillMeter(e.target, 55);
+                    ioSkill.unobserve(e.target);
+                }
+            });
+        }, { threshold: 0.5 });
+        skillRows.forEach(r => ioSkill.observe(r));
+
+        /* count-up totals */
+        const nums = document.querySelectorAll('.num[data-count]');
+        const ioNum = new IntersectionObserver(entries => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    const target = parseInt(e.target.dataset.count, 10);
+                    let cur = 0;
+                    const step = () => { cur++; e.target.textContent = cur; if (cur < target) setTimeout(step, 90); };
+                    step();
+                    ioNum.unobserve(e.target);
+                }
+            });
+        }, { threshold: 0.6 });
+        nums.forEach(n => ioNum.observe(n));
+
+        /* copy buttons */
+        document.querySelectorAll('.copy-x').forEach(btn => {
+            btn.addEventListener('click', async e => {
+                e.preventDefault();
+                try {
+                    await navigator.clipboard.writeText(btn.dataset.copy);
+                    const t = btn.textContent; btn.textContent = 'copied'; setTimeout(() => btn.textContent = t, 1300);
+                } catch (err) { }
+            });
+        });
+
+        /* stamp */
+        document.getElementById('stampBtn').addEventListener('click', () => { window.location.href = 'mailto:Nobrothana180703@gmail.com'; });
+
+        /* print */
+        document.getElementById('printBtn').addEventListener('click', () => window.print());
+
+        /* photo upload */
+        const photoFrame = document.getElementById('photoFrame');
+        const photoInput = document.getElementById('photoInput');
+        const photoImg = document.getElementById('photoImg');
+        photoFrame.addEventListener('click', () => photoInput.click());
+        photoInput.addEventListener('change', () => {
+            const file = photoInput.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = () => {
+                photoImg.src = reader.result;
+                photoFrame.classList.add('has-img');
+            };
+            reader.readAsDataURL(file);
+        });
+
+        /* RUN SKILLS CHECK terminal */
+        const runBtn = document.getElementById('runBtn');
+        const termWrap = document.getElementById('termWrap');
+        const termBody = document.getElementById('termBody');
+        const mainSkillRows = Array.from(document.querySelectorAll('.skill-row')).slice(0, 8);
+
+        function sleep(ms) { return new Promise(res => setTimeout(res, ms)); }
+        async function typeLine(text, cls) {
+            const span = document.createElement('span');
+            if (cls) span.className = cls;
+            termBody.appendChild(span);
+            for (const ch of text) {
+                span.textContent += ch;
+                termBody.scrollTop = termBody.scrollHeight;
+                await sleep(10);
+            }
+            termBody.appendChild(document.createTextNode('\n'));
+        }
+
+        runBtn.addEventListener('click', async () => {
+            runBtn.disabled = true;
+            termWrap.classList.add('show');
+            termBody.textContent = '';
+            await typeLine('> SYSTEM SELF-TEST INITIATED...');
+            await sleep(150);
+            for (const row of mainSkillRows) {
+                const name = row.querySelector('.sname').textContent;
+                const level = row.dataset.level;
+                await typeLine('> checking ' + name + ' ...');
+                fillMeter(row, 40);
+                await typeLine('  ...OK  [' + level + '/10]', 'ok');
+                await sleep(90);
+            }
+            await sleep(100);
+            await typeLine('> ALL SYSTEMS OPERATIONAL ✓', 'ok');
+            runBtn.disabled = false;
+            runBtn.innerHTML = '<svg class="icon" style="width:12px;height:12px;" viewBox="0 0 24 24"><path d="M6 3l14 9-14 9V3z"/></svg>RE-RUN CHECK';
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,7 @@
+{
+  "cleanUrls": true,
+  "rewrites": [
+    { "source": "/CV", "destination": "/CV.html" },
+    { "source": "/CV-Recipt", "destination": "/CV-Recipt.html" }
+  ]
+}
