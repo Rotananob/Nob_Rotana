@@ -667,8 +667,8 @@ async function sendToAllBots(text) {
     }).then(r => r.json())
   );
 
-  // Send to group chat (via Bot 1 only to avoid duplicate messages)
-  const groupPromise = fetch(`https://api.telegram.org/bot${BOTS[0].token}/sendMessage`, {
+  // Send to group chat (via Bot 2 @rotananobSETEC to avoid duplicate messages)
+  const groupPromise = fetch(`https://api.telegram.org/bot${BOTS[1].token}/sendMessage`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ chat_id: GROUP_CHAT_ID, text, parse_mode: 'Markdown', disable_web_page_preview: false })
