@@ -22,11 +22,12 @@ Welcome to the **NOB Rotana Developer Portfolio** repository! This project serve
 
 ## ✨ Features
 
-- **Latest Updates:** Added an **AI-Powered Development** section outlining workflow and use cases with AI tools. Updated Hero section to reflect "Software & Web App Builder" title. Integrated new major projects (**S Tech Store**, **Delight Fashion**, and **NRI Studio**), featuring full bilingual support and modern UI cards. Reorganized featured projects grid and updated media links.
+- **Latest Updates:** Added **CV Templates** (Normal & Creative "Receipt" style). Added an **AI-Powered Development** section outlining workflow and use cases with AI tools. Updated Hero section to reflect "Software & Web App Builder" title. Integrated new major projects (**S Tech Store**, **Delight Fashion**, and **NRI Studio**), featuring full bilingual support and modern UI cards. Reorganized featured projects grid and updated media links.
+- **CV & Resumes:** Included two responsive resume templates: Normal (`CV.html`) and Creative Receipt (`CV-Recipt.html`).
 - **Dynamic Content:** Optional Firestore collections `projects` and `certificates` dynamically replace static placeholders.
 - **Interactive UI:** Responsive layout, dark/light theme, scroll effects, optional canvas weather + audio (user-triggered only).
 - **Contact System:** Integrated contact form writes directly to Firestore collection `messages`.
-- **Clean URLs:** Enabled `cleanUrls: true` for Firebase Hosting (e.g., paths like `/test` instead of `/test.html`).
+- **Clean URLs:** Enabled `cleanUrls: true` for Firebase Hosting and added `serve.json` for local static serving without `.html` extensions.
 
 ## 🏗️ Architecture & Infrastructure
 
@@ -51,6 +52,9 @@ graph TD
 .
 ├── public/
 │   ├── index.html      # Main portfolio (Firebase Hosting entry)
+│   ├── CV.html         # Professional CV template
+│   ├── CV-Recipt.html  # Creative CV (Receipt style) template
+│   ├── serve.json      # Local routing config for clean URLs
 │   ├── script.js       # Client-side interactivity
 │   ├── style.css       # Styles & Themes
 │   ├── Assets/         # Media, Images, and Icons

@@ -653,20 +653,32 @@ const BOTS = [
   { token: '8930376959:AAE3jZqSvNWgteMNj4wrfCDEAGpd6FEsYrw', chat_id: '5969566967' }, // acc2
 ];
 
-// Helper: send a message via all bots
+// ====== TELEGRAM GROUP CHAT ID ======
+const GROUP_CHAT_ID = '-1004309159982'; // Group: Alert Testing
+
+// Helper: send a message via all bots (personal chats + group)
 async function sendToAllBots(text) {
-  const results = await Promise.allSettled(
-    BOTS.map(bot =>
-      fetch(`https://api.telegram.org/bot${bot.token}/sendMessage`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ chat_id: bot.chat_id, text, parse_mode: 'Markdown', disable_web_page_preview: false })
-      }).then(r => r.json())
-    )
+  // Send to each bot's personal chat
+  const personalPromises = BOTS.map(bot =>
+    fetch(`https://api.telegram.org/bot${bot.token}/sendMessage`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ chat_id: bot.chat_id, text, parse_mode: 'Markdown', disable_web_page_preview: false })
+    }).then(r => r.json())
   );
+
+  // Send to group chat (via Bot 1 only to avoid duplicate messages)
+  const groupPromise = fetch(`https://api.telegram.org/bot${BOTS[0].token}/sendMessage`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ chat_id: GROUP_CHAT_ID, text, parse_mode: 'Markdown', disable_web_page_preview: false })
+  }).then(r => r.json());
+
+  const results = await Promise.allSettled([...personalPromises, groupPromise]);
   results.forEach((r, i) => {
-    if (r.status === 'fulfilled') console.log(`[TG] ✅ Bot${i+1} sent:`, r.value.ok);
-    else console.error(`[TG] ❌ Bot${i+1} failed:`, r.reason);
+    const label = i < BOTS.length ? `Bot${i+1}` : 'Group';
+    if (r.status === 'fulfilled') console.log(`[TG] ✅ ${label} sent:`, r.value.ok);
+    else console.error(`[TG] ❌ ${label} failed:`, r.reason);
   });
 }
 
