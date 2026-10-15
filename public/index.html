@@ -183,7 +183,46 @@
            Fallback static cards shown until Firebase is connected. -->
       <div class="projects-grid" id="projects-grid">
 
-        <!-- #1 TOP: Delight Fashion -->
+        <!-- #1 TOP FEATURED: Houn Vannak Medical Clinic -->
+        <div class="project-card reveal"
+          onclick="openCertModal('Assets/IMG/clinic_logo.svg', t('proj11.title'))">
+          <div class="project-media">
+            <img
+              src="Assets/IMG/clinic_logo.svg"
+              onerror="this.onerror=null; this.src='https://clinic-systems.vercel.app/icons/icon-512.svg';"
+              alt="Houn Vannak Medical Clinic" style="object-fit: contain; background: linear-gradient(135deg, #042f2e 0%, #0f766e 50%, #115e59 100%); padding: 1.5rem;" />
+            <div class="project-media-badge" data-i18n="common.badgeImage">Image</div>
+          </div>
+          <div class="project-body">
+            <div class="project-tags">
+              <span class="tag">Next.js 14</span>
+              <span class="tag">NestJS 10</span>
+              <span class="tag">TypeScript</span>
+              <span class="tag">PostgreSQL 16</span>
+              <span class="tag">Prisma ORM</span>
+              <span class="tag">KHQR (EMVCo)</span>
+              <span class="tag">Cloudinary CDN</span>
+              <span class="tag">Telegram Supergroup Bot</span>
+              <span class="tag">RBAC (6 Roles)</span>
+              <span class="tag">ESC/POS Printing</span>
+              <span class="tag">TailwindCSS</span>
+              <span class="tag">PWA</span>
+            </div>
+            <h3 class="project-title" style="font-family: 'Dangrek', cursive, sans-serif;" data-i18n="proj11.title">
+              Houn Vannak Medical Clinic (Enterprise Medical SaaS)</h3>
+            <p class="project-desc" data-i18n="proj11.desc"></p>
+            <div class="project-links">
+              <a href="https://github.com/Rotananob/Clinic_systems" class="project-link" target="_blank"
+                rel="noopener noreferrer" onclick="event.stopPropagation();"><i class="fa-brands fa-github"></i> <span
+                  data-i18n="common.code">Code</span></a>
+              <a href="https://clinic-systems.vercel.app/login" class="project-link" target="_blank"
+                rel="noopener noreferrer" onclick="event.stopPropagation();"><i
+                  class="fa-solid fa-arrow-up-right-from-square"></i> <span data-i18n="common.live">Live</span></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- #2 TOP: Delight Fashion -->
         <div class="project-card reveal"
           onclick="openCertModal('Assets/IMG/delight_fashion.jpg', t('proj9.title'))">
           <div class="project-media">
