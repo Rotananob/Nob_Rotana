@@ -2,7 +2,7 @@
 
 /* ========== i18n: English (default) & Khmer ========== */
 const LANG_KEY = 'portfolio-lang';
-let weatherState = 1;
+let weatherState = 0; // 2026 Interactive 3D Cyber Mesh default
 
 const I18N = { en: {}, km: {} };
 
@@ -152,14 +152,19 @@ Object.assign(I18N.en, {
   'contact.findMe': 'Find me on',
   'footer.heading': 'Let\'s build something amazing together.',
   'footer.copy': '© 2025 Rotana NOB. All rights reserved.',
-  'weather.btnTitle': 'Toggle weather ambience (rain / snow / storm)',
-  'weather.zen': 'Zen Mode',
-  'weather.nextSnow': 'Next: Snow',
-  'weather.nextThunder': 'Next: Storm',
-  'weather.nextOff': 'Next: Off',
-  'weather.rainMode': '🌧 Rain Mode',
-  'weather.snowMode': '❄️ Snow Mode',
-  'weather.thunderMode': '🌩 Storm Mode',
+  'weather.btnTitle': 'Switch Visual & 3D Ambience (Click to cycle)',
+  'weather.mode0': '🌌 3D Cyber Mesh',
+  'weather.mode1': '🎬 Cyber Video',
+  'weather.mode2': '🌧️ Cyber Rain',
+  'weather.mode3': '⚡ Thunderstorm',
+  'weather.mode4': '❄️ Cosmic Snow',
+  'weather.mode5': '✨ Zen Aurora',
+  'weather.ind0': '🌌 3D Interactive Cyber Constellation Active (Move Mouse)',
+  'weather.ind1': '🎬 Cinematic Video Motion Active',
+  'weather.ind2': '🌧️ Neon Rain Ambience Active',
+  'weather.ind3': '⚡ Fierce Lightning & Thunderstorm Active',
+  'weather.ind4': '❄️ 3D Cosmic Snow Active',
+  'weather.ind5': '✨ Zen Aurora Glow Active',
   'nav.resume': 'Resume',
   'resume.sectionTag': 'My Story',
   'resume.titleBefore': 'My',
@@ -387,14 +392,19 @@ Object.assign(I18N.km, {
   'contact.findMe': 'រកខ្ញុំនៅ',
   'footer.heading': 'តោះ! រួមគ្នាបង្កើតអ្វីដែលអស្ចារ្យ។',
   'footer.copy': '© ២០២៥ ណុប រតនា។ រក្សាសិទ្ធិគ្រប់យ៉ាង។',
-  'weather.btnTitle': 'ប្តូរបរិយាកាស (ភ្លៀង / ព្រិល / ផ្គររន្ទះ)',
-  'weather.zen': 'Zen',
-  'weather.nextSnow': 'បន្ទាប់៖ ព្រិល',
-  'weather.nextThunder': 'បន្ទាប់៖ ផ្គររន្ទះ',
-  'weather.nextOff': 'បន្ទាប់៖ បិទ',
-  'weather.rainMode': '🌧 របៀបភ្លៀង',
-  'weather.snowMode': '❄️ របៀបព្រិល',
-  'weather.thunderMode': '🌩 របៀបផ្គររន្ទះ',
+  'weather.btnTitle': 'ប្តូរបរិយាកាស 3D & Background (ចុចដើម្បីប្តូរ)',
+  'weather.mode0': '🌌 3D Cyber Mesh',
+  'weather.mode1': '🎬 Cyber Video',
+  'weather.mode2': '🌧️ បរិយាកាសភ្លៀង',
+  'weather.mode3': '⚡ ផ្គររន្ទះ & ផ្លេកបន្ទោរ',
+  'weather.mode4': '❄️ ព្រិល 3D Cosmic',
+  'weather.mode5': '✨ របៀប Zen Aurora',
+  'weather.ind0': '🌌 3D Cyber Matrix កំពុងដំណើរការ (អូស Mouse ដើម្បីបញ្ជា)',
+  'weather.ind1': '🎬 វីដេអូ Background កំពុងដំណើរការ',
+  'weather.ind2': '🌧️ បរិយាកាសភ្លៀងកំពុងដំណើរការ',
+  'weather.ind3': '⚡ ផ្គររន្ទះ និងផ្លេកបន្ទោរកំពុងដំណើរការ',
+  'weather.ind4': '❄️ ព្រិល 3D Cosmic កំពុងដំណើរការ',
+  'weather.ind5': '✨ របៀប Zen Aurora កំពុងដំណើរការ',
   'nav.resume': 'ប្រវត្តិ',
   'resume.sectionTag': 'រឿងរ៉ាវរបស់ខ្ញុំ',
   'resume.titleBefore': 'ដំណើរ',
@@ -896,7 +906,7 @@ if (tickerTrack) {
 }
 
 /* ========================================================
-   WEATHER EFFECT (Canvas + Audio)
+   2026 INTERACTIVE 3D BACKGROUND ENGINE & AMBIENCE CONTROLLER
    ======================================================== */
 const weatherBtn = document.getElementById('weather-btn');
 const weatherIcon = document.getElementById('weather-icon');
@@ -907,12 +917,52 @@ const rainAudio = document.getElementById('rain-audio');
 const snowAudio = document.getElementById('snow-audio');
 const thunderAudio = document.getElementById('thunder-audio');
 const stormVideo = document.getElementById('storm-video');
+const cyberVideo = document.getElementById('cyber-video');
+const cursorGlow = document.getElementById('cursor-glow');
+const audioWaves = document.getElementById('audio-waves');
 const ctx = weatherCanvas?.getContext('2d');
 
 let particles = [];
+let splashes = [];
 let animFrame = null;
 let flashOpacity = 0;
 let lightningBolt = null;
+let indicatorTimeout = null;
+
+// Mouse & 3D Interactive Camera State
+const mouse = {
+  x: window.innerWidth / 2,
+  y: window.innerHeight / 2,
+  targetX: window.innerWidth / 2,
+  targetY: window.innerHeight / 2
+};
+const cam = { x: 0, y: 0, targetX: 0, targetY: 0 };
+const shockwaves = [];
+
+// Track mouse position globally for 3D camera, cursor glow, and particles
+window.addEventListener('pointermove', (e) => {
+  mouse.x = e.clientX;
+  mouse.y = e.clientY;
+  cam.targetX = (e.clientX - window.innerWidth / 2) * 0.12;
+  cam.targetY = (e.clientY - window.innerHeight / 2) * 0.12;
+
+  // Real-time cursor spotlight
+  if (cursorGlow) {
+    cursorGlow.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0)`;
+  }
+});
+
+// Click shockwave interaction in 3D canvas
+window.addEventListener('pointerdown', (e) => {
+  if (e.target.closest('button, a, input, textarea, select')) return;
+  shockwaves.push({
+    x: e.clientX,
+    y: e.clientY,
+    r: 5,
+    maxR: 240,
+    alpha: 0.9
+  });
+});
 
 function resizeCanvas() {
   if (!weatherCanvas) return;
@@ -922,96 +972,286 @@ function resizeCanvas() {
 window.addEventListener('resize', resizeCanvas);
 resizeCanvas();
 
+// --- 3D PARTICLE CONSTELLATION GENERATOR (Mode 0 & Mode 1 overlay) ---
+function create3DParticle() {
+  const w = weatherCanvas?.width || window.innerWidth;
+  const h = weatherCanvas?.height || window.innerHeight;
+  return {
+    x: (Math.random() - 0.5) * w * 1.4,
+    y: (Math.random() - 0.5) * h * 1.4,
+    z: (Math.random() - 0.5) * 600, // Z depth from -300 to 300
+    vx: (Math.random() - 0.5) * 0.7,
+    vy: (Math.random() - 0.5) * 0.7,
+    vz: (Math.random() - 0.5) * 0.5,
+    baseR: 1.6 + Math.random() * 2.2,
+    alpha: 0.35 + Math.random() * 0.55,
+    hue: Math.random() > 0.4 ? 205 : 270 // Cyan & Purple Cyber Glow
+  };
+}
+
+// --- RAIN DROP GENERATOR (Mode 2) ---
 function createRainDrop() {
   return {
     x: Math.random() * weatherCanvas.width,
     y: Math.random() * -weatherCanvas.height,
-    speed: 8 + Math.random() * 8,
-    len: 12 + Math.random() * 20,
-    thick: 0.5 + Math.random() * 1,
+    speed: 12 + Math.random() * 10,
+    len: 16 + Math.random() * 24,
+    thick: 0.8 + Math.random() * 1.2,
     alpha: 0.4 + Math.random() * 0.5,
-    wind: 2 + Math.random() * 2
+    wind: 1.5 + Math.random() * 2
   };
 }
+
+// --- SNOWFLAKE GENERATOR (Mode 4) ---
 function createSnowFlake() {
   return {
     x: Math.random() * weatherCanvas.width,
     y: Math.random() * -weatherCanvas.height,
-    r: 1 + Math.random() * 4,
-    speed: 1 + Math.random() * 2,
-    drift: (Math.random() - 0.5) * 0.8,
-    alpha: 0.5 + Math.random() * 0.5,
+    r: 1.5 + Math.random() * 3.5,
+    speed: 1.2 + Math.random() * 2.5,
+    drift: (Math.random() - 0.5) * 1.2,
+    alpha: 0.4 + Math.random() * 0.55,
     wobble: Math.random() * Math.PI * 2
   };
 }
+
+// --- AMBIENT ORB GENERATOR (Mode 5 - Zen Aurora) ---
+function createZenOrb() {
+  return {
+    x: Math.random() * weatherCanvas.width,
+    y: Math.random() * weatherCanvas.height,
+    r: 120 + Math.random() * 200,
+    vx: (Math.random() - 0.5) * 0.3,
+    vy: (Math.random() - 0.5) * 0.3,
+    alpha: 0.08 + Math.random() * 0.12,
+    hue: Math.random() > 0.5 ? 210 : 280
+  };
+}
+
+// --- INITIALIZE PARTICLES ---
 function initParticles() {
   particles = [];
+  splashes = [];
   lightningBolt = null;
   flashOpacity = 0;
-  if (weatherState === 0) return;
-  if (weatherState === 3) {
-    for (let i = 0; i < 10; i++) {
-      particles.push({
-        x: Math.random() * weatherCanvas.width,
-        y: Math.random() * (weatherCanvas.height * 0.4),
-        r: 200 + Math.random() * 300,
-        speed: 0.05 + Math.random() * 0.1,
-        alpha: isDark ? 0.12 : 0.25
-      });
-    }
-    return;
-  }
-  const count = weatherState === 1 ? 220 : 120;
+
+  const count = weatherState === 0 ? 95 :
+                weatherState === 1 ? 55 :
+                weatherState === 2 ? 180 :
+                weatherState === 3 ? 12 :
+                weatherState === 4 ? 110 : 8;
+
   for (let i = 0; i < count; i++) {
-    if (weatherState === 1) {
+    if (weatherState === 0 || weatherState === 1) {
+      particles.push(create3DParticle());
+    } else if (weatherState === 2) {
       const d = createRainDrop();
       d.y = Math.random() * weatherCanvas.height;
       particles.push(d);
-    } else if (weatherState === 2) {
+    } else if (weatherState === 3) {
+      particles.push({
+        x: Math.random() * weatherCanvas.width,
+        y: Math.random() * (weatherCanvas.height * 0.45),
+        r: 220 + Math.random() * 320,
+        speed: 0.06 + Math.random() * 0.1,
+        alpha: 0.15
+      });
+    } else if (weatherState === 4) {
       const s = createSnowFlake();
       s.y = Math.random() * weatherCanvas.height;
       particles.push(s);
+    } else if (weatherState === 5) {
+      particles.push(createZenOrb());
     }
   }
 }
-function drawRain() {
+
+// --- DRAW 3D CYBER CONSTELLATION (Mode 0 & Mode 1) ---
+function drawCyberConstellation(isOverlayOnly = false) {
+  if (!ctx) return;
   ctx.clearRect(0, 0, weatherCanvas.width, weatherCanvas.height);
+
+  // Smooth camera spring
+  cam.x += (cam.targetX - cam.x) * 0.06;
+  cam.y += (cam.targetY - cam.y) * 0.06;
+
+  const w = weatherCanvas.width;
+  const h = weatherCanvas.height;
+  const centerX = w / 2;
+  const centerY = h / 2;
+  const fov = 420;
+
+  // Process shockwaves
+  for (let sIdx = shockwaves.length - 1; sIdx >= 0; sIdx--) {
+    const sw = shockwaves[sIdx];
+    ctx.save();
+    ctx.beginPath();
+    ctx.arc(sw.x, sw.y, sw.r, 0, Math.PI * 2);
+    ctx.strokeStyle = `rgba(99, 179, 237, ${sw.alpha})`;
+    ctx.lineWidth = 2.5;
+    ctx.shadowBlur = 15;
+    ctx.shadowColor = 'rgba(99, 179, 237, 0.8)';
+    ctx.stroke();
+    ctx.restore();
+
+    sw.r += 6;
+    sw.alpha *= 0.94;
+    if (sw.alpha < 0.02 || sw.r > sw.maxR) {
+      shockwaves.splice(sIdx, 1);
+    }
+  }
+
+  // Pre-calculate 2D projected coordinates
+  const projected = [];
+  for (let i = 0; i < particles.length; i++) {
+    const p = particles[i];
+
+    // 3D physics movement
+    p.x += p.vx;
+    p.y += p.vy;
+    p.z += p.vz;
+
+    // Boundary wrapping in 3D
+    const boundX = w * 0.75;
+    const boundY = h * 0.75;
+    if (p.x < -boundX) p.x = boundX;
+    if (p.x > boundX) p.x = -boundX;
+    if (p.y < -boundY) p.y = boundY;
+    if (p.y > boundY) p.y = -boundY;
+    if (p.z < -280) p.z = 280;
+    if (p.z > 280) p.z = -280;
+
+    // Perspective projection
+    const scale = fov / (fov + p.z);
+    const px = centerX + (p.x - cam.x) * scale;
+    const py = centerY + (p.y - cam.y) * scale;
+    const pr = Math.max(0.8, p.baseR * scale);
+
+    // Mouse proximity interaction (Elastic Attraction & Repulsion)
+    const mDx = mouse.x - px;
+    const mDy = mouse.y - py;
+    const mDist = Math.sqrt(mDx * mDx + mDy * mDy);
+
+    if (mDist < 170 && mDist > 0) {
+      const force = (1 - mDist / 170) * 0.0006;
+      p.vx += mDx * force;
+      p.vy += mDy * force;
+
+      // Draw cursor laser line to nearby particles
+      ctx.save();
+      ctx.beginPath();
+      ctx.moveTo(mouse.x, mouse.y);
+      ctx.lineTo(px, py);
+      ctx.strokeStyle = `rgba(99, 179, 237, ${(1 - mDist / 170) * 0.45})`;
+      ctx.lineWidth = 1;
+      ctx.stroke();
+      ctx.restore();
+    }
+
+    // Shockwave repulsion
+    shockwaves.forEach(sw => {
+      const swDx = px - sw.x;
+      const swDy = py - sw.y;
+      const swDist = Math.sqrt(swDx * swDx + swDy * swDy);
+      if (Math.abs(swDist - sw.r) < 35 && swDist > 0) {
+        p.vx += (swDx / swDist) * 1.5;
+        p.vy += (swDy / swDist) * 1.5;
+      }
+    });
+
+    // Velocity damping
+    p.vx *= 0.985;
+    p.vy *= 0.985;
+
+    projected.push({ px, py, pr, scale, p });
+  }
+
+  // Draw Constellation Lines between connected nodes
+  const maxConnDist = isOverlayOnly ? 85 : 125;
+  for (let i = 0; i < projected.length; i++) {
+    const a = projected[i];
+    for (let j = i + 1; j < projected.length; j++) {
+      const b = projected[j];
+      const dx = a.px - b.px;
+      const dy = a.py - b.py;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+
+      if (dist < maxConnDist) {
+        const lineAlpha = (1 - dist / maxConnDist) * 0.35 * Math.min(a.scale, b.scale);
+        ctx.save();
+        ctx.beginPath();
+        ctx.moveTo(a.px, a.py);
+        ctx.lineTo(b.px, b.py);
+        ctx.strokeStyle = `rgba(99, 179, 237, ${lineAlpha})`;
+        ctx.lineWidth = 0.85;
+        ctx.stroke();
+        ctx.restore();
+      }
+    }
+  }
+
+  // Draw 3D Particle Nodes
+  for (let i = 0; i < projected.length; i++) {
+    const { px, py, pr, p, scale } = projected[i];
+    const nodeAlpha = Math.min(1, p.alpha * scale * (isOverlayOnly ? 0.6 : 1));
+
+    ctx.save();
+    ctx.beginPath();
+    ctx.arc(px, py, pr, 0, Math.PI * 2);
+    ctx.fillStyle = `hsla(${p.hue}, 85%, 65%, ${nodeAlpha})`;
+    ctx.shadowBlur = 10 * scale;
+    ctx.shadowColor = `hsla(${p.hue}, 90%, 60%, 0.8)`;
+    ctx.fill();
+    ctx.restore();
+  }
+}
+
+// --- DRAW CYBER RAIN (Mode 2) ---
+function drawRain() {
+  if (!ctx) return;
+  ctx.clearRect(0, 0, weatherCanvas.width, weatherCanvas.height);
+
   particles.forEach((d, i) => {
     ctx.save();
     ctx.globalAlpha = d.alpha;
-    ctx.strokeStyle = isDark ? 'rgba(150,210,255,0.8)' : 'rgba(70,130,200,0.6)';
+    ctx.strokeStyle = 'rgba(99, 179, 237, 0.85)';
     ctx.lineWidth = d.thick;
+    ctx.shadowBlur = 6;
+    ctx.shadowColor = 'rgba(99, 179, 237, 0.5)';
     ctx.beginPath();
     ctx.moveTo(d.x, d.y);
     ctx.lineTo(d.x + d.wind, d.y + d.len);
     ctx.stroke();
     ctx.restore();
+
     d.x += d.wind;
     d.y += d.speed;
-    if (d.y > weatherCanvas.height || d.x > weatherCanvas.width) {
+
+    if (d.y > weatherCanvas.height - 20) {
+      if (Math.random() > 0.7) {
+        splashes.push({ x: d.x, y: weatherCanvas.height - 10, r: 1, alpha: 0.6 });
+      }
       particles[i] = createRainDrop();
     }
   });
-}
-function drawSnow() {
-  ctx.clearRect(0, 0, weatherCanvas.width, weatherCanvas.height);
-  particles.forEach((s, i) => {
-    s.wobble += 0.02;
+
+  // Render splashes
+  for (let sIdx = splashes.length - 1; sIdx >= 0; sIdx--) {
+    const sp = splashes[sIdx];
     ctx.save();
-    ctx.globalAlpha = s.alpha;
-    ctx.fillStyle = isDark ? 'rgba(220,240,255,0.9)' : 'rgba(180,210,240,0.8)';
     ctx.beginPath();
-    ctx.arc(s.x + Math.sin(s.wobble) * 1.5, s.y, s.r, 0, Math.PI * 2);
-    ctx.fill();
+    ctx.arc(sp.x, sp.y, sp.r, 0, Math.PI * 2);
+    ctx.strokeStyle = `rgba(99, 179, 237, ${sp.alpha})`;
+    ctx.lineWidth = 1;
+    ctx.stroke();
     ctx.restore();
-    s.x += s.drift;
-    s.y += s.speed;
-    if (s.y > weatherCanvas.height + 10) {
-      particles[i] = createSnowFlake();
-    }
-  });
+    sp.r += 1.2;
+    sp.alpha -= 0.05;
+    if (sp.alpha <= 0) splashes.splice(sIdx, 1);
+  }
 }
 
+// --- DRAW THUNDERSTORM (Mode 3) ---
 function createFierceLightning(x, y, angle, branches) {
   if (branches <= 0) return [];
   const segments = [];
@@ -1021,28 +1261,23 @@ function createFierceLightning(x, y, angle, branches) {
   const nY = curY + Math.cos(angle) * length + (Math.random() * 40);
 
   segments.push({ x1: curX, y1: curY, x2: nX, y2: nY, width: branches * 0.8 });
-
-  // Main path
   segments.push(...createFierceLightning(nX, nY, angle + (Math.random() - 0.5) * 0.3, branches - 1));
 
-  // Branching
   if (Math.random() > 0.7 && branches > 2) {
     segments.push(...createFierceLightning(nX, nY, angle + (Math.random() - 0.5) * 1.5, Math.floor(branches / 1.5)));
   }
-
   return segments;
 }
 
 function drawThunderstorm() {
+  if (!ctx) return;
   ctx.clearRect(0, 0, weatherCanvas.width, weatherCanvas.height);
 
-  // Fierce Clouds
   particles.forEach(c => {
     ctx.save();
     const grad = ctx.createRadialGradient(c.x, c.y, 0, c.x, c.y, c.r);
-    const color = isDark ? '60, 80, 120' : '160, 180, 200';
-    grad.addColorStop(0, `rgba(${color}, ${c.alpha})`);
-    grad.addColorStop(1, `rgba(${color}, 0)`);
+    grad.addColorStop(0, `rgba(99, 179, 237, ${c.alpha})`);
+    grad.addColorStop(1, 'rgba(13, 20, 32, 0)');
     ctx.fillStyle = grad;
     ctx.beginPath();
     ctx.arc(c.x, c.y, c.r, 0, Math.PI * 2);
@@ -1052,19 +1287,17 @@ function drawThunderstorm() {
     if (c.x - c.r > weatherCanvas.width) c.x = -c.r;
   });
 
-  // Thunder Strike Logic
-  if (!lightningBolt && Math.random() > 0.99) {
+  if (!lightningBolt && Math.random() > 0.985) {
     const startX = Math.random() * weatherCanvas.width;
     lightningBolt = createFierceLightning(startX, 0, 0, 12);
-    flashOpacity = 0.85; // Heavy flash
+    flashOpacity = 0.8;
   }
 
-  // Draw Fierce Bolt
   if (lightningBolt) {
     ctx.save();
-    ctx.strokeStyle = '#fff';
-    ctx.shadowBlur = 30;
-    ctx.shadowColor = 'rgba(100, 200, 255, 0.9)';
+    ctx.strokeStyle = '#ffffff';
+    ctx.shadowBlur = 35;
+    ctx.shadowColor = 'rgba(120, 210, 255, 0.95)';
     ctx.lineCap = 'round';
     ctx.beginPath();
     lightningBolt.forEach(s => {
@@ -1074,109 +1307,195 @@ function drawThunderstorm() {
     });
     ctx.stroke();
     ctx.restore();
-
-    if (Math.random() > 0.6) lightningBolt = null; // Stutter effect
+    if (Math.random() > 0.6) lightningBolt = null;
   }
 
-  // Heavy Flash Decay
   if (flashOpacity > 0) {
     ctx.save();
     ctx.globalAlpha = flashOpacity;
-    ctx.fillStyle = isDark ? 'rgba(255, 255, 255, 0.5)' : 'rgba(255, 255, 255, 0.65)';
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.45)';
     ctx.fillRect(0, 0, weatherCanvas.width, weatherCanvas.height);
     ctx.restore();
-    flashOpacity -= 0.08; // Fast decay
+    flashOpacity -= 0.08;
   }
 }
+
+// --- DRAW COSMIC SNOW (Mode 4) ---
+function drawSnow() {
+  if (!ctx) return;
+  ctx.clearRect(0, 0, weatherCanvas.width, weatherCanvas.height);
+
+  particles.forEach((s, i) => {
+    s.wobble += 0.02;
+    ctx.save();
+    ctx.globalAlpha = s.alpha;
+    ctx.fillStyle = 'rgba(210, 235, 255, 0.9)';
+    ctx.shadowBlur = 8;
+    ctx.shadowColor = 'rgba(180, 220, 255, 0.6)';
+    ctx.beginPath();
+    ctx.arc(s.x + Math.sin(s.wobble) * 2, s.y, s.r, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.restore();
+
+    s.x += s.drift;
+    s.y += s.speed;
+    if (s.y > weatherCanvas.height + 10) {
+      particles[i] = createSnowFlake();
+    }
+  });
+}
+
+// --- DRAW ZEN AURORA (Mode 5) ---
+function drawZenAurora() {
+  if (!ctx) return;
+  ctx.clearRect(0, 0, weatherCanvas.width, weatherCanvas.height);
+
+  particles.forEach(o => {
+    ctx.save();
+    const grad = ctx.createRadialGradient(o.x, o.y, 0, o.x, o.y, o.r);
+    grad.addColorStop(0, `hsla(${o.hue}, 80%, 65%, ${o.alpha})`);
+    grad.addColorStop(1, 'transparent');
+    ctx.fillStyle = grad;
+    ctx.beginPath();
+    ctx.arc(o.x, o.y, o.r, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.restore();
+
+    o.x += o.vx;
+    o.y += o.vy;
+    if (o.x < -100) o.x = weatherCanvas.width + 100;
+    if (o.x > weatherCanvas.width + 100) o.x = -100;
+    if (o.y < -100) o.y = weatherCanvas.height + 100;
+    if (o.y > weatherCanvas.height + 100) o.y = -100;
+  });
+}
+
+// --- MASTER ANIMATION LOOP ---
 function animateWeather() {
-  if (weatherState === 0) return;
-  if (weatherState === 1) drawRain();
-  else if (weatherState === 2) drawSnow();
-  else if (weatherState === 3) drawThunderstorm();
+  if (weatherState === 0) {
+    drawCyberConstellation(false);
+  } else if (weatherState === 1) {
+    drawCyberConstellation(true);
+  } else if (weatherState === 2) {
+    drawRain();
+  } else if (weatherState === 3) {
+    drawThunderstorm();
+  } else if (weatherState === 4) {
+    drawSnow();
+  } else if (weatherState === 5) {
+    drawZenAurora();
+  }
   animFrame = requestAnimationFrame(animateWeather);
 }
+
 function stopWeather() {
   cancelAnimationFrame(animFrame);
   if (ctx) ctx.clearRect(0, 0, weatherCanvas.width, weatherCanvas.height);
   weatherCanvas?.classList.remove('active');
   stormVideo?.classList.remove('active');
+  cyberVideo?.classList.remove('active');
   if (stormVideo) stormVideo.pause();
+  if (cyberVideo) cyberVideo.pause();
   rainAudio?.pause(); if (rainAudio) rainAudio.currentTime = 0;
   snowAudio?.pause(); if (snowAudio) snowAudio.currentTime = 0;
   thunderAudio?.pause(); if (thunderAudio) thunderAudio.currentTime = 0;
   weatherIndicator?.classList.remove('visible');
+  if (audioWaves) audioWaves.style.display = 'none';
 }
+
 function applyWeatherUiLabels() {
   if (weatherBtn) weatherBtn.setAttribute('title', t('weather.btnTitle'));
   if (!weatherLabel || !weatherIcon) return;
-  if (weatherState === 0) {
-    weatherLabel.textContent = t('weather.zen');
-    weatherIcon.className = 'fa-solid fa-cloud-sun';
-    weatherIndicator?.classList.remove('visible');
-  } else if (weatherState === 1) {
-    weatherLabel.textContent = t('weather.nextSnow');
-    weatherIcon.className = 'fa-solid fa-cloud-rain';
-    weatherIndicator.textContent = t('weather.rainMode');
+
+  const modeIcons = [
+    'fa-solid fa-cubes',
+    'fa-solid fa-film',
+    'fa-solid fa-cloud-rain',
+    'fa-solid fa-bolt-lightning',
+    'fa-solid fa-snowflake',
+    'fa-solid fa-circle-notch'
+  ];
+
+  weatherIcon.className = modeIcons[weatherState] || 'fa-solid fa-cubes';
+  weatherLabel.textContent = t(`weather.mode${weatherState}`);
+
+  if (weatherIndicator) {
+    weatherIndicator.textContent = t(`weather.ind${weatherState}`);
     weatherIndicator.classList.add('visible');
-  } else if (weatherState === 2) {
-    weatherLabel.textContent = t('weather.nextThunder');
-    weatherIcon.className = 'fa-solid fa-snowflake';
-    weatherIndicator.textContent = t('weather.snowMode');
-    weatherIndicator.classList.add('visible');
-  } else if (weatherState === 3) {
-    weatherLabel.textContent = t('weather.nextOff');
-    weatherIcon.className = 'fa-solid fa-cloud-bolt';
-    weatherIndicator.textContent = t('weather.thunderMode');
-    weatherIndicator.classList.add('visible');
+    clearTimeout(indicatorTimeout);
+    indicatorTimeout = setTimeout(() => {
+      weatherIndicator.classList.remove('visible');
+    }, 4000);
+  }
+
+  // Update live audio visualizer waves
+  if (audioWaves) {
+    const isPlaying = (weatherState === 2 && !rainAudio?.paused && !isMuted) ||
+                      (weatherState === 3 && !thunderAudio?.paused && !isMuted) ||
+                      (weatherState === 4 && !snowAudio?.paused && !isMuted);
+    audioWaves.style.display = isPlaying ? 'flex' : 'none';
   }
 }
+
 function startWeather() {
   resizeCanvas();
   initParticles();
 
-  if (weatherState === 3) {
+  // Manage Background Video & Canvas Visibility
+  if (weatherState === 0) {
+    cyberVideo?.classList.remove('active');
+    if (cyberVideo) cyberVideo.pause();
+    stormVideo?.classList.remove('active');
+    if (stormVideo) stormVideo.pause();
+    weatherCanvas?.classList.add('active');
+  } else if (weatherState === 1) {
+    stormVideo?.classList.remove('active');
+    if (stormVideo) stormVideo.pause();
+    cyberVideo?.classList.add('active');
+    cyberVideo?.play().catch(() => console.log("Video autoplay blocked"));
+    weatherCanvas?.classList.add('active');
+  } else if (weatherState === 3) {
+    cyberVideo?.classList.remove('active');
+    if (cyberVideo) cyberVideo.pause();
     stormVideo?.classList.add('active');
-    stormVideo?.play().catch(e => console.log("Video play blocked"));
-    // We can hide canvas for storm if user wants only video, 
-    // but canvas still draws clouds/flashes on top
+    stormVideo?.play().catch(() => console.log("Storm video blocked"));
     weatherCanvas?.classList.add('active');
   } else {
+    cyberVideo?.classList.remove('active');
+    if (cyberVideo) cyberVideo.pause();
     stormVideo?.classList.remove('active');
     if (stormVideo) stormVideo.pause();
     weatherCanvas?.classList.add('active');
   }
 
   animateWeather();
+
+  // Manage Audio
   rainAudio?.pause();
   snowAudio?.pause();
   thunderAudio?.pause();
-  if (weatherState === 1) {
-    if (rainAudio) {
+
+  if (!isMuted) {
+    if (weatherState === 2 && rainAudio) {
       rainAudio.volume = 0.5;
-      rainAudio.play().catch(e => console.log("Autoplay blocked"));
-    }
-  } else if (weatherState === 2) {
-    if (snowAudio) {
-      snowAudio.volume = 0.4;
-      snowAudio.play().catch(e => console.log("Autoplay blocked"));
-    }
-  } else if (weatherState === 3) {
-    if (thunderAudio) {
+      rainAudio.play().catch(() => console.log("Rain audio waiting for user gesture"));
+    } else if (weatherState === 3 && thunderAudio) {
       thunderAudio.volume = 0.6;
-      thunderAudio.play().catch(e => console.log("Autoplay blocked"));
+      thunderAudio.play().catch(() => console.log("Thunder audio waiting"));
+    } else if (weatherState === 4 && snowAudio) {
+      snowAudio.volume = 0.4;
+      snowAudio.play().catch(() => console.log("Snow audio waiting"));
     }
   }
+
   applyWeatherUiLabels();
 }
+
+// 6 Modes cycle: 0 -> 1 -> 2 -> 3 -> 4 -> 5 -> 0
 weatherBtn?.addEventListener('click', () => {
-  weatherState = (weatherState + 1) % 4;
-  if (weatherState === 0) {
-    stopWeather();
-    applyWeatherUiLabels();
-  } else {
-    stopWeather();
-    startWeather();
-  }
+  weatherState = (weatherState + 1) % 6;
+  stopWeather();
+  startWeather();
 });
 
 // --- AUDIO MUTE LOGIC ---
@@ -1190,18 +1509,56 @@ if (muteBtn) {
     if (rainAudio) rainAudio.muted = isMuted;
     if (snowAudio) snowAudio.muted = isMuted;
     if (thunderAudio) thunderAudio.muted = isMuted;
-    
+
     if (isMuted) {
       muteIcon.classList.remove('fa-volume-high');
       muteIcon.classList.add('fa-volume-xmark');
+      if (audioWaves) audioWaves.style.display = 'none';
     } else {
       muteIcon.classList.remove('fa-volume-xmark');
       muteIcon.classList.add('fa-volume-high');
-      // Attempt to play if weather is active and audio was paused
-      const targetAudio = weatherState === 1 ? rainAudio : (weatherState === 2 ? snowAudio : (weatherState === 3 ? thunderAudio : null));
+      const targetAudio = weatherState === 2 ? rainAudio : (weatherState === 4 ? snowAudio : (weatherState === 3 ? thunderAudio : null));
       if (targetAudio && targetAudio.paused) {
-        targetAudio.play().catch(e => console.log("Autoplay blocked"));
+        targetAudio.play().catch(() => console.log("Audio waiting"));
       }
+      if (audioWaves && targetAudio) audioWaves.style.display = 'flex';
+    }
+  });
+}
+
+// --- 2026 3D CARD HOVER TILT SYSTEM ---
+function init3DCardTilt() {
+  const cards = document.querySelectorAll('.project-card, .cert-card, .timeline-content, .hero-stat-item');
+  cards.forEach(card => {
+    card.addEventListener('pointermove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+      const rotX = ((y - centerY) / centerY) * -6;
+      const rotY = ((x - centerX) / centerX) * 6;
+
+      card.style.transform = `perspective(1000px) rotateX(${rotX.toFixed(2)}deg) rotateY(${rotY.toFixed(2)}deg) scale3d(1.02, 1.02, 1.02)`;
+      card.style.setProperty('--mouse-card-x', `${x}px`);
+      card.style.setProperty('--mouse-card-y', `${y}px`);
+    });
+
+    card.addEventListener('pointerleave', () => {
+      card.style.transform = '';
+    });
+  });
+}
+
+// Hero 3D Hologram Parallax
+const heroPhotoArea = document.getElementById('hero-photos-3d');
+if (heroPhotoArea) {
+  window.addEventListener('pointermove', (e) => {
+    const rx = (e.clientY / window.innerHeight - 0.5) * 16;
+    const ry = (e.clientX / window.innerWidth - 0.5) * -16;
+    const holo = heroPhotoArea.querySelector('.hero-3d-hologram');
+    if (holo) {
+      holo.style.transform = `rotateX(${rx.toFixed(2)}deg) rotateY(${ry.toFixed(2)}deg)`;
     }
   });
 }
@@ -1264,12 +1621,13 @@ sections.forEach(s => navObserver.observe(s));
 
 // INIT
 observeReveal();
-loadProjectsFromFirestore();
-loadCertificatesFromFirestore();
+loadProjectsFromFirestore().then(() => init3DCardTilt());
+loadCertificatesFromFirestore().then(() => init3DCardTilt());
 applyI18n();
+init3DCardTilt();
 
 window.addEventListener('load', () => {
-  if (weatherState > 0) setTimeout(() => startWeather(), 500);
+  setTimeout(() => startWeather(), 200);
 });
 
 // Audio Unlock Management
@@ -1277,10 +1635,10 @@ let hasUnlocked = false;
 const unlockAudio = async () => {
   if (hasUnlocked) return;
 
-  // We try to play whichever weather audio should be active
-  const targetAudio = weatherState === 1 ? rainAudio : (weatherState === 2 ? snowAudio : null);
+  // We try to play whichever ambience audio should be active
+  const targetAudio = weatherState === 2 ? rainAudio : (weatherState === 4 ? snowAudio : (weatherState === 3 ? thunderAudio : null));
 
-  if (targetAudio && targetAudio.paused) {
+  if (targetAudio && targetAudio.paused && !isMuted) {
     try {
       await targetAudio.play();
       hasUnlocked = true;
@@ -1290,8 +1648,7 @@ const unlockAudio = async () => {
       console.log("Audio playback waiting for interaction...");
     }
   } else {
-    // If nothing to play or already playing, we can stop listening
-    if (weatherState === 0 || (targetAudio && !targetAudio.paused)) {
+    if (weatherState === 0 || weatherState === 1 || weatherState === 5 || (targetAudio && !targetAudio.paused)) {
       hasUnlocked = true;
       cleanupAudioListeners();
     }

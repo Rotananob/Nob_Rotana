@@ -9,18 +9,24 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=JetBrains+Mono:wght@400;500&family=Dangrek&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:ital,wght@0,100..700;1,100..700&family=Outfit:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
     rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
-  <link rel="stylesheet " href="style.css">
+  <link rel="stylesheet" href="style.css?v=2026">
 
 </head>
 
 <body>
   <!-- =====================
-       WEATHER CANVAS & VIDEO
+       2026 INTERACTIVE BACKGROUND & 3D CANVAS & VIDEOS
        ===================== -->
+  <div id="cursor-glow" aria-hidden="true"></div>
+  <div id="cyber-grid" aria-hidden="true"></div>
   <canvas id="weather-canvas"></canvas>
+  <video id="cyber-video" loop muted playsinline class="weather-video cyber-bg-video">
+    <source src="https://assets.mixkit.co/videos/preview/mixkit-abstract-laser-lights-background-animation-41484-large.mp4"
+      type="video/mp4" />
+  </video>
   <video id="storm-video" loop muted playsinline class="weather-video">
     <source src="https://assets.mixkit.co/videos/preview/mixkit-lightning-strikes-in-the-night-sky-1510-large.mp4"
       type="video/mp4" />
@@ -123,9 +129,25 @@
         </div>
       </div>
 
-      <!-- Hero Photos -->
-      <div class="hero-photos">
+      <!-- Hero Photos with 3D Cyber Elements -->
+      <div class="hero-photos" id="hero-photos-3d">
         <div class="photo-bg-shape"></div>
+
+        <!-- 3D Holographic Cyber Shapes (2026 Interactive) -->
+        <div class="hero-3d-hologram" aria-hidden="true">
+          <div class="cube-3d-scene">
+            <div class="cube-3d">
+              <div class="cube-face f-front"><i class="fa-brands fa-react"></i></div>
+              <div class="cube-face f-back"><i class="fa-solid fa-code"></i></div>
+              <div class="cube-face f-right"><i class="fa-solid fa-fire"></i></div>
+              <div class="cube-face f-left"><i class="fa-solid fa-database"></i></div>
+              <div class="cube-face f-top"><i class="fa-solid fa-bolt"></i></div>
+              <div class="cube-face f-bottom"><i class="fa-solid fa-layer-group"></i></div>
+            </div>
+          </div>
+          <div class="holo-orbit-ring ring-1"></div>
+          <div class="holo-orbit-ring ring-2"></div>
+        </div>
 
         <!-- Floating stat card -->
         <div class="photo-stat-card">
@@ -136,16 +158,15 @@
           </div>
         </div>
 
-        <!-- 📸 PHOTO 1: Replace src with your main profile photo URL -->
+        <!-- 📸 PHOTO 1: Main profile photo -->
         <div class="photo-main-wrap">
           <img src="Assets/IMG/pic3.jpg" alt="Profile Photo" />
         </div>
 
-        <!-- 📸 PHOTO 2: Replace src with your secondary/action photo URL -->
+        <!-- 📸 PHOTO 2: Secondary photo -->
         <div class="photo-secondary-wrap">
           <img src="Assets/IMG/pic1.JPG" alt="Secondary Photo" />
         </div>
-
 
         <!-- 📸 PHOTO 4 -->
         <div class="photo-quaternary-wrap">
@@ -1471,16 +1492,24 @@
   </footer>
 
   <!-- =====================
-       WEATHER TOGGLE BUTTON
+       2026 INTERACTIVE AMBIENCE CONTROLLER DOCK
        ===================== -->
-  <div class="weather-indicator" id="weather-indicator"></div>
-  <button id="mute-btn" data-i18n-title="mute.btnTitle" title="Toggle Sound">
-    <i class="fa-solid fa-volume-high" id="mute-icon"></i>
-  </button>
-  <button id="weather-btn" data-i18n-title="weather.btnTitle" title="Toggle weather ambience">
-    <span class="weather-label" id="weather-label">Zen Mode</span>
-    <i class="fa-solid fa-cloud-sun" id="weather-icon"></i>
-  </button>
+  <div class="ambience-dock" id="ambience-dock">
+    <div class="weather-indicator" id="weather-indicator"></div>
+    <div class="ambience-dock-btns">
+      <button id="mute-btn" data-i18n-title="mute.btnTitle" title="Toggle Sound" aria-label="Toggle Sound">
+        <i class="fa-solid fa-volume-high" id="mute-icon"></i>
+        <span class="audio-waves" id="audio-waves" aria-hidden="true">
+          <span></span><span></span><span></span>
+        </span>
+      </button>
+      <button id="weather-btn" data-i18n-title="weather.btnTitle" title="Toggle Visual Ambience & 3D (Click to switch)" aria-label="Toggle Visual Mode">
+        <span class="weather-label" id="weather-label">🌌 3D Cyber Mesh</span>
+        <i class="fa-solid fa-cubes" id="weather-icon"></i>
+        <span class="hud-pill-2026">2026</span>
+      </button>
+    </div>
+  </div>
 
   <!-- =====================
        AUDIO (hidden, user-triggered only)
@@ -1576,7 +1605,7 @@
   <!-- =====================
        JAVASCRIPT
        ===================== -->
-  <script src="script.js?v=3"></script>
+  <script src="script.js?v=2026"></script>
 </body>
 
 </html>

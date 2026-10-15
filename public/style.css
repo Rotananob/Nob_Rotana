@@ -67,25 +67,30 @@ html {
 }
 
 body {
-  font-family: 'DM Sans', sans-serif;
+  font-family: 'Plus Jakarta Sans', 'Kantumruy Pro', sans-serif;
   background: var(--bg-primary);
   color: var(--text-primary);
   min-height: 100vh;
   overflow-x: hidden;
   transition: background var(--transition), color var(--transition);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 html[lang="km"] body {
-  font-family: 'Dangrek', 'DM Sans', sans-serif;
+  font-family: 'Kantumruy Pro', 'Plus Jakarta Sans', sans-serif;
   line-height: 1.85;
   word-break: break-word;
+  letter-spacing: 0.01em;
 }
 
 h1,
 h2,
 h3,
 h4 {
-  font-family: 'Syne', sans-serif;
+  font-family: 'Outfit', 'Kantumruy Pro', 'Syne', sans-serif;
+  letter-spacing: -0.02em;
 }
 
 html[lang="km"] h1,
@@ -99,7 +104,9 @@ html[lang="km"] .project-title,
 html[lang="km"] .cert-card-title,
 html[lang="km"] .stat-card-text strong,
 html[lang="km"] .hero-stat-item strong {
-  font-family: 'Dangrek', 'Syne', sans-serif;
+  font-family: 'Kantumruy Pro', 'Outfit', sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.01em;
 }
 
 code,
@@ -118,8 +125,51 @@ img {
 }
 
 /* =============================
-       CANVAS & WEATHER
+       2026 INTERACTIVE BACKGROUND & CANVAS & VIDEO
        ============================= */
+#cursor-glow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 650px;
+  height: 650px;
+  border-radius: 50%;
+  pointer-events: none;
+  background: radial-gradient(circle, rgba(99, 179, 237, 0.14) 0%, rgba(183, 148, 244, 0.05) 45%, transparent 70%);
+  transform: translate(-50%, -50%);
+  z-index: 0;
+  transition: opacity 0.5s ease;
+  mix-blend-mode: screen;
+}
+
+[data-theme="light"] #cursor-glow {
+  background: radial-gradient(circle, rgba(37, 99, 235, 0.09) 0%, rgba(124, 58, 237, 0.03) 45%, transparent 70%);
+  mix-blend-mode: multiply;
+}
+
+#cyber-grid {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+  background-size: 50px 50px;
+  mask-image: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.9) 0%, transparent 80%);
+  -webkit-mask-image: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.9) 0%, transparent 80%);
+  opacity: 0.7;
+}
+
+[data-theme="light"] #cyber-grid {
+  background-image: 
+    linear-gradient(to right, rgba(0, 0, 0, 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.035) 1px, transparent 1px);
+}
+
 #weather-canvas {
   position: fixed;
   top: 0;
@@ -150,7 +200,12 @@ img {
 }
 
 .weather-video.active {
-  opacity: 0.65;
+  opacity: 0.55;
+}
+
+.weather-video.cyber-bg-video.active {
+  opacity: 0.32;
+  filter: saturate(1.4) hue-rotate(15deg);
 }
 
 /* =============================
@@ -538,12 +593,122 @@ nav {
   transform: translateY(-2px);
 }
 
+/* =============================
+   3D HOLOGRAPHIC CYBER OBJECTS (2026)
+   ============================= */
+.hero-3d-hologram {
+  position: absolute;
+  top: -60px;
+  right: -40px;
+  width: 160px;
+  height: 160px;
+  pointer-events: none;
+  z-index: 5;
+  perspective: 900px;
+}
+
+.cube-3d-scene {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  animation: cyberFloat 5s ease-in-out infinite;
+}
+
+.cube-3d {
+  width: 54px;
+  height: 54px;
+  position: absolute;
+  top: 53px;
+  left: 53px;
+  transform-style: preserve-3d;
+  animation: rotateCube 16s linear infinite;
+  transform-origin: 27px 27px 0;
+}
+
+@keyframes rotateCube {
+  0% { transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg); }
+  100% { transform: rotateX(360deg) rotateY(720deg) rotateZ(360deg); }
+}
+
+@keyframes cyberFloat {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-14px) rotate(4deg); }
+}
+
+.cube-face {
+  position: absolute;
+  width: 54px;
+  height: 54px;
+  background: rgba(13, 20, 32, 0.55);
+  border: 1.5px solid rgba(99, 179, 237, 0.7);
+  box-shadow: inset 0 0 15px rgba(99, 179, 237, 0.25), 0 0 12px rgba(99, 179, 237, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #63b3ed;
+  font-size: 1.2rem;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border-radius: 8px;
+}
+
+[data-theme="light"] .cube-face {
+  background: rgba(255, 255, 255, 0.75);
+  border-color: rgba(37, 99, 235, 0.6);
+  color: #2563eb;
+  box-shadow: inset 0 0 10px rgba(37, 99, 235, 0.15), 0 0 10px rgba(37, 99, 235, 0.15);
+}
+
+.cube-face.f-front  { transform: rotateY(  0deg) translateZ(27px); }
+.cube-face.f-back   { transform: rotateX(180deg) translateZ(27px); }
+.cube-face.f-right  { transform: rotateY( 90deg) translateZ(27px); }
+.cube-face.f-left   { transform: rotateY(-90deg) translateZ(27px); }
+.cube-face.f-top    { transform: rotateX( 90deg) translateZ(27px); }
+.cube-face.f-bottom { transform: rotateX(-90deg) translateZ(27px); }
+
+.holo-orbit-ring {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.holo-orbit-ring.ring-1 {
+  width: 120px;
+  height: 120px;
+  top: 20px;
+  left: 20px;
+  border: 1px dashed rgba(183, 148, 244, 0.6);
+  animation: spinHolo 10s linear infinite;
+  box-shadow: 0 0 15px rgba(183, 148, 244, 0.25);
+}
+
+.holo-orbit-ring.ring-2 {
+  width: 150px;
+  height: 150px;
+  top: 5px;
+  left: 5px;
+  border: 1px solid rgba(99, 179, 237, 0.35);
+  animation: spinHoloReverse 14s linear infinite;
+}
+
+@keyframes spinHolo {
+  0% { transform: rotateX(65deg) rotateZ(0deg); }
+  100% { transform: rotateX(65deg) rotateZ(360deg); }
+}
+
+@keyframes spinHoloReverse {
+  0% { transform: rotateY(65deg) rotateZ(360deg); }
+  100% { transform: rotateY(65deg) rotateZ(0deg); }
+}
+
 /* Hero Photos */
 .hero-photos {
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
+  perspective: 1000px;
 }
 
 .photo-main-wrap {
@@ -1566,15 +1731,27 @@ footer::before {
 }
 
 /* =============================
-       WEATHER TOGGLE BUTTON
-       ============================= */
-#weather-btn, #mute-btn {
+   2026 INTERACTIVE AMBIENCE CONTROLLER DOCK
+   ============================= */
+.ambience-dock {
   position: fixed;
   bottom: 2rem;
   right: 2rem;
   z-index: 200;
-  width: 54px;
-  height: 54px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+}
+
+.ambience-dock-btns {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+#weather-btn, #mute-btn {
+  height: 52px;
   border-radius: 16px;
   border: 1px solid var(--border);
   background: var(--glass);
@@ -1585,65 +1762,134 @@ footer::before {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.4rem;
-  transition: all 0.3s;
+  transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
   box-shadow: var(--shadow-card);
-}
-
-#weather-btn {
-  right: 2rem;
+  position: relative;
 }
 
 #mute-btn {
-  right: calc(2rem + 64px); /* 54px width + 10px gap */
+  width: 52px;
+  font-size: 1.25rem;
+}
+
+#weather-btn {
+  padding: 0 18px;
+  gap: 10px;
+  font-size: 1.2rem;
+}
+
+.hud-pill-2026 {
+  font-size: 0.65rem;
+  font-family: 'JetBrains Mono', monospace;
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-purple) 100%);
+  color: #fff;
+  padding: 2px 7px;
+  border-radius: 6px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  box-shadow: 0 0 10px var(--glow);
+}
+
+.audio-waves {
+  position: absolute;
+  bottom: 7px;
+  display: flex;
+  gap: 2.5px;
+  align-items: flex-end;
+  height: 9px;
+  pointer-events: none;
+}
+
+.audio-waves span {
+  width: 2.5px;
+  height: 3px;
+  background: var(--accent);
+  border-radius: 2px;
+  animation: audioBar 1s infinite ease-in-out;
+}
+
+.audio-waves span:nth-child(2) {
+  animation-delay: 0.25s;
+}
+
+.audio-waves span:nth-child(3) {
+  animation-delay: 0.5s;
+}
+
+@keyframes audioBar {
+  0%, 100% { height: 2px; }
+  50% { height: 9px; }
 }
 
 #weather-btn:hover, #mute-btn:hover {
   border-color: var(--border-hover);
-  transform: scale(1.08);
-  box-shadow: 0 8px 24px var(--glow-strong);
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 10px 25px var(--glow-strong);
 }
 
 #weather-btn .weather-label {
-  position: absolute;
-  right: 66px;
-  background: var(--glass);
-  backdrop-filter: blur(20px);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 6px 14px;
-  font-size: 0.75rem;
-  font-weight: 500;
+  font-size: 0.82rem;
+  font-weight: 600;
   white-space: nowrap;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.2s;
-  font-family: 'JetBrains Mono', monospace;
-  color: var(--text-secondary);
-}
-
-#weather-btn:hover .weather-label {
-  opacity: 1;
+  font-family: 'Plus Jakarta Sans', 'Kantumruy Pro', sans-serif;
+  color: var(--text-primary);
+  display: inline-block;
 }
 
 .weather-indicator {
-  position: fixed;
-  bottom: calc(2rem + 64px);
-  right: 2rem;
-  z-index: 200;
   background: var(--glass);
   backdrop-filter: blur(16px);
   border: 1px solid var(--border);
   border-radius: 12px;
-  padding: 8px 14px;
-  font-size: 0.72rem;
+  padding: 8px 16px;
+  font-size: 0.78rem;
   font-family: 'JetBrains Mono', monospace;
   color: var(--accent);
   display: none;
+  box-shadow: var(--shadow-card);
+  animation: fadeInDown 0.3s ease;
+}
+
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .weather-indicator.visible {
   display: block;
+}
+
+/* =============================
+   2026 3D CARD TILT & SPECULAR SHEEN
+   ============================= */
+.project-card,
+.cert-card,
+.timeline-content,
+.hero-stat-item {
+  transform-style: preserve-3d;
+  transition: transform 0.25s cubic-bezier(0.2, 0, 0.2, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+  position: relative;
+}
+
+.project-card::before,
+.cert-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: inherit;
+  background: radial-gradient(400px circle at var(--mouse-card-x, 50%) var(--mouse-card-y, 50%), rgba(255, 255, 255, 0.08), transparent 40%);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 1;
+}
+
+.project-card:hover::before,
+.cert-card:hover::before {
+  opacity: 1;
 }
 
 /* =============================
@@ -1870,28 +2116,40 @@ footer::before {
     /* Show floating button on mobile */
   }
 
-  #weather-btn {
-    width: 44px;
-    height: 44px;
+  .ambience-dock {
     bottom: auto;
-    top: 80px;
-    right: 1rem;
-    font-size: 1.1rem;
+    top: 72px;
+    right: 0.75rem;
+    gap: 6px;
   }
+
+  #weather-btn, #mute-btn {
+    height: 40px;
+    border-radius: 12px;
+  }
+
   #mute-btn {
-    width: 44px;
-    height: 44px;
-    bottom: auto;
-    top: 80px;
-    right: calc(1rem + 52px); /* 44px width + 8px gap */
-    font-size: 1.1rem;
+    width: 40px;
+    font-size: 1rem;
+  }
+
+  #weather-btn {
+    padding: 0 12px;
+    font-size: 0.95rem;
+    gap: 6px;
+  }
+
+  #weather-btn .weather-label {
+    font-size: 0.75rem;
   }
 
   .weather-indicator {
-    right: 1rem;
+    right: 0.75rem;
     bottom: auto;
-    top: 130px;
-    max-width: calc(100vw - 2rem);
+    top: 118px;
+    max-width: calc(100vw - 1.5rem);
+    font-size: 0.72rem;
+    padding: 6px 12px;
   }
 
   #hero {
@@ -2235,25 +2493,24 @@ footer::before {
 }
 
 .alert-title {
-  font-family: 'Dangrek', cursive !important;
-  font-weight: 400;
-  font-size: 1.8rem;
+  font-family: 'Outfit', 'Kantumruy Pro', sans-serif !important;
+  font-weight: 700;
+  font-size: 1.6rem;
   margin-bottom: 1.2rem;
   background: linear-gradient(to right, #fff 30%, var(--accent-warm) 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  letter-spacing: 0.5px;
+  letter-spacing: -0.01em;
 }
 
 .alert-message {
-  font-family: 'Dangrek', cursive !important;
-  font-size: 1.1rem;
-  line-height: 1.8;
-  color: rgba(255, 255, 255, 0.8);
-  margin-bottom: 2.5rem;
-  padding: 0 15px;
-  letter-spacing: 0.3px;
+  font-family: 'Kantumruy Pro', sans-serif !important;
+  font-size: 0.95rem;
+  line-height: 1.85;
+  color: rgba(255, 255, 255, 0.85);
+  margin-bottom: 2rem;
+  padding: 0 10px;
 }
 
 .alert-actions {
@@ -2263,13 +2520,13 @@ footer::before {
 }
 
 .alert-btn-confirm {
-  font-family: 'Dangrek', cursive !important;
+  font-family: 'Kantumruy Pro', 'Outfit', sans-serif !important;
   background: linear-gradient(135deg, var(--accent) 0%, var(--accent-purple) 100%);
   color: #fff;
-  padding: 16px;
-  border-radius: 18px;
-  font-size: 1.1rem;
-  font-weight: 400;
+  padding: 14px 20px;
+  border-radius: 16px;
+  font-size: 1rem;
+  font-weight: 600;
   border: none;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -2301,13 +2558,13 @@ footer::before {
 }
 
 .alert-btn-cancel {
-  font-family: 'Dangrek', cursive !important;
+  font-family: 'Kantumruy Pro', sans-serif !important;
   background: rgba(255, 255, 255, 0.05);
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(255, 255, 255, 0.6);
   padding: 12px;
   border-radius: 16px;
-  font-weight: 400;
-  font-size: 1rem;
+  font-weight: 500;
+  font-size: 0.95rem;
   border: 1px solid rgba(255, 255, 255, 0.1);
   cursor: pointer;
   transition: all 0.3s;
