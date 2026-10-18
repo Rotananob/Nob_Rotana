@@ -152,19 +152,19 @@ Object.assign(I18N.en, {
   'contact.findMe': 'Find me on',
   'footer.heading': 'Let\'s build something amazing together.',
   'footer.copy': '© 2025 Rotana NOB. All rights reserved.',
-  'weather.btnTitle': 'Switch Visual & 3D Ambience (Click to cycle)',
+  'weather.btnTitle': 'Change Visual Mode (3D, Video, Weather)',
   'weather.mode0': '🌌 3D Cyber Mesh',
   'weather.mode1': '🎬 Cyber Video',
   'weather.mode2': '🌧️ Cyber Rain',
   'weather.mode3': '⚡ Thunderstorm',
   'weather.mode4': '❄️ Cosmic Snow',
   'weather.mode5': '✨ Zen Aurora',
-  'weather.ind0': '🌌 3D Interactive Cyber Constellation Active (Move Mouse)',
-  'weather.ind1': '🎬 Cinematic Video Motion Active',
-  'weather.ind2': '🌧️ Neon Rain Ambience Active',
-  'weather.ind3': '⚡ Fierce Lightning & Thunderstorm Active',
-  'weather.ind4': '❄️ 3D Cosmic Snow Active',
-  'weather.ind5': '✨ Zen Aurora Glow Active',
+  'weather.ind0': '🌌 3D Cyber Mesh',
+  'weather.ind1': '🎬 Cyber Video',
+  'weather.ind2': '🌧️ Cyber Rain',
+  'weather.ind3': '⚡ Thunderstorm',
+  'weather.ind4': '❄️ 3D Cosmic Snow',
+  'weather.ind5': '✨ Zen Aurora',
   'nav.resume': 'Resume',
   'resume.sectionTag': 'My Story',
   'resume.titleBefore': 'My',
@@ -392,19 +392,19 @@ Object.assign(I18N.km, {
   'contact.findMe': 'រកខ្ញុំនៅ',
   'footer.heading': 'តោះ! រួមគ្នាបង្កើតអ្វីដែលអស្ចារ្យ។',
   'footer.copy': '© ២០២៥ ណុប រតនា។ រក្សាសិទ្ធិគ្រប់យ៉ាង។',
-  'weather.btnTitle': 'ប្តូរបរិយាកាស 3D & Background (ចុចដើម្បីប្តូរ)',
+  'weather.btnTitle': 'ប្តូរបរិយាកាស (3D / Video / Weather)',
   'weather.mode0': '🌌 3D Cyber Mesh',
   'weather.mode1': '🎬 Cyber Video',
-  'weather.mode2': '🌧️ បរិយាកាសភ្លៀង',
-  'weather.mode3': '⚡ ផ្គររន្ទះ & ផ្លេកបន្ទោរ',
-  'weather.mode4': '❄️ ព្រិល 3D Cosmic',
-  'weather.mode5': '✨ របៀប Zen Aurora',
-  'weather.ind0': '🌌 3D Cyber Matrix កំពុងដំណើរការ (អូស Mouse ដើម្បីបញ្ជា)',
-  'weather.ind1': '🎬 វីដេអូ Background កំពុងដំណើរការ',
-  'weather.ind2': '🌧️ បរិយាកាសភ្លៀងកំពុងដំណើរការ',
-  'weather.ind3': '⚡ ផ្គររន្ទះ និងផ្លេកបន្ទោរកំពុងដំណើរការ',
-  'weather.ind4': '❄️ ព្រិល 3D Cosmic កំពុងដំណើរការ',
-  'weather.ind5': '✨ របៀប Zen Aurora កំពុងដំណើរការ',
+  'weather.mode2': '🌧️ ភ្លៀងធ្លាក់',
+  'weather.mode3': '⚡ ផ្គររន្ទះ',
+  'weather.mode4': '❄️ ព្រិលត្រជាក់',
+  'weather.mode5': '✨ Zen Aurora',
+  'weather.ind0': '🌌 3D Cyber Mesh',
+  'weather.ind1': '🎬 Cyber Video',
+  'weather.ind2': '🌧️ ភ្លៀងធ្លាក់',
+  'weather.ind3': '⚡ ផ្គររន្ទះ',
+  'weather.ind4': '❄️ ព្រិលត្រជាក់',
+  'weather.ind5': '✨ Zen Aurora',
   'nav.resume': 'ប្រវត្តិ',
   'resume.sectionTag': 'រឿងរ៉ាវរបស់ខ្ញុំ',
   'resume.titleBefore': 'ដំណើរ',
@@ -939,30 +939,31 @@ const mouse = {
 const cam = { x: 0, y: 0, targetX: 0, targetY: 0 };
 const shockwaves = [];
 
-// Track mouse position globally for 3D camera, cursor glow, and particles
+// Track mouse position globally for 3D camera, cursor glow, and particles (Desktop only)
 window.addEventListener('pointermove', (e) => {
+  if (e.pointerType === 'touch') return;
   mouse.x = e.clientX;
   mouse.y = e.clientY;
-  cam.targetX = (e.clientX - window.innerWidth / 2) * 0.12;
-  cam.targetY = (e.clientY - window.innerHeight / 2) * 0.12;
+  cam.targetX = (e.clientX - window.innerWidth / 2) * 0.08;
+  cam.targetY = (e.clientY - window.innerHeight / 2) * 0.08;
 
-  // Real-time cursor spotlight
+  // Real-time cursor spotlight on desktop
   if (cursorGlow) {
     cursorGlow.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0)`;
   }
-});
+}, { passive: true });
 
-// Click shockwave interaction in 3D canvas
+// Click / tap shockwave interaction in 3D canvas
 window.addEventListener('pointerdown', (e) => {
-  if (e.target.closest('button, a, input, textarea, select')) return;
+  if (e.target.closest('button, a, input, textarea, select, .project-card, .cert-card')) return;
   shockwaves.push({
     x: e.clientX,
     y: e.clientY,
-    r: 5,
-    maxR: 240,
-    alpha: 0.9
+    r: 4,
+    maxR: 200,
+    alpha: 0.85
   });
-});
+}, { passive: true });
 
 function resizeCanvas() {
   if (!weatherCanvas) return;
@@ -1035,11 +1036,12 @@ function initParticles() {
   lightningBolt = null;
   flashOpacity = 0;
 
-  const count = weatherState === 0 ? 95 :
-                weatherState === 1 ? 55 :
-                weatherState === 2 ? 180 :
-                weatherState === 3 ? 12 :
-                weatherState === 4 ? 110 : 8;
+  const isMobile = window.innerWidth < 768;
+  const count = weatherState === 0 ? (isMobile ? 35 : 80) :
+                weatherState === 1 ? (isMobile ? 22 : 45) :
+                weatherState === 2 ? (isMobile ? 80 : 160) :
+                weatherState === 3 ? 10 :
+                weatherState === 4 ? (isMobile ? 45 : 90) : 6;
 
   for (let i = 0; i < count; i++) {
     if (weatherState === 0 || weatherState === 1) {
@@ -1052,9 +1054,9 @@ function initParticles() {
       particles.push({
         x: Math.random() * weatherCanvas.width,
         y: Math.random() * (weatherCanvas.height * 0.45),
-        r: 220 + Math.random() * 320,
+        r: 200 + Math.random() * 300,
         speed: 0.06 + Math.random() * 0.1,
-        alpha: 0.15
+        alpha: 0.14
       });
     } else if (weatherState === 4) {
       const s = createSnowFlake();
@@ -1080,19 +1082,16 @@ function drawCyberConstellation(isOverlayOnly = false) {
   const centerX = w / 2;
   const centerY = h / 2;
   const fov = 420;
+  const isMobile = w < 768;
 
   // Process shockwaves
   for (let sIdx = shockwaves.length - 1; sIdx >= 0; sIdx--) {
     const sw = shockwaves[sIdx];
-    ctx.save();
     ctx.beginPath();
     ctx.arc(sw.x, sw.y, sw.r, 0, Math.PI * 2);
     ctx.strokeStyle = `rgba(99, 179, 237, ${sw.alpha})`;
-    ctx.lineWidth = 2.5;
-    ctx.shadowBlur = 15;
-    ctx.shadowColor = 'rgba(99, 179, 237, 0.8)';
+    ctx.lineWidth = 2;
     ctx.stroke();
-    ctx.restore();
 
     sw.r += 6;
     sw.alpha *= 0.94;
@@ -1127,37 +1126,40 @@ function drawCyberConstellation(isOverlayOnly = false) {
     const py = centerY + (p.y - cam.y) * scale;
     const pr = Math.max(0.8, p.baseR * scale);
 
-    // Mouse proximity interaction (Elastic Attraction & Repulsion)
-    const mDx = mouse.x - px;
-    const mDy = mouse.y - py;
-    const mDist = Math.sqrt(mDx * mDx + mDy * mDy);
+    // Mouse proximity interaction (Desktop only)
+    if (!isMobile) {
+      const mDx = mouse.x - px;
+      const mDy = mouse.y - py;
+      const mDist2 = mDx * mDx + mDy * mDy;
 
-    if (mDist < 170 && mDist > 0) {
-      const force = (1 - mDist / 170) * 0.0006;
-      p.vx += mDx * force;
-      p.vy += mDy * force;
+      if (mDist2 < 28900 && mDist2 > 0) { // 170px squared
+        const mDist = Math.sqrt(mDist2);
+        const force = (1 - mDist / 170) * 0.0006;
+        p.vx += mDx * force;
+        p.vy += mDy * force;
 
-      // Draw cursor laser line to nearby particles
-      ctx.save();
-      ctx.beginPath();
-      ctx.moveTo(mouse.x, mouse.y);
-      ctx.lineTo(px, py);
-      ctx.strokeStyle = `rgba(99, 179, 237, ${(1 - mDist / 170) * 0.45})`;
-      ctx.lineWidth = 1;
-      ctx.stroke();
-      ctx.restore();
+        // Draw cursor laser line to nearby particles
+        ctx.beginPath();
+        ctx.moveTo(mouse.x, mouse.y);
+        ctx.lineTo(px, py);
+        ctx.strokeStyle = `rgba(99, 179, 237, ${(1 - mDist / 170) * 0.35})`;
+        ctx.lineWidth = 1;
+        ctx.stroke();
+      }
     }
 
     // Shockwave repulsion
-    shockwaves.forEach(sw => {
+    for (let sIdx = 0; sIdx < shockwaves.length; sIdx++) {
+      const sw = shockwaves[sIdx];
       const swDx = px - sw.x;
       const swDy = py - sw.y;
-      const swDist = Math.sqrt(swDx * swDx + swDy * swDy);
-      if (Math.abs(swDist - sw.r) < 35 && swDist > 0) {
+      const swDist2 = swDx * swDx + swDy * swDy;
+      if (Math.abs(Math.sqrt(swDist2) - sw.r) < 35 && swDist2 > 0) {
+        const swDist = Math.sqrt(swDist2);
         p.vx += (swDx / swDist) * 1.5;
         p.vy += (swDy / swDist) * 1.5;
       }
-    });
+    }
 
     // Velocity damping
     p.vx *= 0.985;
@@ -1166,43 +1168,40 @@ function drawCyberConstellation(isOverlayOnly = false) {
     projected.push({ px, py, pr, scale, p });
   }
 
-  // Draw Constellation Lines between connected nodes
-  const maxConnDist = isOverlayOnly ? 85 : 125;
+  // Draw Constellation Lines (Optimized without redundant Math.sqrt)
+  const maxConnDist = isOverlayOnly ? 70 : (isMobile ? 75 : 115);
+  const maxConnDist2 = maxConnDist * maxConnDist;
+  ctx.lineWidth = 0.8;
+
   for (let i = 0; i < projected.length; i++) {
     const a = projected[i];
     for (let j = i + 1; j < projected.length; j++) {
       const b = projected[j];
       const dx = a.px - b.px;
       const dy = a.py - b.py;
-      const dist = Math.sqrt(dx * dx + dy * dy);
+      const dist2 = dx * dx + dy * dy;
 
-      if (dist < maxConnDist) {
-        const lineAlpha = (1 - dist / maxConnDist) * 0.35 * Math.min(a.scale, b.scale);
-        ctx.save();
+      if (dist2 < maxConnDist2) {
+        const dist = Math.sqrt(dist2);
+        const lineAlpha = (1 - dist / maxConnDist) * 0.3 * Math.min(a.scale, b.scale);
         ctx.beginPath();
         ctx.moveTo(a.px, a.py);
         ctx.lineTo(b.px, b.py);
         ctx.strokeStyle = `rgba(99, 179, 237, ${lineAlpha})`;
-        ctx.lineWidth = 0.85;
         ctx.stroke();
-        ctx.restore();
       }
     }
   }
 
-  // Draw 3D Particle Nodes
+  // Draw 3D Particle Nodes (High performance, no heavy shadowBlur)
   for (let i = 0; i < projected.length; i++) {
     const { px, py, pr, p, scale } = projected[i];
     const nodeAlpha = Math.min(1, p.alpha * scale * (isOverlayOnly ? 0.6 : 1));
 
-    ctx.save();
     ctx.beginPath();
     ctx.arc(px, py, pr, 0, Math.PI * 2);
     ctx.fillStyle = `hsla(${p.hue}, 85%, 65%, ${nodeAlpha})`;
-    ctx.shadowBlur = 10 * scale;
-    ctx.shadowColor = `hsla(${p.hue}, 90%, 60%, 0.8)`;
     ctx.fill();
-    ctx.restore();
   }
 }
 
@@ -1403,12 +1402,11 @@ function stopWeather() {
   if (audioWaves) audioWaves.style.display = 'none';
 }
 
-function applyWeatherUiLabels() {
+function applyWeatherUiLabels(showToast = false) {
   if (weatherBtn) weatherBtn.setAttribute('title', t('weather.btnTitle'));
-  if (!weatherLabel || !weatherIcon) return;
 
   const modeIcons = [
-    'fa-solid fa-cubes',
+    'fa-solid fa-cube',
     'fa-solid fa-film',
     'fa-solid fa-cloud-rain',
     'fa-solid fa-bolt-lightning',
@@ -1416,28 +1414,21 @@ function applyWeatherUiLabels() {
     'fa-solid fa-circle-notch'
   ];
 
-  weatherIcon.className = modeIcons[weatherState] || 'fa-solid fa-cubes';
-  weatherLabel.textContent = t(`weather.mode${weatherState}`);
+  if (weatherIcon) {
+    weatherIcon.className = modeIcons[weatherState] || 'fa-solid fa-cube';
+  }
 
-  if (weatherIndicator) {
+  if (weatherIndicator && showToast) {
     weatherIndicator.textContent = t(`weather.ind${weatherState}`);
     weatherIndicator.classList.add('visible');
     clearTimeout(indicatorTimeout);
     indicatorTimeout = setTimeout(() => {
       weatherIndicator.classList.remove('visible');
-    }, 4000);
-  }
-
-  // Update live audio visualizer waves
-  if (audioWaves) {
-    const isPlaying = (weatherState === 2 && !rainAudio?.paused && !isMuted) ||
-                      (weatherState === 3 && !thunderAudio?.paused && !isMuted) ||
-                      (weatherState === 4 && !snowAudio?.paused && !isMuted);
-    audioWaves.style.display = isPlaying ? 'flex' : 'none';
+    }, 1500);
   }
 }
 
-function startWeather() {
+function startWeather(isUserAction = false) {
   resizeCanvas();
   initParticles();
 
@@ -1452,7 +1443,7 @@ function startWeather() {
     stormVideo?.classList.remove('active');
     if (stormVideo) stormVideo.pause();
     cyberVideo?.classList.add('active');
-    cyberVideo?.play().catch(() => console.log("Video autoplay blocked"));
+    cyberVideo?.play().catch(() => console.log("Video blocked"));
     weatherCanvas?.classList.add('active');
   } else if (weatherState === 3) {
     cyberVideo?.classList.remove('active');
@@ -1478,7 +1469,7 @@ function startWeather() {
   if (!isMuted) {
     if (weatherState === 2 && rainAudio) {
       rainAudio.volume = 0.5;
-      rainAudio.play().catch(() => console.log("Rain audio waiting for user gesture"));
+      rainAudio.play().catch(() => console.log("Rain audio waiting"));
     } else if (weatherState === 3 && thunderAudio) {
       thunderAudio.volume = 0.6;
       thunderAudio.play().catch(() => console.log("Thunder audio waiting"));
@@ -1488,17 +1479,17 @@ function startWeather() {
     }
   }
 
-  applyWeatherUiLabels();
+  applyWeatherUiLabels(isUserAction);
 }
 
 // 6 Modes cycle: 0 -> 1 -> 2 -> 3 -> 4 -> 5 -> 0
 weatherBtn?.addEventListener('click', () => {
   weatherState = (weatherState + 1) % 6;
   stopWeather();
-  startWeather();
+  startWeather(true);
 });
 
-// --- AUDIO MUTE LOGIC ---
+// --- AUDIO MUTE LOGIC (MINIMAL ICON TOGGLE) ---
 const muteBtn = document.getElementById('mute-btn');
 const muteIcon = document.getElementById('mute-icon');
 let isMuted = false;
@@ -1511,35 +1502,36 @@ if (muteBtn) {
     if (thunderAudio) thunderAudio.muted = isMuted;
 
     if (isMuted) {
-      muteIcon.classList.remove('fa-volume-high');
-      muteIcon.classList.add('fa-volume-xmark');
-      if (audioWaves) audioWaves.style.display = 'none';
+      muteIcon.className = 'fa-solid fa-volume-xmark';
     } else {
-      muteIcon.classList.remove('fa-volume-xmark');
-      muteIcon.classList.add('fa-volume-high');
+      muteIcon.className = 'fa-solid fa-volume-high';
       const targetAudio = weatherState === 2 ? rainAudio : (weatherState === 4 ? snowAudio : (weatherState === 3 ? thunderAudio : null));
       if (targetAudio && targetAudio.paused) {
         targetAudio.play().catch(() => console.log("Audio waiting"));
       }
-      if (audioWaves && targetAudio) audioWaves.style.display = 'flex';
     }
   });
 }
 
-// --- 2026 3D CARD HOVER TILT SYSTEM ---
+// --- 2026 3D CARD HOVER TILT SYSTEM (DESKTOP MOUSE ONLY - ZERO TOUCH STUTTER) ---
 function init3DCardTilt() {
+  // Completely disable on touch screens to prevent Mobile Safari WebKit clipping bugs & scroll lag
+  if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    return;
+  }
   const cards = document.querySelectorAll('.project-card, .cert-card, .timeline-content, .hero-stat-item');
   cards.forEach(card => {
     card.addEventListener('pointermove', (e) => {
+      if (e.pointerType === 'touch') return;
       const rect = card.getBoundingClientRect();
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
       const centerX = rect.width / 2;
       const centerY = rect.height / 2;
-      const rotX = ((y - centerY) / centerY) * -6;
-      const rotY = ((x - centerX) / centerX) * 6;
+      const rotX = Math.max(-5, Math.min(5, ((y - centerY) / centerY) * -4));
+      const rotY = Math.max(-5, Math.min(5, ((x - centerX) / centerX) * 4));
 
-      card.style.transform = `perspective(1000px) rotateX(${rotX.toFixed(2)}deg) rotateY(${rotY.toFixed(2)}deg) scale3d(1.02, 1.02, 1.02)`;
+      card.style.transform = `perspective(800px) rotateX(${rotX.toFixed(2)}deg) rotateY(${rotY.toFixed(2)}deg) translateZ(4px)`;
       card.style.setProperty('--mouse-card-x', `${x}px`);
       card.style.setProperty('--mouse-card-y', `${y}px`);
     });
@@ -1550,17 +1542,32 @@ function init3DCardTilt() {
   });
 }
 
-// Hero 3D Hologram Parallax
+// Interactive 3D Hero Cube (Click to spin boost)
+const cube3D = document.querySelector('.cube-3d');
+if (cube3D) {
+  cube3D.style.cursor = 'pointer';
+  cube3D.addEventListener('click', () => {
+    cube3D.style.animation = 'none';
+    cube3D.offsetHeight; /* trigger reflow */
+    cube3D.style.animation = 'rotateCube 2.5s cubic-bezier(0.2, 0.8, 0.2, 1)';
+    setTimeout(() => {
+      cube3D.style.animation = 'rotateCube 16s linear infinite';
+    }, 2500);
+  });
+}
+
+// Hero 3D Hologram Parallax (Desktop mouse only)
 const heroPhotoArea = document.getElementById('hero-photos-3d');
-if (heroPhotoArea) {
+if (heroPhotoArea && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
   window.addEventListener('pointermove', (e) => {
-    const rx = (e.clientY / window.innerHeight - 0.5) * 16;
-    const ry = (e.clientX / window.innerWidth - 0.5) * -16;
+    if (e.pointerType === 'touch') return;
+    const rx = (e.clientY / window.innerHeight - 0.5) * 14;
+    const ry = (e.clientX / window.innerWidth - 0.5) * -14;
     const holo = heroPhotoArea.querySelector('.hero-3d-hologram');
     if (holo) {
       holo.style.transform = `rotateX(${rx.toFixed(2)}deg) rotateY(${ry.toFixed(2)}deg)`;
     }
-  });
+  }, { passive: true });
 }
 
 /* ========================================================
