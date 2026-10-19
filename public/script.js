@@ -578,9 +578,21 @@ async function loadProjectsFromFirestore() {
     const snapshot = await db.collection('projects').get();
     if (snapshot.empty) return;
 
+    const docs = [];
+    snapshot.forEach((docSnap) => docs.push(docSnap.data()));
+    docs.sort((a, b) => {
+      const score = (p) => {
+        const t = (p.title || '').toLowerCase();
+        if (t.includes('s tech') || t.includes('s_tech')) return 1;
+        if (t.includes('youngpos') || t.includes('young pos')) return 2;
+        if (t.includes('clinic') || t.includes('houn vannak')) return 3;
+        return (p.order !== undefined ? p.order + 10 : 99);
+      };
+      return score(a) - score(b);
+    });
+
     const parts = [];
-    snapshot.forEach((docSnap) => {
-      const p = docSnap.data();
+    docs.forEach((p) => {
       const title = escapeHtml(p.title || '');
       const desc = escapeHtml(p.description || '');
       const mt = String(p.mediaType || 'image').toLowerCase();
@@ -929,7 +941,7 @@ let flashOpacity = 0;
 let lightningBolt = null;
 let indicatorTimeout = null;
 
-// Mouse & 3D Interactive Camera State
+// Mouse, Scroll & 3D Interactive Camera State
 const mouse = {
   x: window.innerWidth / 2,
   y: window.innerHeight / 2,
@@ -938,6 +950,20 @@ const mouse = {
 };
 const cam = { x: 0, y: 0, targetX: 0, targetY: 0 };
 const shockwaves = [];
+const clickSparks = [];
+
+let lastScrollY = window.pageYOffset || document.documentElement.scrollTop;
+let scrollVelocity = 0;
+
+// Track scroll velocity for 3D warp depth flight
+window.addEventListener('scroll', () => {
+  const currentScrollY = window.pageYOffset || document.documentElement.scrollTop;
+  const delta = currentScrollY - lastScrollY;
+  lastScrollY = currentScrollY;
+  scrollVelocity += delta * 0.18;
+  if (scrollVelocity > 28) scrollVelocity = 28;
+  if (scrollVelocity < -28) scrollVelocity = -28;
+}, { passive: true });
 
 // Track mouse position globally for 3D camera, cursor glow, and particles (Desktop only)
 window.addEventListener('pointermove', (e) => {
@@ -953,16 +979,64 @@ window.addEventListener('pointermove', (e) => {
   }
 }, { passive: true });
 
-// Click / tap shockwave interaction in 3D canvas
-window.addEventListener('pointerdown', (e) => {
-  if (e.target.closest('button, a, input, textarea, select, .project-card, .cert-card')) return;
+// Mobile Touch drag 3D depth parallax
+window.addEventListener('touchmove', (e) => {
+  if (e.touches && e.touches[0]) {
+    const t = e.touches[0];
+    cam.targetX = (t.clientX - window.innerWidth / 2) * 0.06;
+    cam.targetY = (t.clientY - window.innerHeight / 2) * 0.06;
+  }
+}, { passive: true });
+
+// Click / tap 3D spark explosion and dual energy shockwave everywhere
+function trigger3DClickExplosion(clientX, clientY) {
+  const isMobile = window.innerWidth < 768;
+  const count = isMobile ? 14 : 26;
+
+  // Dual Shockwave Rings (Cyan & Purple Neon)
   shockwaves.push({
-    x: e.clientX,
-    y: e.clientY,
-    r: 4,
-    maxR: 200,
-    alpha: 0.85
+    x: clientX,
+    y: clientY,
+    r: 6,
+    maxR: isMobile ? 180 : 280,
+    alpha: 0.95,
+    hue: 195 // Cyan
   });
+  shockwaves.push({
+    x: clientX,
+    y: clientY,
+    r: 2,
+    maxR: isMobile ? 140 : 220,
+    alpha: 0.85,
+    hue: 280 // Purple
+  });
+
+  // 3D Perspective Sparks
+  for (let i = 0; i < count; i++) {
+    const angle = Math.random() * Math.PI * 2;
+    const speed = 2.5 + Math.random() * 8.5;
+    clickSparks.push({
+      x: clientX,
+      y: clientY,
+      z: (Math.random() - 0.5) * 100,
+      vx: Math.cos(angle) * speed,
+      vy: Math.sin(angle) * speed,
+      vz: (Math.random() - 0.5) * 6,
+      r: 2 + Math.random() * 2.8,
+      life: 1.0,
+      decay: 0.022 + Math.random() * 0.025,
+      hue: Math.random() > 0.5 ? 195 : (Math.random() > 0.3 ? 280 : 48) // Cyan, Purple, or Gold
+    });
+  }
+
+  // 3D Camera Impulse kickback
+  cam.targetX += (Math.random() - 0.5) * 16;
+  cam.targetY += (Math.random() - 0.5) * 16;
+  scrollVelocity += (Math.random() > 0.5 ? 5 : -5);
+}
+
+window.addEventListener('pointerdown', (e) => {
+  trigger3DClickExplosion(e.clientX, e.clientY);
 }, { passive: true });
 
 function resizeCanvas() {
@@ -972,6 +1046,51 @@ function resizeCanvas() {
 }
 window.addEventListener('resize', resizeCanvas);
 resizeCanvas();
+
+// Render interactive shockwaves and 3D spark particles
+function renderInteractiveFx(fov) {
+  if (!ctx) return;
+
+  // 1. Dual Shockwave Rings
+  for (let sIdx = shockwaves.length - 1; sIdx >= 0; sIdx--) {
+    const sw = shockwaves[sIdx];
+    ctx.beginPath();
+    ctx.arc(sw.x, sw.y, sw.r, 0, Math.PI * 2);
+    ctx.strokeStyle = `hsla(${sw.hue || 195}, 90%, 65%, ${sw.alpha})`;
+    ctx.lineWidth = Math.max(1, 2.5 * sw.alpha);
+    ctx.stroke();
+
+    sw.r += 6.5;
+    sw.alpha *= 0.93;
+    if (sw.alpha < 0.02 || sw.r > sw.maxR) {
+      shockwaves.splice(sIdx, 1);
+    }
+  }
+
+  // 2. 3D Spark Explosions
+  for (let i = clickSparks.length - 1; i >= 0; i--) {
+    const sp = clickSparks[i];
+    sp.x += sp.vx;
+    sp.y += sp.vy;
+    sp.z += sp.vz;
+    sp.vx *= 0.93;
+    sp.vy *= 0.93;
+    sp.life -= sp.decay;
+
+    if (sp.life <= 0) {
+      clickSparks.splice(i, 1);
+      continue;
+    }
+
+    const scale = fov / (fov + sp.z);
+    const spr = Math.max(0.6, sp.r * scale * sp.life);
+
+    ctx.beginPath();
+    ctx.arc(sp.x, sp.y, spr, 0, Math.PI * 2);
+    ctx.fillStyle = `hsla(${sp.hue}, 95%, 65%, ${sp.life})`;
+    ctx.fill();
+  }
+}
 
 // --- 3D PARTICLE CONSTELLATION GENERATOR (Mode 0 & Mode 1 overlay) ---
 function create3DParticle() {
@@ -1077,6 +1196,9 @@ function drawCyberConstellation(isOverlayOnly = false) {
   cam.x += (cam.targetX - cam.x) * 0.06;
   cam.y += (cam.targetY - cam.y) * 0.06;
 
+  // Damp scroll velocity smoothly each frame
+  scrollVelocity *= 0.92;
+
   const w = weatherCanvas.width;
   const h = weatherCanvas.height;
   const centerX = w / 2;
@@ -1084,20 +1206,21 @@ function drawCyberConstellation(isOverlayOnly = false) {
   const fov = 420;
   const isMobile = w < 768;
 
-  // Process shockwaves
-  for (let sIdx = shockwaves.length - 1; sIdx >= 0; sIdx--) {
-    const sw = shockwaves[sIdx];
-    ctx.beginPath();
-    ctx.arc(sw.x, sw.y, sw.r, 0, Math.PI * 2);
-    ctx.strokeStyle = `rgba(99, 179, 237, ${sw.alpha})`;
-    ctx.lineWidth = 2;
-    ctx.stroke();
-
-    sw.r += 6;
-    sw.alpha *= 0.94;
-    if (sw.alpha < 0.02 || sw.r > sw.maxR) {
-      shockwaves.splice(sIdx, 1);
-    }
+  // Dynamic 3D perspective pitch and scale for Background Video and Grid
+  const pitch = Math.max(-10, Math.min(10, scrollVelocity * 0.35));
+  const yaw = Math.max(-8, Math.min(8, (cam.x / (w / 2)) * 14));
+  const scaleVal = 1.05 + Math.min(0.06, Math.abs(scrollVelocity) * 0.003);
+  const transformStr = `perspective(1000px) rotateX(${pitch.toFixed(2)}deg) rotateY(${yaw.toFixed(2)}deg) scale(${scaleVal.toFixed(3)})`;
+  if (cyberVideo && cyberVideo.classList.contains('active')) {
+    cyberVideo.style.transform = transformStr;
+  }
+  if (stormVideo && stormVideo.classList.contains('active')) {
+    stormVideo.style.transform = transformStr;
+  }
+  const cyberGrid = document.getElementById('cyber-grid');
+  if (cyberGrid) {
+    const gridPitch = 60 + Math.max(-10, Math.min(10, scrollVelocity * 0.25));
+    cyberGrid.style.transform = `perspective(600px) rotateX(${gridPitch.toFixed(1)}deg) translateY(${(window.scrollY * 0.35) % 60}px)`;
   }
 
   // Pre-calculate 2D projected coordinates
@@ -1105,20 +1228,20 @@ function drawCyberConstellation(isOverlayOnly = false) {
   for (let i = 0; i < particles.length; i++) {
     const p = particles[i];
 
-    // 3D physics movement
+    // 3D physics movement + Scroll-driven Z-depth warp flight
     p.x += p.vx;
     p.y += p.vy;
-    p.z += p.vz;
+    p.z += p.vz + scrollVelocity * 2.2;
 
-    // Boundary wrapping in 3D
+    // Boundary wrapping in 3D with hyperspace warp loop
     const boundX = w * 0.75;
     const boundY = h * 0.75;
     if (p.x < -boundX) p.x = boundX;
     if (p.x > boundX) p.x = -boundX;
     if (p.y < -boundY) p.y = boundY;
     if (p.y > boundY) p.y = -boundY;
-    if (p.z < -280) p.z = 280;
-    if (p.z > 280) p.z = -280;
+    if (p.z < -380) p.z = 280;
+    if (p.z > 280) p.z = -380;
 
     // Perspective projection
     const scale = fov / (fov + p.z);
@@ -1154,10 +1277,10 @@ function drawCyberConstellation(isOverlayOnly = false) {
       const swDx = px - sw.x;
       const swDy = py - sw.y;
       const swDist2 = swDx * swDx + swDy * swDy;
-      if (Math.abs(Math.sqrt(swDist2) - sw.r) < 35 && swDist2 > 0) {
+      if (Math.abs(Math.sqrt(swDist2) - sw.r) < 40 && swDist2 > 0) {
         const swDist = Math.sqrt(swDist2);
-        p.vx += (swDx / swDist) * 1.5;
-        p.vy += (swDy / swDist) * 1.5;
+        p.vx += (swDx / swDist) * 1.8;
+        p.vy += (swDy / swDist) * 1.8;
       }
     }
 
@@ -1203,12 +1326,17 @@ function drawCyberConstellation(isOverlayOnly = false) {
     ctx.fillStyle = `hsla(${p.hue}, 85%, 65%, ${nodeAlpha})`;
     ctx.fill();
   }
+
+  // Render expanding shockwaves and 3D sparks
+  renderInteractiveFx(fov);
 }
 
 // --- DRAW CYBER RAIN (Mode 2) ---
 function drawRain() {
   if (!ctx) return;
   ctx.clearRect(0, 0, weatherCanvas.width, weatherCanvas.height);
+
+  scrollVelocity *= 0.92;
 
   particles.forEach((d, i) => {
     ctx.save();
@@ -1224,7 +1352,7 @@ function drawRain() {
     ctx.restore();
 
     d.x += d.wind;
-    d.y += d.speed;
+    d.y += d.speed + scrollVelocity * 0.8;
 
     if (d.y > weatherCanvas.height - 20) {
       if (Math.random() > 0.7) {
@@ -1248,6 +1376,8 @@ function drawRain() {
     sp.alpha -= 0.05;
     if (sp.alpha <= 0) splashes.splice(sIdx, 1);
   }
+
+  renderInteractiveFx(420);
 }
 
 // --- DRAW THUNDERSTORM (Mode 3) ---
@@ -1271,6 +1401,8 @@ function createFierceLightning(x, y, angle, branches) {
 function drawThunderstorm() {
   if (!ctx) return;
   ctx.clearRect(0, 0, weatherCanvas.width, weatherCanvas.height);
+
+  scrollVelocity *= 0.92;
 
   particles.forEach(c => {
     ctx.save();
@@ -1317,12 +1449,16 @@ function drawThunderstorm() {
     ctx.restore();
     flashOpacity -= 0.08;
   }
+
+  renderInteractiveFx(420);
 }
 
 // --- DRAW COSMIC SNOW (Mode 4) ---
 function drawSnow() {
   if (!ctx) return;
   ctx.clearRect(0, 0, weatherCanvas.width, weatherCanvas.height);
+
+  scrollVelocity *= 0.92;
 
   particles.forEach((s, i) => {
     s.wobble += 0.02;
@@ -1337,17 +1473,21 @@ function drawSnow() {
     ctx.restore();
 
     s.x += s.drift;
-    s.y += s.speed;
+    s.y += s.speed + scrollVelocity * 0.6;
     if (s.y > weatherCanvas.height + 10) {
       particles[i] = createSnowFlake();
     }
   });
+
+  renderInteractiveFx(420);
 }
 
 // --- DRAW ZEN AURORA (Mode 5) ---
 function drawZenAurora() {
   if (!ctx) return;
   ctx.clearRect(0, 0, weatherCanvas.width, weatherCanvas.height);
+
+  scrollVelocity *= 0.92;
 
   particles.forEach(o => {
     ctx.save();
@@ -1367,6 +1507,8 @@ function drawZenAurora() {
     if (o.y < -100) o.y = weatherCanvas.height + 100;
     if (o.y > weatherCanvas.height + 100) o.y = -100;
   });
+
+  renderInteractiveFx(420);
 }
 
 // --- MASTER ANIMATION LOOP ---

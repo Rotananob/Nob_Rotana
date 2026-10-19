@@ -72,6 +72,21 @@
     <a href="#contact" onclick="closeMobileMenu()" data-i18n="nav.contact">Contact</a>
   </div>
 
+  <!-- =====================
+       2026 FLOATING CONTROLLER (UPPER-LEFT / SIDE DOCK)
+       ===================== -->
+  <div class="ambience-dock" id="ambience-dock">
+    <div class="ambience-dock-btns">
+      <button id="mute-btn" data-i18n-title="mute.btnTitle" title="Toggle Sound (Mute/Unmute)" aria-label="Toggle Sound">
+        <i class="fa-solid fa-volume-high" id="mute-icon"></i>
+      </button>
+      <button id="weather-btn" data-i18n-title="weather.btnTitle" title="Change Mode (3D, Video, Weather)" aria-label="Toggle Visual Mode">
+        <i class="fa-solid fa-cube" id="weather-icon"></i>
+      </button>
+    </div>
+    <div class="weather-indicator" id="weather-indicator"></div>
+  </div>
+
   <!-- Floating Mobile Hire Me Button -->
   <a href="#contact" class="mobile-hire-btn">
     <span class="pulse-ring"></span>
@@ -204,129 +219,7 @@
            Fallback static cards shown until Firebase is connected. -->
       <div class="projects-grid" id="projects-grid">
 
-        <!-- #1 TOP FEATURED: Houn Vannak Medical Clinic -->
-        <div class="project-card reveal"
-          onclick="openCertModal('Assets/IMG/clinic_logo.svg', t('proj11.title'))">
-          <div class="project-media">
-            <img
-              src="Assets/IMG/clinic_logo.svg"
-              onerror="this.onerror=null; this.src='https://clinic-systems.vercel.app/icons/icon-512.svg';"
-              alt="Houn Vannak Medical Clinic" style="object-fit: contain; background: linear-gradient(135deg, #042f2e 0%, #0f766e 50%, #115e59 100%); padding: 1.5rem;" />
-            <div class="project-media-badge" data-i18n="common.badgeImage">Image</div>
-          </div>
-          <div class="project-body">
-            <div class="project-tags">
-              <span class="tag">Next.js 14</span>
-              <span class="tag">NestJS 10</span>
-              <span class="tag">TypeScript</span>
-              <span class="tag">PostgreSQL 16</span>
-              <span class="tag">Prisma ORM</span>
-              <span class="tag">KHQR (EMVCo)</span>
-              <span class="tag">Cloudinary CDN</span>
-              <span class="tag">Telegram Supergroup Bot</span>
-              <span class="tag">RBAC (6 Roles)</span>
-              <span class="tag">ESC/POS Printing</span>
-              <span class="tag">TailwindCSS</span>
-              <span class="tag">PWA</span>
-            </div>
-            <h3 class="project-title" style="font-family: 'Dangrek', cursive, sans-serif;" data-i18n="proj11.title">
-              Houn Vannak Medical Clinic (Enterprise Medical SaaS)</h3>
-            <p class="project-desc" data-i18n="proj11.desc"></p>
-            <div class="project-links">
-              <a href="https://github.com/Rotananob/Clinic_systems" class="project-link" target="_blank"
-                rel="noopener noreferrer" onclick="event.stopPropagation();"><i class="fa-brands fa-github"></i> <span
-                  data-i18n="common.code">Code</span></a>
-              <a href="https://clinic-systems.vercel.app/login" class="project-link" target="_blank"
-                rel="noopener noreferrer" onclick="event.stopPropagation();"><i
-                  class="fa-solid fa-arrow-up-right-from-square"></i> <span data-i18n="common.live">Live</span></a>
-            </div>
-          </div>
-        </div>
-
-        <!-- #2 TOP FEATURED: Delight Fashion -->
-        <div class="project-card reveal"
-          onclick="openCertModal('Assets/IMG/delight_fashion_logo.jpg', t('proj9.title'))">
-          <div class="project-media">
-            <img
-              src="Assets/IMG/delight_fashion_logo.jpg"
-              onerror="this.onerror=null; this.src='Assets/IMG/delight_fashion.jpg';"
-              alt="Delight Fashion" style="object-fit: cover; background: #050505;" />
-            <div class="project-media-badge" data-i18n="common.badgeImage">Image</div>
-          </div>
-          <div class="project-body">
-            <div class="project-tags">
-              <span class="tag">Next.js 16</span>
-              <span class="tag">React 19</span>
-              <span class="tag">TypeScript</span>
-              <span class="tag">TailwindCSS v4</span>
-              <span class="tag">Firebase 12</span>
-              <span class="tag">Firebase Admin</span>
-              <span class="tag">Firestore NoSQL</span>
-              <span class="tag">ABA PayWay</span>
-              <span class="tag">Bakong KHQR</span>
-              <span class="tag">Telegram Bot API</span>
-              <span class="tag">Cloudinary CDN</span>
-              <span class="tag">Serwist PWA</span>
-              <span class="tag">Recharts</span>
-            </div>
-            <h3 class="project-title" style="font-family: 'Dangrek', cursive, sans-serif;" data-i18n="proj9.title">
-              Delight Fashion (Luxury Men's E-Commerce & KHQR Platform)</h3>
-            <p class="project-desc" data-i18n="proj9.desc"></p>
-            <div class="project-links">
-              <a href="https://github.com/Rotananob/Delight-Fashion" class="project-link" target="_blank"
-                rel="noopener noreferrer" onclick="event.stopPropagation();"><i class="fa-brands fa-github"></i> <span
-                  data-i18n="common.code">Code</span></a>
-              <a href="https://delight-fashion.web.app" class="project-link" target="_blank" rel="noopener noreferrer"
-                onclick="event.stopPropagation();"><i class="fa-solid fa-arrow-up-right-from-square"></i> <span
-                  data-i18n="common.live">Live</span></a>
-              <a href="https://www.tiktok.com/@delightfashion21" class="project-link" target="_blank"
-                rel="noopener noreferrer" onclick="event.stopPropagation();"><i class="fa-brands fa-tiktok"></i>
-                TikTok</a>
-              <a href="https://t.me/DelightFashionKH" class="project-link" target="_blank"
-                rel="noopener noreferrer" onclick="event.stopPropagation();"><i class="fa-brands fa-telegram" style="color: #26A5E4;"></i>
-                Telegram</a>
-              <a href="tel:+855766606852" class="project-link" onclick="event.stopPropagation();"><i
-                  class="fa-solid fa-phone" style="color: #34d399;"></i> 076 660 6852</a>
-              <a href="mailto:sinornnosmoke063@gmail.com" class="project-link" onclick="event.stopPropagation();"><i
-                  class="fa-solid fa-envelope" style="color: #f87171;"></i> Email</a>
-            </div>
-          </div>
-        </div>
-
-        <!-- #2 TOP: Rotana E-Learning V2 -->
-        <div class="project-card reveal"
-          onclick="openCertModal('https://rotana-elearningg.web.app/assets/css/fonts/images/logo.png', t('proj7.title'))">
-          <div class="project-media">
-            <img src="https://rotana-elearningg.web.app/assets/css/fonts/images/logo.png" alt="Rotana E-Learning V2"
-              style="object-fit: contain; background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 50%, #3b82f6 100%); padding: 2rem;" />
-            <div class="project-media-badge" data-i18n="common.badgeImage">Image</div>
-          </div>
-          <div class="project-body">
-            <div class="project-tags">
-              <span class="tag">React 18</span>
-              <span class="tag">TypeScript</span>
-              <span class="tag">Vite</span>
-              <span class="tag">Firebase</span>
-              <span class="tag">Node.js</span>
-              <span class="tag">Express</span>
-              <span class="tag">Cloudflare</span>
-              <span class="tag">PWA</span>
-              <span class="tag">Gemini AI</span>
-            </div>
-            <h3 class="project-title" data-i18n="proj7.title">Rotana E-Learning V2</h3>
-            <p class="project-desc" data-i18n="proj7.desc"></p>
-            <div class="project-links">
-              <a href="https://github.com/Rotananob/e-learning-v2-react-ts" class="project-link" target="_blank"
-                rel="noopener noreferrer" onclick="event.stopPropagation();"><i class="fa-brands fa-github"></i> <span
-                  data-i18n="common.code">Code</span></a>
-              <a href="https://rotana-education.web.app/" class="project-link" target="_blank" rel="noopener noreferrer"
-                onclick="event.stopPropagation();"><i class="fa-solid fa-arrow-up-right-from-square"></i> <span
-                  data-i18n="common.live">Live</span></a>
-            </div>
-          </div>
-        </div>
-
-        <!-- NEW: S Tech Store -->
+        <!-- #1 TOP FEATURED: S Tech Store -->
         <div class="project-card reveal" onclick="openCertModal('Assets/IMG/S_tech_store.jpg', t('proj8.title'))">
           <div class="project-media">
             <img src="Assets/IMG/S_tech_store.jpg"
@@ -353,7 +246,7 @@
               <span class="tag">PWA</span>
               <span class="tag">Framer Motion</span>
             </div>
-            <h3 class="project-title" style="font-family: 'Dangrek', cursive, sans-serif;" data-i18n="proj8.title">S Tech Store (Enterprise IT E-Commerce & KHQR Platform)</h3>
+            <h3 class="project-title" data-i18n="proj8.title">S Tech Store (Enterprise IT E-Commerce & KHQR Platform)</h3>
             <p class="project-desc" data-i18n="proj8.desc"></p>
             <div class="project-links">
               <a href="https://github.com/Rotananob/S_Tech_Store-Project" class="project-link" target="_blank"
@@ -372,71 +265,7 @@
           </div>
         </div>
 
-        <!-- NEW: YOUNG SMS -->
-        <div class="project-card reveal"
-          onclick="openCertModal('https://student-management-syste-70290.web.app/logo.png', t('proj5.title'))">
-          <div class="project-media">
-            <img src="https://student-management-syste-70290.web.app/logo.png" alt="YOUNG SMS"
-              style="object-fit: contain; background: linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #4338ca 100%); padding: 2rem;" />
-            <div class="project-media-badge" data-i18n="common.badgeImage">Image</div>
-          </div>
-          <div class="project-body">
-            <div class="project-tags">
-              <span class="tag">React.js</span>
-              <span class="tag">Node.js</span>
-              <span class="tag">Express</span>
-              <span class="tag">Firebase</span>
-              <span class="tag">Firestore</span>
-              <span class="tag">Realtime Database</span>
-              <span class="tag">Authentication</span>
-              <span class="tag">Firebase Hosting</span>
-            </div>
-            <h3 class="project-title" data-i18n="proj5.title">YOUNG SMS</h3>
-            <p class="project-desc" data-i18n="proj5.desc"></p>
-            <div class="project-links">
-              <a href="https://github.com/Rotananob/SMS" class="project-link" target="_blank" rel="noopener noreferrer"
-                onclick="event.stopPropagation();"><i class="fa-brands fa-github"></i> <span
-                  data-i18n="common.code">Code</span></a>
-              <a href="https://student-management-syste-70290.web.app/" class="project-link" target="_blank"
-                rel="noopener noreferrer" onclick="event.stopPropagation();"><i
-                  class="fa-solid fa-arrow-up-right-from-square"></i> <span data-i18n="common.live">Live</span></a>
-            </div>
-          </div>
-        </div>
-
-        <!-- NEW: NRI Studio -->
-        <div class="project-card reveal"
-          onclick="openCertModal('https://rotananob-nri-studio.vercel.app/logo.png', t('proj10.title'))">
-          <div class="project-media">
-            <img src="https://rotananob-nri-studio.vercel.app/logo.png" alt="NRI Studio"
-              style="object-fit: cover; background: #1e1e1e;" />
-            <div class="project-media-badge" data-i18n="common.badgeImage">Image</div>
-          </div>
-          <div class="project-body">
-            <div class="project-tags">
-              <span class="tag">React 18</span>
-              <span class="tag">TypeScript</span>
-              <span class="tag">Vite</span>
-              <span class="tag">Monaco Editor</span>
-              <span class="tag">Node.js</span>
-              <span class="tag">MongoDB</span>
-              <span class="tag">Firebase Auth</span>
-              <span class="tag">Xterm.js</span>
-            </div>
-            <h3 class="project-title" style="font-family: 'Dangrek', cursive, sans-serif;" data-i18n="proj10.title">NRI
-              Studio</h3>
-            <p class="project-desc" data-i18n="proj10.desc"></p>
-            <div class="project-links">
-              <a href="https://github.com/Rotananob/NRI-Studio" class="project-link" target="_blank"
-                rel="noopener noreferrer" onclick="event.stopPropagation();"><i class="fa-brands fa-github"></i> <span
-                  data-i18n="common.code">Code</span></a>
-              <a href="https://rotananob-nri-studio.vercel.app" class="project-link" target="_blank"
-                rel="noopener noreferrer" onclick="event.stopPropagation();"><i
-                  class="fa-solid fa-arrow-up-right-from-square"></i> <span data-i18n="common.live">Live</span></a>
-            </div>
-          </div>
-        </div>
-
+        <!-- #2 TOP FEATURED: YoungPOS Cambodia -->
         <div class="project-card reveal">
           <div class="project-media">
             <iframe id="proj3-video" src="https://www.youtube.com/embed/AurZL1FkU-I?si=8glhJ5yImK7KYT9R"
@@ -499,6 +328,192 @@
                   data-i18n="common.posApp">Young-POS</span></a>
               <a href="https://t.me/youngposcambodia" class="project-link" target="_blank"
                 rel="noopener noreferrer"><i class="fa-brands fa-telegram"></i> <span>Telegram Channel</span></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- #3 TOP FEATURED: Houn Vannak Medical Clinic -->
+        <div class="project-card reveal"
+          onclick="openCertModal('Assets/IMG/clinic_logo.svg', t('proj11.title'))">
+          <div class="project-media">
+            <img
+              src="Assets/IMG/clinic_logo.svg"
+              onerror="this.onerror=null; this.src='https://clinic-systems.vercel.app/icons/icon-512.svg';"
+              alt="Houn Vannak Medical Clinic" style="object-fit: contain; background: linear-gradient(135deg, #042f2e 0%, #0f766e 50%, #115e59 100%); padding: 1.5rem;" />
+            <div class="project-media-badge" data-i18n="common.badgeImage">Image</div>
+          </div>
+          <div class="project-body">
+            <div class="project-tags">
+              <span class="tag">Next.js 14</span>
+              <span class="tag">NestJS 10</span>
+              <span class="tag">TypeScript</span>
+              <span class="tag">PostgreSQL 16</span>
+              <span class="tag">Prisma ORM</span>
+              <span class="tag">KHQR (EMVCo)</span>
+              <span class="tag">Cloudinary CDN</span>
+              <span class="tag">Telegram Supergroup Bot</span>
+              <span class="tag">RBAC (6 Roles)</span>
+              <span class="tag">ESC/POS Printing</span>
+              <span class="tag">TailwindCSS</span>
+              <span class="tag">PWA</span>
+            </div>
+            <h3 class="project-title" data-i18n="proj11.title">
+              Houn Vannak Medical Clinic (Enterprise Medical SaaS)</h3>
+            <p class="project-desc" data-i18n="proj11.desc"></p>
+            <div class="project-links">
+              <a href="https://github.com/Rotananob/Clinic_systems" class="project-link" target="_blank"
+                rel="noopener noreferrer" onclick="event.stopPropagation();"><i class="fa-brands fa-github"></i> <span
+                  data-i18n="common.code">Code</span></a>
+              <a href="https://clinic-systems.vercel.app/login" class="project-link" target="_blank"
+                rel="noopener noreferrer" onclick="event.stopPropagation();"><i
+                  class="fa-solid fa-arrow-up-right-from-square"></i> <span data-i18n="common.live">Live</span></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- #4: Delight Fashion -->
+        <div class="project-card reveal"
+          onclick="openCertModal('Assets/IMG/delight_fashion_logo.jpg', t('proj9.title'))">
+          <div class="project-media">
+            <img
+              src="Assets/IMG/delight_fashion_logo.jpg"
+              onerror="this.onerror=null; this.src='Assets/IMG/delight_fashion.jpg';"
+              alt="Delight Fashion" style="object-fit: cover; background: #050505;" />
+            <div class="project-media-badge" data-i18n="common.badgeImage">Image</div>
+          </div>
+          <div class="project-body">
+            <div class="project-tags">
+              <span class="tag">Next.js 16</span>
+              <span class="tag">React 19</span>
+              <span class="tag">TypeScript</span>
+              <span class="tag">TailwindCSS v4</span>
+              <span class="tag">Firebase 12</span>
+              <span class="tag">Firebase Admin</span>
+              <span class="tag">Firestore NoSQL</span>
+              <span class="tag">ABA PayWay</span>
+              <span class="tag">Bakong KHQR</span>
+              <span class="tag">Telegram Bot API</span>
+              <span class="tag">Cloudinary CDN</span>
+              <span class="tag">Serwist PWA</span>
+              <span class="tag">Recharts</span>
+            </div>
+            <h3 class="project-title" data-i18n="proj9.title">
+              Delight Fashion (Luxury Men's E-Commerce & KHQR Platform)</h3>
+            <p class="project-desc" data-i18n="proj9.desc"></p>
+            <div class="project-links">
+              <a href="https://github.com/Rotananob/Delight-Fashion" class="project-link" target="_blank"
+                rel="noopener noreferrer" onclick="event.stopPropagation();"><i class="fa-brands fa-github"></i> <span
+                  data-i18n="common.code">Code</span></a>
+              <a href="https://delight-fashion.web.app" class="project-link" target="_blank" rel="noopener noreferrer"
+                onclick="event.stopPropagation();"><i class="fa-solid fa-arrow-up-right-from-square"></i> <span
+                  data-i18n="common.live">Live</span></a>
+              <a href="https://www.tiktok.com/@delightfashion21" class="project-link" target="_blank"
+                rel="noopener noreferrer" onclick="event.stopPropagation();"><i class="fa-brands fa-tiktok"></i>
+                TikTok</a>
+              <a href="https://t.me/DelightFashionKH" class="project-link" target="_blank"
+                rel="noopener noreferrer" onclick="event.stopPropagation();"><i class="fa-brands fa-telegram" style="color: #26A5E4;"></i>
+                Telegram</a>
+              <a href="tel:+855766606852" class="project-link" onclick="event.stopPropagation();"><i
+                  class="fa-solid fa-phone" style="color: #34d399;"></i> 076 660 6852</a>
+              <a href="mailto:sinornnosmoke063@gmail.com" class="project-link" onclick="event.stopPropagation();"><i
+                  class="fa-solid fa-envelope" style="color: #f87171;"></i> Email</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- #5: Rotana E-Learning V2 -->
+        <div class="project-card reveal"
+          onclick="openCertModal('https://rotana-elearningg.web.app/assets/css/fonts/images/logo.png', t('proj7.title'))">
+          <div class="project-media">
+            <img src="https://rotana-elearningg.web.app/assets/css/fonts/images/logo.png" alt="Rotana E-Learning V2"
+              style="object-fit: contain; background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 50%, #3b82f6 100%); padding: 2rem;" />
+            <div class="project-media-badge" data-i18n="common.badgeImage">Image</div>
+          </div>
+          <div class="project-body">
+            <div class="project-tags">
+              <span class="tag">React 18</span>
+              <span class="tag">TypeScript</span>
+              <span class="tag">Vite</span>
+              <span class="tag">Firebase</span>
+              <span class="tag">Node.js</span>
+              <span class="tag">Express</span>
+              <span class="tag">Cloudflare</span>
+              <span class="tag">PWA</span>
+              <span class="tag">Gemini AI</span>
+            </div>
+            <h3 class="project-title" data-i18n="proj7.title">Rotana E-Learning V2</h3>
+            <p class="project-desc" data-i18n="proj7.desc"></p>
+            <div class="project-links">
+              <a href="https://github.com/Rotananob/e-learning-v2-react-ts" class="project-link" target="_blank"
+                rel="noopener noreferrer" onclick="event.stopPropagation();"><i class="fa-brands fa-github"></i> <span
+                  data-i18n="common.code">Code</span></a>
+              <a href="https://rotana-education.web.app/" class="project-link" target="_blank" rel="noopener noreferrer"
+                onclick="event.stopPropagation();"><i class="fa-solid fa-arrow-up-right-from-square"></i> <span
+                  data-i18n="common.live">Live</span></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- #6: YOUNG SMS -->
+        <div class="project-card reveal"
+          onclick="openCertModal('https://student-management-syste-70290.web.app/logo.png', t('proj5.title'))">
+          <div class="project-media">
+            <img src="https://student-management-syste-70290.web.app/logo.png" alt="YOUNG SMS"
+              style="object-fit: contain; background: linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #4338ca 100%); padding: 2rem;" />
+            <div class="project-media-badge" data-i18n="common.badgeImage">Image</div>
+          </div>
+          <div class="project-body">
+            <div class="project-tags">
+              <span class="tag">React.js</span>
+              <span class="tag">Node.js</span>
+              <span class="tag">Express</span>
+              <span class="tag">Firebase</span>
+              <span class="tag">Firestore</span>
+              <span class="tag">Realtime Database</span>
+              <span class="tag">Authentication</span>
+              <span class="tag">Firebase Hosting</span>
+            </div>
+            <h3 class="project-title" data-i18n="proj5.title">YOUNG SMS</h3>
+            <p class="project-desc" data-i18n="proj5.desc"></p>
+            <div class="project-links">
+              <a href="https://github.com/Rotananob/SMS" class="project-link" target="_blank" rel="noopener noreferrer"
+                onclick="event.stopPropagation();"><i class="fa-brands fa-github"></i> <span
+                  data-i18n="common.code">Code</span></a>
+              <a href="https://student-management-syste-70290.web.app/" class="project-link" target="_blank"
+                rel="noopener noreferrer" onclick="event.stopPropagation();"><i
+                  class="fa-solid fa-arrow-up-right-from-square"></i> <span data-i18n="common.live">Live</span></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- #7: NRI Studio -->
+        <div class="project-card reveal"
+          onclick="openCertModal('https://rotananob-nri-studio.vercel.app/logo.png', t('proj10.title'))">
+          <div class="project-media">
+            <img src="https://rotananob-nri-studio.vercel.app/logo.png" alt="NRI Studio"
+              style="object-fit: cover; background: #1e1e1e;" />
+            <div class="project-media-badge" data-i18n="common.badgeImage">Image</div>
+          </div>
+          <div class="project-body">
+            <div class="project-tags">
+              <span class="tag">React 18</span>
+              <span class="tag">TypeScript</span>
+              <span class="tag">Vite</span>
+              <span class="tag">Monaco Editor</span>
+              <span class="tag">Node.js</span>
+              <span class="tag">MongoDB</span>
+              <span class="tag">Firebase Auth</span>
+              <span class="tag">Xterm.js</span>
+            </div>
+            <h3 class="project-title" data-i18n="proj10.title">NRI Studio</h3>
+            <p class="project-desc" data-i18n="proj10.desc"></p>
+            <div class="project-links">
+              <a href="https://github.com/Rotananob/NRI-Studio" class="project-link" target="_blank"
+                rel="noopener noreferrer" onclick="event.stopPropagation();"><i class="fa-brands fa-github"></i> <span
+                  data-i18n="common.code">Code</span></a>
+              <a href="https://rotananob-nri-studio.vercel.app" class="project-link" target="_blank"
+                rel="noopener noreferrer" onclick="event.stopPropagation();"><i
+                  class="fa-solid fa-arrow-up-right-from-square"></i> <span data-i18n="common.live">Live</span></a>
             </div>
           </div>
         </div>
@@ -1490,21 +1505,6 @@
       </div>
     </div>
   </footer>
-
-  <!-- =====================
-       2026 MINIMAL AMBIENCE CONTROLLER (ICON ONLY - CLEAN & COMPACT)
-       ===================== -->
-  <div class="ambience-dock" id="ambience-dock">
-    <div class="weather-indicator" id="weather-indicator"></div>
-    <div class="ambience-dock-btns">
-      <button id="mute-btn" data-i18n-title="mute.btnTitle" title="Toggle Sound (Mute/Unmute)" aria-label="Toggle Sound">
-        <i class="fa-solid fa-volume-high" id="mute-icon"></i>
-      </button>
-      <button id="weather-btn" data-i18n-title="weather.btnTitle" title="Change Mode (3D, Video, Weather)" aria-label="Toggle Visual Mode">
-        <i class="fa-solid fa-cube" id="weather-icon"></i>
-      </button>
-    </div>
-  </div>
 
   <!-- =====================
        AUDIO (hidden, user-triggered only)
