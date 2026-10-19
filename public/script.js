@@ -2,7 +2,7 @@
 
 /* ========== i18n: English (default) & Khmer ========== */
 const LANG_KEY = 'portfolio-lang';
-let weatherState = 0; // 2026 Interactive 3D Cyber Mesh default
+let weatherState = 0; // 2026 Mode 0: Ultimate Cyber Storm (Mix of Lightning + Rain + Snow + 3D Mesh) [DEFAULT]
 
 const I18N = { en: {}, km: {} };
 
@@ -153,18 +153,23 @@ Object.assign(I18N.en, {
   'footer.heading': 'Let\'s build something amazing together.',
   'footer.copy': '© 2025 Rotana NOB. All rights reserved.',
   'weather.btnTitle': 'Change Visual Mode (3D, Video, Weather)',
-  'weather.mode0': '🌌 3D Cyber Mesh',
+  'weather.mode0': '⚡ Ultimate Cyber Storm (Mix of All)',
   'weather.mode1': '🎬 Cyber Video',
   'weather.mode2': '🌧️ Cyber Rain',
-  'weather.mode3': '⚡ Thunderstorm',
+  'weather.mode3': '⚡ Fierce Thunderstorm',
   'weather.mode4': '❄️ Cosmic Snow',
-  'weather.mode5': '✨ Zen Aurora',
-  'weather.ind0': '🌌 3D Cyber Mesh',
+  'weather.mode5': '🌌 3D Cyber Mesh',
+  'weather.mode6': '✨ Zen Aurora',
+  'weather.ind0': '⚡ Ultimate Cyber Storm (Lightning + Rain + Snow + 3D)',
   'weather.ind1': '🎬 Cyber Video',
   'weather.ind2': '🌧️ Cyber Rain',
-  'weather.ind3': '⚡ Thunderstorm',
-  'weather.ind4': '❄️ 3D Cosmic Snow',
-  'weather.ind5': '✨ Zen Aurora',
+  'weather.ind3': '⚡ Fierce Thunderstorm',
+  'weather.ind4': '❄️ Cosmic Snow',
+  'weather.ind5': '🌌 3D Cyber Mesh',
+  'weather.ind6': '✨ Zen Aurora',
+  'mute.btnTitle': 'Toggle Sound (Mute/Unmute)',
+  'mute.unmuted': '🔊 Sound Active',
+  'mute.muted': '🔇 Sound Muted',
   'nav.resume': 'Resume',
   'resume.sectionTag': 'My Story',
   'resume.titleBefore': 'My',
@@ -403,18 +408,23 @@ Object.assign(I18N.km, {
   'footer.heading': 'តោះ! រួមគ្នាបង្កើតអ្វីដែលអស្ចារ្យ។',
   'footer.copy': '© ២០២៥ ណុប រតនា។ រក្សាសិទ្ធិគ្រប់យ៉ាង។',
   'weather.btnTitle': 'ប្តូរបរិយាកាស (3D / Video / Weather)',
-  'weather.mode0': '🌌 3D Cyber Mesh',
+  'weather.mode0': '⚡ មហាកំពូលព្យុះ (រន្ទះ + ភ្លៀង + ព្រិល + 3D)',
   'weather.mode1': '🎬 Cyber Video',
-  'weather.mode2': '🌧️ ភ្លៀងធ្លាក់',
-  'weather.mode3': '⚡ ផ្គររន្ទះ',
-  'weather.mode4': '❄️ ព្រិលត្រជាក់',
-  'weather.mode5': '✨ Zen Aurora',
-  'weather.ind0': '🌌 3D Cyber Mesh',
+  'weather.mode2': '🌧️ ភ្លៀងធ្លាក់ Cyber',
+  'weather.mode3': '⚡ ផ្គររន្ទះ និងផ្លេកបន្ទោរ',
+  'weather.mode4': '❄️ ព្រិលត្រជាក់ Cosmic',
+  'weather.mode5': '🌌 3D Cyber Mesh',
+  'weather.mode6': '✨ Zen Aurora',
+  'weather.ind0': '⚡ មហាកំពូលព្យុះ (រន្ទះ + ភ្លៀង + ព្រិល + 3D)',
   'weather.ind1': '🎬 Cyber Video',
-  'weather.ind2': '🌧️ ភ្លៀងធ្លាក់',
-  'weather.ind3': '⚡ ផ្គររន្ទះ',
-  'weather.ind4': '❄️ ព្រិលត្រជាក់',
-  'weather.ind5': '✨ Zen Aurora',
+  'weather.ind2': '🌧️ ភ្លៀងធ្លាក់ Cyber',
+  'weather.ind3': '⚡ ផ្គររន្ទះ និងផ្លេកបន្ទោរ',
+  'weather.ind4': '❄️ ព្រិលត្រជាក់ Cosmic',
+  'weather.ind5': '🌌 3D Cyber Mesh',
+  'weather.ind6': '✨ Zen Aurora',
+  'mute.btnTitle': 'បិទ/បើក សំឡេងបរិយាកាស',
+  'mute.unmuted': '🔊 បានបើកសំឡេងបរិយាកាស',
+  'mute.muted': '🔇 បានបិទសំឡេង',
   'nav.resume': 'ប្រវត្តិ',
   'resume.sectionTag': 'រឿងរ៉ាវរបស់ខ្ញុំ',
   'resume.titleBefore': 'ដំណើរ',
@@ -969,10 +979,136 @@ const ctx = weatherCanvas?.getContext('2d');
 
 let particles = [];
 let splashes = [];
+let particles3D = [];
+let rainDrops = [];
+let snowFlakes = [];
 let animFrame = null;
 let flashOpacity = 0;
 let lightningBolt = null;
 let indicatorTimeout = null;
+let lastLightningTime = 0;
+
+// --- 2026 PROCEDURAL WEB AUDIO SYNTH ENGINE ---
+let audioCtx = null;
+let rainSource = null;
+let rainFilter = null;
+let rainGain = null;
+let windSource = null;
+let windFilter = null;
+let windGain = null;
+let isAudioSynthInitialized = false;
+
+function initWebAudioSynth() {
+  if (isAudioSynthInitialized) return;
+  try {
+    const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+    if (!AudioContextClass) return;
+    if (!audioCtx) audioCtx = new AudioContextClass();
+
+    // 1. Procedural Continuous Rainfall Roar
+    const rainBuffer = audioCtx.createBuffer(1, Math.floor(audioCtx.sampleRate * 4), audioCtx.sampleRate);
+    const rainData = rainBuffer.getChannelData(0);
+    for (let i = 0; i < rainData.length; i++) {
+      rainData[i] = (Math.random() * 2 - 1) * 0.32;
+    }
+    rainSource = audioCtx.createBufferSource();
+    rainSource.buffer = rainBuffer;
+    rainSource.loop = true;
+
+    rainFilter = audioCtx.createBiquadFilter();
+    rainFilter.type = 'lowpass';
+    rainFilter.frequency.setValueAtTime(850, audioCtx.currentTime);
+
+    rainGain = audioCtx.createGain();
+    rainGain.gain.setValueAtTime(0.2, audioCtx.currentTime);
+
+    rainSource.connect(rainFilter);
+    rainFilter.connect(rainGain);
+    rainGain.connect(audioCtx.destination);
+    rainSource.start();
+
+    // 2. Procedural Wind / Cosmic Breeze
+    const windBuffer = audioCtx.createBuffer(1, Math.floor(audioCtx.sampleRate * 4), audioCtx.sampleRate);
+    const windData = windBuffer.getChannelData(0);
+    for (let i = 0; i < windData.length; i++) {
+      windData[i] = (Math.random() * 2 - 1) * 0.2;
+    }
+    windSource = audioCtx.createBufferSource();
+    windSource.buffer = windBuffer;
+    windSource.loop = true;
+
+    windFilter = audioCtx.createBiquadFilter();
+    windFilter.type = 'bandpass';
+    windFilter.frequency.setValueAtTime(360, audioCtx.currentTime);
+    windFilter.Q.setValueAtTime(2.2, audioCtx.currentTime);
+
+    windGain = audioCtx.createGain();
+    windGain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+
+    windSource.connect(windFilter);
+    windFilter.connect(windGain);
+    windGain.connect(audioCtx.destination);
+    windSource.start();
+
+    isAudioSynthInitialized = true;
+  } catch (e) {
+    console.log("Web Audio synth init postponed:", e);
+  }
+}
+
+function playSynthesizedThunder(intensity = 1.0) {
+  if (isMuted) return;
+  if (!audioCtx) initWebAudioSynth();
+  if (!audioCtx) return;
+  if (audioCtx.state === 'suspended') {
+    audioCtx.resume().catch(() => {});
+  }
+
+  try {
+    const now = audioCtx.currentTime;
+    const dur = 4.0;
+    const buffer = audioCtx.createBuffer(1, Math.floor(audioCtx.sampleRate * dur), audioCtx.sampleRate);
+    const data = buffer.getChannelData(0);
+    for (let i = 0; i < data.length; i++) {
+      data[i] = (Math.random() * 2 - 1);
+    }
+    const thunderSource = audioCtx.createBufferSource();
+    thunderSource.buffer = buffer;
+
+    const thunderFilter = audioCtx.createBiquadFilter();
+    thunderFilter.type = 'lowpass';
+    thunderFilter.frequency.setValueAtTime(95, now);
+    thunderFilter.Q.setValueAtTime(4.0, now);
+
+    const thunderGain = audioCtx.createGain();
+    const peakVol = Math.min(0.7, 0.45 * intensity);
+    thunderGain.gain.setValueAtTime(0.001, now);
+    thunderGain.gain.exponentialRampToValueAtTime(peakVol, now + 0.12);
+    thunderGain.gain.exponentialRampToValueAtTime(peakVol * 0.35, now + 0.9);
+    thunderGain.gain.exponentialRampToValueAtTime(0.001, now + dur);
+
+    thunderSource.connect(thunderFilter);
+    thunderFilter.connect(thunderGain);
+    thunderGain.connect(audioCtx.destination);
+
+    thunderSource.start(now);
+    thunderSource.stop(now + dur);
+  } catch (e) {
+    console.log("Synthesized thunder error:", e);
+  }
+}
+
+function triggerThunderAudio(intensity = 1.0) {
+  if (isMuted) return;
+  playSynthesizedThunder(intensity);
+  if (thunderAudio) {
+    try {
+      thunderAudio.currentTime = 0;
+      thunderAudio.volume = Math.min(0.65, 0.45 * intensity);
+      thunderAudio.play().catch(() => {});
+    } catch (e) {}
+  }
+}
 
 // Mouse, Scroll & 3D Interactive Camera State
 const mouse = {
@@ -1021,7 +1157,7 @@ window.addEventListener('touchmove', (e) => {
   }
 }, { passive: true });
 
-// Click / tap 3D spark explosion and dual energy shockwave everywhere
+// Click / tap 3D spark explosion, dual energy shockwave & interactive lightning
 function trigger3DClickExplosion(clientX, clientY) {
   const isMobile = window.innerWidth < 768;
   const count = isMobile ? 14 : 26;
@@ -1060,6 +1196,15 @@ function trigger3DClickExplosion(clientX, clientY) {
       decay: 0.022 + Math.random() * 0.025,
       hue: Math.random() > 0.5 ? 195 : (Math.random() > 0.3 ? 280 : 48) // Cyan, Purple, or Gold
     });
+  }
+
+  // Interactive Electric Strike to user's click coordinate
+  if ((weatherState === 0 || weatherState === 3) && Math.random() > 0.42) {
+    const startX = clientX + (Math.random() - 0.5) * 180;
+    const angle = Math.atan2(clientY, clientX - startX) - Math.PI / 2;
+    lightningBolt = createFierceLightning(startX, 0, angle, 9);
+    flashOpacity = 0.75;
+    triggerThunderAudio(0.7);
   }
 
   // 3D Camera Impulse kickback
@@ -1185,24 +1330,43 @@ function createZenOrb() {
 function initParticles() {
   particles = [];
   splashes = [];
+  particles3D = [];
+  rainDrops = [];
+  snowFlakes = [];
   lightningBolt = null;
   flashOpacity = 0;
 
   const isMobile = window.innerWidth < 768;
-  const count = weatherState === 0 ? (isMobile ? 35 : 80) :
-                weatherState === 1 ? (isMobile ? 22 : 45) :
-                weatherState === 2 ? (isMobile ? 80 : 160) :
-                weatherState === 3 ? 10 :
-                weatherState === 4 ? (isMobile ? 45 : 90) : 6;
 
-  for (let i = 0; i < count; i++) {
-    if (weatherState === 0 || weatherState === 1) {
-      particles.push(create3DParticle());
-    } else if (weatherState === 2) {
+  if (weatherState === 0) {
+    // Mode 0: Ultimate Cyber Storm (Mix of 3D Constellation + Rain + Snow)
+    const p3dCount = isMobile ? 26 : 52;
+    const rainCount = isMobile ? 45 : 95;
+    const snowCount = isMobile ? 18 : 36;
+    for (let i = 0; i < p3dCount; i++) particles3D.push(create3DParticle());
+    for (let i = 0; i < rainCount; i++) {
+      const d = createRainDrop();
+      d.y = Math.random() * weatherCanvas.height;
+      rainDrops.push(d);
+    }
+    for (let i = 0; i < snowCount; i++) {
+      const s = createSnowFlake();
+      s.y = Math.random() * weatherCanvas.height;
+      snowFlakes.push(s);
+    }
+  } else if (weatherState === 1) {
+    const count = isMobile ? 22 : 45;
+    for (let i = 0; i < count; i++) particles.push(create3DParticle());
+  } else if (weatherState === 2) {
+    const count = isMobile ? 80 : 160;
+    for (let i = 0; i < count; i++) {
       const d = createRainDrop();
       d.y = Math.random() * weatherCanvas.height;
       particles.push(d);
-    } else if (weatherState === 3) {
+    }
+  } else if (weatherState === 3) {
+    const count = 10;
+    for (let i = 0; i < count; i++) {
       particles.push({
         x: Math.random() * weatherCanvas.width,
         y: Math.random() * (weatherCanvas.height * 0.45),
@@ -1210,17 +1374,242 @@ function initParticles() {
         speed: 0.06 + Math.random() * 0.1,
         alpha: 0.14
       });
-    } else if (weatherState === 4) {
+    }
+  } else if (weatherState === 4) {
+    const count = isMobile ? 45 : 90;
+    for (let i = 0; i < count; i++) {
       const s = createSnowFlake();
       s.y = Math.random() * weatherCanvas.height;
       particles.push(s);
-    } else if (weatherState === 5) {
-      particles.push(createZenOrb());
     }
+  } else if (weatherState === 5) {
+    const count = isMobile ? 35 : 80;
+    for (let i = 0; i < count; i++) particles.push(create3DParticle());
+  } else if (weatherState === 6) {
+    for (let i = 0; i < 6; i++) particles.push(createZenOrb());
   }
 }
 
-// --- DRAW 3D CYBER CONSTELLATION (Mode 0 & Mode 1) ---
+// --- DRAW ULTIMATE CYBER STORM (Mode 0 - DEFAULT HYBRID MIX) ---
+// Combines: 3D Constellation Mesh + Slanted Rain & Splashes + Drifting Snow + Lightning Strikes & Thunder
+function drawUltimateCyberStorm() {
+  if (!ctx) return;
+  ctx.clearRect(0, 0, weatherCanvas.width, weatherCanvas.height);
+
+  const w = weatherCanvas.width;
+  const h = weatherCanvas.height;
+  const isMobile = w < 768;
+  const centerX = w / 2;
+  const centerY = h / 2;
+  const fov = 420;
+
+  // Smooth camera spring
+  cam.x += (cam.targetX - cam.x) * 0.06;
+  cam.y += (cam.targetY - cam.y) * 0.06;
+
+  // Damp scroll velocity smoothly each frame
+  scrollVelocity *= 0.92;
+
+  // Dynamic 3D perspective pitch and scale for Background Grid
+  const cyberGrid = document.getElementById('cyber-grid');
+  if (cyberGrid) {
+    const gridPitch = 60 + Math.max(-10, Math.min(10, scrollVelocity * 0.25));
+    cyberGrid.style.transform = `perspective(600px) rotateX(${gridPitch.toFixed(1)}deg) translateY(${(window.scrollY * 0.35) % 60}px)`;
+  }
+
+  // 1. Render Slanted Cyber Rain & Water Splashes
+  rainDrops.forEach((d, i) => {
+    ctx.save();
+    ctx.globalAlpha = d.alpha;
+    ctx.strokeStyle = 'rgba(125, 211, 252, 0.85)';
+    ctx.lineWidth = d.thick;
+    ctx.shadowBlur = 4;
+    ctx.shadowColor = 'rgba(56, 189, 248, 0.4)';
+    ctx.beginPath();
+    ctx.moveTo(d.x, d.y);
+    ctx.lineTo(d.x + d.wind, d.y + d.len);
+    ctx.stroke();
+    ctx.restore();
+
+    d.x += d.wind;
+    d.y += d.speed + scrollVelocity * 0.8;
+
+    if (d.y > h - 15) {
+      if (Math.random() > 0.65) {
+        splashes.push({ x: d.x, y: h - 10, r: 1, alpha: 0.6 });
+      }
+      rainDrops[i] = createRainDrop();
+    }
+  });
+
+  // Render Splashes
+  for (let sIdx = splashes.length - 1; sIdx >= 0; sIdx--) {
+    const sp = splashes[sIdx];
+    ctx.save();
+    ctx.beginPath();
+    ctx.arc(sp.x, sp.y, sp.r, 0, Math.PI * 2);
+    ctx.strokeStyle = `rgba(56, 189, 248, ${sp.alpha})`;
+    ctx.lineWidth = 1;
+    ctx.stroke();
+    ctx.restore();
+    sp.r += 1.3;
+    sp.alpha -= 0.05;
+    if (sp.alpha <= 0) splashes.splice(sIdx, 1);
+  }
+
+  // 2. Render Drifting Cosmic Snowflakes
+  snowFlakes.forEach((s, i) => {
+    s.wobble += 0.025;
+    ctx.save();
+    ctx.globalAlpha = s.alpha;
+    ctx.fillStyle = 'rgba(235, 248, 255, 0.9)';
+    ctx.shadowBlur = 8;
+    ctx.shadowColor = 'rgba(186, 230, 253, 0.7)';
+    ctx.beginPath();
+    ctx.arc(s.x + Math.sin(s.wobble) * 2.5, s.y, s.r, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.restore();
+
+    s.x += s.drift;
+    s.y += s.speed + scrollVelocity * 0.5;
+
+    if (!isMobile) {
+      const sDx = s.x - mouse.x;
+      const sDy = s.y - mouse.y;
+      const sDist2 = sDx * sDx + sDy * sDy;
+      if (sDist2 < 10000 && sDist2 > 0) {
+        s.x += (sDx / Math.sqrt(sDist2)) * 1.2;
+      }
+    }
+
+    if (s.y > h + 10) {
+      snowFlakes[i] = createSnowFlake();
+    }
+  });
+
+  // 3. Render 3D Constellation Mesh Nodes & Laser Connections
+  const projected = [];
+  for (let i = 0; i < particles3D.length; i++) {
+    const p = particles3D[i];
+    p.x += p.vx;
+    p.y += p.vy;
+    p.z += p.vz + scrollVelocity * 2.0;
+
+    const boundX = w * 0.75;
+    const boundY = h * 0.75;
+    if (p.x < -boundX) p.x = boundX;
+    if (p.x > boundX) p.x = -boundX;
+    if (p.y < -boundY) p.y = boundY;
+    if (p.y > boundY) p.y = -boundY;
+    if (p.z < -380) p.z = 280;
+    if (p.z > 280) p.z = -380;
+
+    const scale = fov / (fov + p.z);
+    const px = centerX + (p.x - cam.x) * scale;
+    const py = centerY + (p.y - cam.y) * scale;
+    const pr = Math.max(0.8, p.baseR * scale);
+
+    if (!isMobile) {
+      const mDx = mouse.x - px;
+      const mDy = mouse.y - py;
+      const mDist2 = mDx * mDx + mDy * mDy;
+      if (mDist2 < 22500 && mDist2 > 0) {
+        const mDist = Math.sqrt(mDist2);
+        const force = (1 - mDist / 150) * 0.0005;
+        p.vx += mDx * force;
+        p.vy += mDy * force;
+
+        ctx.beginPath();
+        ctx.moveTo(mouse.x, mouse.y);
+        ctx.lineTo(px, py);
+        ctx.strokeStyle = `rgba(0, 240, 255, ${(1 - mDist / 150) * 0.3})`;
+        ctx.lineWidth = 0.8;
+        ctx.stroke();
+      }
+    }
+
+    p.vx *= 0.985;
+    p.vy *= 0.985;
+    projected.push({ px, py, pr, scale, p });
+  }
+
+  // Draw connecting lines between nearby 3D nodes
+  const maxConnDist = isMobile ? 65 : 100;
+  const maxConnDist2 = maxConnDist * maxConnDist;
+  ctx.lineWidth = 0.7;
+  for (let i = 0; i < projected.length; i++) {
+    const a = projected[i];
+    for (let j = i + 1; j < projected.length; j++) {
+      const b = projected[j];
+      const dx = a.px - b.px;
+      const dy = a.py - b.py;
+      const dist2 = dx * dx + dy * dy;
+      if (dist2 < maxConnDist2) {
+        const dist = Math.sqrt(dist2);
+        const lineAlpha = (1 - dist / maxConnDist) * 0.25 * Math.min(a.scale, b.scale);
+        ctx.beginPath();
+        ctx.moveTo(a.px, a.py);
+        ctx.lineTo(b.px, b.py);
+        ctx.strokeStyle = `rgba(0, 240, 255, ${lineAlpha})`;
+        ctx.stroke();
+      }
+    }
+  }
+
+  // Draw 3D nodes
+  for (let i = 0; i < projected.length; i++) {
+    const { px, py, pr, p, scale } = projected[i];
+    const nodeAlpha = Math.min(1, p.alpha * scale * 0.85);
+    ctx.beginPath();
+    ctx.arc(px, py, pr, 0, Math.PI * 2);
+    ctx.fillStyle = `hsla(${p.hue}, 90%, 65%, ${nodeAlpha})`;
+    ctx.fill();
+  }
+
+  // 4. Procedural Fractal Lightning & Sky Flash
+  const now = Date.now();
+  if (!lightningBolt && (Math.random() > 0.988 || (now - lastLightningTime > 5500 && Math.random() > 0.85))) {
+    lastLightningTime = now;
+    const startX = Math.random() * w * 0.8 + w * 0.1;
+    lightningBolt = createFierceLightning(startX, 0, (Math.random() - 0.5) * 0.35, 11);
+    flashOpacity = 0.82;
+    cam.targetX += (Math.random() - 0.5) * 20;
+    cam.targetY += (Math.random() - 0.5) * 20;
+    scrollVelocity += (Math.random() - 0.5) * 3;
+    triggerThunderAudio(1.0);
+  }
+
+  if (lightningBolt) {
+    ctx.save();
+    ctx.strokeStyle = '#ffffff';
+    ctx.shadowBlur = 35;
+    ctx.shadowColor = 'rgba(120, 220, 255, 0.95)';
+    ctx.lineCap = 'round';
+    ctx.beginPath();
+    lightningBolt.forEach(s => {
+      ctx.lineWidth = s.width;
+      ctx.moveTo(s.x1, s.y1);
+      ctx.lineTo(s.x2, s.y2);
+    });
+    ctx.stroke();
+    ctx.restore();
+    if (Math.random() > 0.5) lightningBolt = null;
+  }
+
+  if (flashOpacity > 0) {
+    ctx.save();
+    ctx.globalAlpha = Math.min(0.55, flashOpacity);
+    ctx.fillStyle = 'rgba(180, 230, 255, 0.45)';
+    ctx.fillRect(0, 0, w, h);
+    ctx.restore();
+    flashOpacity -= 0.08;
+  }
+
+  // 5. Interactive shockwaves and 3D sparks
+  renderInteractiveFx(420);
+}
+
+// --- DRAW 3D CYBER CONSTELLATION (Mode 1 & Mode 5) ---
 function drawCyberConstellation(isOverlayOnly = false) {
   if (!ctx) return;
   ctx.clearRect(0, 0, weatherCanvas.width, weatherCanvas.height);
@@ -1547,7 +1936,7 @@ function drawZenAurora() {
 // --- MASTER ANIMATION LOOP ---
 function animateWeather() {
   if (weatherState === 0) {
-    drawCyberConstellation(false);
+    drawUltimateCyberStorm();
   } else if (weatherState === 1) {
     drawCyberConstellation(true);
   } else if (weatherState === 2) {
@@ -1557,6 +1946,8 @@ function animateWeather() {
   } else if (weatherState === 4) {
     drawSnow();
   } else if (weatherState === 5) {
+    drawCyberConstellation(false);
+  } else if (weatherState === 6) {
     drawZenAurora();
   }
   animFrame = requestAnimationFrame(animateWeather);
@@ -1575,22 +1966,26 @@ function stopWeather() {
   thunderAudio?.pause(); if (thunderAudio) thunderAudio.currentTime = 0;
   weatherIndicator?.classList.remove('visible');
   if (audioWaves) audioWaves.style.display = 'none';
+  if (audioCtx && audioCtx.state === 'running') {
+    audioCtx.suspend().catch(() => {});
+  }
 }
 
 function applyWeatherUiLabels(showToast = false) {
   if (weatherBtn) weatherBtn.setAttribute('title', t('weather.btnTitle'));
 
   const modeIcons = [
-    'fa-solid fa-cube',
-    'fa-solid fa-film',
-    'fa-solid fa-cloud-rain',
-    'fa-solid fa-bolt-lightning',
-    'fa-solid fa-snowflake',
-    'fa-solid fa-circle-notch'
+    'fa-solid fa-bolt-lightning', // Mode 0: Ultimate Cyber Storm
+    'fa-solid fa-film',           // Mode 1: Cyber Video
+    'fa-solid fa-cloud-rain',     // Mode 2: Cyber Rain
+    'fa-solid fa-bolt',           // Mode 3: Thunderstorm
+    'fa-solid fa-snowflake',      // Mode 4: Cosmic Snow
+    'fa-solid fa-cube',           // Mode 5: 3D Cyber Mesh
+    'fa-solid fa-circle-notch'    // Mode 6: Zen Aurora
   ];
 
   if (weatherIcon) {
-    weatherIcon.className = modeIcons[weatherState] || 'fa-solid fa-cube';
+    weatherIcon.className = modeIcons[weatherState] || 'fa-solid fa-bolt-lightning';
   }
 
   if (weatherIndicator && showToast) {
@@ -1603,28 +1998,80 @@ function applyWeatherUiLabels(showToast = false) {
   }
 }
 
+function syncModeAudio() {
+  if (isMuted) {
+    rainAudio?.pause();
+    snowAudio?.pause();
+    thunderAudio?.pause();
+    if (audioCtx && audioCtx.state === 'running') {
+      audioCtx.suspend().catch(() => {});
+    }
+    return;
+  }
+
+  initWebAudioSynth();
+  if (audioCtx && audioCtx.state === 'suspended') {
+    audioCtx.resume().catch(() => {});
+  }
+
+  if (weatherState === 0) {
+    // Mode 0: Ultimate Cyber Storm (Mix of All + Procedural Rain/Wind + Lo-Fi Chill Rain Track)
+    if (rainGain && audioCtx) rainGain.gain.setValueAtTime(0.22, audioCtx.currentTime);
+    if (windGain && audioCtx) windGain.gain.setValueAtTime(0.12, audioCtx.currentTime);
+    if (rainAudio) {
+      rainAudio.volume = 0.35;
+      rainAudio.play().catch(() => {});
+    }
+    snowAudio?.pause();
+  } else if (weatherState === 2) {
+    // Cyber Rain
+    if (rainGain && audioCtx) rainGain.gain.setValueAtTime(0.3, audioCtx.currentTime);
+    if (windGain && audioCtx) windGain.gain.setValueAtTime(0.05, audioCtx.currentTime);
+    if (rainAudio) {
+      rainAudio.volume = 0.5;
+      rainAudio.play().catch(() => {});
+    }
+    snowAudio?.pause();
+  } else if (weatherState === 3) {
+    // Thunderstorm
+    if (rainGain && audioCtx) rainGain.gain.setValueAtTime(0.15, audioCtx.currentTime);
+    if (windGain && audioCtx) windGain.gain.setValueAtTime(0.15, audioCtx.currentTime);
+    rainAudio?.pause();
+    snowAudio?.pause();
+  } else if (weatherState === 4) {
+    // Cosmic Snow
+    if (rainGain && audioCtx) rainGain.gain.setValueAtTime(0.0, audioCtx.currentTime);
+    if (windGain && audioCtx) windGain.gain.setValueAtTime(0.18, audioCtx.currentTime);
+    rainAudio?.pause();
+    if (snowAudio) {
+      snowAudio.volume = 0.45;
+      snowAudio.play().catch(() => {});
+    }
+  } else {
+    // Video / 3D Mesh / Zen
+    if (rainGain && audioCtx) rainGain.gain.setValueAtTime(0.02, audioCtx.currentTime);
+    if (windGain && audioCtx) windGain.gain.setValueAtTime(0.04, audioCtx.currentTime);
+    rainAudio?.pause();
+    snowAudio?.pause();
+  }
+}
+
 function startWeather(isUserAction = false) {
   resizeCanvas();
   initParticles();
 
   // Manage Background Video & Canvas Visibility
-  if (weatherState === 0) {
-    cyberVideo?.classList.remove('active');
-    if (cyberVideo) cyberVideo.pause();
-    stormVideo?.classList.remove('active');
-    if (stormVideo) stormVideo.pause();
-    weatherCanvas?.classList.add('active');
-  } else if (weatherState === 1) {
+  if (weatherState === 1) {
     stormVideo?.classList.remove('active');
     if (stormVideo) stormVideo.pause();
     cyberVideo?.classList.add('active');
-    cyberVideo?.play().catch(() => console.log("Video blocked"));
+    cyberVideo?.play().catch(() => {});
     weatherCanvas?.classList.add('active');
   } else if (weatherState === 3) {
     cyberVideo?.classList.remove('active');
     if (cyberVideo) cyberVideo.pause();
     stormVideo?.classList.add('active');
-    stormVideo?.play().catch(() => console.log("Storm video blocked"));
+    stormVideo?.play().catch(() => {});
     weatherCanvas?.classList.add('active');
   } else {
     cyberVideo?.classList.remove('active');
@@ -1635,31 +2082,13 @@ function startWeather(isUserAction = false) {
   }
 
   animateWeather();
-
-  // Manage Audio
-  rainAudio?.pause();
-  snowAudio?.pause();
-  thunderAudio?.pause();
-
-  if (!isMuted) {
-    if (weatherState === 2 && rainAudio) {
-      rainAudio.volume = 0.5;
-      rainAudio.play().catch(() => console.log("Rain audio waiting"));
-    } else if (weatherState === 3 && thunderAudio) {
-      thunderAudio.volume = 0.6;
-      thunderAudio.play().catch(() => console.log("Thunder audio waiting"));
-    } else if (weatherState === 4 && snowAudio) {
-      snowAudio.volume = 0.4;
-      snowAudio.play().catch(() => console.log("Snow audio waiting"));
-    }
-  }
-
+  syncModeAudio();
   applyWeatherUiLabels(isUserAction);
 }
 
-// 6 Modes cycle: 0 -> 1 -> 2 -> 3 -> 4 -> 5 -> 0
+// 7 Modes cycle: 0 -> 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 0
 weatherBtn?.addEventListener('click', () => {
-  weatherState = (weatherState + 1) % 6;
+  weatherState = (weatherState + 1) % 7;
   stopWeather();
   startWeather(true);
 });
@@ -1669,22 +2098,46 @@ const muteBtn = document.getElementById('mute-btn');
 const muteIcon = document.getElementById('mute-icon');
 let isMuted = false;
 
-if (muteBtn) {
-  muteBtn.addEventListener('click', () => {
-    isMuted = !isMuted;
-    if (rainAudio) rainAudio.muted = isMuted;
-    if (snowAudio) snowAudio.muted = isMuted;
-    if (thunderAudio) thunderAudio.muted = isMuted;
+function setAudioMuteState(muted, showToast = true) {
+  isMuted = muted;
+  if (rainAudio) rainAudio.muted = isMuted;
+  if (snowAudio) snowAudio.muted = isMuted;
+  if (thunderAudio) thunderAudio.muted = isMuted;
 
+  if (audioCtx) {
+    if (isMuted && audioCtx.state === 'running') {
+      audioCtx.suspend().catch(() => {});
+    } else if (!isMuted && audioCtx.state === 'suspended') {
+      audioCtx.resume().catch(() => {});
+    }
+  }
+
+  if (muteIcon && muteBtn) {
     if (isMuted) {
       muteIcon.className = 'fa-solid fa-volume-xmark';
+      muteBtn.classList.remove('playing');
+      muteBtn.classList.add('muted');
     } else {
       muteIcon.className = 'fa-solid fa-volume-high';
-      const targetAudio = weatherState === 2 ? rainAudio : (weatherState === 4 ? snowAudio : (weatherState === 3 ? thunderAudio : null));
-      if (targetAudio && targetAudio.paused) {
-        targetAudio.play().catch(() => console.log("Audio waiting"));
-      }
+      muteBtn.classList.add('playing');
+      muteBtn.classList.remove('muted');
+      syncModeAudio();
     }
+  }
+
+  if (weatherIndicator && showToast) {
+    weatherIndicator.textContent = isMuted ? t('mute.muted') : t('mute.unmuted');
+    weatherIndicator.classList.add('visible');
+    clearTimeout(indicatorTimeout);
+    indicatorTimeout = setTimeout(() => {
+      weatherIndicator.classList.remove('visible');
+    }, 1500);
+  }
+}
+
+if (muteBtn) {
+  muteBtn.addEventListener('click', () => {
+    setAudioMuteState(!isMuted, true);
   });
 }
 
@@ -1808,44 +2261,33 @@ loadCertificatesFromFirestore().then(() => init3DCardTilt());
 applyI18n();
 init3DCardTilt();
 
-window.addEventListener('load', () => {
-  setTimeout(() => startWeather(), 200);
-});
-
-// Audio Unlock Management
-let hasUnlocked = false;
+// Autoplay & User Interaction Audio Unlocker
+let hasUnlockedAudio = false;
 const unlockAudio = async () => {
-  if (hasUnlocked) return;
+  if (hasUnlockedAudio) return;
+  hasUnlockedAudio = true;
 
-  // We try to play whichever ambience audio should be active
-  const targetAudio = weatherState === 2 ? rainAudio : (weatherState === 4 ? snowAudio : (weatherState === 3 ? thunderAudio : null));
-
-  if (targetAudio && targetAudio.paused && !isMuted) {
-    try {
-      await targetAudio.play();
-      hasUnlocked = true;
-      cleanupAudioListeners();
-      console.log("Audio unlocked successfully");
-    } catch (e) {
-      console.log("Audio playback waiting for interaction...");
-    }
-  } else {
-    if (weatherState === 0 || weatherState === 1 || weatherState === 5 || (targetAudio && !targetAudio.paused)) {
-      hasUnlocked = true;
-      cleanupAudioListeners();
-    }
+  if (!isMuted) {
+    syncModeAudio();
   }
-};
 
-const cleanupAudioListeners = () => {
-  ['click', 'touchstart', 'scroll', 'mousedown'].forEach(ev => {
+  ['click', 'touchstart', 'scroll', 'mousedown', 'keydown', 'pointerdown'].forEach(ev => {
     window.removeEventListener(ev, unlockAudio);
   });
 };
 
-// Add listeners for any user interaction to unlock audio
-['click', 'touchstart', 'scroll', 'mousedown'].forEach(ev => {
+['click', 'touchstart', 'scroll', 'mousedown', 'keydown', 'pointerdown'].forEach(ev => {
   window.addEventListener(ev, unlockAudio, { passive: true });
+});
+
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    startWeather();
+    // Default open: trigger ambient soundscape immediately
+    if (!isMuted) {
+      syncModeAudio();
+    }
+  }, 150);
 });
 
 /* ========================================================

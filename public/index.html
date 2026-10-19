@@ -77,11 +77,11 @@
        ===================== -->
   <div class="ambience-dock" id="ambience-dock">
     <div class="ambience-dock-btns">
-      <button id="mute-btn" data-i18n-title="mute.btnTitle" title="Toggle Sound (Mute/Unmute)" aria-label="Toggle Sound">
+      <button id="mute-btn" class="playing" data-i18n-title="mute.btnTitle" title="Toggle Sound (Mute/Unmute)" aria-label="Toggle Sound">
         <i class="fa-solid fa-volume-high" id="mute-icon"></i>
       </button>
       <button id="weather-btn" data-i18n-title="weather.btnTitle" title="Change Mode (3D, Video, Weather)" aria-label="Toggle Visual Mode">
-        <i class="fa-solid fa-cube" id="weather-icon"></i>
+        <i class="fa-solid fa-bolt-lightning" id="weather-icon"></i>
       </button>
     </div>
     <div class="weather-indicator" id="weather-indicator"></div>
@@ -1682,16 +1682,16 @@
     🔊 AUDIO SOURCES: Replace with actual audio file URLs.
     Free audio sources: https://freesound.org
   -->
-  <audio id="rain-audio" loop autoplay>
+  <audio id="rain-audio" loop preload="auto">
     <!-- Upbeat Lo-Fi Chill Beat for Rain Mode -->
     <source src="Assets/sound/rain.mp3" type="audio/mpeg" />
   </audio>
 
-  <audio id="snow-audio" loop>
-    <source src="Assets/sound/snow.mp3" type="audio/mpe g" />
+  <audio id="snow-audio" loop preload="auto">
+    <source src="Assets/sound/snow.mp3" type="audio/mpeg" />
   </audio>
 
-  <audio id="thunder-audio" loop>
+  <audio id="thunder-audio" preload="auto">
     <!-- Powerful Thunder Strike sound -->
     <source src="https://cdn.pixabay.com/audio/2022/03/10/audio_b3c959779e.mp3" type="audio/mpeg" />
   </audio>

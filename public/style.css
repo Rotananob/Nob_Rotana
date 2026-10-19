@@ -1803,6 +1803,31 @@ footer::before {
   border-color: rgba(0, 240, 255, 0.4);
 }
 
+#mute-btn.playing {
+  color: #00f0ff;
+  border-color: rgba(0, 240, 255, 0.85);
+  box-shadow: 0 0 18px rgba(0, 240, 255, 0.55), inset 0 0 10px rgba(0, 240, 255, 0.25);
+  animation: audioPulse 2.4s ease-in-out infinite;
+}
+
+#mute-btn.muted {
+  color: #94a3b8;
+  border-color: rgba(148, 163, 184, 0.35);
+  box-shadow: none;
+  animation: none;
+}
+
+@keyframes audioPulse {
+  0%, 100% {
+    box-shadow: 0 0 12px rgba(0, 240, 255, 0.35), inset 0 0 6px rgba(0, 240, 255, 0.15);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 24px rgba(0, 240, 255, 0.75), inset 0 0 12px rgba(0, 240, 255, 0.35);
+    transform: scale(1.05);
+  }
+}
+
 #weather-btn {
   color: #c084fc;
   border-color: rgba(192, 132, 252, 0.4);
