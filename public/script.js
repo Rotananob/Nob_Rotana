@@ -590,7 +590,9 @@ async function loadProjectsFromFirestore() {
         if (t.includes('s tech') || t.includes('s_tech')) return 1;
         if (t.includes('youngpos') || t.includes('young pos')) return 2;
         if (t.includes('clinic') || t.includes('houn vannak')) return 3;
-        if (t.includes('qr scan') || t.includes('qr-scan')) return 4;
+        if (t.includes('e-learning v2') || t.includes('elearning') || t.includes('e-learning')) return 4;
+        if (t.includes('qr scan') || t.includes('qr-scan')) return 5;
+        if (t.includes('sms') || t.includes('student management')) return 6;
         return (p.order !== undefined ? p.order + 10 : 99);
       };
       return score(a) - score(b);
