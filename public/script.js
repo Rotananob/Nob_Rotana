@@ -538,7 +538,9 @@ function applyI18n() {
     btn.setAttribute('aria-pressed', on ? 'true' : 'false');
   });
   document.title = t('page.title');
-  if (typeof applyWeatherUiLabels === 'function') applyWeatherUiLabels();
+  try {
+    if (typeof applyWeatherUiLabels === 'function') applyWeatherUiLabels();
+  } catch (e) {}
 }
 
 document.querySelectorAll('.lang-btn').forEach((btn) => {
@@ -2112,7 +2114,10 @@ function stopWeather() {
 }
 
 function applyWeatherUiLabels(showToast = false) {
-  if (weatherBtn) weatherBtn.setAttribute('title', t('weather.btnTitle'));
+  const btn = document.getElementById('weather-btn');
+  const icon = document.getElementById('weather-icon');
+  const indicator = document.getElementById('weather-indicator');
+  if (btn) btn.setAttribute('title', t('weather.btnTitle'));
 
   const modeIcons = [
     'fa-solid fa-bolt-lightning', // Mode 0: Ultimate Cyber Storm
@@ -2124,17 +2129,20 @@ function applyWeatherUiLabels(showToast = false) {
     'fa-solid fa-circle-notch'    // Mode 6: Zen Aurora
   ];
 
-  if (weatherIcon) {
-    weatherIcon.className = modeIcons[weatherState] || 'fa-solid fa-bolt-lightning';
+  const state = typeof weatherState !== 'undefined' ? weatherState : 0;
+  if (icon) {
+    icon.className = modeIcons[state] || 'fa-solid fa-bolt-lightning';
   }
 
-  if (weatherIndicator && showToast) {
-    weatherIndicator.textContent = t(`weather.ind${weatherState}`);
-    weatherIndicator.classList.add('visible');
-    clearTimeout(indicatorTimeout);
-    indicatorTimeout = setTimeout(() => {
-      weatherIndicator.classList.remove('visible');
-    }, 1500);
+  if (indicator && showToast) {
+    indicator.textContent = t(`weather.ind${state}`);
+    indicator.classList.add('visible');
+    if (typeof indicatorTimeout !== 'undefined') {
+      clearTimeout(indicatorTimeout);
+      indicatorTimeout = setTimeout(() => {
+        indicator.classList.remove('visible');
+      }, 1500);
+    }
   }
 }
 
