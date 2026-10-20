@@ -989,6 +989,8 @@ let splashes = [];
 let particles3D = [];
 let rainDrops = [];
 let snowFlakes = [];
+let glassDroplets = [];
+let matrixDrops = [];
 let animFrame = null;
 let flashOpacity = 0;
 let lightningBolt = null;
@@ -1055,43 +1057,18 @@ function initWebAudioSynth() {
     masterCompressor.connect(masterGain);
     masterGain.connect(audioCtx.destination);
 
-    // 1. Organic Rain Engine (Pink Noise + Modulated Lowpass Filter)
-    const rainBuffer = createPinkNoiseBuffer(audioCtx, 4.0);
-    rainSource = audioCtx.createBufferSource();
-    rainSource.buffer = rainBuffer;
-    rainSource.loop = true;
-
-    rainFilter = audioCtx.createBiquadFilter();
-    rainFilter.type = 'lowpass';
-    rainFilter.frequency.setValueAtTime(1150, now);
-    rainFilter.Q.setValueAtTime(1.2, now);
-
-    // Subtle LFO sweeps rain filter for natural wind & density ebb/flow
-    rainLfo = audioCtx.createOscillator();
-    rainLfo.frequency.setValueAtTime(0.18, now); // Gentle 0.18Hz breath cycle
-    const rainLfoGain = audioCtx.createGain();
-    rainLfoGain.gain.setValueAtTime(260, now);
-    rainLfo.connect(rainLfoGain);
-    rainLfoGain.connect(rainFilter.frequency);
-    rainLfo.start();
-
+    // 1. Organic Rain Engine (Silenced pink noise in favor of authentic soothing rain recording)
     rainGain = audioCtx.createGain();
-    rainGain.gain.setValueAtTime(0.35, now);
+    rainGain.gain.setValueAtTime(0.0001, now);
 
-    rainSource.connect(rainFilter);
-    rainFilter.connect(rainGain);
-    rainGain.connect(masterCompressor);
-    rainSource.start();
-
-    // 2. Warm Futuristic Cyber Ambient Pad (Lush D minor 9th Chord)
-    // Notes: D3 (146.83Hz), A3 (220Hz), F4 (349.23Hz)
+    // 2. Mellow Healing Ambient Pad (432Hz Calm Nostalgic Tone - Ultra-soft & peaceful, បែបអន្លង់អន្លោច)
     ambientPadFilter = audioCtx.createBiquadFilter();
     ambientPadFilter.type = 'lowpass';
-    ambientPadFilter.frequency.setValueAtTime(380, now);
-    ambientPadFilter.Q.setValueAtTime(1.0, now);
+    ambientPadFilter.frequency.setValueAtTime(280, now);
+    ambientPadFilter.Q.setValueAtTime(0.7, now);
 
     ambientPadGain = audioCtx.createGain();
-    ambientPadGain.gain.setValueAtTime(0.045, now); // Soft, non-intrusive, majestic
+    ambientPadGain.gain.setValueAtTime(0.012, now); // Soft, peaceful, melancholic warmth
 
     ambientPadFilter.connect(ambientPadGain);
     ambientPadGain.connect(masterCompressor);
@@ -1099,8 +1076,8 @@ function initWebAudioSynth() {
     const padFreqs = [146.83, 220.0, 349.23];
     ambientPadOscs = padFreqs.map((freq, idx) => {
       const osc = audioCtx.createOscillator();
-      osc.type = 'triangle';
-      osc.frequency.setValueAtTime(freq + (idx === 1 ? 0.35 : -0.25), now); // Micro-detuning for lush stereo chorus
+      osc.type = 'sine'; // Ultra-smooth, non-harsh pure sine
+      osc.frequency.setValueAtTime(freq + (idx === 1 ? 0.25 : -0.2), now);
       osc.connect(ambientPadFilter);
       osc.start();
       return osc;
@@ -1193,11 +1170,10 @@ function playSynthesizedThunder(intensity = 1.0) {
 
 function triggerThunderAudio(intensity = 1.0) {
   if (isMuted) return;
-  playSynthesizedThunder(intensity);
   if (thunderAudio) {
     try {
       thunderAudio.currentTime = 0;
-      thunderAudio.volume = Math.min(0.65, 0.45 * intensity);
+      thunderAudio.volume = Math.min(0.42, 0.28 * intensity);
       thunderAudio.play().catch(() => {});
     } catch (e) {}
   }
@@ -1425,6 +1401,34 @@ function createZenOrb() {
   };
 }
 
+// --- 2026 INTERACTIVE GLASS RAINDROP GENERATOR (Window Surface Droplets) ---
+function createGlassDroplet() {
+  const w = weatherCanvas?.width || window.innerWidth;
+  const h = weatherCanvas?.height || window.innerHeight;
+  return {
+    x: Math.random() * w,
+    y: Math.random() * h,
+    r: 1.6 + Math.random() * 3.2,
+    speed: 0.18 + Math.random() * 0.45,
+    alpha: 0.35 + Math.random() * 0.45
+  };
+}
+
+// --- 2026 CYBER MATRIX CODE STREAM GENERATOR (SynthRain Aesthetic) ---
+function createMatrixDrop() {
+  const w = weatherCanvas?.width || window.innerWidth;
+  const chars = ['0', '1', 'λ', '◈', '✦', '{', '}', '<', '>', '/', '#', '::'];
+  return {
+    x: Math.random() * w,
+    y: Math.random() * -300,
+    speed: 2.2 + Math.random() * 3.2,
+    char: chars[Math.floor(Math.random() * chars.length)],
+    alpha: 0.28 + Math.random() * 0.42,
+    size: 11 + Math.random() * 4,
+    hue: Math.random() > 0.4 ? 185 : 275
+  };
+}
+
 // --- INITIALIZE PARTICLES ---
 function initParticles() {
   particles = [];
@@ -1432,17 +1436,21 @@ function initParticles() {
   particles3D = [];
   rainDrops = [];
   snowFlakes = [];
+  glassDroplets = [];
+  matrixDrops = [];
   lightningBolt = null;
   flashOpacity = 0;
 
   const isMobile = window.innerWidth < 768;
 
   if (weatherState === 0) {
-    // Mode 0: Ultimate Cyber Storm (Mix of 3D Constellation + Rain + Snow)
-    // Streamlined on mobile (< 768px) to reduce CPU/GPU cycles by 60% and prevent overheating
+    // Mode 0: Ultimate Cyber Storm (3D Constellation + Slanted Rain + Snow + Glass Droplets + Matrix Streams)
     const p3dCount = isMobile ? 12 : 52;
     const rainCount = isMobile ? 22 : 95;
     const snowCount = isMobile ? 8 : 36;
+    const glassCount = isMobile ? 10 : 26;
+    const matrixCount = isMobile ? 8 : 22;
+
     for (let i = 0; i < p3dCount; i++) particles3D.push(create3DParticle());
     for (let i = 0; i < rainCount; i++) {
       const d = createRainDrop();
@@ -1454,6 +1462,8 @@ function initParticles() {
       s.y = Math.random() * weatherCanvas.height;
       snowFlakes.push(s);
     }
+    for (let i = 0; i < glassCount; i++) glassDroplets.push(createGlassDroplet());
+    for (let i = 0; i < matrixCount; i++) matrixDrops.push(createMatrixDrop());
   } else if (weatherState === 1) {
     const count = isMobile ? 22 : 45;
     for (let i = 0; i < count; i++) particles.push(create3DParticle());
@@ -1575,6 +1585,54 @@ function drawUltimateCyberStorm() {
     sp.alpha -= 0.05;
     if (sp.alpha <= 0) splashes.splice(sIdx, 1);
   }
+
+  // 1b. Render Subtle 3D Cyber Matrix Streams (SynthRain Aesthetic)
+  ctx.save();
+  matrixDrops.forEach((m, idx) => {
+    ctx.fillStyle = `hsla(${m.hue}, 90%, 65%, ${m.alpha})`;
+    ctx.font = `${m.size}px 'JetBrains Mono', monospace`;
+    ctx.fillText(m.char, m.x, m.y);
+    m.y += m.speed;
+    if (Math.random() > 0.96) {
+      const chars = ['0', '1', 'λ', '◈', '✦', '{', '}', '<', '>', '/', '#', '::'];
+      m.char = chars[Math.floor(Math.random() * chars.length)];
+    }
+    if (m.y > h + 20) {
+      matrixDrops[idx] = createMatrixDrop();
+    }
+  });
+  ctx.restore();
+
+  // 1c. Render Interactive Glass Condensation Droplets (Water Beads on Screen Window)
+  glassDroplets.forEach((g, idx) => {
+    ctx.save();
+    ctx.beginPath();
+    ctx.arc(g.x, g.y, g.r, 0, Math.PI * 2);
+    const grad = ctx.createRadialGradient(g.x - g.r * 0.35, g.y - g.r * 0.35, 0.2, g.x, g.y, g.r);
+    grad.addColorStop(0, `rgba(255, 255, 255, ${g.alpha * 0.95})`);
+    grad.addColorStop(0.5, `rgba(125, 211, 252, ${g.alpha * 0.4})`);
+    grad.addColorStop(1, `rgba(15, 23, 42, ${g.alpha * 0.15})`);
+    ctx.fillStyle = grad;
+    ctx.fill();
+
+    ctx.strokeStyle = `rgba(186, 230, 253, ${g.alpha * 0.5})`;
+    ctx.lineWidth = 0.6;
+    ctx.stroke();
+    ctx.restore();
+
+    if (Math.random() > 0.35) g.y += g.speed;
+    if (!isMobile) {
+      const gDx = mouse.x - g.x;
+      const gDy = mouse.y - g.y;
+      if (gDx * gDx + gDy * gDy < 4900) {
+        g.y += 0.9;
+        g.alpha = Math.min(0.85, g.alpha + 0.05);
+      }
+    }
+    if (g.y > h + 15) {
+      glassDroplets[idx] = createGlassDroplet();
+    }
+  });
 
   // 2. Render Drifting Cosmic Snowflakes (ShadowBlur off on mobile)
   const snowShadow = isMobile ? 0 : 8;
@@ -2166,42 +2224,50 @@ function syncModeAudio() {
   }
 
   if (weatherState === 0) {
-    // Mode 0: Ultimate Cyber Storm (Organic Rain + Warm Ambient Pad + Chill Beat)
-    if (rainGain && audioCtx) rainGain.gain.setValueAtTime(0.35, audioCtx.currentTime);
-    if (ambientPadGain && audioCtx) ambientPadGain.gain.setValueAtTime(0.045, audioCtx.currentTime);
+    // Mode 0: Ultimate Cyber Rain & Distant Thunder (Authentic Soothing Nature Audio, បែបអន្លង់អន្លោច)
+    if (rainGain && audioCtx) rainGain.gain.setValueAtTime(0.0001, audioCtx.currentTime);
+    if (ambientPadGain && audioCtx) ambientPadGain.gain.setValueAtTime(0.012, audioCtx.currentTime);
     if (rainAudio) {
-      rainAudio.volume = 0.28;
+      rainAudio.volume = 0.32;
       rainAudio.play().catch(() => {});
     }
     snowAudio?.pause();
   } else if (weatherState === 2) {
     // Cyber Rain
-    if (rainGain && audioCtx) rainGain.gain.setValueAtTime(0.42, audioCtx.currentTime);
-    if (ambientPadGain && audioCtx) ambientPadGain.gain.setValueAtTime(0.02, audioCtx.currentTime);
+    if (rainGain && audioCtx) rainGain.gain.setValueAtTime(0.0001, audioCtx.currentTime);
+    if (ambientPadGain && audioCtx) ambientPadGain.gain.setValueAtTime(0.012, audioCtx.currentTime);
     if (rainAudio) {
-      rainAudio.volume = 0.45;
+      rainAudio.volume = 0.35;
       rainAudio.play().catch(() => {});
     }
     snowAudio?.pause();
   } else if (weatherState === 3) {
     // Thunderstorm
-    if (rainGain && audioCtx) rainGain.gain.setValueAtTime(0.3, audioCtx.currentTime);
-    if (ambientPadGain && audioCtx) ambientPadGain.gain.setValueAtTime(0.03, audioCtx.currentTime);
-    rainAudio?.pause();
+    if (rainGain && audioCtx) rainGain.gain.setValueAtTime(0.0001, audioCtx.currentTime);
+    if (ambientPadGain && audioCtx) ambientPadGain.gain.setValueAtTime(0.012, audioCtx.currentTime);
+    if (rainAudio) {
+      rainAudio.volume = 0.35;
+      rainAudio.play().catch(() => {});
+    }
+    if (thunderAudio) {
+      thunderAudio.currentTime = 0;
+      thunderAudio.volume = 0.38;
+      thunderAudio.play().catch(() => {});
+    }
     snowAudio?.pause();
   } else if (weatherState === 4) {
     // Cosmic Snow
-    if (rainGain && audioCtx) rainGain.gain.setValueAtTime(0.05, audioCtx.currentTime);
-    if (ambientPadGain && audioCtx) ambientPadGain.gain.setValueAtTime(0.06, audioCtx.currentTime);
+    if (rainGain && audioCtx) rainGain.gain.setValueAtTime(0.0001, audioCtx.currentTime);
+    if (ambientPadGain && audioCtx) ambientPadGain.gain.setValueAtTime(0.02, audioCtx.currentTime);
     rainAudio?.pause();
     if (snowAudio) {
-      snowAudio.volume = 0.45;
+      snowAudio.volume = 0.4;
       snowAudio.play().catch(() => {});
     }
   } else {
     // Video / 3D Mesh / Zen
-    if (rainGain && audioCtx) rainGain.gain.setValueAtTime(0.05, audioCtx.currentTime);
-    if (ambientPadGain && audioCtx) ambientPadGain.gain.setValueAtTime(0.07, audioCtx.currentTime);
+    if (rainGain && audioCtx) rainGain.gain.setValueAtTime(0.0001, audioCtx.currentTime);
+    if (ambientPadGain && audioCtx) ambientPadGain.gain.setValueAtTime(0.02, audioCtx.currentTime);
     rainAudio?.pause();
     snowAudio?.pause();
   }

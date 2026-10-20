@@ -22,6 +22,7 @@
        ===================== -->
   <div id="cursor-glow" aria-hidden="true"></div>
   <div id="cyber-grid" aria-hidden="true"></div>
+  <div id="cyber-vignette" aria-hidden="true"></div>
   <canvas id="weather-canvas"></canvas>
   <video id="cyber-video" autoplay loop muted playsinline webkit-playsinline preload="auto" class="weather-video cyber-bg-video">
     <source src="Assets/vdo/cyber_tunnel.webm" type="video/webm" />
@@ -1676,15 +1677,18 @@
     Free audio sources: https://freesound.org
   -->
   <audio id="rain-audio" loop preload="auto">
-    <!-- Upbeat Lo-Fi Chill Beat for Rain Mode -->
-    <source src="Assets/sound/rain.mp3" type="audio/mpeg" />
+    <!-- Soothing authentic ambient rainfall -->
+    <source src="Assets/sound/rain_soothing.mp3" type="audio/mpeg" />
   </audio>
 
   <audio id="snow-audio" loop preload="auto">
     <source src="Assets/sound/snow.mp3" type="audio/mpeg" />
   </audio>
 
-  <audio id="thunder-audio" preload="none"></audio>
+  <audio id="thunder-audio" preload="auto">
+    <!-- Deep atmospheric distant rolling thunder -->
+    <source src="Assets/sound/thunder_rumble.mp3" type="audio/mpeg" />
+  </audio>
 
   <!-- Firebase (compat — works with a single inline script block) -->
   <!-- Back to top button -->
