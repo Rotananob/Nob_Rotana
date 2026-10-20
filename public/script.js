@@ -1148,8 +1148,9 @@ window.addEventListener('pointermove', (e) => {
   }
 }, { passive: true });
 
-// Mobile Touch drag 3D depth parallax
+// Touch drag 3D depth parallax (Desktop/tablet pointer, disabled during mobile scroll to eliminate lag)
 window.addEventListener('touchmove', (e) => {
+  if (window.innerWidth < 768) return;
   if (e.touches && e.touches[0]) {
     const t = e.touches[0];
     cam.targetX = (t.clientX - window.innerWidth / 2) * 0.06;
@@ -1207,13 +1208,18 @@ function trigger3DClickExplosion(clientX, clientY) {
     triggerThunderAudio(0.7);
   }
 
-  // 3D Camera Impulse kickback
-  cam.targetX += (Math.random() - 0.5) * 16;
-  cam.targetY += (Math.random() - 0.5) * 16;
-  scrollVelocity += (Math.random() > 0.5 ? 5 : -5);
+  // 3D Camera Impulse kickback (Desktop only to prevent mobile scroll jumps)
+  if (!isMobile) {
+    cam.targetX += (Math.random() - 0.5) * 16;
+    cam.targetY += (Math.random() - 0.5) * 16;
+    scrollVelocity += (Math.random() > 0.5 ? 5 : -5);
+  }
 }
 
 window.addEventListener('pointerdown', (e) => {
+  if (e.target && e.target.closest('button, a, input, select, textarea, .video-tab, .ambience-dock, .nav-actions, .mobile-menu')) {
+    return;
+  }
   trigger3DClickExplosion(e.clientX, e.clientY);
 }, { passive: true });
 
@@ -1410,11 +1416,15 @@ function drawUltimateCyberStorm() {
   // Damp scroll velocity smoothly each frame
   scrollVelocity *= 0.92;
 
-  // Dynamic 3D perspective pitch and scale for Background Grid
+  // Dynamic 3D perspective pitch and scale for Background Grid (Desktop only to prevent Mobile WebKit clipping)
   const cyberGrid = document.getElementById('cyber-grid');
   if (cyberGrid) {
-    const gridPitch = 60 + Math.max(-10, Math.min(10, scrollVelocity * 0.25));
-    cyberGrid.style.transform = `perspective(600px) rotateX(${gridPitch.toFixed(1)}deg) translateY(${(window.scrollY * 0.35) % 60}px)`;
+    if (!isMobile) {
+      const gridPitch = 60 + Math.max(-10, Math.min(10, scrollVelocity * 0.25));
+      cyberGrid.style.transform = `perspective(600px) rotateX(${gridPitch.toFixed(1)}deg) translateY(${(window.scrollY * 0.35) % 60}px)`;
+    } else if (cyberGrid.style.transform) {
+      cyberGrid.style.transform = '';
+    }
   }
 
   // 1. Render Slanted Cyber Rain & Water Splashes
@@ -1628,21 +1638,28 @@ function drawCyberConstellation(isOverlayOnly = false) {
   const fov = 420;
   const isMobile = w < 768;
 
-  // Dynamic 3D perspective pitch and scale for Background Video and Grid
-  const pitch = Math.max(-10, Math.min(10, scrollVelocity * 0.35));
-  const yaw = Math.max(-8, Math.min(8, (cam.x / (w / 2)) * 14));
-  const scaleVal = 1.05 + Math.min(0.06, Math.abs(scrollVelocity) * 0.003);
-  const transformStr = `perspective(1000px) rotateX(${pitch.toFixed(2)}deg) rotateY(${yaw.toFixed(2)}deg) scale(${scaleVal.toFixed(3)})`;
-  if (cyberVideo && cyberVideo.classList.contains('active')) {
-    cyberVideo.style.transform = transformStr;
-  }
-  if (stormVideo && stormVideo.classList.contains('active')) {
-    stormVideo.style.transform = transformStr;
-  }
-  const cyberGrid = document.getElementById('cyber-grid');
-  if (cyberGrid) {
-    const gridPitch = 60 + Math.max(-10, Math.min(10, scrollVelocity * 0.25));
-    cyberGrid.style.transform = `perspective(600px) rotateX(${gridPitch.toFixed(1)}deg) translateY(${(window.scrollY * 0.35) % 60}px)`;
+  // Dynamic 3D perspective pitch and scale for Background Video and Grid (Desktop only to prevent Mobile WebKit clipping)
+  if (!isMobile) {
+    const pitch = Math.max(-10, Math.min(10, scrollVelocity * 0.35));
+    const yaw = Math.max(-8, Math.min(8, (cam.x / (w / 2)) * 14));
+    const scaleVal = 1.05 + Math.min(0.06, Math.abs(scrollVelocity) * 0.003);
+    const transformStr = `perspective(1000px) rotateX(${pitch.toFixed(2)}deg) rotateY(${yaw.toFixed(2)}deg) scale(${scaleVal.toFixed(3)})`;
+    if (cyberVideo && cyberVideo.classList.contains('active')) {
+      cyberVideo.style.transform = transformStr;
+    }
+    if (stormVideo && stormVideo.classList.contains('active')) {
+      stormVideo.style.transform = transformStr;
+    }
+    const cyberGrid = document.getElementById('cyber-grid');
+    if (cyberGrid) {
+      const gridPitch = 60 + Math.max(-10, Math.min(10, scrollVelocity * 0.25));
+      cyberGrid.style.transform = `perspective(600px) rotateX(${gridPitch.toFixed(1)}deg) translateY(${(window.scrollY * 0.35) % 60}px)`;
+    }
+  } else {
+    if (cyberVideo && cyberVideo.style.transform) cyberVideo.style.transform = '';
+    if (stormVideo && stormVideo.style.transform) stormVideo.style.transform = '';
+    const cyberGrid = document.getElementById('cyber-grid');
+    if (cyberGrid && cyberGrid.style.transform) cyberGrid.style.transform = '';
   }
 
   // Pre-calculate 2D projected coordinates
