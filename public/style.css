@@ -2069,7 +2069,17 @@ footer::before {
     grid-template-columns: 1fr;
   }
 
-  /* Prevent Mobile Safari WebKit clipping bugs & text cutoffs */
+  /* Prevent Mobile Safari WebKit clipping bugs, text cutoffs & thermal lag */
+  section {
+    overflow: visible !important;
+    contain: none !important;
+  }
+
+  .projects-grid,
+  .certs-grid {
+    overflow: visible !important;
+  }
+
   .project-card,
   .cert-card,
   .timeline-content,
@@ -2082,6 +2092,9 @@ footer::before {
     backdrop-filter: none !important;
     background: #0d1527 !important;
     border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4) !important;
+    will-change: auto !important;
+    contain: none !important;
   }
 
   [data-theme="light"] .project-card,
@@ -2090,6 +2103,7 @@ footer::before {
   [data-theme="light"] .hero-stat-item {
     background: #ffffff !important;
     border: 1px solid rgba(0, 0, 0, 0.1) !important;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06) !important;
   }
 
   .reveal.visible {
