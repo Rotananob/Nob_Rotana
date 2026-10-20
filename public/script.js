@@ -1519,6 +1519,18 @@ function drawUltimateCyberStorm() {
     }
   }
 
+  // 3D Perspective Parallax for Cyber Background Video
+  if (cyberVideo && cyberVideo.classList.contains('active')) {
+    if (!isMobile) {
+      const pitch = Math.max(-10, Math.min(10, scrollVelocity * 0.35));
+      const yaw = Math.max(-8, Math.min(8, (cam.x / (w / 2)) * 14));
+      const scaleVal = 1.05 + Math.min(0.06, Math.abs(scrollVelocity) * 0.003);
+      cyberVideo.style.transform = `perspective(1000px) rotateX(${pitch.toFixed(2)}deg) rotateY(${yaw.toFixed(2)}deg) scale(${scaleVal.toFixed(3)})`;
+    } else if (cyberVideo.style.transform) {
+      cyberVideo.style.transform = '';
+    }
+  }
+
   // 1. Render Slanted Cyber Rain & Water Splashes (ShadowBlur off on mobile to keep device cool)
   const rainShadow = isMobile ? 0 : 4;
   rainDrops.forEach((d, i) => {
@@ -2192,7 +2204,16 @@ function startWeather(isUserAction = false) {
   initParticles();
 
   // Manage Background Video & Canvas Visibility
-  if (weatherState === 1) {
+  if (weatherState === 0) {
+    // Mode 0: ULTIMATE HYBRID CYBER STORM (Mix of 3D Cyber Video + Rain + Snow + Lightning + 3D Mesh)
+    stormVideo?.classList.remove('active');
+    if (stormVideo) stormVideo.pause();
+    cyberVideo?.classList.add('active');
+    if (cyberVideo) {
+      cyberVideo.play().catch(() => {});
+    }
+    weatherCanvas?.classList.add('active');
+  } else if (weatherState === 1) {
     stormVideo?.classList.remove('active');
     if (stormVideo) stormVideo.pause();
     cyberVideo?.classList.add('active');
@@ -2272,8 +2293,16 @@ function setAudioMuteState(muted, showToast = true) {
 }
 
 if (muteBtn) {
-  muteBtn.addEventListener('click', () => {
-    setAudioMuteState(!isMuted, true);
+  muteBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    // If sound was never started (browser blocked unprompted autoplay) OR currently muted, UNMUTE and play immediately!
+    const needsStart = !audioCtx || audioCtx.state === 'suspended' || isMuted || (rainAudio && rainAudio.paused && weatherState === 0);
+    if (needsStart) {
+      setAudioMuteState(false, true);
+      resumeAndPlayAudio();
+    } else {
+      setAudioMuteState(true, true);
+    }
   });
 }
 
@@ -2399,29 +2428,39 @@ init3DCardTilt();
 
 // Autoplay & User Interaction Audio Unlocker
 let hasUnlockedAudio = false;
-const unlockAudio = async () => {
-  if (hasUnlockedAudio) return;
-  hasUnlockedAudio = true;
 
-  if (!isMuted) {
-    syncModeAudio();
+function resumeAndPlayAudio() {
+  if (isMuted) return;
+  initWebAudioSynth();
+  if (audioCtx && audioCtx.state === 'suspended') {
+    audioCtx.resume().catch(() => {});
   }
+  syncModeAudio();
+  if (cyberVideo && cyberVideo.paused && (weatherState === 0 || weatherState === 1)) {
+    cyberVideo.play().catch(() => {});
+  }
+}
 
-  ['click', 'touchstart', 'scroll', 'mousedown', 'keydown', 'pointerdown'].forEach(ev => {
-    window.removeEventListener(ev, unlockAudio);
-  });
+const unlockAudio = () => {
+  resumeAndPlayAudio();
+  if (audioCtx && audioCtx.state === 'running') {
+    hasUnlockedAudio = true;
+    ['click', 'touchstart', 'touchend', 'scroll', 'mousedown', 'keydown', 'pointerdown'].forEach(ev => {
+      window.removeEventListener(ev, unlockAudio);
+    });
+  }
 };
 
-['click', 'touchstart', 'scroll', 'mousedown', 'keydown', 'pointerdown'].forEach(ev => {
+['click', 'touchstart', 'touchend', 'scroll', 'mousedown', 'keydown', 'pointerdown'].forEach(ev => {
   window.addEventListener(ev, unlockAudio, { passive: true });
 });
 
 window.addEventListener('load', () => {
   setTimeout(() => {
     startWeather();
-    // Default open: trigger ambient soundscape immediately
+    // Default open: trigger ambient soundscape & video immediately
     if (!isMuted) {
-      syncModeAudio();
+      resumeAndPlayAudio();
     }
   }, 150);
 });

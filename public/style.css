@@ -177,7 +177,7 @@ img {
   width: 100%;
   height: 100%;
   pointer-events: none;
-  z-index: 0;
+  z-index: 1;
   opacity: 0;
   transition: opacity 0.8s ease;
 }
@@ -196,7 +196,7 @@ img {
   pointer-events: none;
   z-index: 0;
   opacity: 0;
-  transition: opacity 1.2s ease-in-out;
+  transition: opacity 0.8s ease-in-out;
 }
 
 .weather-video.active {
@@ -204,8 +204,8 @@ img {
 }
 
 .weather-video.cyber-bg-video.active {
-  opacity: 0.32;
-  filter: saturate(1.4) hue-rotate(15deg);
+  opacity: 0.46;
+  filter: saturate(1.5) hue-rotate(185deg) contrast(1.15);
 }
 
 /* =============================
