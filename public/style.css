@@ -421,6 +421,7 @@ nav {
   align-items: center;
   padding: 100px 2rem 60px;
   position: relative;
+  z-index: 2;
   overflow: hidden;
 }
 
@@ -896,7 +897,7 @@ nav {
 section {
   padding: 100px 2rem;
   position: relative;
-  z-index: 1;
+  z-index: 2;
 }
 
 .section-inner {
@@ -1545,7 +1546,7 @@ footer {
   border-top: 1px solid var(--border);
   padding: 6rem 2rem 4rem;
   position: relative;
-  z-index: 1;
+  z-index: 2;
   overflow: hidden;
 }
 
