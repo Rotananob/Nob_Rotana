@@ -547,6 +547,7 @@ document.querySelectorAll('.lang-btn').forEach((btn) => {
     applyI18n();
   });
 });
+applyI18n();
 
 /* ========================================================
    🔥 FIREBASE INTEGRATION ZONE
@@ -909,6 +910,10 @@ if (savedTheme) {
   isDark = savedTheme === 'dark';
   document.documentElement.setAttribute('data-theme', savedTheme);
   themeIcon.className = isDark ? 'fa-solid fa-moon' : 'fa-solid fa-sun';
+} else {
+  isDark = true;
+  document.documentElement.setAttribute('data-theme', 'dark');
+  if (themeIcon) themeIcon.className = 'fa-solid fa-moon';
 }
 themeToggle.addEventListener('click', () => {
   isDark = !isDark;
