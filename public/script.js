@@ -976,6 +976,7 @@ const weatherLabel = document.getElementById('weather-label');
 const weatherIndicator = document.getElementById('weather-indicator');
 const weatherCanvas = document.getElementById('weather-canvas');
 const rainAudio = document.getElementById('rain-audio');
+const beatAudio = document.getElementById('beat-audio');
 const snowAudio = document.getElementById('snow-audio');
 const thunderAudio = document.getElementById('thunder-audio');
 const stormVideo = document.getElementById('storm-video');
@@ -983,6 +984,9 @@ const cyberVideo = document.getElementById('cyber-video');
 const cursorGlow = document.getElementById('cursor-glow');
 const audioWaves = document.getElementById('audio-waves');
 const ctx = weatherCanvas?.getContext('2d');
+
+let beatDropTimeout = null;
+let beatFadeInterval = null;
 
 let particles = [];
 let splashes = [];
@@ -1445,11 +1449,11 @@ function initParticles() {
 
   if (weatherState === 0) {
     // Mode 0: Ultimate Cyber Storm (3D Constellation + Slanted Rain + Snow + Glass Droplets + Matrix Streams)
-    const p3dCount = isMobile ? 12 : 52;
-    const rainCount = isMobile ? 22 : 95;
-    const snowCount = isMobile ? 8 : 36;
-    const glassCount = isMobile ? 10 : 26;
-    const matrixCount = isMobile ? 8 : 22;
+    const p3dCount = isMobile ? 10 : 52;
+    const rainCount = isMobile ? 18 : 95;
+    const snowCount = isMobile ? 6 : 36;
+    const glassCount = isMobile ? 6 : 26;
+    const matrixCount = isMobile ? 4 : 22;
 
     for (let i = 0; i < p3dCount; i++) particles3D.push(create3DParticle());
     for (let i = 0; i < rainCount; i++) {
@@ -1465,10 +1469,10 @@ function initParticles() {
     for (let i = 0; i < glassCount; i++) glassDroplets.push(createGlassDroplet());
     for (let i = 0; i < matrixCount; i++) matrixDrops.push(createMatrixDrop());
   } else if (weatherState === 1) {
-    const count = isMobile ? 22 : 45;
+    const count = isMobile ? 14 : 45;
     for (let i = 0; i < count; i++) particles.push(create3DParticle());
   } else if (weatherState === 2) {
-    const count = isMobile ? 80 : 160;
+    const count = isMobile ? 24 : 160;
     for (let i = 0; i < count; i++) {
       const d = createRainDrop();
       d.y = Math.random() * weatherCanvas.height;
@@ -1486,14 +1490,14 @@ function initParticles() {
       });
     }
   } else if (weatherState === 4) {
-    const count = isMobile ? 45 : 90;
+    const count = isMobile ? 18 : 90;
     for (let i = 0; i < count; i++) {
       const s = createSnowFlake();
       s.y = Math.random() * weatherCanvas.height;
       particles.push(s);
     }
   } else if (weatherState === 5) {
-    const count = isMobile ? 35 : 80;
+    const count = isMobile ? 14 : 80;
     for (let i = 0; i < count; i++) particles.push(create3DParticle());
   } else if (weatherState === 6) {
     for (let i = 0; i < 6; i++) particles.push(createZenOrb());
@@ -1714,12 +1718,12 @@ function drawUltimateCyberStorm() {
   }
 
   // Draw connecting lines between nearby 3D nodes (linear nearest-neighbor on mobile for zero lag)
-  const maxConnDist = isMobile ? 65 : 100;
+  const maxConnDist = isMobile ? 50 : 100;
   const maxConnDist2 = maxConnDist * maxConnDist;
   ctx.lineWidth = 0.7;
   for (let i = 0; i < projected.length; i++) {
     const a = projected[i];
-    const endJ = isMobile ? Math.min(projected.length, i + 3) : projected.length;
+    const endJ = isMobile ? Math.min(projected.length, i + 2) : projected.length;
     for (let j = i + 1; j < endJ; j++) {
       const b = projected[j];
       const dx = a.px - b.px;
@@ -1763,7 +1767,7 @@ function drawUltimateCyberStorm() {
   if (lightningBolt) {
     ctx.save();
     ctx.strokeStyle = '#ffffff';
-    ctx.shadowBlur = 35;
+    ctx.shadowBlur = isMobile ? 0 : 35;
     ctx.shadowColor = 'rgba(120, 220, 255, 0.95)';
     ctx.lineCap = 'round';
     ctx.beginPath();
@@ -1953,8 +1957,10 @@ function drawRain() {
     ctx.globalAlpha = d.alpha;
     ctx.strokeStyle = 'rgba(99, 179, 237, 0.85)';
     ctx.lineWidth = d.thick;
-    ctx.shadowBlur = 6;
-    ctx.shadowColor = 'rgba(99, 179, 237, 0.5)';
+    if (window.innerWidth >= 768) {
+      ctx.shadowBlur = 6;
+      ctx.shadowColor = 'rgba(99, 179, 237, 0.5)';
+    }
     ctx.beginPath();
     ctx.moveTo(d.x, d.y);
     ctx.lineTo(d.x + d.wind, d.y + d.len);
@@ -2037,8 +2043,10 @@ function drawThunderstorm() {
   if (lightningBolt) {
     ctx.save();
     ctx.strokeStyle = '#ffffff';
-    ctx.shadowBlur = 35;
-    ctx.shadowColor = 'rgba(120, 210, 255, 0.95)';
+    if (window.innerWidth >= 768) {
+      ctx.shadowBlur = 35;
+      ctx.shadowColor = 'rgba(120, 210, 255, 0.95)';
+    }
     ctx.lineCap = 'round';
     ctx.beginPath();
     lightningBolt.forEach(s => {
@@ -2121,16 +2129,45 @@ function drawZenAurora() {
   renderInteractiveFx(420);
 }
 
-// --- MASTER ANIMATION LOOP WITH MOBILE THERMAL & BATTERY PROTECTOR ---
+// --- MASTER ANIMATION LOOP WITH MOBILE THERMAL & RAM SHIELD ---
 let lastWeatherRenderTime = 0;
+let isMobileTouchScrolling = false;
+let mobileScrollResumeTimeout = null;
+
+// Mobile Thermal & RAM Shield: Listen for scroll & touch to pause canvas rendering during active swipe gestures
+window.addEventListener('scroll', () => {
+  if (window.innerWidth < 768) {
+    isMobileTouchScrolling = true;
+    if (mobileScrollResumeTimeout) clearTimeout(mobileScrollResumeTimeout);
+    mobileScrollResumeTimeout = setTimeout(() => {
+      isMobileTouchScrolling = false;
+    }, 120);
+  }
+}, { passive: true });
+
+window.addEventListener('touchmove', () => {
+  if (window.innerWidth < 768) {
+    isMobileTouchScrolling = true;
+    if (mobileScrollResumeTimeout) clearTimeout(mobileScrollResumeTimeout);
+    mobileScrollResumeTimeout = setTimeout(() => {
+      isMobileTouchScrolling = false;
+    }, 150);
+  }
+}, { passive: true });
 
 function animateWeather(timestamp) {
   animFrame = requestAnimationFrame(animateWeather);
 
-  // Mobile battery & temperature protector:
-  // Cap canvas rendering on mobile (< 768px) to 30 FPS (~33ms).
-  // This drastically cuts mobile GPU/CPU heat by 60%+ while keeping native touch scrolling at buttery 60fps!
   const isMobile = window.innerWidth < 768;
+
+  // 1. Mobile Thermal & Scroll Shield:
+  // Pause canvas drawing while mobile user is scrolling.
+  // Gives 100% of mobile CPU/GPU compositor headroom for buttery 60fps/120fps native scrolling!
+  if (isMobile && isMobileTouchScrolling) {
+    return;
+  }
+
+  // 2. Cap canvas rendering on mobile (< 768px) to 30 FPS (~33ms) to prevent device overheating.
   if (isMobile) {
     if (timestamp && (timestamp - lastWeatherRenderTime < 32)) return;
     lastWeatherRenderTime = timestamp || 0;
@@ -2153,6 +2190,83 @@ function animateWeather(timestamp) {
   }
 }
 
+function clearBeatTimers() {
+  if (beatDropTimeout) {
+    clearTimeout(beatDropTimeout);
+    beatDropTimeout = null;
+  }
+  if (beatFadeInterval) {
+    clearInterval(beatFadeInterval);
+    beatFadeInterval = null;
+  }
+}
+
+// 2-Phase Audio Sequencing:
+// Phase 1: Immediate authentic rain + rolling thunder rumble
+// Phase 2: Upbeat bouncy chill beat drops in smoothly after ~3s ("sound ញាក់តាមក្រោយ")
+function startCyberAtmosphereAndBeatSequence() {
+  if (isMuted) return;
+  clearBeatTimers();
+
+  // Phase 1: Immediate natural soothing rain sound
+  if (rainAudio) {
+    rainAudio.loop = true;
+    rainAudio.volume = 0.38;
+    const playRain = rainAudio.play();
+    if (playRain && typeof playRain.catch === 'function') {
+      playRain.catch(() => {});
+    }
+  }
+
+  // Phase 1b: Distant rolling atmospheric thunder rumble at ~0.45s with subtle lightning
+  setTimeout(() => {
+    if (isMuted || weatherState !== 0) return;
+    if (thunderAudio) {
+      try {
+        thunderAudio.currentTime = 0;
+        thunderAudio.volume = 0.42;
+        thunderAudio.play().catch(() => {});
+      } catch (e) {}
+    }
+    flashOpacity = 0.72;
+    const w = weatherCanvas ? weatherCanvas.width : window.innerWidth;
+    lightningBolt = createFierceLightning(w * 0.45, 0, 0.05, 10);
+  }, 450);
+
+  // Phase 2: "AND THEN SOUND ញាក់តាមក្រោយ" (~3s later)
+  // Drop in the groovy bouncy lo-fi chill beat track (Assets/sound/rain.mp3)!
+  beatDropTimeout = setTimeout(() => {
+    if (isMuted || weatherState !== 0) return;
+    if (beatAudio) {
+      beatAudio.loop = true;
+      beatAudio.currentTime = 0;
+      beatAudio.volume = 0.02;
+      const playBeat = beatAudio.play();
+      if (playBeat && typeof playBeat.then === 'function') {
+        playBeat.then(() => {
+          let currentVol = 0.05;
+          beatFadeInterval = setInterval(() => {
+            if (isMuted || !beatAudio || weatherState !== 0) {
+              clearInterval(beatFadeInterval);
+              return;
+            }
+            currentVol = Math.min(0.42, currentVol + 0.05);
+            beatAudio.volume = currentVol;
+            if (currentVol >= 0.42) {
+              clearInterval(beatFadeInterval);
+            }
+          }, 80);
+
+          // Soften the ambient rain slightly so beat & rain blend together seamlessly
+          if (rainAudio && !isMuted) {
+            rainAudio.volume = 0.22;
+          }
+        }).catch(() => {});
+      }
+    }
+  }, 3000);
+}
+
 function stopWeather() {
   cancelAnimationFrame(animFrame);
   if (ctx) ctx.clearRect(0, 0, weatherCanvas.width, weatherCanvas.height);
@@ -2161,7 +2275,9 @@ function stopWeather() {
   cyberVideo?.classList.remove('active');
   if (stormVideo) stormVideo.pause();
   if (cyberVideo) cyberVideo.pause();
+  clearBeatTimers();
   rainAudio?.pause(); if (rainAudio) rainAudio.currentTime = 0;
+  beatAudio?.pause(); if (beatAudio) beatAudio.currentTime = 0;
   snowAudio?.pause(); if (snowAudio) snowAudio.currentTime = 0;
   thunderAudio?.pause(); if (thunderAudio) thunderAudio.currentTime = 0;
   weatherIndicator?.classList.remove('visible');
@@ -2206,7 +2322,9 @@ function applyWeatherUiLabels(showToast = false) {
 
 function syncModeAudio() {
   if (isMuted) {
+    clearBeatTimers();
     rainAudio?.pause();
+    beatAudio?.pause();
     snowAudio?.pause();
     thunderAudio?.pause();
     if (masterGain && audioCtx) {
@@ -2224,52 +2342,72 @@ function syncModeAudio() {
   }
 
   if (weatherState === 0) {
-    // Mode 0: Ultimate Cyber Rain & Distant Thunder (Authentic Soothing Nature Audio, បែបអន្លង់អន្លោច)
-    if (rainGain && audioCtx) rainGain.gain.setValueAtTime(0.0001, audioCtx.currentTime);
+    // Mode 0: Ultimate Cyber Storm
+    // Immediate Rain & Thunder, then bouncy beat drop ("SOUND ញាក់តាមក្រោយ")
+    snowAudio?.pause();
     if (ambientPadGain && audioCtx) ambientPadGain.gain.setValueAtTime(0.012, audioCtx.currentTime);
+    startCyberAtmosphereAndBeatSequence();
+  } else if (weatherState === 1) {
+    // Mode 1: Cyber Video
+    clearBeatTimers();
+    rainAudio?.pause();
+    snowAudio?.pause();
+    thunderAudio?.pause();
+    if (beatAudio) {
+      beatAudio.loop = true;
+      beatAudio.volume = 0.40;
+      beatAudio.play().catch(() => {});
+    }
+    if (ambientPadGain && audioCtx) ambientPadGain.gain.setValueAtTime(0.015, audioCtx.currentTime);
+  } else if (weatherState === 2) {
+    // Mode 2: Cyber Rain
+    clearBeatTimers();
+    snowAudio?.pause();
+    thunderAudio?.pause();
     if (rainAudio) {
+      rainAudio.loop = true;
       rainAudio.volume = 0.32;
       rainAudio.play().catch(() => {});
     }
-    snowAudio?.pause();
-  } else if (weatherState === 2) {
-    // Cyber Rain
-    if (rainGain && audioCtx) rainGain.gain.setValueAtTime(0.0001, audioCtx.currentTime);
-    if (ambientPadGain && audioCtx) ambientPadGain.gain.setValueAtTime(0.012, audioCtx.currentTime);
-    if (rainAudio) {
-      rainAudio.volume = 0.35;
-      rainAudio.play().catch(() => {});
+    if (beatAudio) {
+      beatAudio.loop = true;
+      beatAudio.volume = 0.36;
+      beatAudio.play().catch(() => {});
     }
-    snowAudio?.pause();
   } else if (weatherState === 3) {
-    // Thunderstorm
-    if (rainGain && audioCtx) rainGain.gain.setValueAtTime(0.0001, audioCtx.currentTime);
-    if (ambientPadGain && audioCtx) ambientPadGain.gain.setValueAtTime(0.012, audioCtx.currentTime);
+    // Mode 3: Thunderstorm
+    clearBeatTimers();
+    beatAudio?.pause();
+    snowAudio?.pause();
     if (rainAudio) {
-      rainAudio.volume = 0.35;
+      rainAudio.loop = true;
+      rainAudio.volume = 0.40;
       rainAudio.play().catch(() => {});
     }
     if (thunderAudio) {
       thunderAudio.currentTime = 0;
-      thunderAudio.volume = 0.38;
+      thunderAudio.volume = 0.42;
       thunderAudio.play().catch(() => {});
     }
-    snowAudio?.pause();
   } else if (weatherState === 4) {
-    // Cosmic Snow
-    if (rainGain && audioCtx) rainGain.gain.setValueAtTime(0.0001, audioCtx.currentTime);
-    if (ambientPadGain && audioCtx) ambientPadGain.gain.setValueAtTime(0.02, audioCtx.currentTime);
+    // Mode 4: Cosmic Snow
+    clearBeatTimers();
     rainAudio?.pause();
+    beatAudio?.pause();
+    thunderAudio?.pause();
     if (snowAudio) {
-      snowAudio.volume = 0.4;
+      snowAudio.loop = true;
+      snowAudio.volume = 0.40;
       snowAudio.play().catch(() => {});
     }
   } else {
-    // Video / 3D Mesh / Zen
-    if (rainGain && audioCtx) rainGain.gain.setValueAtTime(0.0001, audioCtx.currentTime);
-    if (ambientPadGain && audioCtx) ambientPadGain.gain.setValueAtTime(0.02, audioCtx.currentTime);
+    // Mode 5 & 6: Ambient synth
+    clearBeatTimers();
     rainAudio?.pause();
+    beatAudio?.pause();
     snowAudio?.pause();
+    thunderAudio?.pause();
+    if (ambientPadGain && audioCtx) ambientPadGain.gain.setValueAtTime(0.02, audioCtx.currentTime);
   }
 }
 
@@ -2277,34 +2415,44 @@ function startWeather(isUserAction = false) {
   resizeCanvas();
   initParticles();
 
+  const isMobile = window.innerWidth < 768;
+
   // Manage Background Video & Canvas Visibility
-  if (weatherState === 0) {
-    // Mode 0: ULTIMATE HYBRID CYBER STORM (Mix of 3D Cyber Video + Rain + Snow + Lightning + 3D Mesh)
+  if (isMobile) {
+    // Mobile RAM & Thermal Shield: Disable video hardware decoders on mobile to prevent battery drain & overheating
     stormVideo?.classList.remove('active');
-    if (stormVideo) stormVideo.pause();
-    cyberVideo?.classList.add('active');
-    if (cyberVideo) {
-      cyberVideo.play().catch(() => {});
-    }
-    weatherCanvas?.classList.add('active');
-  } else if (weatherState === 1) {
-    stormVideo?.classList.remove('active');
-    if (stormVideo) stormVideo.pause();
-    cyberVideo?.classList.add('active');
-    cyberVideo?.play().catch(() => {});
-    weatherCanvas?.classList.add('active');
-  } else if (weatherState === 3) {
     cyberVideo?.classList.remove('active');
+    if (stormVideo) stormVideo.pause();
     if (cyberVideo) cyberVideo.pause();
-    stormVideo?.classList.add('active');
-    stormVideo?.play().catch(() => {});
     weatherCanvas?.classList.add('active');
   } else {
-    cyberVideo?.classList.remove('active');
-    if (cyberVideo) cyberVideo.pause();
-    stormVideo?.classList.remove('active');
-    if (stormVideo) stormVideo.pause();
-    weatherCanvas?.classList.add('active');
+    if (weatherState === 0) {
+      stormVideo?.classList.remove('active');
+      if (stormVideo) stormVideo.pause();
+      cyberVideo?.classList.add('active');
+      if (cyberVideo) {
+        cyberVideo.play().catch(() => {});
+      }
+      weatherCanvas?.classList.add('active');
+    } else if (weatherState === 1) {
+      stormVideo?.classList.remove('active');
+      if (stormVideo) stormVideo.pause();
+      cyberVideo?.classList.add('active');
+      cyberVideo?.play().catch(() => {});
+      weatherCanvas?.classList.add('active');
+    } else if (weatherState === 3) {
+      cyberVideo?.classList.remove('active');
+      if (cyberVideo) cyberVideo.pause();
+      stormVideo?.classList.add('active');
+      stormVideo?.play().catch(() => {});
+      weatherCanvas?.classList.add('active');
+    } else {
+      cyberVideo?.classList.remove('active');
+      if (cyberVideo) cyberVideo.pause();
+      stormVideo?.classList.remove('active');
+      if (stormVideo) stormVideo.pause();
+      weatherCanvas?.classList.add('active');
+    }
   }
 
   animateWeather();
@@ -2327,12 +2475,14 @@ let isMuted = false;
 function setAudioMuteState(muted, showToast = true) {
   isMuted = muted;
   if (rainAudio) rainAudio.muted = isMuted;
+  if (beatAudio) beatAudio.muted = isMuted;
   if (snowAudio) snowAudio.muted = isMuted;
   if (thunderAudio) thunderAudio.muted = isMuted;
 
   if (masterGain && audioCtx) {
     const now = audioCtx.currentTime;
     if (isMuted) {
+      clearBeatTimers();
       masterGain.gain.setTargetAtTime(0.0001, now, 0.05);
       setTimeout(() => {
         if (isMuted && audioCtx && audioCtx.state === 'running') audioCtx.suspend().catch(() => {});
@@ -2345,6 +2495,11 @@ function setAudioMuteState(muted, showToast = true) {
 
   if (muteIcon && muteBtn) {
     if (isMuted) {
+      clearBeatTimers();
+      rainAudio?.pause();
+      beatAudio?.pause();
+      snowAudio?.pause();
+      thunderAudio?.pause();
       muteIcon.className = 'fa-solid fa-volume-xmark';
       muteBtn.classList.remove('playing');
       muteBtn.classList.add('muted');
@@ -2510,7 +2665,8 @@ function resumeAndPlayAudio() {
     audioCtx.resume().catch(() => {});
   }
   syncModeAudio();
-  if (cyberVideo && cyberVideo.paused && (weatherState === 0 || weatherState === 1)) {
+  const isMobile = window.innerWidth < 768;
+  if (!isMobile && cyberVideo && cyberVideo.paused && (weatherState === 0 || weatherState === 1)) {
     cyberVideo.play().catch(() => {});
   }
 }
@@ -2804,14 +2960,19 @@ document.addEventListener('visibilitychange', () => {
   if (document.hidden) {
     if (animFrame) cancelAnimationFrame(animFrame);
     if (audioCtx && audioCtx.state === 'running') audioCtx.suspend().catch(() => {});
+    clearBeatTimers();
     if (rainAudio) rainAudio.pause();
+    if (beatAudio) beatAudio.pause();
     if (snowAudio) snowAudio.pause();
     if (thunderAudio) thunderAudio.pause();
   } else {
     if (animFrame) cancelAnimationFrame(animFrame);
     animFrame = requestAnimationFrame(animateWeather);
-    if (!isMuted && audioCtx && audioCtx.state === 'suspended') {
-      audioCtx.resume().catch(() => {});
+    if (!isMuted) {
+      if (audioCtx && audioCtx.state === 'suspended') {
+        audioCtx.resume().catch(() => {});
+      }
+      syncModeAudio();
     }
   }
 });

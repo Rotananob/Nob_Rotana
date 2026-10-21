@@ -210,6 +210,13 @@ img {
   will-change: transform;
 }
 
+/* Mobile RAM & Thermal Shield: Hide video decode surfaces on mobile devices */
+@media (max-width: 768px) {
+  .weather-video {
+    display: none !important;
+  }
+}
+
 #cyber-vignette {
   position: fixed;
   top: 0;
