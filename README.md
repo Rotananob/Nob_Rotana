@@ -22,7 +22,7 @@ Welcome to the **NOB Rotana Developer Portfolio** repository! This project serve
 
 ## ✨ Features
 
-- **Latest Updates:** Added **CV Templates** (Normal & Creative "Receipt" style). Added an **AI-Powered Development** section outlining workflow and use cases with AI tools. Updated Hero section to reflect "Software & Web App Builder" title. Integrated new major projects (**S Tech Store**, **Delight Fashion**, and **NRI Studio**), featuring full bilingual support and modern UI cards. Reorganized featured projects grid and updated media links.
+- **Latest Updates:** Updated **X-Clinic Platform** to Enterprise Multi-Tenant Medical PaaS v2.0 with Google Gemini 3.8 Flash medical AI, real headless ABA PayWay KHQR gateway, CDSS safety guard, DICOM PACS WebGL imaging, and 15-second instant Gmail OTP onboarding. Added **CV Templates** (Normal & Creative "Receipt" style). Added an **AI-Powered Development** section outlining workflow and use cases with AI tools. Updated Hero section to reflect "Software & Web App Builder" title. Integrated major projects (**X-Clinic Platform**, **S Tech Store**, **Delight Fashion**, and **NRI Studio**), featuring full bilingual support and modern UI cards. Reorganized featured projects grid and updated media links.
 - **CV & Resumes:** Included two responsive resume templates: Normal (`CV.html`) and Creative Receipt (`CV-Recipt.html`).
 - **Dynamic Content:** Optional Firestore collections `projects` and `certificates` dynamically replace static placeholders.
 - **Interactive UI:** Responsive layout, dark/light theme, scroll effects, optional canvas weather + audio (user-triggered only).
