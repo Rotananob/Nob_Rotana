@@ -2137,6 +2137,10 @@ let mobileScrollResumeTimeout = null;
 // Mobile Thermal & RAM Shield: Listen for scroll & touch to pause canvas rendering during active swipe gestures
 window.addEventListener('scroll', () => {
   if (window.innerWidth < 768) {
+    // Mobile Horizontal Lock: Prevent any accidental horizontal drift or wobble
+    if (window.scrollX !== 0) {
+      window.scrollTo(0, window.scrollY);
+    }
     isMobileTouchScrolling = true;
     if (mobileScrollResumeTimeout) clearTimeout(mobileScrollResumeTimeout);
     mobileScrollResumeTimeout = setTimeout(() => {

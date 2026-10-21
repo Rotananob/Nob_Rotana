@@ -64,6 +64,11 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
+  overflow-x: clip;
+  max-width: 100%;
+  width: 100%;
+  touch-action: pan-y pinch-zoom;
 }
 
 body {
@@ -72,6 +77,11 @@ body {
   color: var(--text-primary);
   min-height: 100vh;
   overflow-x: hidden;
+  overflow-x: clip;
+  max-width: 100%;
+  width: 100%;
+  position: relative;
+  touch-action: pan-y pinch-zoom;
   transition: background var(--transition), color var(--transition);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -932,11 +942,16 @@ section {
   padding: 100px 2rem;
   position: relative;
   z-index: 2;
+  max-width: 100%;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .section-inner {
   max-width: 1200px;
+  width: 100%;
   margin: 0 auto;
+  box-sizing: border-box;
 }
 
 .section-header {
@@ -997,6 +1012,9 @@ section {
   overflow: hidden;
   position: relative;
   z-index: 1;
+  width: 100%;
+  max-width: 100%;
+  contain: paint;
 }
 
 .ticker-track {
@@ -1043,6 +1061,9 @@ section {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr));
   gap: 1.5rem;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .project-card {
@@ -1053,6 +1074,9 @@ section {
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   backdrop-filter: blur(10px);
   cursor: pointer;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .project-card:hover {
@@ -2104,15 +2128,26 @@ footer::before {
     grid-template-columns: 1fr;
   }
 
-  /* Prevent Mobile Safari WebKit clipping bugs, text cutoffs & thermal lag */
+  /* Mobile Viewport Lock: Clip horizontal overflow and lock width */
   section {
-    overflow: visible !important;
-    contain: none !important;
+    overflow-x: clip !important;
+    max-width: 100% !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
   }
 
   .projects-grid,
   .certs-grid {
-    overflow: visible !important;
+    overflow-x: clip !important;
+    max-width: 100% !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .hero-photos {
+    max-width: 100% !important;
+    overflow: hidden !important;
+    position: relative;
   }
 
   .project-card,
@@ -2153,13 +2188,13 @@ footer::before {
   }
 
   .photo-tertiary-wrap {
-    right: -10px;
+    right: 0 !important;
     width: clamp(60px, 15vw, 90px);
     height: clamp(60px, 15vw, 90px);
   }
 
   .photo-quaternary-wrap {
-    left: -10px;
+    left: 0 !important;
     width: clamp(60px, 15vw, 85px);
     height: clamp(60px, 15vw, 85px);
   }
@@ -2192,10 +2227,12 @@ footer::before {
 @media (max-width: 480px) {
   nav {
     padding: 0.5rem 0.75rem;
-    height: auto;
+    height: 56px;
     min-height: 56px;
-    flex-wrap: wrap;
-    row-gap: 0.5rem;
+    flex-wrap: nowrap;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
   }
 
   .nav-logo {
@@ -2268,12 +2305,12 @@ footer::before {
   .photo-secondary-wrap {
     width: 104px;
     height: 104px;
-    right: -8px;
+    right: 0 !important;
     bottom: -16px;
   }
 
   .photo-stat-card {
-    left: -16px;
+    left: 0 !important;
     padding: 10px 14px;
   }
 
@@ -2828,17 +2865,25 @@ footer::before {
   padding: 12px 15px 4px;
   background: var(--bg-primary);
   border-bottom: 1px solid var(--border);
+  max-width: 100%;
+  width: 100%;
+  overflow: hidden;
+  box-sizing: border-box;
 }
 
 .video-switcher {
   display: flex;
   gap: 8px;
   overflow-x: auto;
+  max-width: 100%;
+  width: 100%;
   padding: 4px 4px 10px;
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* IE/Edge */
   scroll-behavior: auto;
   -webkit-overflow-scrolling: touch;
+  touch-action: pan-x;
+  box-sizing: border-box;
 }
 
 .video-switcher::-webkit-scrollbar {
