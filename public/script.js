@@ -218,13 +218,13 @@ Object.assign(I18N.en, {
   'alert.confirm': 'Confirm and Continue',
   'alert.cancel': 'Cancel',
   'proj8.title': 'S Tech Store (Enterprise IT E-Commerce & KHQR Platform)',
-  'proj8.desc': 'S Tech Store is an enterprise-grade IT and computer hardware e-commerce platform built with Next.js 14, React 18, Laravel 11 REST API, and PostgreSQL/MySQL. Key highlights include: National Bakong KHQR dynamic payments (USD/KHR) with 1-tap mobile banking deep links (ABA, Bakong, Wing, ACLEDA), Telegram Supergroup Forum Bot automation for real-time order routing & stock alerts, an interactive Custom PC Builder with wattage calculation, S-Tech Loyalty Rewards wallet, Executive Merchant HQ Admin Console, and an offline-resilient PWA via Cloudflare Edge.',
+  'proj8.desc': 'S Tech Store is an enterprise-grade, omnichannel IT and computer hardware e-commerce ecosystem engineered for high-performance retail in Cambodia. Built with a decoupled microservice architecture utilizing Next.js 14 (App Router), React 18, TypeScript, Tailwind CSS v4, Laravel 11 REST API engine, and high-concurrency PostgreSQL & MySQL databases. Core architectural highlights include: 1) National Bakong KHQR & FinTech Gateway: Full EMVCo-compliant dynamic QR code generation in dual currencies (USD & KHR) with real-time National Bank exchange rates, automated webhook callbacks, and instant 1-tap mobile banking deep-linking (ABA Mobile, Bakong, Wing Bank, ACLEDA, Sathapana); 2) Telegram Supergroup Forum Bot Architecture: Real-time multi-topic bot automation routing orders, dispatch notices, stock reorders, and customer inquiries across dedicated department channels with inline interactive action buttons; 3) Interactive Custom PC Builder Engine: Real-time hardware compatibility validator (CPU socket matching, DDR4/DDR5 RAM slot limits, PCIe clearance, GPU length vs chassis sizing), automated total system wattage calculator with recommended 80+ Gold/Platinum PSU wattage recommendations, and 1-click bundle checkout; 4) Customer Loyalty & Digital Points Wallet: Tiered rewards program (Bronze, Silver, Gold, Platinum) with real-time points accumulation per dollar spent, birthday rewards, promotional coupon codes, and 1-tap checkout point redemption; 5) Merchant HQ Cockpit & Admin Intelligence: Executive console featuring real-time gross revenue analytics, best-selling hardware leaderboards, 7-day sales breakdown charts, batch product catalog management, supplier invoice tracking, and granular multi-stage order lifecycle status (Pending -> Verified -> Assembled -> In-Transit -> Delivered); 6) Cloudinary Media Optimization & CDN Pipeline: High-speed edge delivery with automated WebP/AVIF compression, responsive picture breakpoints, and sub-100ms image loads; and 7) Progressive Web App (PWA) with Offline Resilience: Service worker caching via Workbox and Cloudflare Edge Network ensuring instant catalog navigation even on unstable 3G/4G connections. Live at www.s-tech-store.tech.',
   'proj9.title': 'Delight Fashion (Luxury Men\'s E-Commerce & KHQR Platform)',
   'proj9.desc': 'Delight Fashion is a production-grade, mobile-first, high-end men\'s fashion e-commerce platform built for the modern boutique market in Phnom Penh, Cambodia. Engineered with a cutting-edge full-stack architecture utilizing Next.js 16 (App Router), React 19, TypeScript, and Tailwind CSS v4, featuring a luxury Black, White & Gold aesthetic. Core architectural features include: 1) Secure Authentication & IAM with Firebase Auth (Google Sign-In & custom RBAC claims) separating customer accounts from shop owner controls; 2) Atomic Transactional Order & Stock Engine using Firebase Admin SDK with Firestore transactions to prevent race conditions and automatically deduct inventory in real time; 3) Integrated Cambodia Local Payments featuring ABA Bank PayWay and Dynamic Bakong KHQR (EMVCo standard) with 1-tap mobile banking deep-linking and automated payment status verification; 4) Instant Shop Owner Notifications powered by automated Telegram Bot API alerts upon every placed order; 5) Luxury Catalog & Shopping Experience with server-driven Live Search, category filters, auto-opening slide-over cart drawer, and single-page checkout; 6) Merchant HQ Admin Dashboard featuring real-time revenue analytics, 7-day interactive sales charts powered by Recharts, inventory management, low stock alerts, and multi-stage order tracking (Pending to Completed); 7) High-performance Cloudinary CDN media pipeline delivering optimized WebP/AVIF imagery; and 8) Progressive Web App (PWA) powered by Serwist for offline resilience and mobile home screen installation. Deployed live on Firebase Hosting and GitHub.',
   'proj10.title': 'NRI Studio',
   'proj10.desc': 'NRI Studio is a full-stack, browser-based Integrated Development Environment (IDE) that closely mimics the behavior and UI of VSCode. Built for modern web development, it allows users to create, edit, save, and execute JavaScript and TypeScript code entirely in the cloud. Features include Monaco Editor with full IntelliSense & auto-completion, a collapsible sidebar with file explorer, multi-tab support, local folder upload, live terminal powered by a secure Node.js backend sandbox, real-time auto-save to MongoDB, and Firebase Authentication (email/password & Google). Deployed on Vercel (frontend) and Render (backend).',
   'proj11.title': 'Houn Vannak Medical Clinic (Enterprise Medical SaaS)',
-  'proj11.desc': 'Houn Vannak Medical Clinic is a production-grade Clinical SaaS & Patient Management System built with Next.js 14 App Router, NestJS 10, Prisma ORM, and PostgreSQL 16. Key highlights include: 6-tier medical RBAC security, dynamic Bakong KHQR billing (USD/KHR) with instant bank deep-linking, 1-click Telegram Forum Bot automation (@Clinic_systemBot), comprehensive EMR 360 with clinical vitals, prescription dispensation & 1-click Word (.doc) medical exports, in-browser ESC/POS thermal receipt printing (80mm/58mm), and an offline-first PWA.',
+  'proj11.desc': 'Houn Vannak Medical Clinic is a full-featured, enterprise-grade Clinical SaaS & Electronic Medical Records (EMR 360) Hospital Information System engineered specifically for clinics, healthcare centers, and polyclinics in Cambodia. Architected with Next.js 14 (App Router), NestJS 10 enterprise backend, Prisma ORM, and high-availability PostgreSQL 16. Core architectural highlights include: 1) 6-Tier Clinical Role-Based Access Control (RBAC): Strict medical data isolation complying with healthcare confidentiality standards across 6 distinct roles — Super Admin, Doctor/Physician, Nurse/Triage, Pharmacist, Cashier/Billing, and Receptionist with JWT security and immutable audit logging; 2) Dynamic Bakong KHQR Invoicing & POS Cashier Engine: Automated EMVCo-compliant dynamic KHQR code generation for patient consultation fees, lab tests, and medication bills in USD & KHR with real-time bank reconciliation, split-payment handling, and outstanding balance tracking; 3) Comprehensive EMR 360 Patient Charting: Digital patient records tracking medical history, chronic conditions, allergy alerts, vital signs telemetry (Blood Pressure, Heart Rate, SpO2, Temperature, BMI with automated hypertension flags), and ICD-10 diagnostic coding; 4) Digital Pharmacy & FEFO Inventory Engine: Smart pharmaceutical inventory management enforcing First-Expired, First-Out (FEFO) dispensing rules, low-stock threshold alerts, batch expiry warnings, and automated supplier replenishment logs; 5) 1-Click Medical Document & Word (.doc) Exporter: Instant generation and export of formatted official Medical Certificates, Referral Letters, and Clinical Prescriptions directly to editable Microsoft Word (.doc) and print-ready PDF formats; 6) In-Browser ESC/POS Thermal Receipt Printing: Native thermal printing engine for 80mm and 58mm POS receipt printers without requiring third-party print drivers, rendering Khmer Unicode fonts, clinic headers, diagnostic summaries, itemized charges, and payment KHQR codes; and 7) Autonomous Telegram Supergroup Bot (@Clinic_systemBot): Automated daily doctor roster broadcasts, urgent triage queue alerts, and financial end-of-day revenue reconciliation pushed directly to private clinic staff channels. Deployed live on Vercel with PostgreSQL cloud database.',
   'proj12.title': 'QR Scan (Ultra HD AI QR & Barcode Scanner PWA)',
   'proj12.desc': 'QR Scan is a production-grade, fast, and privacy-first Progressive Web App (PWA) designed for seamless QR code and barcode scanning directly from any web browser or mobile phone. Built with a modern architecture using React 18, TypeScript, Vite 5, Tailwind CSS, and html5-qrcode. Core architectural features include: 1) Ultra HD AI Camera Scanning with auto-focus, camera flip (front/back), torch/flashlight toggle, and tap-to-focus; 2) Intelligent Multi-Format Detection supporting National Bakong KHQR (EMVCo), EAN-13, EAN-8, UPC-A, UPC-E, Code 128, Code 39, and custom QR payloads; 3) Smart Content Processing with automatic parsing of URLs, Wi-Fi credentials (1-tap network info copy), vCard contacts (.vcf export), phone dialer, SMS, email, geolocation on Google Maps, Google Product Search, and social media handles; 4) Security & Anti-Phishing Engine with dangerous protocol blocking (javascript:, data:, file:), HTTP security warnings, and external link confirmation modals; 5) 100% Local-First Privacy with zero server tracking, zero external telemetry, and offline-persistent scan history stored in client IndexedDB with favorite bookmarks and search filters; 6) Image file & photo gallery QR decoding alongside manual text entry; 7) Bilingual UI support (Khmer/English) via i18next; and 8) Progressive Web App (PWA) installability with automated background service worker updates via Workbox.',
   'proj13.title': 'Rotana Portfolio Native (React Native & Expo)',
@@ -473,13 +473,13 @@ Object.assign(I18N.km, {
   'alert.confirm': 'យល់ព្រម និងបន្ត',
   'alert.cancel': 'បោះបង់',
   'proj8.title': 'S Tech Store (វេទិកា E-Commerce កុំព្យូទ័រ & ប្រព័ន្ធទូទាត់ KHQR)',
-  'proj8.desc': 'S Tech Store គឺជាវេទិកា E-Commerce កុំព្យូទ័រ & Hardware កម្រិតសហគ្រាស បង្កើតឡើងដោយ Next.js 14, React 18, Laravel 11 និង MySQL/PostgreSQL។ មុខងារស្នូលសំខាន់ៗរួមមាន៖ ប្រព័ន្ធទូទាត់ Dynamic Bakong KHQR (USD/KHR) ជាមួយ 1-Tap Mobile Banking Deep Links, ប្រព័ន្ធ Telegram Supergroup Forum Bot ស្វ័យប្រវត្តិតាមដាន Order និងស្តុកទំនិញ, ឧបករណ៍ផ្គុំកុំព្យូទ័រ Custom PC Builder គណនាវ៉ាត់ភ្លើងដោយស្វ័យប្រវត្តិ, ប្រព័ន្ធ Loyalty Rewards, ផ្ទាំងគ្រប់គ្រង Merchant HQ Cockpit និង PWA ដំណើរការលឿនតាម Cloudflare Edge Network។',
+  'proj8.desc': 'S Tech Store គឺជាវេទិកា E-Commerce កុំព្យូទ័រ និងសម្ភារៈ IT កម្រិតសហគ្រាស (Enterprise Omnichannel IT & Hardware Platform) ត្រូវបានបង្កើតឡើងយ៉ាងរឹងមាំសម្រាប់ទីផ្សារបច្ចេកវិទ្យាក្នុងប្រទេសកម្ពុជា ត្រៀមរួចជាស្រេចសម្រាប់ Production។ ប្រព័ន្ធត្រូវបានរចនាឡើងជាមួយ Next.js 14 (App Router), React 18, TypeScript, Tailwind CSS v4 រួមបញ្ចូលជាមួយ Laravel 11 REST API Engine, និង PostgreSQL/MySQL។ មុខងារស្ថាបត្យកម្មស្នូលសំខាន់ៗរួមមាន៖ ១) ប្រព័ន្ធទូទាត់ប្រាក់ជាតិ Bakong KHQR & FinTech Gateway៖ បង្កើត Dynamic QR កូដតាមស្តង់ដារ EMVCo គាំទ្ររូបិយប័ណ្ណពីរ (USD និង KHR) គណនាអត្រាប្តូរប្រាក់ស្វ័យប្រវត្តិតាមធនាគារជាតិ ជាមួយ 1-Tap Deep Link ចូល Mobile Banking App (ABA Mobile, Bakong, Wing, ACLEDA, Sathapana) និងផ្ទៀងផ្ទាត់ការទូទាត់ជោគជ័យតាម Webhook ភ្លាមៗ; ២) ប្រព័ន្ធ Telegram Supergroup Forum Bot ស្វ័យប្រវត្តិ៖ បញ្ជូនដំណឹង និងបញ្ជាទិញថ្មីៗបែងចែកតាម Topic នីមួយៗក្នុង Telegram Group របស់ក្រុមការងារ (ផ្នែកលក់, ផ្នែកឃ្លាំង, ផ្នែកដឹកជញ្ជូន) ជាមួយប៊ូតុងបញ្ជាក់ការងារភ្លាមៗ; ៣) ឧបករណ៍ផ្គុំកុំព្យូទ័រឆ្លាតវៃ (Interactive Custom PC Builder & Wattage Calculator)៖ ផ្ទៀងផ្ទាត់ភាពត្រូវគ្នានៃ Hardware ស្វ័យប្រវត្តិ (Socket CPU, រន្ធ RAM DDR4/DDR5, ប្រវែង GPU និងទំហំ Case), គណនាចំនួនវ៉ាត់ភ្លើងសរុប (Wattage Consumption) និងណែនាំកម្លាំង Power Supply (PSU) ដែលស័ក្តិសមបំផុត ព្រមទាំងទិញជាឈុតដោយ ១ ចុច; ៤) កាបូបពិន្ទុរង្វាន់ Loyalty Points & Digital Wallet៖ ប្រព័ន្ធសន្សំពិន្ទុតាមកម្រិតសមាជិក (Bronze, Silver, Gold, Platinum) ប្តូរជាទឹកប្រាក់បញ្ចុះតម្លៃពេល Checkout និងគូប៉ុងប្រូម៉ូសិន; ៥) ផ្ទាំងគ្រប់គ្រងអាជីវកម្ម Merchant HQ Cockpit៖ ផ្ទាំងគ្រប់គ្រង Admin កម្រិតប្រតិបត្តិ វិភាគស្ថិតិចំណូលជាក់ស្តែង ក្រាហ្វលក់ប្រចាំថ្ងៃ/ខែ ការគ្រប់គ្រងស្តុកទំនិញរាប់ពាន់មុខ និងតាមដានដំណាក់កាលដឹកជញ្ជូន (Pending -> Assembled -> In-Transit -> Delivered); ៦) ប្រព័ន្ធរូបភាព Cloudinary CDN Pipeline៖ បង្កើនល្បឿនផ្ទុករូបភាព Hardware កម្រិតខ្ពស់ជាមួយ Auto WebP/AVIF Compression; និង ៧) កម្មវិធីទូរស័ព្ទ Progressive Web App (PWA)៖ ដំឡើងលើទូរស័ព្ទដៃ និងដំណើរការបានរលូនតាមរយៈ Cloudflare Edge Network។ ដាក់ឱ្យដំណើរការផ្ទាល់នៅ www.s-tech-store.tech។',
   'proj9.title': 'Delight Fashion (វេទិកា E-Commerce ម៉ូតបុរសប្រណិត & ប្រព័ន្ធ KHQR)',
   'proj9.desc': 'Delight Fashion គឺជាវេទិកា E-Commerce លក់សម្លៀកបំពាក់បុរសកម្រិតប្រណិត (Luxury Men\'s Fashion Platform) ដែលត្រូវបានបង្កើតឡើងសម្រាប់ទីផ្សារហាងសម្លៀកបំពាក់ទំនើបក្នុងរាជធានីភ្នំពេញ ប្រទេសកម្ពុជា ត្រៀមរួចជាស្រេចសម្រាប់ Production។ ប្រព័ន្ធត្រូវបានរចនាឡើងយ៉ាងរឹងមាំជាមួយ Next.js 16 (App Router), React 19, TypeScript, និង Tailwind CSS v4 ជាមួយរចនាបថប្រណិតពណ៌ខ្មៅ ស និងមាស (Black, White & Gold Aesthetic)។ មុខងារស្នូលសំខាន់ៗរួមមាន៖ ១) ប្រព័ន្ធសុវត្ថិភាព និងការគ្រប់គ្រងសិទ្ធិ (Firebase Auth & RBAC) គាំទ្រ Google Sign-In ដោយបែងចែកដាច់រវាងគណនីអតិថិជន និងសិទ្ធិគ្រប់គ្រងរបស់ម្ចាស់ហាង (Admin); ២) ដំណើរការកុម្ម៉ង់ និងកាត់ស្តុកស្វ័យប្រវត្តិ (Atomic Transactional Order Engine) ដោយប្រើ Firebase Admin SDK ជាមួយ Firestore Transactions ដើម្បីការពារ Race Condition និងកាត់បន្ថយចំនួនទំនិញក្នុងស្តុកភ្លាមៗ; ៣) ប្រព័ន្ធទូទាត់ប្រាក់ក្នុងស្រុកពេញលេញ គាំទ្រ ABA Bank QR PayWay និង Dynamic Bakong KHQR តាមស្តង់ដារ EMVCo ជាមួយ 1-Tap Deep Link ចូល Mobile Banking App និងផ្ទៀងផ្ទាត់ការទូទាត់ដោយស្វ័យប្រវត្តិ; ៤) ប្រព័ន្ធជូនដំណឹងបន្ទាន់ទៅកាន់ម្ចាស់ហាងតាម Telegram Bot API ដោយស្វ័យប្រវត្តិនូវរាល់ពេលមានការបញ្ជាទិញថ្មី; ៥) បទពិសោធទិញទំនិញដ៏រលូន (Storefront UX) រួមមាន Live Search តាម Server Actions, តម្រងស្វែងរកតាមប្រភេទ, កន្ត្រកទំនិញស្លាយបើកស្វ័យប្រវត្តិ (Cart Drawer), និង Checkout Modal រហ័ស; ៦) ផ្ទាំងគ្រប់គ្រងអាជីវកម្ម (Admin Dashboard) វិភាគស្ថិតិចំណូលជាក់ស្តែង ក្រាហ្វលក់ ៧ ថ្ងៃចុងក្រោយជាមួយ Recharts, ការជូនដំណឹងទំនិញជិតអស់ពីស្តុក (Low Stock Alerts), និងការគ្រប់គ្រងដំណាក់កាល Order; ៧) ប្រព័ន្ធបញ្ជូនរូបភាព Cloudinary CDN បង្កើនល្បឿនជាមួយ WebP/AVIF Auto-Optimization; និង ៨) ដំឡើងជាកម្មវិធីទូរស័ព្ទ (PWA) តាមរយៈ Serwist អាចដំណើរការបានទោះបី Offline។ ដាក់ឱ្យដំណើរការផ្ទាល់នៅលើ Firebase Hosting និង GitHub។',
   'proj10.title': 'NRI Studio',
   'proj10.desc': 'NRI Studio គឺជា IDE (Integrated Development Environment) ដំណើរការក្នុង Browser ដែលមានទម្រង់ស្រដៀង VSCode។ បង្កើតឡើងសម្រាប់ Developer ទំនើប អាចបង្កើត កែ រក្សាទុក និង Execute កូដ JavaScript/TypeScript ទាំងស្រុងក្នុង Cloud។ មុខងាររួមមាន Monaco Editor ជាមួយ IntelliSense, ការ Auto-Complete, Sidebar, Multi-Tab, Local Folder Upload, Terminal ស្ទួន Node.js Sandbox, Auto-Save ទៅ MongoDB, និង Firebase Auth (Email/Google)។ Deploy នៅ Vercel (Frontend) និង Render (Backend)។',
   'proj11.title': 'មន្ទីរសម្រាកព្យាបាល ហួន វណ្ណៈ (Clinical SaaS & KHQR System)',
-  'proj11.desc': 'មន្ទីរសម្រាកព្យាបាល ហួន វណ្ណៈ គឺជាប្រព័ន្ធ Hospital-Grade Clinical SaaS គ្រប់គ្រងគ្លីនិក និងអ្នកជំងឺ បង្កើតឡើងដោយ Next.js 14 App Router, NestJS 10, Prisma ORM និង PostgreSQL 16។ មុខងារស្នូលសំខាន់ៗរួមមាន៖ ប្រព័ន្ធសុវត្ថិភាព 6-Tier Medical RBAC, ប្រព័ន្ធទូទាត់វិក្កយបត្រស្វ័យប្រវត្តិ Dynamic Bakong KHQR (USD/KHR), ប្រព័ន្ធ Telegram Forum Bot (@Clinic_systemBot), កំណត់ត្រាវេជ្ជសាស្ត្រ EMR 360 ចេញវេជ្ជបញ្ជា និង Export វិញ្ញាបនបត្រ Word (.doc), ប្រព័ន្ធព្រីនបង្កាន់ដៃកម្ដៅ ESC/POS Thermal Printing (80mm/58mm) និង PWA ដំណើរការបានទាំង Offline។',
+  'proj11.desc': 'មន្ទីរសម្រាកព្យាបាល ហួន វណ្ណៈ (Houn Vannak Medical Clinic) គឺជាប្រព័ន្ធគ្រប់គ្រងគ្លីនិក និងកំណត់ត្រាវេជ្ជសាស្ត្រអ្នកជំងឺកម្រិតមន្ទីរពេទ្យ (Hospital-Grade Clinical SaaS & Electronic Medical Records EMR 360) ត្រូវបានបង្កើតឡើងយ៉ាងយកចិត្តទុកដាក់បំផុតសម្រាប់គ្លីនិក និងមជ្ឈមណ្ឌលវេជ្ជសាស្ត្រទំនើបក្នុងប្រទេសកម្ពុជា ត្រៀមរួចជាស្រេចសម្រាប់ Production។ ប្រព័ន្ធត្រូវបានរចនាឡើងជាមួយ Next.js 14 (App Router), NestJS 10, Prisma ORM, និង PostgreSQL 16។ មុខងារស្ថាបត្យកម្មស្នូលសំខាន់ៗរួមមាន៖ ១) ប្រព័ន្ធសុវត្ថិភាពវេជ្ជសាស្ត្រ 6-Tier Medical RBAC៖ បែងចែកសិទ្ធិ និងការពារទិន្នន័យសម្ងាត់របស់អ្នកជំងឺយ៉ាងតឹងរ៉ឹងតាមតួនាទីចំនួន ៦ រួមមាន៖ Super Admin, គ្រូពេទ្យពិនិត្យព្យាបាល (Doctor), គិលានុបដ្ឋាក (Nurse/Triage), ឱសថការី (Pharmacist), បេឡាគិតប្រាក់ (Cashier), និងបុគ្គលិកទទួលភ្ញៀវ (Receptionist) ជាមួយ JWT Authentication និង Audit Logs; ២) ប្រព័ន្ធគិតប្រាក់ និងទូទាត់ Dynamic Bakong KHQR៖ ចេញវិក្កយបត្រស្វ័យប្រវត្តិតាមស្តង់ដារ EMVCo ទាំងប្រាក់រៀល (KHR) និងដុល្លារ (USD) ជាមួយ 1-Tap Deep Link ចូល Mobile Banking App ផ្ទៀងផ្ទាត់ការទូទាត់ភ្លាមៗ និងតាមដានបំណុលនៅសល់; ៣) កំណត់ត្រាវេជ្ជសាស្ត្រឌីជីថល EMR 360 & Patient Vitals៖ កត់ត្រាប្រវត្តិជំងឺ អាលែកហ្ស៊ី សញ្ញាជីវិតសំខាន់ៗ (សម្ពាធឈាម BP, ចង្វាក់បេះដូង Pulse, អុកស៊ីសែន SpO2, កម្ដៅ, សន្ទស្សន៍ទម្ងន់ BMI) និងកូដរោគវិនិច្ឆ័យស្តង់ដារអន្តរជាតិ ICD-10; ៤) ប្រព័ន្ធគ្រប់គ្រងឱសថស្ថាន និងស្តុកថ្នាំ FEFO៖ គ្រប់គ្រងស្តុកឱសថតាមស្តង់ដារ First-Expired, First-Out (FEFO) ជូនដំណឹងថ្នាំជិតផុតកំណត់ និងថ្នាំជិតអស់ពីស្តុកស្វ័យប្រវត្តិ; ៥) ការចេញវេជ្ជបញ្ជា និង Export ឯកសារ Word (.doc) ដោយ ១ ចុច៖ ចេញវេជ្ជបញ្ជាថ្នាំត្រឹមត្រូវតាមកម្រិតប្រើប្រាស់ និងអាចទាញចេញជាឯកសារលិខិតបញ្ជាក់វេជ្ជសាស្ត្រផ្លូវការជា Microsoft Word (.doc) និង PDF ភ្លាមៗ; ៦) ប្រព័ន្ធព្រីនបង្កាន់ដៃកម្ដៅ ESC/POS Thermal Printing៖ ព្រីនបង្កាន់ដៃពី Browser ផ្ទាល់ទៅកាន់ម៉ាស៊ីនព្រីនកម្ដៅ 80mm និង 58mm ដោយមិនបាច់ដំឡើង Driver ក្រៅឡើយ គាំទ្រពុម្ពអក្សរខ្មែរយូនីកូដច្បាស់ស្អាត និងមានបង្កប់កូដ KHQR; និង ៧) ប្រព័ន្ធ Telegram Supergroup Bot (@Clinic_systemBot)៖ ផ្ញើរបាយការណ៍សង្ខេបប្រចាំថ្ងៃ កាលវិភាគគ្រូពេទ្យប្រចាំការ និងដំណឹងអ្នកជំងឺបន្ទាន់ទៅកាន់ក្រុមការងារ Telegram។ ដាក់ឱ្យដំណើរការផ្ទាល់នៅលើ Vercel និង Cloud PostgreSQL។',
   'proj12.title': 'QR Scan (កម្មវិធីស្កេនកូដ QR & បាកូដ Ultra HD AI PWA)',
   'proj12.desc': 'QR Scan គឺជាកម្មវិធី Progressive Web App (PWA) ដ៏ទំនើប លឿនបំផុត និងមានសុវត្ថិភាពខ្ពស់ សម្រាប់ស្កេនកូដ QR និងបាកូដទំនិញគ្រប់ប្រភេទដោយផ្ទាល់តាមរយៈ Browser និងទូរស័ព្ទដៃ ដោយមិនបាច់ដំឡើង App ពី Store ឡើយ។ ប្រព័ន្ធត្រូវបានបង្កើតឡើងដោយ React 18, TypeScript, Vite 5, Tailwind CSS និង html5-qrcode។ មុខងារស្នូលសំខាន់ៗរួមមាន៖ ១) ប្រព័ន្ធស្កេនកាមេរ៉ាកម្រិត Ultra HD AI ជាមួយសមត្ថភាព Auto-Focus ប្តូរកាមេរ៉ាមុខក្រោយ បើកពិល (Torch) និងចុចលើអេក្រង់ដើម្បី Focus; ២) ការស្គាល់គ្រប់ទម្រង់កូដ រួមមានកូដជាតិ Bakong KHQR (EMVCo), បាកូដទំនិញស្តង់ដារអន្តរជាតិ (EAN-13, EAN-8, UPC, Code 128, Code 39) និង QR កូដទូទៅ; ៣) ការវិភាគខ្លឹមសារឆ្លាតវៃ (Smart Content Parsing) ចែកដាច់រវាងតំណរភ្ជាប់ URL, ព័ត៌មាន Wi-Fi (Copy ពាក្យសម្ងាត់ភ្ជាប់ដោយ ១ ចុច), ទំនាក់ទំនង vCard (.vcf export), ការតេចេញ, ផ្ញើសារ SMS, អ៊ីមែល, ទីតាំង Google Maps, ការស្វែងរកទំនិញលើ Google និងបើកគណនីបណ្តាញសង្គម; ៤) ប្រព័ន្ធការពារសុវត្ថិភាពខ្ពស់ (Anti-Phishing & Security) ទប់ស្កាត់ Protocol គ្រោះថ្នាក់ (javascript:, data:) ព្រមានតំណរភ្ជាប់ HTTP និងផ្ទៀងផ្ទាត់មុនបើកគេហទំព័រក្រៅ; ៥) ឯកជនភាព ១០០% (Local-First Privacy) មិនបញ្ជូនទិន្នន័យ ឬរូបភាពទៅកាន់ Server ក្រៅឡើយ ដោយរក្សាទុកប្រវត្តិស្កេន និង Favorite ក្នុង IndexedDB លើឧបករណ៍ផ្ទាល់ខ្លួន; ៦) ស្កេនកូដពីរូបថតក្នុង Gallery និងបញ្ចូលកូដដោយដៃ; ៧) គាំទ្រ ២ ភាសា (ខ្មែរ/អង់គ្លេស) ជាមួយ i18next; និង ៨) ដំឡើងជា PWA លើ iPhone, Android និងកុំព្យូទ័រ ជាមួយប្រព័ន្ធ Auto-Update ស្វ័យប្រវត្តិតាមរយៈ Workbox។',
   'proj13.title': 'Rotana Portfolio Native (កម្មវិធីទូរស័ព្ទ React Native & Expo)',
@@ -999,6 +999,7 @@ if (stormVideo) {
 
 let beatDropTimeout = null;
 let beatFadeInterval = null;
+let thunderTimeout = null;
 
 let particles = [];
 let splashes = [];
@@ -2193,6 +2194,10 @@ function clearBeatTimers() {
     clearInterval(beatFadeInterval);
     beatFadeInterval = null;
   }
+  if (thunderTimeout) {
+    clearTimeout(thunderTimeout);
+    thunderTimeout = null;
+  }
 }
 
 // 2-Phase Audio Sequencing:
@@ -2213,7 +2218,7 @@ function startCyberAtmosphereAndBeatSequence() {
   }
 
   // Phase 1b: Distant rolling atmospheric thunder rumble at ~0.45s with subtle lightning
-  setTimeout(() => {
+  thunderTimeout = setTimeout(() => {
     if (isMuted || weatherState !== 0) return;
     if (thunderAudio) {
       try {
@@ -2456,43 +2461,61 @@ const muteBtn = document.getElementById('mute-btn');
 const muteIcon = document.getElementById('mute-icon');
 let isMuted = false;
 
+function stopAllAudio() {
+  clearBeatTimers();
+  [rainAudio, beatAudio, snowAudio, thunderAudio].forEach(a => {
+    if (a) {
+      try {
+        a.pause();
+        a.currentTime = 0;
+        a.muted = true;
+      } catch (e) {}
+    }
+  });
+  if (audioCtx) {
+    try {
+      if (masterGain) {
+        masterGain.gain.cancelScheduledValues(audioCtx.currentTime);
+        masterGain.gain.setValueAtTime(0.00001, audioCtx.currentTime);
+      }
+      if (audioCtx.state === 'running') {
+        audioCtx.suspend().catch(() => {});
+      }
+    } catch (e) {}
+  }
+}
+
 function setAudioMuteState(muted, showToast = true) {
   isMuted = muted;
-  if (rainAudio) rainAudio.muted = isMuted;
-  if (beatAudio) beatAudio.muted = isMuted;
-  if (snowAudio) snowAudio.muted = isMuted;
-  if (thunderAudio) thunderAudio.muted = isMuted;
 
-  if (masterGain && audioCtx) {
-    const now = audioCtx.currentTime;
-    if (isMuted) {
-      clearBeatTimers();
-      masterGain.gain.setTargetAtTime(0.0001, now, 0.05);
-      setTimeout(() => {
-        if (isMuted && audioCtx && audioCtx.state === 'running') audioCtx.suspend().catch(() => {});
-      }, 150);
-    } else {
-      if (audioCtx.state === 'suspended') audioCtx.resume().catch(() => {});
-      masterGain.gain.setTargetAtTime(0.75, now, 0.08);
-    }
-  }
-
-  if (muteIcon && muteBtn) {
-    if (isMuted) {
-      clearBeatTimers();
-      rainAudio?.pause();
-      beatAudio?.pause();
-      snowAudio?.pause();
-      thunderAudio?.pause();
-      muteIcon.className = 'fa-solid fa-volume-xmark';
+  if (isMuted) {
+    stopAllAudio();
+    if (muteIcon) muteIcon.className = 'fa-solid fa-volume-xmark';
+    if (muteBtn) {
       muteBtn.classList.remove('playing');
       muteBtn.classList.add('muted');
-    } else {
-      muteIcon.className = 'fa-solid fa-volume-high';
+      muteBtn.setAttribute('aria-label', t('mute.muted'));
+      muteBtn.title = t('mute.muted');
+    }
+  } else {
+    [rainAudio, beatAudio, snowAudio, thunderAudio].forEach(a => {
+      if (a) a.muted = false;
+    });
+    if (muteIcon) muteIcon.className = 'fa-solid fa-volume-high';
+    if (muteBtn) {
       muteBtn.classList.add('playing');
       muteBtn.classList.remove('muted');
-      syncModeAudio();
+      muteBtn.setAttribute('aria-label', t('mute.unmuted'));
+      muteBtn.title = t('mute.unmuted');
     }
+    if (audioCtx) {
+      if (audioCtx.state === 'suspended') audioCtx.resume().catch(() => {});
+      if (masterGain) {
+        masterGain.gain.cancelScheduledValues(audioCtx.currentTime);
+        masterGain.gain.setValueAtTime(0.75, audioCtx.currentTime);
+      }
+    }
+    syncModeAudio();
   }
 
   if (weatherIndicator && showToast) {
@@ -2508,9 +2531,8 @@ function setAudioMuteState(muted, showToast = true) {
 if (muteBtn) {
   muteBtn.addEventListener('click', (e) => {
     e.stopPropagation();
-    // If sound was never started (browser blocked unprompted autoplay) OR currently muted, UNMUTE and play immediately!
-    const needsStart = !audioCtx || audioCtx.state === 'suspended' || isMuted || (rainAudio && rainAudio.paused && weatherState === 0);
-    if (needsStart) {
+    // Direct user-driven binary toggle: mute turns off immediately, unmute turns on
+    if (isMuted) {
       setAudioMuteState(false, true);
       resumeAndPlayAudio();
     } else {
@@ -2655,6 +2677,7 @@ function resumeAndPlayAudio() {
 }
 
 const unlockAudio = () => {
+  if (isMuted) return;
   resumeAndPlayAudio();
   if (audioCtx && audioCtx.state === 'running') {
     hasUnlockedAudio = true;
