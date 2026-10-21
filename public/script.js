@@ -2415,44 +2415,34 @@ function startWeather(isUserAction = false) {
   resizeCanvas();
   initParticles();
 
-  const isMobile = window.innerWidth < 768;
-
-  // Manage Background Video & Canvas Visibility
-  if (isMobile) {
-    // Mobile RAM & Thermal Shield: Disable video hardware decoders on mobile to prevent battery drain & overheating
+  // Manage Background Video & Canvas Visibility (Active on BOTH Desktop & Mobile)
+  if (weatherState === 0) {
+    // Mode 0: ULTIMATE HYBRID CYBER STORM (Mix of 3D Cyber Video + Rain + Snow + Lightning + 3D Mesh)
     stormVideo?.classList.remove('active');
-    cyberVideo?.classList.remove('active');
     if (stormVideo) stormVideo.pause();
+    cyberVideo?.classList.add('active');
+    if (cyberVideo) {
+      cyberVideo.play().catch(() => {});
+    }
+    weatherCanvas?.classList.add('active');
+  } else if (weatherState === 1) {
+    stormVideo?.classList.remove('active');
+    if (stormVideo) stormVideo.pause();
+    cyberVideo?.classList.add('active');
+    cyberVideo?.play().catch(() => {});
+    weatherCanvas?.classList.add('active');
+  } else if (weatherState === 3) {
+    cyberVideo?.classList.remove('active');
     if (cyberVideo) cyberVideo.pause();
+    stormVideo?.classList.add('active');
+    stormVideo?.play().catch(() => {});
     weatherCanvas?.classList.add('active');
   } else {
-    if (weatherState === 0) {
-      stormVideo?.classList.remove('active');
-      if (stormVideo) stormVideo.pause();
-      cyberVideo?.classList.add('active');
-      if (cyberVideo) {
-        cyberVideo.play().catch(() => {});
-      }
-      weatherCanvas?.classList.add('active');
-    } else if (weatherState === 1) {
-      stormVideo?.classList.remove('active');
-      if (stormVideo) stormVideo.pause();
-      cyberVideo?.classList.add('active');
-      cyberVideo?.play().catch(() => {});
-      weatherCanvas?.classList.add('active');
-    } else if (weatherState === 3) {
-      cyberVideo?.classList.remove('active');
-      if (cyberVideo) cyberVideo.pause();
-      stormVideo?.classList.add('active');
-      stormVideo?.play().catch(() => {});
-      weatherCanvas?.classList.add('active');
-    } else {
-      cyberVideo?.classList.remove('active');
-      if (cyberVideo) cyberVideo.pause();
-      stormVideo?.classList.remove('active');
-      if (stormVideo) stormVideo.pause();
-      weatherCanvas?.classList.add('active');
-    }
+    cyberVideo?.classList.remove('active');
+    if (cyberVideo) cyberVideo.pause();
+    stormVideo?.classList.remove('active');
+    if (stormVideo) stormVideo.pause();
+    weatherCanvas?.classList.add('active');
   }
 
   animateWeather();
@@ -2665,8 +2655,7 @@ function resumeAndPlayAudio() {
     audioCtx.resume().catch(() => {});
   }
   syncModeAudio();
-  const isMobile = window.innerWidth < 768;
-  if (!isMobile && cyberVideo && cyberVideo.paused && (weatherState === 0 || weatherState === 1)) {
+  if (cyberVideo && cyberVideo.paused && (weatherState === 0 || weatherState === 1)) {
     cyberVideo.play().catch(() => {});
   }
 }

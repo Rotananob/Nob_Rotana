@@ -204,16 +204,29 @@ img {
 }
 
 .weather-video.cyber-bg-video.active {
-  opacity: 0.52;
-  filter: saturate(1.8) hue-rotate(185deg) contrast(1.22) brightness(0.85);
+  opacity: 0.50;
+  filter: saturate(1.85) contrast(1.28) brightness(0.96) drop-shadow(0 0 25px rgba(0, 240, 255, 0.22));
   transform-origin: center center;
-  will-change: transform;
+  will-change: transform, opacity;
 }
 
-/* Mobile RAM & Thermal Shield: Hide video decode surfaces on mobile devices */
+/* Mobile 3D Video & Thermal Optimization: Hardware accelerated video background */
 @media (max-width: 768px) {
   .weather-video {
-    display: none !important;
+    transform: translate3d(0, 0, 0);
+    -webkit-transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    will-change: opacity;
+  }
+
+  .weather-video.active {
+    opacity: 0.44;
+  }
+
+  .weather-video.cyber-bg-video.active {
+    opacity: 0.42;
+    filter: saturate(1.7) contrast(1.22) brightness(0.92);
   }
 }
 
@@ -225,8 +238,8 @@ img {
   height: 100%;
   pointer-events: none;
   z-index: 1;
-  background: radial-gradient(circle at 50% 50%, transparent 40%, rgba(8, 12, 20, 0.6) 80%, rgba(5, 8, 15, 0.9) 100%);
-  mix-blend-mode: multiply;
+  background: radial-gradient(circle at 50% 40%, rgba(0, 240, 255, 0.05) 0%, rgba(56, 189, 248, 0.03) 35%, rgba(8, 12, 20, 0.68) 75%, rgba(4, 7, 14, 0.92) 100%);
+  mix-blend-mode: normal;
 }
 
 /* =============================
