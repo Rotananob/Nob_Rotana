@@ -7,7 +7,7 @@ let weatherState = 0; // 2026 Mode 0: Ultimate Cyber Storm (Mix of Lightning + R
 const I18N = { en: {}, km: {} };
 
 Object.assign(I18N.en, {
-  'page.title': 'Dev Portfolio',
+  'page.title': 'Rotana NOB | Software & Web App Builder - Portfolio',
   'nav.home': 'Home',
   'nav.projects': 'Projects',
   'nav.certificates': 'Certificates',
@@ -256,7 +256,7 @@ Object.assign(I18N.en, {
 });
 
 Object.assign(I18N.km, {
-  'page.title': 'Portfolio ណុប រតនា',
+  'page.title': 'ណុប រតនា (Rotana NOB) | Software & Web App Builder - Portfolio',
   'nav.home': 'ទំព័រដើម',
   'nav.projects': 'គម្រោង',
   'nav.certificates': 'វិញ្ញាបនបត្រ',
