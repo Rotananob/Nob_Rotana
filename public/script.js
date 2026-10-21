@@ -2,7 +2,9 @@
 
 /* ========== i18n: English (default) & Khmer ========== */
 const LANG_KEY = 'portfolio-lang';
-let weatherState = 0; // 2026 Mode 0: Ultimate Cyber Storm (Mix of Lightning + Rain + Snow + 3D Mesh) [DEFAULT]
+const savedWeatherMode = typeof localStorage !== 'undefined' ? localStorage.getItem('portfolio-weather-mode') : null;
+let weatherState = savedWeatherMode !== null ? parseInt(savedWeatherMode, 10) : 0; // 0-6: Visual/Audio modes, 7: Clean Normal (Off)
+if (isNaN(weatherState) || weatherState < 0 || weatherState > 7) weatherState = 0;
 
 const I18N = { en: {}, km: {} };
 
@@ -160,6 +162,7 @@ Object.assign(I18N.en, {
   'weather.mode4': '❄️ Cosmic Snow',
   'weather.mode5': '🌌 3D Cyber Mesh',
   'weather.mode6': '✨ Zen Aurora',
+  'weather.mode7': '🌿 Clean Normal Mode (All Off)',
   'weather.ind0': '⚡ Ultimate Cyber Storm (Lightning + Rain + Snow + 3D)',
   'weather.ind1': '🎬 Cyber Video',
   'weather.ind2': '🌧️ Cyber Rain',
@@ -167,6 +170,7 @@ Object.assign(I18N.en, {
   'weather.ind4': '❄️ Cosmic Snow',
   'weather.ind5': '🌌 3D Cyber Mesh',
   'weather.ind6': '✨ Zen Aurora',
+  'weather.ind7': '🌿 Clean Normal Mode (3D & Videos Off - Zero CPU)',
   'mute.btnTitle': 'Toggle Sound (Mute/Unmute)',
   'mute.unmuted': '🔊 Sound Active',
   'mute.muted': '🔇 Sound Muted',
@@ -415,6 +419,7 @@ Object.assign(I18N.km, {
   'weather.mode4': '❄️ ព្រិលត្រជាក់ Cosmic',
   'weather.mode5': '🌌 3D Cyber Mesh',
   'weather.mode6': '✨ Zen Aurora',
+  'weather.mode7': '🌿 ទម្រង់ធម្មតា (បិទ 3D & Video)',
   'weather.ind0': '⚡ មហាកំពូលព្យុះ (រន្ទះ + ភ្លៀង + ព្រិល + 3D)',
   'weather.ind1': '🎬 Cyber Video',
   'weather.ind2': '🌧️ ភ្លៀងធ្លាក់ Cyber',
@@ -422,6 +427,7 @@ Object.assign(I18N.km, {
   'weather.ind4': '❄️ ព្រិលត្រជាក់ Cosmic',
   'weather.ind5': '🌌 3D Cyber Mesh',
   'weather.ind6': '✨ Zen Aurora',
+  'weather.ind7': '🌿 ទម្រង់ធម្មតា (បិទ 3D & Video - មិនស៊ី RAM & ត្រជាក់ម៉ាស៊ីន)',
   'mute.btnTitle': 'បិទ/បើក សំឡេងបរិយាកាស',
   'mute.unmuted': '🔊 បានបើកសំឡេងបរិយាកាស',
   'mute.muted': '🔇 បានបិទសំឡេង',
@@ -1256,6 +1262,7 @@ if (typeof window !== 'undefined' && 'DeviceOrientationEvent' in window) {
 
 // Click / tap 3D spark explosion, dual energy shockwave & interactive lightning
 function trigger3DClickExplosion(clientX, clientY) {
+  if (weatherState === 7) return; // Mode 7: Clean Normal Mode - Zero 3D FX
   const isMobile = window.innerWidth < 768;
   const count = isMobile ? 14 : 26;
 
@@ -1467,6 +1474,8 @@ function initParticles() {
   matrixDrops = [];
   lightningBolt = null;
   flashOpacity = 0;
+
+  if (weatherState === 7) return; // Mode 7: Clean Normal Mode - Zero particles loaded into memory
 
   const isMobile = window.innerWidth < 768;
 
@@ -2157,6 +2166,12 @@ function drawZenAurora() {
 let lastWeatherRenderTime = 0;
 
 function animateWeather(timestamp) {
+  if (weatherState === 7) {
+    if (animFrame) cancelAnimationFrame(animFrame);
+    animFrame = null;
+    return; // Complete CPU/GPU stoppage in Clean Normal Mode
+  }
+
   animFrame = requestAnimationFrame(animateWeather);
 
   const isMobile = window.innerWidth < 768;
@@ -2299,12 +2314,16 @@ function applyWeatherUiLabels(showToast = false) {
     'fa-solid fa-bolt',           // Mode 3: Thunderstorm
     'fa-solid fa-snowflake',      // Mode 4: Cosmic Snow
     'fa-solid fa-cube',           // Mode 5: 3D Cyber Mesh
-    'fa-solid fa-circle-notch'    // Mode 6: Zen Aurora
+    'fa-solid fa-circle-notch',   // Mode 6: Zen Aurora
+    'fa-solid fa-leaf'            // Mode 7: Clean Normal Mode (All Off)
   ];
 
   const state = typeof weatherState !== 'undefined' ? weatherState : 0;
   if (icon) {
     icon.className = modeIcons[state] || 'fa-solid fa-bolt-lightning';
+  }
+  if (btn) {
+    btn.classList.toggle('mode-off', state === 7);
   }
 
   if (indicator && showToast) {
@@ -2314,12 +2333,17 @@ function applyWeatherUiLabels(showToast = false) {
       clearTimeout(indicatorTimeout);
       indicatorTimeout = setTimeout(() => {
         indicator.classList.remove('visible');
-      }, 1500);
+      }, 1600);
     }
   }
 }
 
 function syncModeAudio() {
+  if (weatherState === 7) {
+    stopAllAudio();
+    return;
+  }
+
   if (isMuted) {
     clearBeatTimers();
     rainAudio?.pause();
@@ -2411,6 +2435,16 @@ function syncModeAudio() {
 }
 
 function startWeather(isUserAction = false) {
+  document.body.classList.toggle('clean-mode', weatherState === 7);
+
+  if (weatherState === 7) {
+    // Mode 7: CLEAN NORMAL (OFF) MODE - Zero 3D, Zero Videos, Zero Sound, Zero CPU/RAM
+    stopWeather();
+    stopAllAudio();
+    applyWeatherUiLabels(isUserAction);
+    return;
+  }
+
   resizeCanvas();
   initParticles();
 
@@ -2449,9 +2483,12 @@ function startWeather(isUserAction = false) {
   applyWeatherUiLabels(isUserAction);
 }
 
-// 7 Modes cycle: 0 -> 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 0
+// 8 Modes cycle: 0 -> 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 (Normal Clean / Off) -> 0
 weatherBtn?.addEventListener('click', () => {
-  weatherState = (weatherState + 1) % 7;
+  weatherState = (weatherState + 1) % 8;
+  try {
+    localStorage.setItem('portfolio-weather-mode', weatherState.toString());
+  } catch (e) {}
   stopWeather();
   startWeather(true);
 });
@@ -2665,7 +2702,7 @@ init3DCardTilt();
 let hasUnlockedAudio = false;
 
 function resumeAndPlayAudio() {
-  if (isMuted) return;
+  if (isMuted || weatherState === 7) return;
   initWebAudioSynth();
   if (audioCtx && audioCtx.state === 'suspended') {
     audioCtx.resume().catch(() => {});
@@ -2677,7 +2714,7 @@ function resumeAndPlayAudio() {
 }
 
 const unlockAudio = () => {
-  if (isMuted) return;
+  if (isMuted || weatherState === 7) return;
   resumeAndPlayAudio();
   if (audioCtx && audioCtx.state === 'running') {
     hasUnlockedAudio = true;
@@ -2695,6 +2732,13 @@ let hasBootedWeather = false;
 function bootWeather() {
   if (hasBootedWeather) return;
   hasBootedWeather = true;
+  document.body.classList.toggle('clean-mode', weatherState === 7);
+  if (weatherState === 7) {
+    stopWeather();
+    stopAllAudio();
+    applyWeatherUiLabels(false);
+    return;
+  }
   startWeather();
   if (!isMuted) {
     resumeAndPlayAudio();
@@ -2986,6 +3030,7 @@ document.addEventListener('visibilitychange', () => {
     if (snowAudio) snowAudio.pause();
     if (thunderAudio) thunderAudio.pause();
   } else {
+    if (weatherState === 7) return; // Mode 7: Keep 100% idle in Clean Normal Mode
     if (animFrame) cancelAnimationFrame(animFrame);
     animFrame = requestAnimationFrame(animateWeather);
     if (!isMuted) {

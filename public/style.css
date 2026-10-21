@@ -261,6 +261,25 @@ img {
   }
 }
 
+/* ========================================================
+   CLEAN NORMAL MODE (Off Mode: 0% CPU, 0% GPU, Zero Overhead)
+   ======================================================== */
+body.clean-mode #weather-canvas {
+  display: none !important;
+  opacity: 0 !important;
+}
+body.clean-mode .weather-video {
+  display: none !important;
+  opacity: 0 !important;
+}
+body.clean-mode #cyber-grid {
+  opacity: 0.3 !important;
+  transform: none !important;
+}
+body.clean-mode #cyber-vignette {
+  opacity: 0.45 !important;
+}
+
 /* =============================
        SCROLLBAR
        ============================= */
@@ -1917,6 +1936,19 @@ footer::before {
   color: #c084fc;
 }
 
+#weather-btn.mode-off {
+  color: #34d399;
+  border-color: rgba(52, 211, 153, 0.45);
+  background: rgba(5, 150, 105, 0.12);
+}
+
+#weather-btn.mode-off:hover {
+  border-color: #10b981;
+  box-shadow: 0 0 25px rgba(16, 185, 129, 0.65);
+  background: rgba(16, 185, 129, 0.22);
+  color: #10b981;
+}
+
 #mute-btn:active, #weather-btn:active {
   transform: scale(0.92);
 }
@@ -2304,7 +2336,22 @@ footer::before {
   }
 
   .weather-indicator {
-    display: none !important;
+    position: absolute;
+    bottom: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%) translateY(4px);
+    white-space: nowrap;
+    max-width: 90vw;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    font-size: 0.72rem;
+    padding: 5px 12px;
+  }
+
+  .weather-indicator.visible {
+    display: block !important;
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
   }
 
   #hero {
