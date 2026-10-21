@@ -75,14 +75,14 @@
        ===================== -->
   <div id="cursor-glow" aria-hidden="true"></div>
   <div id="cyber-grid" aria-hidden="true"></div>
-  <div id="cyber-vignette" aria-hidden="true"></div>
-  <canvas id="weather-canvas"></canvas>
-  <video id="cyber-video" autoplay loop muted playsinline webkit-playsinline preload="auto" class="weather-video cyber-bg-video">
+  <video id="cyber-video" autoplay loop muted playsinline webkit-playsinline preload="metadata" class="weather-video cyber-bg-video">
     <source src="Assets/vdo/cyber_tunnel.webm" type="video/webm" />
   </video>
-  <video id="storm-video" loop muted playsinline webkit-playsinline preload="auto" class="weather-video">
+  <video id="storm-video" loop muted playsinline webkit-playsinline preload="metadata" class="weather-video">
     <source src="Assets/vdo/storm.webm" type="video/webm" />
   </video>
+  <canvas id="weather-canvas" class="active" aria-hidden="true"></canvas>
+  <div id="cyber-vignette" aria-hidden="true"></div>
 
   <!-- =====================  
        NAVIGATION
@@ -1729,21 +1729,21 @@
     🔊 AUDIO SOURCES: Replace with actual audio file URLs.
     Free audio sources: https://freesound.org
   -->
-  <audio id="rain-audio" loop preload="auto">
+  <audio id="rain-audio" loop preload="metadata">
     <!-- Soothing authentic ambient rainfall -->
     <source src="Assets/sound/rain_soothing.mp3" type="audio/mpeg" />
   </audio>
 
-  <audio id="beat-audio" loop preload="auto">
+  <audio id="beat-audio" loop preload="metadata">
     <!-- Groovy bouncy chill beat ("sound ញាក់តាមក្រោយ") -->
     <source src="Assets/sound/rain.mp3" type="audio/mpeg" />
   </audio>
 
-  <audio id="snow-audio" loop preload="auto">
+  <audio id="snow-audio" loop preload="none">
     <source src="Assets/sound/snow.mp3" type="audio/mpeg" />
   </audio>
 
-  <audio id="thunder-audio" preload="auto">
+  <audio id="thunder-audio" preload="none">
     <!-- Deep atmospheric distant rolling thunder -->
     <source src="Assets/sound/thunder_rumble.mp3" type="audio/mpeg" />
   </audio>
