@@ -5,6 +5,10 @@ const LANG_KEY = 'portfolio-lang';
 const savedWeatherMode = typeof localStorage !== 'undefined' ? localStorage.getItem('portfolio-weather-mode') : null;
 let weatherState = savedWeatherMode !== null ? parseInt(savedWeatherMode, 10) : 0; // 0-6: Visual/Audio modes, 7: Clean Normal (Off)
 if (isNaN(weatherState) || weatherState < 0 || weatherState > 7) weatherState = 0;
+// On mobile devices (< 768px), enforce strictly 2 options: Mode 0 (Rain + Snow + Lightning) or Mode 7 (Clean Normal Mode)
+if (typeof window !== 'undefined' && window.innerWidth < 768 && weatherState !== 7) {
+  weatherState = 0;
+}
 
 const I18N = { en: {}, km: {} };
 
@@ -171,6 +175,8 @@ Object.assign(I18N.en, {
   'weather.ind5': '🌌 3D Cyber Mesh',
   'weather.ind6': '✨ Zen Aurora',
   'weather.ind7': '🌿 Clean Normal Mode (3D & Videos Off - Zero CPU)',
+  'weather.mobileOption1': '⚡ Rain + Snow + Lightning',
+  'weather.mobileOption2': '🌿 Clean Normal Mode',
   'mute.btnTitle': 'Toggle Sound (Mute/Unmute)',
   'mute.unmuted': '🔊 Sound Active',
   'mute.muted': '🔇 Sound Muted',
@@ -222,13 +228,13 @@ Object.assign(I18N.en, {
   'alert.confirm': 'Confirm and Continue',
   'alert.cancel': 'Cancel',
   'proj8.title': 'S Tech Store (Enterprise IT E-Commerce & KHQR Platform)',
-  'proj8.desc': 'S Tech Store is an enterprise-grade omnichannel IT & computer hardware e-commerce platform engineered with Next.js 16 (Turbopack), Laravel 11 REST API, PostgreSQL (Neon), and Firebase Realtime Database. Key Features: 1) Bakong KHQR Gateway: Dynamic EMVCo QR (USD/KHR) with live NBC exchange rates, 1-tap mobile banking deep links (ABA, Bakong, Wing, ACLEDA), and instant webhook auto-settlement; 2) Telegram Ecosystem & Mini App (TMA): Seamless Telegram Mini App with 1-click phone handshake (zero reload) and 2-bot multi-topic Supergroup automation (Orders, Inventory, Shift Alerts); 3) Custom PC Builder & Wattage Engine: Real-time hardware compatibility validator (socket, RAM, PCIe, GPU clearance) + dynamic total system wattage and 80+ Gold PSU calculator with 1-click bundle checkout; 4) Bi-directional Live Chat & Unified Auth: Real-time customer chat bridged to Telegram & Admin console; Google OAuth reverse-proxied under custom domain (www.s-tech-store.tech); 5) Merchant HQ & POS Cockpit: Live sales analytics, cash drawer shift reconciliation, ESC/POS barcode receipts, and 5-stage order tracking. Live at www.s-tech-store.tech.',
+  'proj8.desc': 'S Tech Store is an enterprise IT e-commerce platform built with Next.js 16, Laravel 11, and PostgreSQL/Firebase. Key highlights: 1) Dynamic Bakong KHQR payments (USD/KHR) with 1-tap mobile banking deep links; 2) Interactive Custom PC Builder with real-time hardware compatibility & wattage calculation; 3) Telegram Supergroup Bot automation for instant orders and inventory; 4) Real-time customer live chat bridged to Telegram; and 5) Merchant HQ Cockpit with live sales analytics and ESC/POS receipt printing. Live at www.s-tech-store.tech.',
   'proj9.title': 'Delight Fashion (Luxury Men\'s E-Commerce & KHQR Platform)',
   'proj9.desc': 'Delight Fashion is a production-grade, mobile-first, high-end men\'s fashion e-commerce platform built for the modern boutique market in Phnom Penh, Cambodia. Engineered with a cutting-edge full-stack architecture utilizing Next.js 16 (App Router), React 19, TypeScript, and Tailwind CSS v4, featuring a luxury Black, White & Gold aesthetic. Core architectural features include: 1) Secure Authentication & IAM with Firebase Auth (Google Sign-In & custom RBAC claims) separating customer accounts from shop owner controls; 2) Atomic Transactional Order & Stock Engine using Firebase Admin SDK with Firestore transactions to prevent race conditions and automatically deduct inventory in real time; 3) Integrated Cambodia Local Payments featuring ABA Bank PayWay and Dynamic Bakong KHQR (EMVCo standard) with 1-tap mobile banking deep-linking and automated payment status verification; 4) Instant Shop Owner Notifications powered by automated Telegram Bot API alerts upon every placed order; 5) Luxury Catalog & Shopping Experience with server-driven Live Search, category filters, auto-opening slide-over cart drawer, and single-page checkout; 6) Merchant HQ Admin Dashboard featuring real-time revenue analytics, 7-day interactive sales charts powered by Recharts, inventory management, low stock alerts, and multi-stage order tracking (Pending to Completed); 7) High-performance Cloudinary CDN media pipeline delivering optimized WebP/AVIF imagery; and 8) Progressive Web App (PWA) powered by Serwist for offline resilience and mobile home screen installation. Deployed live on Firebase Hosting and GitHub.',
   'proj10.title': 'NRI Studio',
   'proj10.desc': 'NRI Studio is a full-stack, browser-based Integrated Development Environment (IDE) that closely mimics the behavior and UI of VSCode. Built for modern web development, it allows users to create, edit, save, and execute JavaScript and TypeScript code entirely in the cloud. Features include Monaco Editor with full IntelliSense & auto-completion, a collapsible sidebar with file explorer, multi-tab support, local folder upload, live terminal powered by a secure Node.js backend sandbox, real-time auto-save to MongoDB, and Firebase Authentication (email/password & Google). Deployed on Vercel (frontend) and Render (backend).',
   'proj11.title': 'X-Clinic Platform (Enterprise Multi-Tenant Medical PaaS & Hospital Information System)',
-  'proj11.desc': 'X-Clinic Platform is a state-of-the-art, enterprise-grade Multi-Tenant Clinical Platform as a Service (PaaS) and Hospital Information System engineered for outpatient polyclinics, specialized practices, and healthcare chains in Cambodia. Built with Next.js 14 (App Router), NestJS 10, Prisma ORM, and PostgreSQL 16. Core architectural highlights include: 1) Multi-Tenant Automatic Isolation: Native request-scoped tenant isolation powered by AsyncLocalStorage and Prisma extensions, ensuring strict data boundaries across all clinics; 2) 15-Second Instant Signup with Gmail SMTP: Frictionless clinic workspace onboarding with 6-digit confirmation codes sent via real Gmail SMTP, protected with anti-spam security (zero preview code exposure); 3) SaaS Subscription & Anti-Bypass Guard: Transparent 4-tier SaaS plans (Free, Starter $5/mo, Pro $8/mo, Enterprise $12/mo) with 20% annual discounts, 100% cryptographic payment verification, 5 KHQR/day free quota, and automated background billing cycle monitoring; 4) Real FinTech Integration & Static KHQR Demo: Headless ABA PayWay gateway and Bakong EMVCo Tag 01=12 dynamic QR settlement with live permanent static demo QR ($0.01 - $0.05) and custom merchant branding; 5) AI Medical Voice Notes & SOAP Engine: Spoken clinical dictation in Khmer and English parsed into standard SOAP notes using Google Gemini 3.8 Flash with 2-req/min rate limiting and deterministic rule-engine fallback; 6) Intelligent CDSS & Patient Safety: Real-time Drug-Drug Interaction (DDI) detection, Penicillin/Sulfa allergy cross-reactivity guards, and NEWS2 emergency triage scoring; 7) Comprehensive Specialized Modules: DICOM PACS with zero-footprint WebGL medical viewer, encrypted WebRTC Teleconsultation with QR-signed e-prescriptions, 32-tooth interactive Dental Odontogram, Inpatient Admission (IPD) & Nurse eMAR, Smart TV waiting room signage with Khmer TTS, LIS ASTM/HL7 analyzer connectivity, and Ministry of Health compliance featuring Ed25519 digital signatures and DHIS2 disease surveillance XML/JSON exports; 8) Hardware & Offline Edge Resiliency: ESC/POS silent thermal receipt printing (80mm/58mm), auto cash drawer kick, barcode scanner, and encrypted IndexedDB offline mutations; and 9) Dedicated Super Admin Portal: Centralized fleet governance console for system-wide clinic monitoring and tenant management. Deployed live on Vercel with PostgreSQL cloud database.',
+  'proj11.desc': 'X-Clinic Platform is an enterprise Multi-Tenant Clinical SaaS & Hospital Information System built with Next.js 14, NestJS 10, Prisma ORM, and PostgreSQL 16. Key highlights: 1) Multi-Tenant Data Isolation with AsyncLocalStorage; 2) Dynamic Bakong KHQR (USD/KHR) & ABA PayWay billing with instant deep-linking; 3) Comprehensive EMR 360 with AI Medical Voice Dictation (Gemini 3.8); 4) Intelligent Clinical Decision Support (CDSS) for drug interactions & allergy safety; 5) WebGL DICOM PACS medical viewer & WebRTC teleconsultation; and 6) In-browser ESC/POS 80mm/58mm thermal receipt printing and Telegram Bot automation.',
   'proj12.title': 'QR Scan (Ultra HD AI QR & Barcode Scanner PWA)',
   'proj12.desc': 'QR Scan is a production-grade, fast, and privacy-first Progressive Web App (PWA) designed for seamless QR code and barcode scanning directly from any web browser or mobile phone. Built with a modern architecture using React 18, TypeScript, Vite 5, Tailwind CSS, and html5-qrcode. Core architectural features include: 1) Ultra HD AI Camera Scanning with auto-focus, camera flip (front/back), torch/flashlight toggle, and tap-to-focus; 2) Intelligent Multi-Format Detection supporting National Bakong KHQR (EMVCo), EAN-13, EAN-8, UPC-A, UPC-E, Code 128, Code 39, and custom QR payloads; 3) Smart Content Processing with automatic parsing of URLs, Wi-Fi credentials (1-tap network info copy), vCard contacts (.vcf export), phone dialer, SMS, email, geolocation on Google Maps, Google Product Search, and social media handles; 4) Security & Anti-Phishing Engine with dangerous protocol blocking (javascript:, data:, file:), HTTP security warnings, and external link confirmation modals; 5) 100% Local-First Privacy with zero server tracking, zero external telemetry, and offline-persistent scan history stored in client IndexedDB with favorite bookmarks and search filters; 6) Image file & photo gallery QR decoding alongside manual text entry; 7) Bilingual UI support (Khmer/English) via i18next; and 8) Progressive Web App (PWA) installability with automated background service worker updates via Workbox.',
   'proj13.title': 'Rotana Portfolio Native (React Native & Expo)',
@@ -428,6 +434,8 @@ Object.assign(I18N.km, {
   'weather.ind5': '🌌 3D Cyber Mesh',
   'weather.ind6': '✨ Zen Aurora',
   'weather.ind7': '🌿 ទម្រង់ធម្មតា (បិទ 3D & Video - មិនស៊ី RAM & ត្រជាក់ម៉ាស៊ីន)',
+  'weather.mobileOption1': '⚡ ភ្លៀង + ព្រិល + ផ្គររន្ទះ',
+  'weather.mobileOption2': '🌿 ទម្រង់ធម្មតា',
   'mute.btnTitle': 'បិទ/បើក សំឡេងបរិយាកាស',
   'mute.unmuted': '🔊 បានបើកសំឡេងបរិយាកាស',
   'mute.muted': '🔇 បានបិទសំឡេង',
@@ -479,13 +487,13 @@ Object.assign(I18N.km, {
   'alert.confirm': 'យល់ព្រម និងបន្ត',
   'alert.cancel': 'បោះបង់',
   'proj8.title': 'S Tech Store (វេទិកា E-Commerce កុំព្យូទ័រ & ប្រព័ន្ធទូទាត់ KHQR)',
-  'proj8.desc': 'S Tech Store គឺជាវេទិកា E-Commerce កុំព្យូទ័រ និងសម្ភារៈ IT កម្រិត Enterprise Omnichannel ឈានមុខគេ បង្កើតឡើងដោយ Next.js 16 (Turbopack), Laravel 11 REST API, PostgreSQL (Neon) និង Firebase Realtime Database។ មុខងារស្នូលសំខាន់ៗ (Key Features)៖ ១) ប្រព័ន្ធទូទាត់ជាតិ Bakong KHQR (EMVCo)៖ បង្កើត Dynamic QR ស្វ័យប្រវត្តិ (USD/KHR) តាមអត្រាប្តូរប្រាក់ NBC, 1-Tap Deep Link ចូល Mobile Banking (ABA, Bakong, Wing, ACLEDA) និងផ្ទៀងផ្ទាត់ Webhook ជោគជ័យភ្លាមៗ; ២) Telegram Ecosystem & Mini App (TMA)៖ រួមបញ្ចូល Telegram Mini App ជាមួយប្រព័ន្ធ Handshake ចាប់លេខទូរស័ព្ទស្វ័យប្រវត្តិតាម ១ ចុច (មិនបាច់ Reload) និង 2-Bot ឆ្លាតវៃបែងចែកដំណឹងតាម Topic ក្នុង Supergroup (ការកុម្ម៉ង់, ស្តុក, វេនបុគ្គលិក); ៣) ឧបករណ៍ផ្គុំកុំព្យូទ័រ Custom PC Builder៖ ផ្ទៀងផ្ទាត់ភាពត្រូវគ្នានៃ Socket CPU/RAM/GPU ស្វ័យប្រវត្តិ គណនាវ៉ាត់ភ្លើងសរុប (Wattage Engine) និងណែនាំកម្លាំង PSU ស័ក្តិសម ព្រមទាំង Checkout ទាំងឈុត; ៤) Live Chat ពីរផ្លូវ & Unified Auth៖ ឆាតផ្ទាល់ Real-Time ភ្ជាប់ទៅកាន់ Telegram Bot & Admin Console ព្រមទាំង Google OAuth បង្ហាញ Domain ផ្លូវការ (www.s-tech-store.tech); ៥) Merchant HQ & POS Cockpit៖ វិភាគចំណូលជាក់ស្តែង, គ្រប់គ្រងវេនលុយបុគ្គលិក (Cash Drawer Shifts), ចេញវិក្កយបត្រ ESC/POS Barcode និងតាមដានដំណាក់កាលបញ្ជាទិញ ៥ កម្រិត។ ដាក់ឱ្យដំណើរការផ្ទាល់នៅ www.s-tech-store.tech។',
+  'proj8.desc': 'S Tech Store គឺជាវេទិកា E-Commerce កុំព្យូទ័រ និងសម្ភារៈ IT កម្រិត Enterprise បង្កើតឡើងដោយ Next.js 16, Laravel 11 និង PostgreSQL/Firebase។ ចំណុចលេចធ្លោសំខាន់ៗរួមមាន៖ ១) ប្រព័ន្ធទូទាត់ Dynamic Bakong KHQR (USD/KHR) ជាមួយ 1-Tap Mobile Banking Deep Links; ២) ឧបករណ៍ផ្គុំកុំព្យូទ័រ Custom PC Builder ផ្ទៀងផ្ទាត់ភាពត្រូវគ្នានៃគ្រឿង Hardware និងគណនាវ៉ាត់ភ្លើងស្វ័យប្រវត្តិ; ៣) ប្រព័ន្ធ Telegram Supergroup Bot ស្វ័យប្រវត្តិតាមដាន Order និងស្តុក; ៤) ប្រព័ន្ធ Live Chat ពីរផ្លូវតភ្ជាប់ Telegram; និង ៥) ផ្ទាំងគ្រប់គ្រង Merchant HQ វិភាគចំណូលជាក់ស្តែង និងព្រីនវិក្កយបត្រ ESC/POS។ ដាក់ឱ្យដំណើរការផ្ទាល់នៅ www.s-tech-store.tech។',
   'proj9.title': 'Delight Fashion (វេទិកា E-Commerce ម៉ូតបុរសប្រណិត & ប្រព័ន្ធ KHQR)',
   'proj9.desc': 'Delight Fashion គឺជាវេទិកា E-Commerce លក់សម្លៀកបំពាក់បុរសកម្រិតប្រណិត (Luxury Men\'s Fashion Platform) ដែលត្រូវបានបង្កើតឡើងសម្រាប់ទីផ្សារហាងសម្លៀកបំពាក់ទំនើបក្នុងរាជធានីភ្នំពេញ ប្រទេសកម្ពុជា ត្រៀមរួចជាស្រេចសម្រាប់ Production។ ប្រព័ន្ធត្រូវបានរចនាឡើងយ៉ាងរឹងមាំជាមួយ Next.js 16 (App Router), React 19, TypeScript, និង Tailwind CSS v4 ជាមួយរចនាបថប្រណិតពណ៌ខ្មៅ ស និងមាស (Black, White & Gold Aesthetic)។ មុខងារស្នូលសំខាន់ៗរួមមាន៖ ១) ប្រព័ន្ធសុវត្ថិភាព និងការគ្រប់គ្រងសិទ្ធិ (Firebase Auth & RBAC) គាំទ្រ Google Sign-In ដោយបែងចែកដាច់រវាងគណនីអតិថិជន និងសិទ្ធិគ្រប់គ្រងរបស់ម្ចាស់ហាង (Admin); ២) ដំណើរការកុម្ម៉ង់ និងកាត់ស្តុកស្វ័យប្រវត្តិ (Atomic Transactional Order Engine) ដោយប្រើ Firebase Admin SDK ជាមួយ Firestore Transactions ដើម្បីការពារ Race Condition និងកាត់បន្ថយចំនួនទំនិញក្នុងស្តុកភ្លាមៗ; ៣) ប្រព័ន្ធទូទាត់ប្រាក់ក្នុងស្រុកពេញលេញ គាំទ្រ ABA Bank QR PayWay និង Dynamic Bakong KHQR តាមស្តង់ដារ EMVCo ជាមួយ 1-Tap Deep Link ចូល Mobile Banking App និងផ្ទៀងផ្ទាត់ការទូទាត់ដោយស្វ័យប្រវត្តិ; ៤) ប្រព័ន្ធជូនដំណឹងបន្ទាន់ទៅកាន់ម្ចាស់ហាងតាម Telegram Bot API ដោយស្វ័យប្រវត្តិនូវរាល់ពេលមានការបញ្ជាទិញថ្មី; ៥) បទពិសោធទិញទំនិញដ៏រលូន (Storefront UX) រួមមាន Live Search តាម Server Actions, តម្រងស្វែងរកតាមប្រភេទ, កន្ត្រកទំនិញស្លាយបើកស្វ័យប្រវត្តិ (Cart Drawer), និង Checkout Modal រហ័ស; ៦) ផ្ទាំងគ្រប់គ្រងអាជីវកម្ម (Admin Dashboard) វិភាគស្ថិតិចំណូលជាក់ស្តែង ក្រាហ្វលក់ ៧ ថ្ងៃចុងក្រោយជាមួយ Recharts, ការជូនដំណឹងទំនិញជិតអស់ពីស្តុក (Low Stock Alerts), និងការគ្រប់គ្រងដំណាក់កាល Order; ៧) ប្រព័ន្ធបញ្ជូនរូបភាព Cloudinary CDN បង្កើនល្បឿនជាមួយ WebP/AVIF Auto-Optimization; និង ៨) ដំឡើងជាកម្មវិធីទូរស័ព្ទ (PWA) តាមរយៈ Serwist អាចដំណើរការបានទោះបី Offline។ ដាក់ឱ្យដំណើរការផ្ទាល់នៅលើ Firebase Hosting និង GitHub។',
   'proj10.title': 'NRI Studio',
   'proj10.desc': 'NRI Studio គឺជា IDE (Integrated Development Environment) ដំណើរការក្នុង Browser ដែលមានទម្រង់ស្រដៀង VSCode។ បង្កើតឡើងសម្រាប់ Developer ទំនើប អាចបង្កើត កែ រក្សាទុក និង Execute កូដ JavaScript/TypeScript ទាំងស្រុងក្នុង Cloud។ មុខងាររួមមាន Monaco Editor ជាមួយ IntelliSense, ការ Auto-Complete, Sidebar, Multi-Tab, Local Folder Upload, Terminal ស្ទួន Node.js Sandbox, Auto-Save ទៅ MongoDB, និង Firebase Auth (Email/Google)។ Deploy នៅ Vercel (Frontend) និង Render (Backend)។',
   'proj11.title': 'ប្រព័ន្ធ X-Clinic - វេទិកា Multi-Tenant Medical PaaS និងគ្រប់គ្រងមន្ទីរពេទ្យកម្រិតសហគ្រាស',
-  'proj11.desc': 'ប្រព័ន្ធ X-Clinic គឺជាវេទិកាគ្រប់គ្រងគ្លីនិក និងមន្ទីរពេទ្យពហុស្ថាប័នកម្រិតសហគ្រាស Enterprise Multi-Tenant Clinical PaaS និង Electronic Medical Records EMR 360 ត្រូវបានបង្កើតឡើងយ៉ាងយកចិត្តទុកដាក់បំផុតសម្រាប់គ្លីនិក មជ្ឈមណ្ឌលវេជ្ជសាស្ត្រ និងខ្សែសង្វាក់សុខាភិបាលទំនើបក្នុងប្រទេសកម្ពុជា ត្រៀមរួចជាស្រេចសម្រាប់ Production។ ប្រព័ន្ធត្រូវបានរចនាឡើងជាមួយ Next.js 14 App Router, NestJS 10, Prisma ORM, និង PostgreSQL 16។ មុខងារស្ថាបត្យកម្មស្នូលសំខាន់ៗរួមមាន៖ ១) ស្ថាបត្យកម្ម Multi-Tenant Auto-Isolation៖ បែងចែកទិន្នន័យគ្លីនិកនីមួយៗដាច់ដោយឡែកពីគ្នាស្វ័យប្រវត្តិតាមរយៈ AsyncLocalStorage និងគាំទ្រ Subdomain ផ្ទាល់ខ្លួនដូចជា rotana.clinic.com ធានាសុវត្ថិភាពទិន្នន័យវេជ្ជសាស្ត្រ ១០០%; ២) ការចុះឈ្មោះរហ័សត្រឹម ១៥ វិនាទី និងសុវត្ថិភាព Gmail SMTP៖ ចុះឈ្មោះដោយផ្ទាល់ជាមួយ Gmail និងពាក្យសម្ងាត់ ដោយប្រព័ន្ធផ្ញើលេខកូដ ៦ ខ្ទង់តាម Google Gmail SMTP ជាក់ស្តែង និងលុបបំបាត់ការបែកធ្លាយលេខកូដលើ Browser ទាំងស្រុងដើម្បីការពារ Spam; ៣) ប្រព័ន្ធគម្រោង SaaS និងការការពារ Bypass៖ គម្រោងបង់ប្រាក់ ៤ កម្រិតរួមមាន Free, Starter តម្លៃ ៥ ដុល្លារក្នុងមួយខែ, Pro តម្លៃ ៨ ដុល្លារក្នុងមួយខែ, Enterprise តម្លៃ ១២ ដុល្លារក្នុងមួយខែ ជាមួយការបញ្ចុះតម្លៃ ២០% សម្រាប់ប្រចាំឆ្នាំ ការពារការ Bypass ១០០% ដោយផ្ទៀងផ្ទាត់ការទូទាត់ប្រាក់ពិតប្រាកដ និងម៉ាស៊ីនដំណើរការ Billing Cycle ស្វ័យប្រវត្តិ; ៤) ប្រព័ន្ធទូទាត់ ABA PayWay Headless & Real KHQR Demo៖ បង្កើត Dynamic KHQR តាមស្តង់ដារ EMVCo និង Real Static KHQR សម្រាប់ Demo ស្កេនបានពិតៗពីកម្មវិធីធនាគារចំនួន ០.០១ ទៅ ០.០៥ ដុល្លារ ដោយអនុញ្ញាតឱ្យសាកល្បងប្តូរឈ្មោះ Merchant Name ផ្ទាល់ខ្លួន; ៥) បច្ចេកវិទ្យា AI Voice Medical & SOAP Notes៖ បំប្លែងសំឡេងពិគ្រោះជំងឺជាភាសាខ្មែរ និងអង់គ្លេសទៅជាកំណត់ត្រាវេជ្ជសាស្ត្រ SOAP តាមរយៈ Google Gemini 3.8 Flash ដោយមានប្រព័ន្ធ Rate Limit ២ ដងក្នុងមួយនាទី និងប្រព័ន្ធជំនួស Fallback ពេលគ្មានអ៊ីនធឺណិត; ៦) ប្រព័ន្ធជំនួយការសម្រេចចិត្តវេជ្ជសាស្ត្រឆ្លាតវៃ CDSS៖ ផ្ទៀងផ្ទាត់ប្រតិកម្មរវាងថ្នាំ និងថ្នាំ DDI, ប្រតិកម្មអាលែកហ្ស៊ី និងគណនាពិន្ទុហានិភ័យសង្គ្រោះបន្ទាន់ NEWS2; ៧) កញ្ចប់មុខងារឯកទេសទំនើបពេញលេញ៖ ប្រព័ន្ធរូបភាពវេជ្ជសាស្ត្រ DICOM PACS ជាមួយ WebGL Viewer, ការពិគ្រោះជំងឺតាមវីដេអូ WebRTC Teleconsultation ជាមួយវេជ្ជបញ្ជាឌីជីថលចុះហត្ថលេខា QR, ប្លង់ធ្មេញឌីជីថល Dental Odontogram ៣២ គ្រាប់, ការគ្រប់គ្រងអ្នកជំងឺសម្រាកព្យាបាល IPD និង Nurse eMAR, ទូរទស្សន៍ហៅលេខរង់ចាំ Smart TV Signage ជាមួយសំឡេងខ្មែរ, ការតភ្ជាប់ម៉ាស៊ីនមន្ទីរពិសោធន៍ LIS ASTM និង HL7, ព្រមទាំងការអនុលោមតាមក្រសួងសុខាភិបាលជាមួយហត្ថលេខាឌីជីថល Ed25519 និងនាំចេញទិន្នន័យជំងឺឆ្លងទៅ DHIS2 ជាទម្រង់ XML និង JSON; ៨) ប្រព័ន្ធព្រីនកម្ដៅ ESC/POS & Offline-First៖ ព្រីនបង្កាន់ដៃកម្ដៅ ៨០មម និង ៥៨មម ដោយផ្ទាល់ បាញ់បើកថតប្រាក់ ស្កេនបាកូដ និងដំណើរការទិន្នន័យបានទោះបីដាច់អ៊ីនធឺណិតតាមរយៈ IndexedDB; និង ៩) ផ្ទាំងគ្រប់គ្រងជាន់ខ្ពស់ Super Admin Portal៖ គ្រប់គ្រងគ្លីនិក និងអ្នកប្រើប្រាស់ទូទាំងប្រទេស មើលស្ថិតិចំណូល និងកំណត់សិទ្ធិដោយផ្ទាល់។ ដាក់ឱ្យដំណើរការផ្ទាល់នៅលើ Vercel និង Cloud PostgreSQL។',
+  'proj11.desc': 'ប្រព័ន្ធ X-Clinic គឺជាវេទិកា Enterprise Multi-Tenant Clinical SaaS & EMR 360 គ្រប់គ្រងគ្លីនិក និងមន្ទីរពេទ្យទំនើប បង្កើតឡើងដោយ Next.js 14, NestJS 10, Prisma ORM និង PostgreSQL 16។ ចំណុចលេចធ្លោសំខាន់ៗរួមមាន៖ ១) ស្ថាបត្យកម្ម Multi-Tenant Auto-Isolation បែងចែកទិន្នន័យគ្លីនិកនីមួយៗដាច់ដោយឡែកពីគ្នា ១០០%; ២) ប្រព័ន្ធទូទាត់ Dynamic Bakong KHQR (USD/KHR) និង ABA PayWay ជាមួយ 1-Tap Deep Link; ៣) កំណត់ត្រា EMR 360 អមដោយ AI Voice Dictation (Gemini 3.8); ៤) ប្រព័ន្ធជំនួយវេជ្ជសាស្ត្រឆ្លាតវៃ CDSS ផ្ទៀងផ្ទាត់ប្រតិកម្មថ្នាំ និងអាលែកហ្ស៊ី; ៥) WebGL DICOM PACS មើលរូបភាពវេជ្ជសាស្ត្រ និង WebRTC Teleconsultation; និង ៦) ព្រីនបង្កាន់ដៃកម្ដៅ ESC/POS 80mm/58mm ផ្ទាល់ពី Browser អមដោយ Telegram Bot ស្វ័យប្រវត្តិ។',
   'proj12.title': 'QR Scan (កម្មវិធីស្កេនកូដ QR & បាកូដ Ultra HD AI PWA)',
   'proj12.desc': 'QR Scan គឺជាកម្មវិធី Progressive Web App (PWA) ដ៏ទំនើប លឿនបំផុត និងមានសុវត្ថិភាពខ្ពស់ សម្រាប់ស្កេនកូដ QR និងបាកូដទំនិញគ្រប់ប្រភេទដោយផ្ទាល់តាមរយៈ Browser និងទូរស័ព្ទដៃ ដោយមិនបាច់ដំឡើង App ពី Store ឡើយ។ ប្រព័ន្ធត្រូវបានបង្កើតឡើងដោយ React 18, TypeScript, Vite 5, Tailwind CSS និង html5-qrcode។ មុខងារស្នូលសំខាន់ៗរួមមាន៖ ១) ប្រព័ន្ធស្កេនកាមេរ៉ាកម្រិត Ultra HD AI ជាមួយសមត្ថភាព Auto-Focus ប្តូរកាមេរ៉ាមុខក្រោយ បើកពិល (Torch) និងចុចលើអេក្រង់ដើម្បី Focus; ២) ការស្គាល់គ្រប់ទម្រង់កូដ រួមមានកូដជាតិ Bakong KHQR (EMVCo), បាកូដទំនិញស្តង់ដារអន្តរជាតិ (EAN-13, EAN-8, UPC, Code 128, Code 39) និង QR កូដទូទៅ; ៣) ការវិភាគខ្លឹមសារឆ្លាតវៃ (Smart Content Parsing) ចែកដាច់រវាងតំណរភ្ជាប់ URL, ព័ត៌មាន Wi-Fi (Copy ពាក្យសម្ងាត់ភ្ជាប់ដោយ ១ ចុច), ទំនាក់ទំនង vCard (.vcf export), ការតេចេញ, ផ្ញើសារ SMS, អ៊ីមែល, ទីតាំង Google Maps, ការស្វែងរកទំនិញលើ Google និងបើកគណនីបណ្តាញសង្គម; ៤) ប្រព័ន្ធការពារសុវត្ថិភាពខ្ពស់ (Anti-Phishing & Security) ទប់ស្កាត់ Protocol គ្រោះថ្នាក់ (javascript:, data:) ព្រមានតំណរភ្ជាប់ HTTP និងផ្ទៀងផ្ទាត់មុនបើកគេហទំព័រក្រៅ; ៥) ឯកជនភាព ១០០% (Local-First Privacy) មិនបញ្ជូនទិន្នន័យ ឬរូបភាពទៅកាន់ Server ក្រៅឡើយ ដោយរក្សាទុកប្រវត្តិស្កេន និង Favorite ក្នុង IndexedDB លើឧបករណ៍ផ្ទាល់ខ្លួន; ៦) ស្កេនកូដពីរូបថតក្នុង Gallery និងបញ្ចូលកូដដោយដៃ; ៧) គាំទ្រ ២ ភាសា (ខ្មែរ/អង់គ្លេស) ជាមួយ i18next; និង ៨) ដំឡើងជា PWA លើ iPhone, Android និងកុំព្យូទ័រ ជាមួយប្រព័ន្ធ Auto-Update ស្វ័យប្រវត្តិតាមរយៈ Workbox។',
   'proj13.title': 'Rotana Portfolio Native (កម្មវិធីទូរស័ព្ទ React Native & Expo)',
@@ -2305,10 +2313,10 @@ function applyWeatherUiLabels(showToast = false) {
   const btn = document.getElementById('weather-btn');
   const icon = document.getElementById('weather-icon');
   const indicator = document.getElementById('weather-indicator');
-  if (btn) btn.setAttribute('title', t('weather.btnTitle'));
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
 
   const modeIcons = [
-    'fa-solid fa-bolt-lightning', // Mode 0: Ultimate Cyber Storm
+    'fa-solid fa-cloud-bolt',     // Mode 0: Ultimate Cyber Storm (Mix of All)
     'fa-solid fa-film',           // Mode 1: Cyber Video
     'fa-solid fa-cloud-rain',     // Mode 2: Cyber Rain
     'fa-solid fa-bolt',           // Mode 3: Thunderstorm
@@ -2320,14 +2328,30 @@ function applyWeatherUiLabels(showToast = false) {
 
   const state = typeof weatherState !== 'undefined' ? weatherState : 0;
   if (icon) {
-    icon.className = modeIcons[state] || 'fa-solid fa-bolt-lightning';
+    if (isMobile) {
+      icon.className = state === 7 ? 'fa-solid fa-leaf' : 'fa-solid fa-cloud-bolt';
+    } else {
+      icon.className = modeIcons[state] || 'fa-solid fa-cloud-bolt';
+    }
   }
   if (btn) {
     btn.classList.toggle('mode-off', state === 7);
+    if (isMobile) {
+      const mobileLabel = state === 7 ? t('weather.mobileOption2') : t('weather.mobileOption1');
+      btn.title = mobileLabel;
+      btn.setAttribute('aria-label', mobileLabel);
+    } else {
+      btn.title = t(`weather.mode${state}`);
+      btn.setAttribute('aria-label', t(`weather.mode${state}`));
+    }
   }
 
   if (indicator && showToast) {
-    indicator.textContent = t(`weather.ind${state}`);
+    if (isMobile) {
+      indicator.textContent = state === 7 ? t('weather.mobileOption2') : t('weather.mobileOption1');
+    } else {
+      indicator.textContent = t(`weather.ind${state}`);
+    }
     indicator.classList.add('visible');
     if (typeof indicatorTimeout !== 'undefined') {
       clearTimeout(indicatorTimeout);
@@ -2483,9 +2507,15 @@ function startWeather(isUserAction = false) {
   applyWeatherUiLabels(isUserAction);
 }
 
-// 8 Modes cycle: 0 -> 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 (Normal Clean / Off) -> 0
+// On mobile (<768px): Strictly 2 options: Mode 0 (Rain + Snow + Lightning) <-> Mode 7 (Clean Normal Mode)
+// On desktop/tablet (>=768px): 8 Modes cycle: 0 -> 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 0
 weatherBtn?.addEventListener('click', () => {
-  weatherState = (weatherState + 1) % 8;
+  const isMobile = window.innerWidth < 768;
+  if (isMobile) {
+    weatherState = (weatherState === 0) ? 7 : 0;
+  } else {
+    weatherState = (weatherState + 1) % 8;
+  }
   try {
     localStorage.setItem('portfolio-weather-mode', weatherState.toString());
   } catch (e) {}
@@ -2732,6 +2762,9 @@ let hasBootedWeather = false;
 function bootWeather() {
   if (hasBootedWeather) return;
   hasBootedWeather = true;
+  if (typeof window !== 'undefined' && window.innerWidth < 768 && weatherState !== 7) {
+    weatherState = 0;
+  }
   document.body.classList.toggle('clean-mode', weatherState === 7);
   if (weatherState === 7) {
     stopWeather();
